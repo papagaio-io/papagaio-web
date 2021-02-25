@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <img class="w-10 mr-2" alt="Agola logo" src="../assets/img/agola-logo-circle.svg">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
