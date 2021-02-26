@@ -1,12 +1,17 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import projectsetup from "/home/mohab/Documents/projects/projects/papagaio-fe/src/components/projectsetup.vue";
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from '../views/Home.vue';
+import projectsetup from "../views/projectsetup.vue";
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/projectsetup',
+    name: 'ProjectSetup',
+    component: projectsetup
   },
   {
     path: '/about',
@@ -16,10 +21,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
-  {
-    path: "/projectsetup",
-    component: projectsetup,
-  },
+
 ]
 
 const router = createRouter({

@@ -11,6 +11,7 @@
             <img class="w-10 mr-2" src="./assets/img/agola-logo-circle.svg" />
             Agola
           </router-link>
+          
         </div>
         <div class="block lg:hidden">
           <button
@@ -122,6 +123,7 @@
       <router-view v-if="routerActive"></router-view>
     </div>
   </div>
+  <router-view/>
 </template>
 
 
