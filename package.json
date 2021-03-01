@@ -8,8 +8,11 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "element-plus": "^1.0.2-beta.32",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
+    "vue-scroll-table": "^0.2.11",
+    "vuejs-smart-table": "^0.0.7",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {

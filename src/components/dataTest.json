@@ -1,0 +1,121 @@
+{
+    "headers": [
+        {
+            "text": "icon",
+            "sortable": true,
+            "width": 150
+        },
+        {
+            "text": "Organization",
+            "sortable": true,
+            "width": 100
+        },
+        {
+            "text": "Favorite color",
+            "sortable": true,
+            "width": 50
+        },
+        {
+            "text": "Users",
+            "sortable": true,
+            "width": 100
+        },
+        {
+            "text": "Repos",
+            "sortable": true,
+            "width": 50
+        },
+        {
+            "text": "Status",
+            "sortable": true,
+            "width": 100
+        },
+        {
+            "text": "Setting",
+            "sortable": true,
+            "width": 100
+        }
+ 
+    ],
+    "rows": [
+        [
+            {
+                "value": "",
+                "attributes": {
+                    "avatarUrl": "/img/folder.png"
+                }
+            },
+            "Beresford",
+            "#C60000",
+            "test",
+            "Female",
+            "America/Guatemala",
+            "I am a setting"
+        ],
+        [
+            {
+                "value": "",
+                "attributes": {
+                    "avatarUrl": "/img/giteaIcon.png"
+                }
+            },
+            "Shoebotham",
+            "#00C618",
+            "test",
+            "Male",
+            "Asia/Yekaterinburg"
+        ],
+        [
+            {
+                "value": "",
+                "attributes": {
+                    "avatarUrl": "/img/giteaIcon.png"
+                }
+            },
+            "Cheng",
+            "#00C618",
+            "test",
+            "Male",
+            "Africa/Johannesburg"
+        ],
+        [
+            {
+                "value": "",
+                "attributes": {
+                    "avatarUrl": "/img/giteaIcon.png"
+                }
+            },
+            "Muskett",
+            "#00C618",
+            "test",
+            "Female",
+            "America/Mexico_City"
+        ],
+        [
+            {
+                "value": "",
+                "attributes": {
+                    "avatarUrl": "/img/giteaIcon.png"
+                }
+            },
+            "Muskett",
+            "#C60000",
+            "test",
+            "Female",
+            "America/Mexico_City"
+        ],
+        [
+            {
+                "value": "",
+                "attributes": {
+                    "avatarUrl": "/img/giteaIcon.png"
+                }
+            },
+            "Muskett",
+            "#C60000",
+            "test",
+            "Female",
+            "America/Mexico_City"
+        ]
+    ]
+}

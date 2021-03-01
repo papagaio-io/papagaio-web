@@ -3,6 +3,14 @@
 
 @import "./_ansi.scss";
 
+.body {
+ 
+  width: 50%; margin: 0 auto;
+ 
+  
+}
+
+
 .btn {
   @apply font-bold py-2 px-4 rounded;
 }
@@ -17,7 +25,7 @@
   @apply bg-blue-500 opacity-50 cursor-not-allowed;
 }
 .btn-blue:focus {
-  @apply bg-blue-500 outline-none shadow-outline;
+  @apply bg-blue-500 outline-none ;
 }
 
 .btn-red {
@@ -30,7 +38,7 @@
   @apply bg-red-500 opacity-50 cursor-not-allowed;
 }
 .btn-red:focus {
-  @apply bg-red-500 outline-none shadow-outline;
+  @apply bg-red-500 outline-none ;
 }
 
 .tab {
@@ -143,8 +151,12 @@
 html {
   overflow-x: hidden;
   overflow-y: scroll;
+ 
+
 }
 
 body {
   @apply text-dark;
+ 
+  
 }

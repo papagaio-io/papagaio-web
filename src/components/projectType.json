@@ -1,0 +1,15 @@
+[
+ 
+  {
+    "picture": "/img/folder.png",
+    "organizationType": "Folder"
+  },
+  {
+    "picture": "/img/githubIcon.png",
+    "organizationType": "Github Organization"
+  },
+  {
+    "picture": "/img/giteaIcon.png",
+    "organizationType": "Gitea Organization"
+  }
+]

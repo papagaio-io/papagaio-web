@@ -1,5 +1,5 @@
 <template>
-  <div>
+ <div class="body">
     <!-- <h1 class="workingItemsTitle">Working Items</h1>
 
     <div class="headSummaryStyle">
