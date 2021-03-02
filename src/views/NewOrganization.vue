@@ -1,4 +1,6 @@
 <template>
+
+<form @submit.prevent="submitForm"> 
   <div class="body">
     <h4 class="mb-4 text-xl font-bold">New Organization</h4>
     <div class="field">
@@ -13,8 +15,8 @@
         <input
           class="mb-4 appearance-none border rounded py-2 px-10 leading-tight focus:outline-none focus:shadow-outline"
           type="text"
-          placeholder="URL"
-          v-model="orgName"
+          placeholder="Organization url"
+          v-model="orgURL"
         />
       </div>
     </div>
@@ -26,21 +28,21 @@
       </label>
     </div>
 
-    <el-select v-model="value" clearable placeholder="Select">
-      <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
-      >
-      </el-option>
-    </el-select>
-
+    <select
+      v-model="selectedRepo"
+      class="block appearance-none w-50 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+    >
+      <option disabled value="">Please select a repo</option>
+      <option>Gitea</option>
+      <option>Github</option>
+    </select>
+    <span>Selected: {{ selectedRepo }}</span>
+    <br />
     <br />
 
     <button
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      @click="createOrg()"
+      
     >
       Create Organization
     </button>
@@ -52,37 +54,44 @@
       <span class="block sm:inline">{{ createOrgError }}</span>
     </div>
   </div>
+  </form>
+
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   components: {},
-
   name: "neworaganization",
   props: {},
   data() {
     return {
       createOrgError: null,
       orgIsPrivate: false,
-      orgName: null,
-      selectedType: null,
-    //   githubImageSrc: require("@/assets/img/folder.png"),
-      options: [
-        {
-          value: "Gitea",
-          label: "Gitea",
-        },
-        {
-          value: "Github",
-          label: "Github",
-        },
-      ],
-
-      value: "",
+      orgName: '',
+      orgURL: '',
+      selectedRepo: '',
+      //   githubImageSrc: require("@/assets/img/folder.png"),
     };
   },
 
   methods: {
+      submitForm(){
+          axios.post("http://localhost:8080/saveorganization",
+          {
+              name: this.orgName,
+              url: this.orgURL,
+              type: this.selectedRepo,
+              username:this.orgIsPrivate
+          }
+          
+          ).then(Response => {
+              console.log(Response);
+          });
+          
+
+
+      },
     setCurrent(row) {
       this.$refs.singleTable.setCurrentRow(row);
     },
@@ -115,7 +124,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 </style>
 
 
