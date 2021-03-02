@@ -3,7 +3,7 @@ module.exports = {
     extend: {
       container: {
         center: true,
-        padding: '2rem',
+        padding: '4rem',
       },
       fontFamily: {
           'sans': ['Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji']
@@ -41,6 +41,31 @@ module.exports = {
       },
       colors: {
         dark: '#4a4a4a',
+        'jaffa': {  DEFAULT: '#ED8936',  '50': '#FFFFFF',  '100': '#FEF7F1',  '200': '#FADBC2',  '300': '#F5C094',  '400': '#F1A465',  '500': '#ED8936',  '600': '#DC6F14',  '700': '#AD5710',  '800': '#7F400B',  '900': '#502807'},
+        'papaOrange': {
+          '50':  '#faf5e9',
+          '100': '#fbedcc',
+          '200': '#f8df99',
+          '300': '#f5c856',
+          '400': '#f1a421',
+          '500': '#f07f0e',
+          '600': '#f37021',
+          '700': '#c5440e',
+          '800': '#a23615',
+          '900': '#852c15',
+        },
+        'papaDark': {
+          '50':  '#f6fafa',
+          '100': '#eef7f6',
+          '200': '#d8ecea',
+          '300': '#b8dbdd',
+          '400': '#7fbbc4',
+          '500': '#4a96a5',
+          '600': '#357281',
+          '700': '#455a64',
+          '800': '#27444d',
+          '900': '#20363d',
+        },
       }
     }
   },
