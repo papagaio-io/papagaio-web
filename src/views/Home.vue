@@ -19,7 +19,7 @@
       >
         <span class="block xl:inline text-papaDark-700">To DevOps </span>
         <span class="block xl:inline mb-4 text-xl font-bold"
-          >... By Developers</span
+          > ... By Developers</span
         >
       </h1>
       <p
@@ -30,12 +30,12 @@
       </p>
       <div class="mt-5 sm:mt-8 sm:flex sm:justify-center">
         <div class="sm:mt-0 sm:ml-3">
-          <a
-            href="#"
-            class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold py-2 px-4 rounded"
+          <button
+          class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold py-2 px-4 rounded"
+          @click="this.$router.push('http://localhost:8081/neworganization')"
           >
             Try it now
-          </a>
+          </button>
         </div>
       </div>
 

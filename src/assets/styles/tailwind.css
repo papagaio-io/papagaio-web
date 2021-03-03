@@ -147,6 +147,130 @@
   text-align: center;
 }
 
+input {
+  text-align: left;
+  padding-left: 5px;
+}
+
+::-webkit-input-placeholder {
+  text-align: left;
+  padding-left: 5px;
+}
+
+:-ms-input-placeholder {
+  text-align: left;
+  padding-left: 5px;
+}
+
+.workingItemsTitle {
+  background-color: #2d3748;
+  color: white;
+  padding-left: 5px;
+  padding-top: 2px;
+}
+
+.headSummaryStyle {
+  background-color: #2d3748;
+  width: 100%;
+  padding: 5px;
+  text-align: center;
+}
+
+.headTextFieldStyleLong {
+  width: 260px;
+  height: 40px;
+  display: inline-block;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.headTextFieldStyleLong:hover {
+  border: 2px solid #93C5FD;
+}
+
+.headTextFieldStyleLong:focus {
+  outline: none !important;
+  border: 3px solid #93c5fd;
+}
+
+.headTextFieldStyleShort {
+  width: 150px;
+  height: 40px;
+  display: inline-block;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.headTextFieldStyleShort:hover {
+  border: 2px solid #93C5FD;
+}
+
+.headTextFieldStyleShort:focus {
+  outline: none !important;
+  border: 3px solid #93c5fd;
+}
+
+.ProjectSetupForm {
+  width: 100%;
+  background-color: white;
+}
+
+.buttonRight {
+  float: right;
+  margin-top: 20px;
+}
+
+.projectSetupTextField {
+  width: 80%;
+}
+
+.subtitleLabel {
+  margin-left: 10px;
+}
+
+.subtitleLabelDescription {
+  margin-left: 20px;
+}
+
+.caseSensitiveCheckBox {
+  background-color: #eee;
+}
+
+#workingItemNavigationTable {
+  text-align: center;
+  color: #2d3748;
+  margin-top: 60px;
+  border: 1px solid;
+  border-color: white;
+  -webkit-box-shadow: 0px 1px 1px 1px #afafaf;
+          box-shadow: 0px 1px 1px 1px #afafaf;
+  padding: 5px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.vst_table-container.align-text {
+  text-align: left;
+}
+
+.vst_table-container .header-padding {
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+}
+
+.vst_table-container .table-cell {
+  padding: 0.5rem 2rem;
+  vertical-align: middle;
+}
+
+.vst_table-container .table-cell img {
+  vertical-align: middle;
+}
+
+.vst_table-container .sticky-column {
+  -webkit-box-shadow: 10px 0px 10px -12px black;
+          box-shadow: 10px 0px 10px -12px black;
+}
+
 .btn {
   @apply font-bold py-2 px-4 rounded;
 }

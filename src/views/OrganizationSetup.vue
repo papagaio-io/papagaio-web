@@ -43,7 +43,7 @@
       </scroll-table>
     </div> -->
 
-    <h4 class="mb-4 text-xl font-bold">Gitea Organization</h4>
+    <h4 class="mb-4 text-3xl font-bold">Gitea Organization</h4>
     <!-- Beginning of form -->
     <div class="ProjectSetupForm">
       <div class="panel">
@@ -87,7 +87,7 @@
       <!-- Behaviour Section -->
 
       <div class="panel">
-        <p class="panel-title">Behavior</p>
+        <p class="panel-title text-white bg-papaDark-700">Behavior</p>
 <div class="p-4 border-t">
         <div class="inline-block">
           <div class="flex mb-3 relative w-64">
@@ -206,11 +206,11 @@
 
       <!-- Build Strategy -->
       <div class="panel">
-        <p class="panel-title">Build Strategy</p>
+        <p class="panel-title text-white bg-papaDark-700">Build Strategy</p>
         <div>
           <div class="p-4 border-t">
             <button
-              class="btn btn-blue"
+              class="btn text-white bg-papaOrange-600 hover:bg-papaDark-700 "
               @click="addBuildStategyField()"
               v-if="showBuildStrategyAddButton"
             >
@@ -551,117 +551,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-input {
-  text-align: left;
-  padding-left: 5px;
-}
-::-webkit-input-placeholder {
-  text-align: left;
-  padding-left: 5px;
-}
 
-:-ms-input-placeholder {
-  text-align: left;
-  padding-left: 5px;
-}
-
-.workingItemsTitle {
-  background-color: #2d3748;
-  color: white;
-  padding-left: 5px;
-  padding-top: 2px;
-}
-
-.headSummaryStyle {
-  background-color: #2d3748;
-  width: 100%;
-  padding: 5px;
-  text-align: center;
-}
-
-.headTextFieldStyleLong {
-  width: 260px;
-  height: 40px;
-  display: inline-block;
-  margin: 5px;
-  border-radius: 5px;
-}
-.headTextFieldStyleLong:hover {
-  border: 2px solid#93C5FD;
-}
-.headTextFieldStyleLong:focus {
-  outline: none !important;
-  border: 3px solid #93c5fd;
-}
-
-.headTextFieldStyleShort {
-  width: 150px;
-  height: 40px;
-  display: inline-block;
-  margin: 5px;
-  border-radius: 5px;
-}
-.headTextFieldStyleShort:hover {
-  border: 2px solid#93C5FD;
-}
-.headTextFieldStyleShort:focus {
-  outline: none !important;
-  border: 3px solid #93c5fd;
-}
-//form
-.ProjectSetupForm {
-  width: 100%;
-  background-color: white;
-}
-.buttonRight {
-  float: right;
-  margin-top: 20px;
-}
-
-.projectSetupTextField {
-  width: 80%;
-}
-
-.subtitleLabel {
-  margin-left: 10px;
-}
-.subtitleLabelDescription {
-  margin-left: 20px;
-}
-.caseSensitiveCheckBox {
-  background-color: #eee;
-}
-
-#workingItemNavigationTable {
-  text-align: center;
-  color: #2d3748;
-  margin-top: 60px;
-
-  border: 1px solid;
-  border-color: white;
-  box-shadow: 0px 1px 1px 1px rgb(175, 175, 175);
-  padding: 5px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-.vst_table-container.align-text {
-  text-align: left;
-}
-
-.vst_table-container .header-padding {
-  padding: 2rem 1.5rem 1.5rem 1.5rem;
-}
-
-.vst_table-container .table-cell {
-  padding: 0.5rem 2rem;
-  vertical-align: middle;
-
-  & img {
-    vertical-align: middle;
-  }
-}
-
-.vst_table-container .sticky-column {
-  box-shadow: 10px 0px 10px -12px black;
-}
 </style>
