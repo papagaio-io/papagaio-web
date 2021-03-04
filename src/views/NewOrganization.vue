@@ -1,5 +1,8 @@
 <template>
-  <form @submit.prevent="submitForm">
+  <form @submit.prevent="checkForm"
+  action= ""
+  method="post"
+  >
     <div class="body">
       <h4 class="mb-4 text-3xl font-bold">New organization</h4>
       <!-- Beginning of form -->
@@ -69,6 +72,15 @@
                   </div>
                 </div>
               </tr>
+              <tr>
+                    <p v-if="errors.length">
+                        <b>Please correct the following error(s):</b>
+                        <ul>
+                        <li v-for="error in errors" v-bind:key="error"> {{ error }}</li>
+                        </ul>
+                    </p>
+              </tr>
+
             </table>
           </div>
         </div>
@@ -108,11 +120,40 @@ export default {
       orgName: "",
       orgURL: "",
       selectedRepo: "",
+      errors: [],
       //   githubImageSrc: require("@/assets/img/folder.png"),
     };
   },
 
   methods: {
+    checkForm: function (e) {
+      if (
+        this.orgName &&
+        this.orgURL &&
+        this.orgIsPrivate &&
+        this.selectedRepo
+      ) {
+        return this.submitForm();
+      }
+
+      this.errors = [];
+
+      if (!this.orgName) {
+        this.errors.push("OrgName required.");
+      }
+      if (!this.orgURL) {
+        this.errors.push("OrgUrl required.");
+      }
+    //   if (!this.orgIsPrivate) {
+    //     this.errors.push("OrgVisibility required.");
+    //   }
+      if (!this.selectedRepo) {
+        this.errors.push("SelectRepo required.");
+      }
+
+      e.preventDefault();
+    },
+
     submitForm() {
       axios
         .post("http://localhost:8080/saveorganization", {
@@ -155,8 +196,6 @@ export default {
 
       this.$router.push(ownerLink("org", this.orgName));
     },
-
-         
   },
   created: async function () {},
 };
