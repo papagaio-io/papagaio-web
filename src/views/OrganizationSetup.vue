@@ -46,7 +46,7 @@
     <h4 class="mb-4 text-3xl font-bold">Gitea Organization</h4>
     <!-- Beginning of form -->
     <div class="ProjectSetupForm">
-      <div class="panel">
+      <div class="panel border-papaOrange-500 border-dashed">
         <div class="p-4 border-t">
           <table style="width: 100%">
             <tr>
@@ -86,15 +86,17 @@
 
       <!-- Behaviour Section -->
 
-      <div class="panel">
         <p class="panel-title text-white bg-papaDark-700">Behavior</p>
-<div class="p-4 border-t">
-        <div class="inline-block">
-          <div class="flex mb-3 relative w-64">
+      <div class="panel border-papaOrange-500 border-dashed">
+
+<div class="p-4 border-t  ">
+        <div class="inline-block  ">
+          <div class="flex mb-3 relative w-64 ">
+            
             <select
               name="AddingToBehaviourSection"
               @change="addRequiredBehaviour"
-              class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+              class=" block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
             >
               <option value="" disabled selected hidden display>Add</option>
 
@@ -123,7 +125,7 @@
         </div>
       </div>
         <div
-          class="p-4 border-t"
+          class="p-4 border-t border-papaOrange-500 border-dashed"
           v-for="(repositoriesField, counter) in repositoriesTable"
           v-bind:key="counter"
         >
@@ -167,7 +169,7 @@
         </div>
 
         <div
-          class="p-4 border-t"
+          class="p-4 border-t border-papaOrange-500 border-dashed"
           v-for="(field, counter) in withinRepositoriesTable"
           v-bind:key="counter"
         >
@@ -205,10 +207,11 @@
       </div>
 
       <!-- Build Strategy -->
-      <div class="panel">
+     
         <p class="panel-title text-white bg-papaDark-700">Build Strategy</p>
+         <div class="panel border-papaOrange-500 border-dashed">
         <div>
-          <div class="p-4 border-t">
+          <div class="p-4 border-t border-papaOrange-500 border-dashed">
             <button
               class="btn text-white bg-papaOrange-600 hover:bg-papaDark-700 "
               @click="addBuildStategyField()"
@@ -263,7 +266,7 @@
             </div>
           </div>
           <div
-            class="p-4 border-t"
+            class="p-4 border-t border-papaOrange-500 border-dashed"
             v-for="(fields, counter) in regularExpressionTable"
             v-bind:key="counter"
           >
@@ -302,7 +305,7 @@
           </div>
 
           <div
-            class="p-4 border-t"
+            class="p-4 border-t border-papaOrange-500 border-dashed"
             v-for="(fields, counter) in exactNameTable"
             v-bind:key="counter"
           >
@@ -340,7 +343,7 @@
           </div>
 
           <div
-            class="p-4 border-t"
+            class="p-4 border-t border-papaOrange-500 border-dashed"
             v-for="(fields, counter) in wildcardTable"
             v-bind:key="counter"
           >
@@ -389,6 +392,22 @@
             </table>
           </div>
         </div>
+      </div>
+              <div class="sm:mt-0 sm:ml-3">
+          <button
+          class="mb-5 px-10 py-3 border border-transparent text-base font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold py-2 px-4 rounded buttonRight"
+        
+          >
+            Setup 
+          </button>
+        </div>
+     
+      <div
+        v-if="createOrgError"
+        class="mb-10 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+        role="alert"
+      >
+        <span class="block sm:inline">{{ createOrgError }}</span>
       </div>
     </div>
   </div>

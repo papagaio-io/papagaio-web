@@ -4,32 +4,32 @@
   method="post"
   >
     <div class="body">
-      <h4 class="mb-4 text-3xl font-bold">New organization</h4>
+      <h4 class="mb-4 text-3xl font-bold">New Organization</h4>
       <!-- Beginning of form -->
       <div class="ProjectSetupForm">
-        <div class="panel">
+        <div class="panel border-papaOrange-500 border-dashed">
           <div class="p-4 border-t">
             <table style="width: 100%">
               <tr>
-                <h5 class="mb-3 text-xl">Organization Name</h5>
+                <h5 class="mb-3 text-xl">Organization name</h5>
 
                 <center>
                   <input
                     class="mb-4 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
                     type="text"
-                    placeholder="Create your new organization "
+                    placeholder="Create your new organization name"
                     v-model="orgName"
                   />
                 </center>
                 
               </tr>
               <tr>
-                <h5 class="mb-3 text-xl ">Organization Url</h5>
+                <h5 class="mb-3 text-xl ">Organization URL</h5>
                 <center>
                   <input
                     class="mb-4 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
                     type="text"
-                    placeholder="Copy and paste your organization's url"
+                    placeholder="Paste your organization's url"
                     v-model="orgURL"
                   />
                 </center>
@@ -46,13 +46,15 @@
              
               </tr>
               <tr>
-                <h5 class="mb-3 text-xl">Select required repository</h5>
+                <h5 class="mb-3 text-xl">Project respository</h5>
                 <div class="flex mb-3 relative w-64">
                   <select
                     v-model="selectedRepo"
                     class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
                   >
-                    <option disabled value="">Select Repository</option>
+                     <option value="" disabled selected hidden display>
+                      Choose repository source
+                    </option>
                     <option>Gitea</option>
                     <option>Github</option>
                   </select>
@@ -74,13 +76,14 @@
               </tr>
               <tr>
                     <p v-if="errors.length">
-                        <b>Please correct the following error(s):</b>
+                    
+                        <b class = "text-red-600" >Please check the following error(s):</b>
                         <ul>
                         <li v-for="error in errors" v-bind:key="error"> {{ error }}</li>
                         </ul>
+                       
                     </p>
               </tr>
-
             </table>
           </div>
         </div>
@@ -139,16 +142,16 @@ export default {
       this.errors = [];
 
       if (!this.orgName) {
-        this.errors.push("OrgName required.");
+        this.errors.push("Organization name is empty");
       }
       if (!this.orgURL) {
-        this.errors.push("OrgUrl required.");
+        this.errors.push("An existing organization URL must be provided");
       }
     //   if (!this.orgIsPrivate) {
     //     this.errors.push("OrgVisibility required.");
     //   }
       if (!this.selectedRepo) {
-        this.errors.push("SelectRepo required.");
+        this.errors.push("Specify a valid repoistory from the list above");
       }
 
       e.preventDefault();
@@ -160,7 +163,7 @@ export default {
           name: this.orgName,
           url: this.orgURL,
           type: this.selectedRepo,
-          username: this.orgIsPrivate.toString(),
+          visibility: this.orgIsPrivate.toString(),
         })
         .then((response) => {
           //   console.log(response);

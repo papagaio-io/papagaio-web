@@ -1,21 +1,27 @@
 <template>
   <div class="body">
     <img
-      class="mainLogo"
+      class="homeMainLogo"
       alt="Papagaio logo"
-      src="../assets/img/papagaioLogoDraft.png"
+      src="../assets/img/papagaioLowResPhoto.png"
     />
     <div class="heroBody">
-      <h4 class="mb-4 text-xl font-bold">
+      
+      <h4 class=" mb-4 text-xl font-bold">
         Extention of
         <a
-          class="mb-4 text-xl font-bold text-papaOrange-600 hover:text-red-300"
+          class=" "
           href="https://agola.io"
-          >Agola.io</a
+          ><img
+      class="subLogo"
+      alt="Papagaio logo"
+      src="../assets/img/agola-logo-name.svg"
+    /></a
         >
       </h4>
+    
       <h1
-        class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl"
+        class="text-4xl tracking-tight font-extrabold sm:text-5xl md:text-6xl"
       >
         <span class="block xl:inline text-papaDark-700">To DevOps </span>
         <span class="block xl:inline mb-4 text-xl font-bold"
@@ -31,7 +37,7 @@
       <div class="mt-5 sm:mt-8 sm:flex sm:justify-center">
         <div class="sm:mt-0 sm:ml-3">
           <button
-          class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold py-2 px-4 rounded"
+          class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md bg-papaOrange-500 hover:bg-papaDark-700 text-white font-bold py-2 px-4 rounded"
           @click="this.$router.push('http://localhost:8081/neworganization')"
           >
             Try it now
@@ -43,7 +49,7 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="lg:text-center">
       <h2 class="text-base xl:inline text-papaDark-700 font-semibold tracking-wide ">Why Papagaio?</h2>
-      <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+      <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl">
         A better way to run your project
       </p>
     
@@ -56,7 +62,7 @@
       <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
         <div class="flex">
           <div class="flex-shrink-0">
-            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-papaOrange-600 text-white">
+            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-papaOrange-500 text-white">
               <!-- Heroicon name: outline/globe-alt -->
              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
   <path fill="#fff" d="M12 14l9-5-9-5-9 5 9 5z" />
@@ -70,7 +76,7 @@
             <dt class="text-lg leading-6 font-medium text-papaDark-700">
               Competitive exchange rates
             </dt>
-            <dd class="mt-2 text-base text-gray-500">
+            <dd class="mt-2 text-base ">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
             </dd>
           </div>
@@ -78,7 +84,7 @@
 
         <div class="flex">
           <div class="flex-shrink-0">
-            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-papaOrange-600 text-white">
+            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-papaOrange-500 text-white">
               <!-- Heroicon name: outline/scale -->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
@@ -89,7 +95,7 @@
             <dt class="text-lg leading-6 font-medium text-papaDark-700">
               No hidden fees
             </dt>
-            <dd class="mt-2 text-base text-gray-500">
+            <dd class="mt-2 text-base ">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
             </dd>
           </div>
@@ -97,7 +103,7 @@
 
         <div class="flex">
           <div class="flex-shrink-0">
-            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-papaOrange-600 text-white">
+            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-papaOrange-500 text-white">
               <!-- Heroicon name: outline/lightning-bolt -->
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
@@ -108,7 +114,7 @@
             <dt class="text-lg leading-6 font-medium text-papaDark-700">
               Transfers are instant
             </dt>
-            <dd class="mt-2 text-base text-gray-500">
+            <dd class="mt-2 text-base ">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
             </dd>
           </div>
@@ -116,7 +122,7 @@
 
         <div class="flex">
           <div class="flex-shrink-0">
-            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-papaOrange-600 text-white">
+            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-papaOrange-500 text-white">
               <!-- Heroicon name: outline/annotation -->
              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -127,7 +133,7 @@
             <dt class="text-lg leading-6 font-medium text-papaDark-700">
               Mobile notifications
             </dt>
-            <dd class="mt-2 text-base text-gray-500">
+            <dd class="mt-2 text-base">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.
             </dd>
           </div>

@@ -8,7 +8,7 @@
             class="font-semibold flex items-center flex-shrink-0 text-xl tracking-tight"
             to="/"
           >
-            <img class="w-10 mr-2" src="./assets/img/agola-logo-circle.svg" />
+            <img class="w-10 mr-2" src="./assets/img/papagaio-logo-circle.png" />
             Papagaio
           </router-link>
           
@@ -100,8 +100,8 @@
             </div>
           </div>
           <div v-else class="navbar-item">
-            <router-link class="btn bg-papaOrange-600 hover:bg-papaDark-700" to="/register">Sign up</router-link>
-            <router-link class="ml-2 btn bg-papaOrange-600 hover:bg-papaDark-700" to="/login">Login</router-link>
+            <router-link class="btn bg-papaOrange-500 hover:bg-papaDark-700" to="/register">Sign up</router-link>
+            <router-link class="ml-2 btn bg-papaOrange-500 hover:bg-papaDark-700" to="/login">Login</router-link>
           </div>
         </div>
       </div>

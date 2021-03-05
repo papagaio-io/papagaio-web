@@ -133,11 +133,19 @@
   margin: 0 auto;
 }
 
-.mainLogo {
+.homeMainLogo {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
+
+}
+.subLogo{
+  width: 10%;
+  display: inline;
+  
+  
+
+
 }
 
 .heroBody {
