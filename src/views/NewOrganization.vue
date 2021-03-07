@@ -7,7 +7,7 @@
       <h4 class="mb-4 text-3xl font-bold">New Organization</h4>
       <!-- Beginning of form -->
       <div class="ProjectSetupForm">
-        <div class="panel border-papaOrange-500 border-dashed">
+        <div class="panel ">
           <div class="p-4 border-t">
             <table style="width: 100%">
               <tr>
@@ -15,7 +15,7 @@
 
                 <center>
                   <input
-                    class="mb-4 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
+                    class="mb-4 focus:border-papaDark-700  appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
                     type="text"
                     placeholder="Create your new organization name"
                     v-model="orgName"
@@ -27,7 +27,7 @@
                 <h5 class="mb-3 text-xl ">Organization URL</h5>
                 <center>
                   <input
-                    class="mb-4 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
+                    class="mb-4 focus:border-papaDark-700  appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
                     type="text"
                     placeholder="Paste your organization's url"
                     v-model="orgURL"
@@ -50,7 +50,7 @@
                 <div class="flex mb-3 relative w-64">
                   <select
                     v-model="selectedRepo"
-                    class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                    class="block appearance-none w-full bg-white border focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline  px-4 py-2 pr-8 "
                   >
                      <option value="" disabled selected hidden display>
                       Choose repository source
@@ -75,20 +75,23 @@
                 </div>
               </tr>
               <tr>
-                    <p v-if="errors.length">
-                    
-                        <b class = "text-red-600" >Please check the following error(s):</b>
-                        <ul>
-                        <li v-for="error in errors" v-bind:key="error"> {{ error }}</li>
-                        </ul>
-                       
-                    </p>
+                  
+                  
+                  
               </tr>
             </table>
           </div>
         </div>
       </div>
-
+                <p v-if="errors.length">
+                  <div class="panel p-4 bg-white shadow-md ">
+                    
+                  <b class = "text-red-600" >Please check the following error(s):</b>
+                    <ul>
+                    <li v-for="error in errors" v-bind:key="error"> {{ error }}</li>
+                    </ul>
+                    </div>
+                  </p>
         
         <div class="sm:mt-0 sm:ml-3">
           <button
@@ -108,6 +111,7 @@
       </div>
     </div>
   </form>
+
 </template>
 
 <script>
@@ -147,9 +151,9 @@ export default {
       if (!this.orgURL) {
         this.errors.push("An existing organization URL must be provided");
       }
-    //   if (!this.orgIsPrivate) {
-    //     this.errors.push("OrgVisibility required.");
-    //   }
+      //   if (!this.orgIsPrivate) {
+      //     this.errors.push("OrgVisibility required.");
+      //   }
       if (!this.selectedRepo) {
         this.errors.push("Specify a valid repoistory from the list above");
       }

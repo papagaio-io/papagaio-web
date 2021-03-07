@@ -23,9 +23,9 @@
       <h1
         class="text-4xl tracking-tight font-extrabold sm:text-5xl md:text-6xl"
       >
-        <span class="block xl:inline text-papaDark-700">To DevOps </span>
+        <span class="block xl:inline text-papaDark-700">To: DevOps </span>
         <span class="block xl:inline mb-4 text-xl font-bold"
-          > ... By Developers</span
+          > ... Sincere Developers,</span
         >
       </h1>
       <p
