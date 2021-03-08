@@ -1,33 +1,42 @@
 <template>
-  <form @submit.prevent="checkForm"
-  action= ""
-  method="post"
-  >
+  <form @submit.prevent="checkForm" action="" method="post">
     <div class="body">
-      <h4 class="mb-4 text-3xl font-bold">New Organization</h4>
+      <h4 class="mb-2 text-3xl font-bold">New Organization</h4>
       <!-- Beginning of form -->
       <div class="ProjectSetupForm">
-        <div class="panel ">
+        <div class="panel">
           <div class="p-4 border-t">
             <table style="width: 100%">
               <tr>
+                <div class="float-right">
+                  <el-popover
+                    placement="top-start"
+                    title="Setting a new organization"
+                    :width="300"
+                    trigger="hover"
+                    content="this is content, this is content, this is content"
+                  >
+                    <template #reference>
+                      <el-button>?</el-button>
+                    </template>
+                  </el-popover>
+                </div>
                 <h5 class="mb-3 text-xl">Organization name</h5>
 
                 <center>
                   <input
-                    class="mb-4 focus:border-papaDark-700  appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
+                    class="mb-4 focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
                     type="text"
                     placeholder="Create your new organization name"
                     v-model="orgName"
                   />
                 </center>
-                
               </tr>
               <tr>
-                <h5 class="mb-3 text-xl ">Organization URL</h5>
+                <h5 class="mb-3 text-xl">Organization URL</h5>
                 <center>
                   <input
-                    class="mb-4 focus:border-papaDark-700  appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
+                    class="mb-4 focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
                     type="text"
                     placeholder="Paste your organization's url"
                     v-model="orgURL"
@@ -35,24 +44,23 @@
                 </center>
               </tr>
               <tr>
-                <h5 class="mb-3 text-xl ">Private/Public</h5>
-               
-                  <div class="mb-4 ml-1">
-                    <label>
-                      <input type="checkbox" v-model="orgIsPrivate" />
-                      Private
-                    </label>
-                  </div>
-             
+                <h5 class="mb-3 text-xl">Private/Public</h5>
+
+                <div class="mb-4 ml-1">
+                  <label>
+                    <input type="checkbox" v-model="orgIsPrivate" />
+                    Private
+                  </label>
+                </div>
               </tr>
               <tr>
                 <h5 class="mb-3 text-xl">Project respository</h5>
                 <div class="flex mb-3 relative w-64">
                   <select
                     v-model="selectedRepo"
-                    class="block appearance-none w-full bg-white border focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline  px-4 py-2 pr-8 "
+                    class="block appearance-none w-full bg-white border focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline px-4 py-2 pr-8"
                   >
-                     <option value="" disabled selected hidden display>
+                    <option value="" disabled selected hidden display>
                       Choose repository source
                     </option>
                     <option>Gitea</option>
@@ -74,34 +82,31 @@
                   </div>
                 </div>
               </tr>
-              <tr>
-                  
-                  
-                  
-              </tr>
             </table>
           </div>
         </div>
       </div>
-                <p v-if="errors.length">
-                  <div class="panel p-4 bg-white shadow-md ">
-                    
-                  <b class = "text-red-600" >Please check the following error(s):</b>
-                    <ul>
-                    <li v-for="error in errors" v-bind:key="error"> {{ error }}</li>
-                    </ul>
-                    </div>
-                  </p>
-        
-        <div class="sm:mt-0 sm:ml-3">
-          <button
+      <p v-if="errors.length">
+        <el-alert
+          title="Error. Please check and following(s) :"
+          type="error"
+          :closable="false"
+          show-icon
+        >
+          <ul>
+            <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+          </ul>
+        </el-alert>
+      </p>
+
+      <div class="sm:mt-0 sm:ml-3">
+        <button
           class="px-10 py-3 border border-transparent text-base font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold py-2 px-4 rounded buttonRight"
-        
-          >
-            Create 
-          </button>
-        </div>
-     
+        >
+          Create
+        </button>
+      </div>
+
       <div
         v-if="createOrgError"
         class="mb-10 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
@@ -111,7 +116,6 @@
       </div>
     </div>
   </form>
-
 </template>
 
 <script>

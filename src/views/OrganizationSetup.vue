@@ -1,5 +1,5 @@
 <template>
- <div class="body">
+  <div class="body">
     <!-- <h1 class="workingItemsTitle">Working Items</h1>
 
     <div class="headSummaryStyle">
@@ -43,13 +43,27 @@
       </scroll-table>
     </div> -->
 
-    <h4 class="mb-4 text-3xl font-bold">Gitea Organization</h4>
+    <h4 class="mb-2 text-3xl font-bold">Gitea Organization</h4>
     <!-- Beginning of form -->
     <div class="ProjectSetupForm">
-      <div class="panel border-papaOrange-500 border-dashed">
+      <div class="panel">
         <div class="p-4 border-t">
           <table style="width: 100%">
             <tr>
+              <div class="float-right">
+                <el-popover
+                  placement="top-start"
+                  title="Organization Section"
+                  :width="200"
+                  trigger="hover"
+                  content="this is content, this is content, this is content"
+                >
+                  <template #reference>
+                    <el-button>?</el-button>
+                  </template>
+                </el-popover>
+              </div>
+
               <h5 class="mb-3 text-xl">Server URL</h5>
 
               <center>
@@ -85,47 +99,59 @@
       </div>
 
       <!-- Behaviour Section -->
-
+      <div class="panel">
         <p class="panel-title text-white bg-papaDark-700">Behavior</p>
-      <div class="panel border-papaOrange-500 border-dashed">
 
-<div class="p-4 border-t  ">
-        <div class="inline-block  ">
-          <div class="flex mb-3 relative w-64 ">
-            
-            <select
-              name="AddingToBehaviourSection"
-              @change="addRequiredBehaviour"
-              class=" block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-            >
-              <option value="" disabled selected hidden display>Add</option>
-
-              <optgroup label="Repositories">
-                <option value="1">Filter by name(with wildcards)</option>
-              </optgroup>
-
-              <optgroup label="Within repositories">
-                <option value="2">Discovery branch</option>
-              </optgroup>
-            </select>
-            <div
-              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
-            >
-              <svg
-                class="fill-current h-4 w-4"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
+        <div class="p-4 border-t">
+          <div class="inline-block">
+            <div class="flex mb-3 relative w-64">
+              <select
+                name="AddingToBehaviourSection"
+                @change="addRequiredBehaviour"
+                class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
               >
-                <path
-                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                ></path>
-              </svg>
+                <option value="" disabled selected hidden display>Add</option>
+
+                <optgroup label="Repositories">
+                  <option value="1">Filter by name(with wildcards)</option>
+                </optgroup>
+
+                <optgroup label="Within repositories">
+                  <option value="2">Discovery branch</option>
+                </optgroup>
+              </select>
+              <div
+                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
+              >
+                <svg
+                  class="fill-current h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                  ></path>
+                </svg>
+              </div>
             </div>
           </div>
+          <div class="float-right">
+            <el-popover
+              placement="top-start"
+              title="Behaviour section"
+              :width="200"
+              trigger="hover"
+              content="In this section you should do everything and anything no matter how hard it is. if you believe life is underrated then you should rate it.Yea why not?.Unless you believe it is overrated then you should also rate it.Yea why not? So what do you think of this section"
+            >
+              <template #reference>
+                <el-button>?</el-button>
+              </template>
+            </el-popover>
+          </div>
         </div>
-      </div>
+
         <div
-          class="p-4 border-t border-papaOrange-500 border-dashed"
+          class="p-4 border-t"
           v-for="(repositoriesField, counter) in repositoriesTable"
           v-bind:key="counter"
         >
@@ -169,7 +195,7 @@
         </div>
 
         <div
-          class="p-4 border-t border-papaOrange-500 border-dashed"
+          class="p-4 border-t"
           v-for="(field, counter) in withinRepositoriesTable"
           v-bind:key="counter"
         >
@@ -207,201 +233,209 @@
       </div>
 
       <!-- Build Strategy -->
-     
+      <div class="panel">
         <p class="panel-title text-white bg-papaDark-700">Build Strategy</p>
-         <div class="panel border-papaOrange-500 border-dashed">
-        <div>
-          <div class="p-4 border-t border-papaOrange-500 border-dashed">
+
+        <div class="p-4 border-t">
+          <button
+            class="btn text-white bg-papaOrange-600 hover:bg-papaDark-700"
+            @click="addBuildStategyField()"
+            v-if="showBuildStrategyAddButton"
+          >
+            Add
+          </button>
+            <div class="float-right">
+              <el-popover
+                placement="top-start"
+                title="Build Strategy Section"
+                :width="200"
+                trigger="hover"
+                content="this is content, this is content, this is content"
+              >
+                <template #reference>
+                  <el-button>?</el-button>
+                </template>
+              </el-popover>
+            </div>
+          <div
+            class=""
+            v-for="(fields, counter) in buildStrategyTable"
+            v-bind:key="counter"
+          >
+          <!-- This section needs adjustment after final form is agreed -->
+           <br /><br />
             <button
-              class="btn text-white bg-papaOrange-600 hover:bg-papaDark-700 "
-              @click="addBuildStategyField()"
-              v-if="showBuildStrategyAddButton"
+              class="btn btn-red buttonRight"
+              @click="deleteBuildStrategyField(counter)"
             >
-              Add
+              Delete
             </button>
 
-            <div
-              class=""
-              v-for="(fields, counter) in buildStrategyTable"
-              v-bind:key="counter"
-            >
-              <button
-                class="btn btn-red buttonRight"
-                @click="deleteBuildStrategyField(counter)"
-              >
-                Delete
-              </button>
+            <h5 class="mb-3 text-xl">Named Branches</h5>
 
-              <h5 class="mb-3 text-xl">Named Branches</h5>
+            <div class="inline-block">
+              <div class="flex mb-3 relative w-64">
+                <select
+                  name=""
+                  @change="addRequiredBuildStrategy"
+                  class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                >
+                  <option value="" disabled selected hidden display>Add</option>
+                  <option value="1">Regular expressions</option>
+                  <option value="2">Exact name</option>
+                  <option value="3">Wildcard</option>
+                </select>
 
-              <div class="inline-block">
-                <div class="flex mb-3 relative w-64">
-                  <select
-                    name=""
-                    @change="addRequiredBuildStrategy"
-                    class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                <div
+                  class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
+                >
+                  <svg
+                    class="fill-current h-4 w-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
                   >
-                    <option value="" disabled selected hidden display>
-                      Add
-                    </option>
-                    <option value="1">Regular expressions</option>
-                    <option value="2">Exact name</option>
-                    <option value="3">Wildcard</option>
-                  </select>
-                  <div
-                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
-                  >
-                    <svg
-                      class="fill-current h-4 w-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                      ></path>
-                    </svg>
-                  </div>
+                    <path
+                      d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                    ></path>
+                  </svg>
                 </div>
               </div>
             </div>
           </div>
-          <div
-            class="p-4 border-t border-papaOrange-500 border-dashed"
-            v-for="(fields, counter) in regularExpressionTable"
-            v-bind:key="counter"
-          >
-            <table style="width: 100%">
-              <button
-                class="btn btn-red buttonRight"
-                @click="deleteRegularExpressionInBuildStrategy(counter)"
-              >
-                Delete
-              </button>
-              <label class="block font-bold mb-2 subtitleLabel"
-                >Regular Expression</label
-              >
+        </div>
+        <div
+          class="p-4 border-t"
+          v-for="(fields, counter) in regularExpressionTable"
+          v-bind:key="counter"
+        >
+          <table style="width: 100%">
+            <button
+              class="btn btn-red buttonRight"
+              @click="deleteRegularExpressionInBuildStrategy(counter)"
+            >
+              Delete
+            </button>
+            <label class="block font-bold mb-2 subtitleLabel"
+              >Regular Expression</label
+            >
 
-              <tr>
-                <center>
-                  <input
-                    class="mb-4 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
-                    type="text"
-                    placeholder="Type"
-                    v-model="fields.regularExpressionField"
-                  />
-                </center>
-              </tr>
+            <tr>
               <center>
-                <tr>
-                  <input
-                    type="checkbox"
-                    class="caseSensitiveCheckBox"
-                    v-model="checked"
-                  />
-                  Case sensitive
-                </tr>
+                <input
+                  class="mb-4 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
+                  type="text"
+                  placeholder="Type"
+                  v-model="fields.regularExpressionField"
+                />
               </center>
-            </table>
-          </div>
-
-          <div
-            class="p-4 border-t border-papaOrange-500 border-dashed"
-            v-for="(fields, counter) in exactNameTable"
-            v-bind:key="counter"
-          >
-            <table style="width: 100%">
-              <button
-                class="btn btn-red buttonRight"
-                @click="deleteExactNameInBuildStrategy(counter)"
-              >
-                Delete
-              </button>
-              <label class="block font-bold mb-2 subtitleLabel"
-                >Exact Name</label
-              >
+            </tr>
+            <center>
               <tr>
-                <center>
-                  <input
-                    class="mb-4 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
-                    type="text"
-                    placeholder="Type"
-                    v-model="fields.exactNameField"
-                  />
-                </center>
+                <input
+                  type="checkbox"
+                  class="caseSensitiveCheckBox"
+                  v-model="checked"
+                />
+                Case sensitive
               </tr>
+            </center>
+          </table>
+        </div>
+
+        <div
+          class="p-4 border-t"
+          v-for="(fields, counter) in exactNameTable"
+          v-bind:key="counter"
+        >
+          <table style="width: 100%">
+            <button
+              class="btn btn-red buttonRight"
+              @click="deleteExactNameInBuildStrategy(counter)"
+            >
+              Delete
+            </button>
+            <label class="block font-bold mb-2 subtitleLabel">Exact Name</label>
+            <tr>
               <center>
-                <tr>
-                  <input
-                    type="checkbox"
-                    class="caseSensitiveCheckBox"
-                    v-model="checked"
-                  />
-                  Case sensitive
-                </tr>
+                <input
+                  class="mb-4 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
+                  type="text"
+                  placeholder="Type"
+                  v-model="fields.exactNameField"
+                />
               </center>
-            </table>
-          </div>
-
-          <div
-            class="p-4 border-t border-papaOrange-500 border-dashed"
-            v-for="(fields, counter) in wildcardTable"
-            v-bind:key="counter"
-          >
-            <table style="width: 100%">
-              <button
-                class="btn btn-red buttonRight"
-                @click="deleteWildcardInBuildStrategy(counter)"
-              >
-                Delete
-              </button>
-              <label class="block font-bold mb-2 subtitleLabel">Wildcard</label>
+            </tr>
+            <center>
               <tr>
-                <span class="font-bold subtitleLabelDescription">Include</span>
-
-                <center>
-                  <input
-                    class="mb-4 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
-                    type="text"
-                    placeholder="Type"
-                    v-model="fields.wildcardField"
-                  />
-                </center>
+                <input
+                  type="checkbox"
+                  class="caseSensitiveCheckBox"
+                  v-model="checked"
+                />
+                Case sensitive
               </tr>
-              <tr>
-                <span class="font-bold subtitleLabelDescription">Exclude</span>
+            </center>
+          </table>
+        </div>
 
-                <center>
-                  <input
-                    class="mb-4 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
-                    type="text"
-                    placeholder="Type"
-                    v-model="fields.wildcardField"
-                  />
-                </center>
-              </tr>
+        <div
+          class="p-4 border-t"
+          v-for="(fields, counter) in wildcardTable"
+          v-bind:key="counter"
+        >
+          <table style="width: 100%">
+            <button
+              class="btn btn-red buttonRight"
+              @click="deleteWildcardInBuildStrategy(counter)"
+            >
+              Delete
+            </button>
+            <label class="block font-bold mb-2 subtitleLabel">Wildcard</label>
+            <tr>
+              <span class="font-bold subtitleLabelDescription">Include</span>
+
               <center>
-                <tr>
-                  <input
-                    type="checkbox"
-                    class="caseSensitiveCheckBox"
-                    v-model="checked"
-                  />
-                  Case sensitive
-                </tr>
+                <input
+                  class="mb-4 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
+                  type="text"
+                  placeholder="Type"
+                  v-model="fields.wildcardField"
+                />
               </center>
-            </table>
-          </div>
+            </tr>
+            <tr>
+              <span class="font-bold subtitleLabelDescription">Exclude</span>
+
+              <center>
+                <input
+                  class="mb-4 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
+                  type="text"
+                  placeholder="Type"
+                  v-model="fields.wildcardField"
+                />
+              </center>
+            </tr>
+            <center>
+              <tr>
+                <input
+                  type="checkbox"
+                  class="caseSensitiveCheckBox"
+                  v-model="checked"
+                />
+                Case sensitive
+              </tr>
+            </center>
+          </table>
         </div>
       </div>
-              <div class="sm:mt-0 sm:ml-3">
-          <button
+      <div class="sm:mt-0 sm:ml-3">
+        <button
           class="mb-5 px-10 py-3 border border-transparent text-base font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold py-2 px-4 rounded buttonRight"
-        
-          >
-            Setup 
-          </button>
-        </div>
-     
+        >
+          Setup
+        </button>
+      </div>
+
       <div
         v-if="createOrgError"
         class="mb-10 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
@@ -570,5 +604,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 </style>
