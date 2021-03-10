@@ -27,7 +27,7 @@
                   <input
                     class="mb-4 focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
                     type="text"
-                    placeholder="Create your new organization name"
+                    placeholder="Type/paste an existing organization name"
                     v-model="orgName"
                   />
                 </center>
@@ -44,40 +44,6 @@
                 </div>
               </tr>
               <tr>
-                <h5 class="mb-3 text-xl">Remote Source Name</h5>
-                <div class="flex mb-3 relative w-64">
-                  <select
-                    v-model="selectedRemoteSource"
-                    class="block appearance-none w-full bg-white border focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline px-4 py-2 pr-8"
-                  >
-                  <option value="" disabled selected hidden display>
-                      Select from list
-                    </option>
-                    <option
-                      v-for="item in getRemoteSourcesList"
-                      v-bind:key="item.id"
-                    >
-                      {{ item.name }}
-                    </option>
-                  </select>
-
-                  <div
-                    class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
-                  >
-                    <svg
-                      class="fill-current h-4 w-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                      ></path>
-                    </svg>
-                  </div>
-                </div>
-              </tr>
-
-              <tr>
                 <h5 class="mb-3 text-xl">Source ID</h5>
                 <div class="flex mb-3 relative w-64">
                   <select
@@ -87,14 +53,15 @@
                    <option value="" disabled selected hidden display>
                       Select from list
                     </option>
-                    
-                    <option v-for="item in getSourcesList" v-bind:key="item.id">
-                      {{ item.id }}
-                     
-                    </option>
+
+                   
                     <option v-for="item in getSourcesList" v-bind:key="item.id">
                     
                       {{ item.name }}
+                    </option>
+                      <option v-for="item in getSourcesList" v-bind:key="item.id">
+                    
+                      {{ item.id }}
                     </option>
                   </select>
 
@@ -164,8 +131,8 @@ export default {
       selectedSourceID: "",
       getSourcesList: [],
       getRemoteSourcesList: [],
+      createOrganizationResponse: null,
       errors: [],
-      //   githubImageSrc: require("@/assets/img/folder.png"),
     };
   },
 
@@ -176,8 +143,9 @@ export default {
 
   methods: {
     checkForm: function (e) {
-      if (this.orgName && this.orgIsPrivate) {
+      if (this.orgName && this.orgIsPrivate != null) {
         return this.submitForm();
+        
       }
 
       this.errors = [];
@@ -185,32 +153,30 @@ export default {
       if (!this.orgName) {
         this.errors.push("Organization name is empty");
       }
-      // if (!this.orgURL) {
-      //   this.errors.push("An existing organization URL must be provided");
-      // }
-      // //   if (!this.orgIsPrivate) {
-      // //     this.errors.push("OrgVisibility required.");
-      // //   }
-      // if (!this.selectedRepo) {
-      //   this.errors.push("Specify a valid repoistory from the list above");
-      // }
+       if (!this.selectedSourceID) {
+        this.errors.push("Please select a source ID");
+      }
+  
 
       e.preventDefault();
     },
 
     submitForm() {
+      this.errors = [];
+
       axios
-        .post("http://localhost:8080/saveorganization", {
+        .post("http://localhost:8080/createorganization", {
           name: this.orgName,
           visibility: this.orgIsPrivate.toString(),
-          remoteSourceName: this.selectedRemoteSource,
           gitSourceId: this.selectedSourceID,
         })
         .then((response) => {
-          //   console.log(response);
+          this.createOrganizationResponse = response;
           this.$router.push("http://localhost:8080/organizationsetup");
         })
         .catch((error) => {
+          this.createOrganizationResponse = error.response.data;
+          this.errors.push(error.response.data);
           console.log(error);
         });
     },
