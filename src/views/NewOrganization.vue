@@ -44,24 +44,22 @@
                 </div>
               </tr>
               <tr>
-                <h5 class="mb-3 text-xl">Source ID</h5>
+                <h5 class="mb-3 text-xl">Git Source</h5>
                 <div class="flex mb-3 relative w-64">
                   <select
                     v-model="selectedSourceID"
                     class="block appearance-none w-full bg-white border focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline px-4 py-2 pr-8"
                   >
-                   <option value="" disabled selected hidden display>
+                    <option value="null" disabled selected hidden display>
                       Select from list
                     </option>
 
-                   
-                    <option v-for="item in getSourcesList" v-bind:key="item.id">
-                    
+                    <option
+                      v-for="item in getSourceListId"
+                      v-bind:key="item.name"
+                      :value="item.id"
+                    >
                       {{ item.name }}
-                    </option>
-                      <option v-for="item in getSourcesList" v-bind:key="item.id">
-                    
-                      {{ item.id }}
                     </option>
                   </select>
 
@@ -80,9 +78,48 @@
                   </div>
                 </div>
               </tr>
+              <!-- Show the url
+              <tr>
+                 
+                <p v-if="selectedSourceID != null">
+                  <el-alert
+                    title="Gitea Source Id added successfully "
+                    type="success"
+                    :closable="false"
+                    show-icon
+                  >
+                    <ul>
+                      <li v-for="item in getSourceListId" v-bind:key="item.id">
+                        Corresponding URL is: {{ item.gitApiUrl }}
+                      </li>
+                    </ul>
+                  </el-alert>
+                </p>
+              </tr>
+-->
+
+              <div
+                class="mt-2 mb-3 text-xl text-papaDark-700"
+                v-if="selectedSourceID != null"
+              >
+                <tr>
+                  Corresponding URL:
+
+                  <p
+                    class="inline mt-2 text-lg text-papaOrange-600"
+                    v-for="item in getSourceListId"
+                    v-bind:key="item.id"
+                  >
+                    {{ item.gitApiUrl }}
+                  </p>
+                </tr>
+              </div>
             </table>
           </div>
+
         </div>
+<!-- place here -->
+        
       </div>
       <p v-if="errors.length">
         <el-alert
@@ -104,7 +141,7 @@
           Create
         </button>
       </div>
-
+      <!-- to be removed -->
       <div
         v-if="createOrgError"
         class="mb-10 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
@@ -112,7 +149,12 @@
       >
         <span class="block sm:inline">{{ createOrgError }}</span>
       </div>
+
+
+
+      
     </div>
+    <p>hello :{{ selectedSourceID }}</p>
   </form>
 </template>
 
@@ -126,37 +168,32 @@ export default {
     return {
       createOrgError: null,
       orgIsPrivate: false,
-      orgName: "",
-      selectedRemoteSource: "",
-      selectedSourceID: "",
-      getSourcesList: [],
-      getRemoteSourcesList: [],
+      orgName: null,
+      selectedSourceID: null,
+      getSourceListId: [],
       createOrganizationResponse: null,
       errors: [],
     };
   },
 
   mounted() {
-    this.getGitSources();
-    this.getRemoteSources();
+    this.getSourceId();
   },
 
   methods: {
     checkForm: function (e) {
-      if (this.orgName && this.orgIsPrivate != null) {
+      if (this.orgName && this.selectedSourceID != null) {
         return this.submitForm();
-        
       }
 
       this.errors = [];
 
       if (!this.orgName) {
-        this.errors.push("Organization name is empty");
+        this.errors.push("A valid existing organization name must be provided");
       }
-       if (!this.selectedSourceID) {
+      if (!this.selectedSourceID) {
         this.errors.push("Please select a source ID");
       }
-  
 
       e.preventDefault();
     },
@@ -181,31 +218,12 @@ export default {
         });
     },
 
-    getGitSources() {
+    getSourceId() {
       axios.get("http://localhost:8080/gitsources").then((response) => {
-        this.getSourcesList = response.data;
-        console.log(response.data);
-
-        // this.formatgetGitSources(response.data);
-      });
-    },
-    getRemoteSources() {
-      axios.get("http://localhost:8080/remotesources").then((response) => {
-        this.getRemoteSourcesList = response.data;
-        console.log(response.data);
-
-        // this.formatgetGitSources(response.data);
+        this.getSourceListId = response.data;
       });
     },
 
-    // formatgetGitSources(sourceOnGitSources){
-
-    //   for(let key in sourceOnGitSources){
-    //     this.getSourcesList.push({ ...sourceOnGitSources[key], id: key });
-    //   }
-    //   console.log(this.getSourcesList)
-
-    // },
     //remove
     setCurrent(row) {
       this.$refs.singleTable.setCurrentRow(row);
