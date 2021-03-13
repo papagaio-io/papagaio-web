@@ -78,25 +78,6 @@
                   </div>
                 </div>
               </tr>
-              <!-- Show the url
-              <tr>
-                 
-                <p v-if="selectedSourceID != null">
-                  <el-alert
-                    title="Gitea Source Id added successfully "
-                    type="success"
-                    :closable="false"
-                    show-icon
-                  >
-                    <ul>
-                      <li v-for="item in getSourceListId" v-bind:key="item.id">
-                        Corresponding URL is: {{ item.gitApiUrl }}
-                      </li>
-                    </ul>
-                  </el-alert>
-                </p>
-              </tr>
--->
 
               <div
                 class="mt-2 mb-3 text-xl text-papaDark-700"
@@ -116,10 +97,96 @@
               </div>
             </table>
           </div>
-
         </div>
-<!-- place here -->
-        
+
+        <!-- Behaviour Section -->
+        <div class="panel">
+          <p class="panel-title text-white bg-papaDark-700">Behavior</p>
+
+          <div class="p-4 border-t">
+            <button
+              class="btn text-white bg-papaOrange-600 hover:bg-papaDark-700"
+              @click="addRepositoriesField()"
+              v-if="showBehaviourAddButton"
+            >
+              Add
+            </button>
+            <div class="float-right">
+              <el-popover
+                placement="top-start"
+                title="Behaviour section"
+                :width="200"
+                trigger="hover"
+                content="In this section you should do everything and anything no matter how hard it is. if you believe life is underrated then you should rate it.Yea why not?.Unless you believe it is overrated then you should also rate it.Yea why not? So what do you think of this section"
+              >
+                <template #reference>
+                  <el-button>?</el-button>
+                </template>
+              </el-popover>
+            </div>
+          </div>
+
+          <div
+            class="p-4"
+            v-for="(repositoriesField, counter) in repositoriesTable"
+            v-bind:key="counter"
+          >
+            <table style="width: 100%">
+              <button
+                class="btn btn-red buttonRight"
+                @click="deleteRepositoriesField(counter)"
+              >
+                Delete
+              </button>
+              <h5 class="mb-3 text-xl">Repositories</h5>
+              <label class="block font-bold mb-2 subtitleLabel"
+                >Filter by name</label
+              >
+              <tr>
+                <span class="font-bold subtitleLabelDescription">Include</span>
+
+                <center>
+                  <input
+                    class="mb-4 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
+                    v-model="repositoriesField.repositoriesInclude"
+                    type="text"
+                    placeholder="Type"
+                  />
+                </center>
+              </tr>
+
+              <tr>
+                <span class="font-bold subtitleLabelDescription">Exclude</span>
+
+                <center>
+                  <input
+                    class="mb-4 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
+                    v-model="repositoriesField.repositoriesExclude"
+                    type="text"
+                    placeholder="Type"
+                  />
+                </center>
+              </tr>
+              <tr>
+                <h5 class="mb-3 text-xl">Behaviour Type</h5>
+
+                <input
+                  type="radio"
+                  value="wildcard"
+                  v-model="behaviorTypepicked"
+                />
+                <label for="one">wildcard</label>
+
+                <input
+                  type="radio"
+                  value="regex"
+                  v-model="behaviorTypepicked"
+                />
+                <label for="two">regex</label>
+              </tr>
+            </table>
+          </div>
+        </div>
       </div>
       <p v-if="errors.length">
         <el-alert
@@ -149,12 +216,7 @@
       >
         <span class="block sm:inline">{{ createOrgError }}</span>
       </div>
-
-
-
-      
     </div>
-    <p>hello :{{ selectedSourceID }}</p>
   </form>
 </template>
 
@@ -173,6 +235,17 @@ export default {
       getSourceListId: [],
       createOrganizationResponse: null,
       errors: [],
+      key: "",
+      showBehaviourAddButton: false,
+      testIamEmpty: "none",
+      repositoriesTable: [
+        {
+          repositoriesInclude: "",
+          repositoriesExclude: "",
+        },
+      ],
+
+      behaviorTypepicked: "",
     };
   },
 
@@ -183,7 +256,16 @@ export default {
   methods: {
     checkForm: function (e) {
       if (this.orgName && this.selectedSourceID != null) {
-        return this.submitForm();
+        if (
+          !this.repositoriesTable[0].repositoriesInclude &&
+          !this.repositoriesTable[0].repositoriesExclude &&
+          !this.behaviorTypepicked
+        ) {
+          (this.repositoriesTable[0].repositoriesInclude = this.testIamEmpty.toString()),
+            (this.repositoriesTable[0].repositoriesExclude = this.testIamEmpty.toString()),
+            (this.behaviorTypepicked = this.testIamEmpty);
+          return this.submitForm();
+        } else return this.submitForm();
       }
 
       this.errors = [];
@@ -206,10 +288,13 @@ export default {
           name: this.orgName,
           visibility: this.orgIsPrivate.toString(),
           gitSourceId: this.selectedSourceID,
+          behaviourInclude: this.repositoriesTable[0].repositoriesInclude,
+          behaviourExclude: this.repositoriesTable[0].repositoriesExclude,
+          behaviourType: this.behaviorTypepicked,
         })
         .then((response) => {
           this.createOrganizationResponse = response;
-          this.$router.push("http://localhost:8080/organizationsetup");
+          this.$router.push("http://localhost:8080/");
         })
         .catch((error) => {
           this.createOrganizationResponse = error.response.data;
@@ -222,6 +307,26 @@ export default {
       axios.get("http://localhost:8080/gitsources").then((response) => {
         this.getSourceListId = response.data;
       });
+    },
+
+    addRepositoriesField() {
+      this.repositoriesTable.push({
+        repositoriesInclude: "",
+        repositoriesExclude: "",
+      });
+      this.showBehaviourAddButton = false;
+    },
+
+    addRequiredBehaviour(event) {
+      if (event.target.value == 1) {
+        this.addRepositoriesField();
+      } else if (event.target.value == 2) {
+        this.addWithinRepositoriesField();
+      }
+    },
+    deleteRepositoriesField(counter) {
+      this.repositoriesTable.splice(counter, 1);
+      this.showBehaviourAddButton = true;
     },
 
     //remove
