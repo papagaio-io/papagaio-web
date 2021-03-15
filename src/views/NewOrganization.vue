@@ -107,7 +107,7 @@
             <button
               class="btn text-white bg-papaOrange-600 hover:bg-papaDark-700"
               @click="addRepositoriesField()"
-              v-if="showBehaviourAddButton"
+              v-if="showBehaviorAddButton"
             >
               Add
             </button>
@@ -169,20 +169,22 @@
               </tr>
               <tr>
                 <h5 class="mb-3 text-xl">Behaviour Type</h5>
-
-                <input
-                  type="radio"
-                  value="wildcard"
-                  v-model="behaviorTypepicked"
-                />
-                <label for="one">wildcard</label>
-
-                <input
-                  type="radio"
-                  value="regex"
-                  v-model="behaviorTypepicked"
-                />
-                <label for="two">regex</label>
+                <label class="ml-1">
+                  <input
+                    type="radio"
+                    value="wildcard"
+                    v-model="behaviorTypepicked"
+                  />
+                  wildcard</label
+                >
+                <label class="ml-1">
+                  <input
+                    type="radio"
+                    value="regex"
+                    v-model="behaviorTypepicked"
+                  />
+                  regex</label
+                >
               </tr>
             </table>
           </div>
@@ -236,8 +238,8 @@ export default {
       createOrganizationResponse: null,
       errors: [],
       key: "",
-      showBehaviourAddButton: false,
-      testIamEmpty: "none",
+      showBehaviorAddButton: false,
+
       repositoriesTable: [
         {
           repositoriesInclude: "",
@@ -246,6 +248,10 @@ export default {
       ],
 
       behaviorTypepicked: "",
+
+      behaviorIncludeTest: "",
+      behaviorExcludeTest: "",
+      behaviourTypeTest: "none",
     };
   },
 
@@ -255,19 +261,6 @@ export default {
 
   methods: {
     checkForm: function (e) {
-      if (this.orgName && this.selectedSourceID != null) {
-        if (
-          !this.repositoriesTable[0].repositoriesInclude &&
-          !this.repositoriesTable[0].repositoriesExclude &&
-          !this.behaviorTypepicked
-        ) {
-          (this.repositoriesTable[0].repositoriesInclude = this.testIamEmpty.toString()),
-            (this.repositoriesTable[0].repositoriesExclude = this.testIamEmpty.toString()),
-            (this.behaviorTypepicked = this.testIamEmpty);
-          return this.submitForm();
-        } else return this.submitForm();
-      }
-
       this.errors = [];
 
       if (!this.orgName) {
@@ -275,6 +268,18 @@ export default {
       }
       if (!this.selectedSourceID) {
         this.errors.push("Please select a source ID");
+      }
+
+      if (this.orgName && this.selectedSourceID != null) {
+        //in-case behaviorAddButton is off. Then assign the fields to be sent to BE
+        if (this.showBehaviorAddButton == false) {
+          this.behaviorIncludeTest = this.repositoriesTable[0].repositoriesInclude;
+          this.behaviorExcludeTest = this.repositoriesTable[0].repositoriesExclude;
+          this.behaviourTypeTest = this.behaviorTypepicked;
+          this.submitForm();
+        } else this.showBehaviorAddButton == true;
+
+        this.submitForm();
       }
 
       e.preventDefault();
@@ -288,9 +293,9 @@ export default {
           name: this.orgName,
           visibility: this.orgIsPrivate.toString(),
           gitSourceId: this.selectedSourceID,
-          behaviourInclude: this.repositoriesTable[0].repositoriesInclude,
-          behaviourExclude: this.repositoriesTable[0].repositoriesExclude,
-          behaviourType: this.behaviorTypepicked,
+          behaviourInclude: this.behaviorIncludeTest,
+          behaviourExclude: this.behaviorExcludeTest,
+          behaviourType: this.behaviourTypeTest,
         })
         .then((response) => {
           this.createOrganizationResponse = response;
@@ -314,19 +319,12 @@ export default {
         repositoriesInclude: "",
         repositoriesExclude: "",
       });
-      this.showBehaviourAddButton = false;
+      this.showBehaviorAddButton = false;
     },
 
-    addRequiredBehaviour(event) {
-      if (event.target.value == 1) {
-        this.addRepositoriesField();
-      } else if (event.target.value == 2) {
-        this.addWithinRepositoriesField();
-      }
-    },
     deleteRepositoriesField(counter) {
       this.repositoriesTable.splice(counter, 1);
-      this.showBehaviourAddButton = true;
+      this.showBehaviorAddButton = true;
     },
 
     //remove
