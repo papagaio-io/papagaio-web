@@ -133,15 +133,6 @@
   margin: 0 auto;
 }
 
-.homeMainLogo {
-  
- 
-}
-.subLogo{
-  width: 10%;
-  display: inline;
-
-}
 
 .heroBody {
   display: block;
@@ -213,23 +204,6 @@ input {
   border: 3px solid #93c5fd;
 }
 
-.ProjectSetupForm {
-  width: 100%;
-  background-color: white;
-}
-
-.buttonRight {
-  float: right;
-  margin-top: 20px;
-}
-
-.projectSetupTextField {
-  width: 80%;
-}
-
-.subtitleLabel {
-  margin-left: 10px;
-}
 
 .subtitleLabelDescription {
   margin-left: 20px;
@@ -330,9 +304,6 @@ input {
   @apply px-4 -m-2px border-b-2;
 }
 
-.panel {
-  @apply mb-2 border-solid border-gray-300 rounded border shadow;
-}
 
 .panel-title {
   @apply bg-gray-200 px-4 py-3 border-solid border-gray-300 border-b text-xl font-bold;

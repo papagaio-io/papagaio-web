@@ -1,7 +1,7 @@
 <template>
   <div class="body">
     <img
-      class="homeMainLogo"
+      class=""
       alt="Papagaio logo"
       src="../assets/img/papagaioLowResPhoto.png"
     />
@@ -11,20 +11,11 @@
         Extention of
         <a class=" " href="https://agola.io"
           ><img
-            class="subLogo"
+            class="inline-block w-20"
             alt="Papagaio logo"
             src="../assets/img/agola-logo-name.svg"
         /></a>
       </h4>
-
-      <h1
-        class="text-4xl tracking-tight font-extrabold sm:text-5xl md:text-6xl"
-      >
-        <span class="block xl:inline text-papaDark-700">To: DevOps </span>
-        <span class="block xl:inline mb-4 text-xl font-bold">
-          ... Sincere Developers,</span
-        >
-      </h1>
 
       <p
         class="mt-3 mb-6 text-base font-bold sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl"
@@ -47,22 +38,22 @@
 
 
 <!-- Body  -->
-      <div class="py-20">
+      <div class="py-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="lg:text-center">
             <h2
-              class="text-base xl:inline text-papaDark-700 font-semibold tracking-wide"
+              class="text-base xl:inline text-cerise-600 font-semibold tracking-wide"
             >
               Why Papagaio ?
             </h2>
             <p
-              class="mt-2 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl"
+              class="mt-2 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl text-cerise"
             >
-              A better way to run your project
+              A convenient way to run your project
             </p>
 
             <p
-              class="mt-3 mb-6 text-base font-bold sm:max-w-xl sm:mx-auto md:mt-2 md:text-xl"
+              class="mt-3 mb-6 text-base font-medium  sm:max-w-xl sm:mx-auto md:mt-2 md:text-xl"
             >
               Lorem ipsum dolor sit amet consect adipisicing elit. Possimus
               magnam voluptatum cupiditate veritatis in accusamus quisquam.
@@ -76,7 +67,7 @@
               <div class="flex">
                 <div class="flex-shrink-0">
                   <div
-                    class="flex items-center justify-center h-12 w-12 rounded-md bg-papaOrange-500 text-white"
+                    class="flex items-center justify-center h-12 w-12 rounded-md bg-cerise-600 text-white"
                   >
                     <!-- Heroicon name: outline/globe-alt -->
                     <svg
@@ -100,7 +91,7 @@
                   </div>
                 </div>
                 <div class="ml-4">
-                  <dt class="text-lg leading-6 font-medium text-papaDark-700">
+                  <dt class="text-lg leading-6 font-bold">
                     Competitive exchange rates
                   </dt>
                   <dd class="mt-2 text-base">
@@ -114,7 +105,7 @@
               <div class="flex">
                 <div class="flex-shrink-0">
                   <div
-                    class="flex items-center justify-center h-12 w-12 rounded-md bg-papaOrange-500 text-white"
+                    class="flex items-center justify-center h-12 w-12 rounded-md bg-cerise-600 text-white"
                   >
                     <!-- Heroicon name: outline/scale -->
                     <svg
@@ -133,7 +124,7 @@
                   </div>
                 </div>
                 <div class="ml-4">
-                  <dt class="text-lg leading-6 font-medium text-papaDark-700">
+                  <dt class="text-lg leading-6 font-bold">
                     No hidden fees
                   </dt>
                   <dd class="mt-2 text-base">
@@ -147,7 +138,7 @@
               <div class="flex">
                 <div class="flex-shrink-0">
                   <div
-                    class="flex items-center justify-center h-12 w-12 rounded-md bg-papaOrange-500 text-white"
+                    class="flex items-center justify-center h-12 w-12 rounded-md bg-cerise-600 text-white"
                   >
                     <!-- Heroicon name: outline/lightning-bolt -->
                     <svg
@@ -166,7 +157,7 @@
                   </div>
                 </div>
                 <div class="ml-4">
-                  <dt class="text-lg leading-6 font-medium text-papaDark-700">
+                  <dt class="text-lg leading-6 font-bold ">
                     Transfers are instant
                   </dt>
                   <dd class="mt-2 text-base">
@@ -180,7 +171,7 @@
               <div class="flex">
                 <div class="flex-shrink-0">
                   <div
-                    class="flex items-center justify-center h-12 w-12 rounded-md bg-papaOrange-500 text-white"
+                    class="flex items-center justify-center h-12 w-12 rounded-md bg-cerise-600 text-white"
                   >
                     <!-- Heroicon name: outline/annotation -->
                     <svg
@@ -199,7 +190,7 @@
                   </div>
                 </div>
                 <div class="ml-4">
-                  <dt class="text-lg leading-6 font-medium text-papaDark-700">
+                  <dt class="text-lg leading-6 font-bold">
                     Mobile notifications
                   </dt>
                   <dd class="mt-2 text-base">

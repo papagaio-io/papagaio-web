@@ -1,10 +1,10 @@
 <template>
   <form @submit.prevent="checkForm" action="" method="post">
-    <div class="body">
-      <h4 class="mb-2 text-3xl font-bold">New Organization</h4>
+    <div class=" body">
+      <h4 class="mb-2 text-3xl font-bold">Configure Organization</h4>
       <!-- Beginning of form -->
-      <div class="ProjectSetupForm">
-        <div class="panel">
+      <div class="bg-gray-100 ">
+        <div class="">
           <div class="p-4 border-t">
             <table style="width: 100%">
               <tr>
@@ -25,7 +25,7 @@
 
                 <center>
                   <input
-                    class="mb-4 focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
+                    class="mb-4 focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none  w-3/4"
                     type="text"
                     placeholder="Type/paste an existing organization name"
                     v-model="orgName"
@@ -34,14 +34,30 @@
               </tr>
 
               <tr>
-                <h5 class="mb-3 text-xl">Private/Public</h5>
-
+                <h5 class="mb-3 text-xl">Visibility</h5>
+<!-- 
                 <div class="mb-4 ml-1">
                   <label>
                     <input type="checkbox" v-model="orgIsPrivate" />
                     Private
                   </label>
-                </div>
+                </div> -->
+
+                <label class="mb-4 flex justify-start items-start">
+                  <div
+                    class="bg-white border-2 rounded border-gray-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500"
+                  >
+                    <input type="checkbox" v-model="orgIsPrivate" class="opacity-0 absolute" />
+                    <svg
+                      class="fill-current hidden w-4 h-4 text-papaOrange-600 pointer-events-none"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
+                    </svg>
+                  </div>
+                  <div class="select-none">Private</div>
+                </label>
+
               </tr>
               <tr>
                 <h5 class="mb-3 text-xl">Git Source</h5>
@@ -100,8 +116,8 @@
         </div>
 
         <!-- Behaviour Section -->
-        <div class="panel">
-          <p class="panel-title text-white bg-papaDark-700">Behavior</p>
+        <div class="">
+          <p class="panel-title text-white bg-cerise-600">Behavior</p>
 
           <div class="p-4 border-t">
             <button
@@ -111,6 +127,7 @@
             >
               Add
             </button>
+
             <div class="float-right">
               <el-popover
                 placement="top-start"
@@ -133,58 +150,65 @@
           >
             <table style="width: 100%">
               <button
-                class="btn btn-red buttonRight"
+                class="btn btn-red float-right mt-5 "
                 @click="deleteRepositoriesField(counter)"
               >
-                Delete
+                Remove
               </button>
+
               <h5 class="mb-3 text-xl">Repositories</h5>
-              <label class="block font-bold mb-2 subtitleLabel"
+
+              <label class="font-bold mb-10"
                 >Filter by name</label
               >
               <tr>
-                <span class="font-bold subtitleLabelDescription">Include</span>
-
+               
+                <span class="font-bold ml-3">Include</span>
                 <center>
                   <input
-                    class="mb-4 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
+                    class="mb-4 focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none  w-3/4   "
                     v-model="repositoriesField.repositoriesInclude"
                     type="text"
-                    placeholder="Type"
+                    placeholder=""
                   />
                 </center>
               </tr>
 
               <tr>
-                <span class="font-bold subtitleLabelDescription">Exclude</span>
+                
+                <span class="font-bold ml-3">Exclude</span>
 
                 <center>
                   <input
-                    class="mb-4 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline projectSetupTextField"
+                    class="mb-4 focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4 "
                     v-model="repositoriesField.repositoriesExclude"
                     type="text"
-                    placeholder="Type"
+                    placeholder=""
                   />
                 </center>
               </tr>
-              <tr>
-                <h5 class="mb-3 text-xl">Behaviour Type</h5>
-                <label class="ml-1">
+              <tr> 
+                <h5 class="mb-3 text-xl">Behavior Type</h5>
+                <label class="text-lg">
                   <input
                     type="radio"
                     value="wildcard"
                     v-model="behaviorTypepicked"
+                    class="w-4 h-4  "
                   />
-                  wildcard</label
+                  Wildcard</label
                 >
-                <label class="ml-1">
+                <label class="ml-5 text-lg">
                   <input
                     type="radio"
                     value="regex"
                     v-model="behaviorTypepicked"
+                    class="w-4 h-4"
                   />
-                  regex</label
+                  Regex</label
                 >
+
+                
               </tr>
             </table>
           </div>
@@ -205,7 +229,7 @@
 
       <div class="sm:mt-0 sm:ml-3">
         <button
-          class="px-10 py-3 border border-transparent text-base font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold py-2 px-4 rounded buttonRight"
+          class="px-10 py-3 border border-transparent text-base font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold py-2 px-4 rounded float-right mt-5"
         >
           Create
         </button>
@@ -247,11 +271,11 @@ export default {
         },
       ],
 
-      behaviorTypepicked: "",
+      behaviorTypepicked: null,
 
-      behaviorIncludeTest: "",
-      behaviorExcludeTest: "",
-      behaviourTypeTest: "none",
+      behaviorIncludeTempValue: "",
+      behaviorExcludeTempValue: "",
+      behaviorTypeTempValue: "none",
     };
   },
 
@@ -260,6 +284,30 @@ export default {
   },
 
   methods: {
+    checkBehavior() {
+      this.errors = [];
+
+      console.log("I entered here");
+
+      if (!this.behaviorTypepicked) {
+        this.errors.push("Choose a type or delete behavior section");
+        console.log("I pushed");
+      }
+
+      if (this.repositoriesTable[0].repositoriesInclude === "") {
+        this.errors.push(
+          "Please provide an include behavior or delete all behavior section "
+        );
+      }
+
+      if (!this.errors.length) {
+        this.behaviorIncludeTempValue = this.repositoriesTable[0].repositoriesInclude;
+        this.behaviorExcludeTempValue = this.repositoriesTable[0].repositoriesExclude;
+        this.behaviorTypeTempValue = this.behaviorTypepicked;
+        this.submitForm();
+      }
+    },
+
     checkForm: function (e) {
       this.errors = [];
 
@@ -273,13 +321,10 @@ export default {
       if (this.orgName && this.selectedSourceID != null) {
         //in-case behaviorAddButton is off. Then assign the fields to be sent to BE
         if (this.showBehaviorAddButton == false) {
-          this.behaviorIncludeTest = this.repositoriesTable[0].repositoriesInclude;
-          this.behaviorExcludeTest = this.repositoriesTable[0].repositoriesExclude;
-          this.behaviourTypeTest = this.behaviorTypepicked;
+          this.checkBehavior();
+        } else if (this.showBehaviorAddButton == true) {
           this.submitForm();
-        } else this.showBehaviorAddButton == true;
-
-        this.submitForm();
+        }
       }
 
       e.preventDefault();
@@ -293,9 +338,9 @@ export default {
           name: this.orgName,
           visibility: this.orgIsPrivate.toString(),
           gitSourceId: this.selectedSourceID,
-          behaviourInclude: this.behaviorIncludeTest,
-          behaviourExclude: this.behaviorExcludeTest,
-          behaviourType: this.behaviourTypeTest,
+          behaviourInclude: this.behaviorIncludeTempValue,
+          behaviourExclude: this.behaviorExcludeTempValue,
+          behaviourType: this.behaviorTypeTempValue,
         })
         .then((response) => {
           this.createOrganizationResponse = response;
@@ -360,6 +405,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+input:checked + svg {
+  display: block;
+}
 </style>
 
 
