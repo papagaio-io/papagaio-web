@@ -128,12 +128,6 @@
   background-color: #ffffff;
 }
 
-.body {
-  width: 50%;
-  margin: 0 auto;
-}
-
-
 .heroBody {
   display: block;
   margin-left: auto;
@@ -202,15 +196,6 @@ input {
 .headTextFieldStyleShort:focus {
   outline: none !important;
   border: 3px solid #93c5fd;
-}
-
-
-.subtitleLabelDescription {
-  margin-left: 20px;
-}
-
-.caseSensitiveCheckBox {
-  background-color: #eee;
 }
 
 #workingItemNavigationTable {
@@ -304,6 +289,9 @@ input {
   @apply px-4 -m-2px border-b-2;
 }
 
+.panel {
+  @apply mb-2 border-solid border-gray-300 rounded border shadow;
+}
 
 .panel-title {
   @apply bg-gray-200 px-4 py-3 border-solid border-gray-300 border-b text-xl font-bold;

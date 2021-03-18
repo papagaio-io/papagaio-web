@@ -1,11 +1,11 @@
 <template>
 
   <div id="app">
-    <nav class="text-white bg-papaDark-700 p-3 ">
+    <nav class="text-white bg-papaOrange-600 p-3 ">
       <div class="container flex items-center justify-between flex-wrap ">
         <div class="mr-6">
           <router-link
-            class="font-semibold flex items-center flex-shrink-0 text-xl tracking-tight"
+            class="font-semibold flex items-center flex-shrink-0 text-xl tracking-tight text-black"
             to="/"
           >
             <img class="w-10 mr-2" src="./assets/img/papagaio-logo-circle.png" />
@@ -100,8 +100,8 @@
             </div>
           </div>
           <div v-else class="navbar-item">
-            <router-link class="btn bg-papaOrange-500 hover:bg-papaDark-700" to="/register">Sign up</router-link>
-            <router-link class="ml-2 btn bg-papaOrange-500 hover:bg-papaDark-700" to="/login">Login</router-link>
+            <router-link class="btn bg-papaDark-700 hover:bg-papaOrange-600" to="/register">Sign up</router-link>
+            <router-link class="ml-2 btn bg-papaDark-700 hover:bg-papaOrange-600" to="/login">Login</router-link>
           </div>
         </div>
       </div>

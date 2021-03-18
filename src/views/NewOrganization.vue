@@ -1,9 +1,9 @@
 <template>
   <form @submit.prevent="checkForm" action="" method="post">
-    <div class=" body">
+    <div class="container mx-auto">
       <h4 class="mb-2 text-3xl font-bold">Configure Organization</h4>
       <!-- Beginning of form -->
-      <div class="bg-gray-100 ">
+      <div class="bg-gray-100">
         <div class="">
           <div class="p-4 border-t">
             <table style="width: 100%">
@@ -25,7 +25,7 @@
 
                 <center>
                   <input
-                    class="mb-4 focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none  w-3/4"
+                    class="mb-4 focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4"
                     type="text"
                     placeholder="Type/paste an existing organization name"
                     v-model="orgName"
@@ -35,19 +35,16 @@
 
               <tr>
                 <h5 class="mb-3 text-xl">Visibility</h5>
-<!-- 
-                <div class="mb-4 ml-1">
-                  <label>
-                    <input type="checkbox" v-model="orgIsPrivate" />
-                    Private
-                  </label>
-                </div> -->
 
                 <label class="mb-4 flex justify-start items-start">
                   <div
                     class="bg-white border-2 rounded border-gray-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500"
                   >
-                    <input type="checkbox" v-model="orgIsPrivate" class="opacity-0 absolute" />
+                    <input
+                      type="checkbox"
+                      v-model="orgIsPrivate"
+                      class="opacity-0 absolute"
+                    />
                     <svg
                       class="fill-current hidden w-4 h-4 text-papaOrange-600 pointer-events-none"
                       viewBox="0 0 20 20"
@@ -57,10 +54,9 @@
                   </div>
                   <div class="select-none">Private</div>
                 </label>
-
               </tr>
               <tr>
-                <h5 class="mb-3 text-xl">Git Source</h5>
+                <h5 class="mb-3 text-xl">Git source</h5>
                 <div class="flex mb-3 relative w-64">
                   <select
                     v-model="selectedSourceID"
@@ -94,22 +90,22 @@
                   </div>
                 </div>
               </tr>
-
-              <div
-                class="mt-2 mb-3 text-xl text-papaDark-700"
-                v-if="selectedSourceID != null"
-              >
-                <tr>
-                  Corresponding URL:
-
+              <div class="m10" v-if="selectedSourceID != null">
+                <el-alert
+                  title="Corresponding URL for git source:"
+                  type="success"
+                  :closable="false"
+                  effect="dark"
+                  show-icon
+                >
                   <p
-                    class="inline mt-2 text-lg text-papaOrange-600"
+                    class="text-lg"
                     v-for="item in getSourceListId"
                     v-bind:key="item.id"
                   >
                     {{ item.gitApiUrl }}
                   </p>
-                </tr>
+                </el-alert>
               </div>
             </table>
           </div>
@@ -117,7 +113,7 @@
 
         <!-- Behaviour Section -->
         <div class="">
-          <p class="panel-title text-white bg-cerise-600">Behavior</p>
+          <p class="panel-title text-white bg-papaDark-700">Behavior</p>
 
           <div class="p-4 border-t">
             <button
@@ -150,7 +146,7 @@
           >
             <table style="width: 100%">
               <button
-                class="btn btn-red float-right mt-5 "
+                class="btn btn-red float-right mt-5"
                 @click="deleteRepositoriesField(counter)"
               >
                 Remove
@@ -158,15 +154,12 @@
 
               <h5 class="mb-3 text-xl">Repositories</h5>
 
-              <label class="font-bold mb-10"
-                >Filter by name</label
-              >
+              <label class="font-bold ml-2">Filter by name</label>
               <tr>
-               
                 <span class="font-bold ml-3">Include</span>
                 <center>
                   <input
-                    class="mb-4 focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none  w-3/4   "
+                    class="mb-4 focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4"
                     v-model="repositoriesField.repositoriesInclude"
                     type="text"
                     placeholder=""
@@ -175,26 +168,25 @@
               </tr>
 
               <tr>
-                
                 <span class="font-bold ml-3">Exclude</span>
 
                 <center>
                   <input
-                    class="mb-4 focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4 "
+                    class="mb-4 focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4"
                     v-model="repositoriesField.repositoriesExclude"
                     type="text"
                     placeholder=""
                   />
                 </center>
               </tr>
-              <tr> 
+              <tr>
                 <h5 class="mb-3 text-xl">Behavior Type</h5>
                 <label class="text-lg">
                   <input
                     type="radio"
                     value="wildcard"
                     v-model="behaviorTypepicked"
-                    class="w-4 h-4  "
+                    class="w-4 h-4"
                   />
                   Wildcard</label
                 >
@@ -207,8 +199,6 @@
                   />
                   Regex</label
                 >
-
-                
               </tr>
             </table>
           </div>
@@ -216,7 +206,7 @@
       </div>
       <p v-if="errors.length">
         <el-alert
-          title="Error. Please check and following(s) :"
+          title="Please check the following error(s): "
           type="error"
           :closable="false"
           show-icon
@@ -290,13 +280,15 @@ export default {
       console.log("I entered here");
 
       if (!this.behaviorTypepicked) {
-        this.errors.push("Choose a type or delete behavior section");
+        this.errors.push(
+          "Choose a 'behavior type', or remove the behavior section"
+        );
         console.log("I pushed");
       }
 
       if (this.repositoriesTable[0].repositoriesInclude === "") {
         this.errors.push(
-          "Please provide an include behavior or delete all behavior section "
+          "Provide an 'include parameter' for the behavior, or remove the behavior section "
         );
       }
 
@@ -344,7 +336,7 @@ export default {
         })
         .then((response) => {
           this.createOrganizationResponse = response;
-          this.$router.push("http://localhost:8080/");
+          this.$router.push("http://localhost:8080/confirmation");
         })
         .catch((error) => {
           this.createOrganizationResponse = error.response.data;
@@ -371,36 +363,7 @@ export default {
       this.repositoriesTable.splice(counter, 1);
       this.showBehaviorAddButton = true;
     },
-
-    //remove
-    setCurrent(row) {
-      this.$refs.singleTable.setCurrentRow(row);
-    },
-    handleCurrentChange(val) {
-      this.currentRow = val;
-    },
-
-    resetErrors() {
-      this.createOrgError = null;
-    },
-    async createOrg() {
-      this.resetErrors();
-
-      let visibility = "public";
-      if (this.orgIsPrivate) {
-        visibility = "private";
-      }
-
-      let { error } = await createOrganization(this.orgName, visibility);
-      if (error) {
-        this.createOrgError = error;
-        return;
-      }
-
-      this.$router.push(ownerLink("org", this.orgName));
-    },
   },
-  created: async function () {},
 };
 </script>
 

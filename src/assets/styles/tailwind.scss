@@ -5,17 +5,11 @@
 
 .body {
  
-  width: 50%; margin: 0 auto;
+  // width: 50%; margin: 0 auto;
  
   
 }
-.homeMainLogo {
- 
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 80%;
-}
+
 .heroBody{
   display: block;
   margin-left: auto;
@@ -82,28 +76,6 @@ input {
   border: 3px solid #93c5fd;
 }
 //form
-.ProjectSetupForm {
-  width: 100%;
-  background-color: white;
-}
-.buttonRight {
-  float: right;
-  margin-top: 20px;
-
-.projectSetupTextField {
-  width: 80%;
-}
-
-.subtitleLabel {
-  margin-left: 10px;
-}
-.subtitleLabelDescription {
-  margin-left: 20px;
-}
-.caseSensitiveCheckBox {
-  background-color: #eee;
-}
-
 
 
 #workingItemNavigationTable {

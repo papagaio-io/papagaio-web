@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 import organizationsetup from "../views/OrganizationSetup.vue";
 import neworganization from "../views/NewOrganization.vue"
+import confirmation from "../views/Confirmation.vue"
 const routes = [
   {
     path: '/',
@@ -17,6 +18,11 @@ const routes = [
     path: '/neworganization',
     name: 'NewOrganization',
     component: neworganization
+  },
+  {
+    path: '/confirmation',
+    name: 'Confirmation',
+    component: confirmation
   },
   {
     path: '/about',

@@ -1,9 +1,9 @@
 <template>
-  <div class="body">
+  <div class="flex flex-col items-center">
     <img
-      class=""
+      class="w-13 h-40 mb-1 "
       alt="Papagaio logo"
-      src="../assets/img/papagaioLowResPhoto.png"
+      src="../assets/img/papagaioMainLogo.jpg"
     />
     <div class="heroBody">
 
@@ -38,6 +38,7 @@
 
 
 <!-- Body  -->
+
       <div class="py-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="lg:text-center">
@@ -47,7 +48,7 @@
               Why Papagaio ?
             </h2>
             <p
-              class="mt-2 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl text-cerise"
+              class="mt-2 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl "
             >
               A convenient way to run your project
             </p>
