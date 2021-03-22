@@ -1,13 +1,14 @@
 <template>
-  <div class="flex flex-col items-center">
+  <div class="flex flex-col items-center ">
     <img
-      class="w-13 h-40 mb-1 "
+      class="object-cover w-80 h-50 mb-1 "
       alt="Papagaio logo"
       src="../assets/img/papagaioMainLogo.jpg"
     />
-    <div class="heroBody">
+   <div class = "bg-papaDark-700 pt-2">
+    <div class="heroBody ">
 
-      <h4 class="mb-4 text-xl font-bold">
+      <h4 class="mb-4 mt-3 text-xl font-bold text-white">
         Extention of
         <a class=" " href="https://agola.io"
           ><img
@@ -18,16 +19,15 @@
       </h4>
 
       <p
-        class="mt-3 mb-6 text-base font-bold sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl"
+        class="mt-3 mb-4 text-base font-bold sm:max-w-4xl sm:mx-auto md:mt-5 md:text-xl text-white"
       >
-        Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem
-        cupidatat commodo.
+        Agola is a CI/CD open source tool under the 2.0 Apache license. Papagaio was developed on top to extend Agola's capabilities and provide a more flexible control on workflow(Runs).    
       </p>
 
       <div class="mt-5 sm:mt-8 sm:flex sm:justify-center">
         <div class="sm:mt-0 sm:ml-3">
           <button
-            class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md bg-papaOrange-500 hover:bg-papaDark-700 text-white font-bold py-2 px-4 rounded"
+            class="w-full flex items-center justify-center px-8 py-3 border-solid border-2 border-white font-medium rounded-md bg-papaOrange-500 hover:bg-papaDark-700 text-white font-bold py-2 px-4 "
             @click="this.$router.push('http://localhost:8081/neworganization')"
           >
             Try Now
@@ -39,16 +39,17 @@
 
 <!-- Body  -->
 
-      <div class="py-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="panel mt-5 mb-2 bg-gray-100">
+        <div class="mb-2 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="lg:text-center">
             <h2
-              class="text-base xl:inline text-cerise-600 font-semibold tracking-wide"
+              class=" text-base xl:inline font-semibold tracking-wide  "
             >
-              Why Papagaio ?
+            <br> <!-- remove this  -->
+              Why Papagaio?
             </h2>
             <p
-              class="mt-2 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl "
+              class="mt-3 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl "
             >
               A convenient way to run your project
             </p>
@@ -68,7 +69,7 @@
               <div class="flex">
                 <div class="flex-shrink-0">
                   <div
-                    class="flex items-center justify-center h-12 w-12 rounded-md bg-cerise-600 text-white"
+                    class="flex items-center justify-center h-12 w-12 rounded-md bg-papaDark-700 text-white"
                   >
                     <!-- Heroicon name: outline/globe-alt -->
                     <svg
@@ -92,8 +93,8 @@
                   </div>
                 </div>
                 <div class="ml-4">
-                  <dt class="text-lg leading-6 font-bold">
-                    Competitive exchange rates
+                  <dt class="text-lg leading-6 font-bold ">
+                    Better view of runs
                   </dt>
                   <dd class="mt-2 text-base">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -106,7 +107,7 @@
               <div class="flex">
                 <div class="flex-shrink-0">
                   <div
-                    class="flex items-center justify-center h-12 w-12 rounded-md bg-cerise-600 text-white"
+                    class="flex items-center justify-center h-12 w-12 rounded-md bg-papaDark-700 text-white"
                   >
                     <!-- Heroicon name: outline/scale -->
                     <svg
@@ -126,9 +127,9 @@
                 </div>
                 <div class="ml-4">
                   <dt class="text-lg leading-6 font-bold">
-                    No hidden fees
+                    Organization members
                   </dt>
-                  <dd class="mt-2 text-base">
+                  <dd class="mt-2 text-base ">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                     Maiores impedit perferendis suscipit eaque, iste dolor
                     cupiditate blanditiis ratione.
@@ -139,7 +140,7 @@
               <div class="flex">
                 <div class="flex-shrink-0">
                   <div
-                    class="flex items-center justify-center h-12 w-12 rounded-md bg-cerise-600 text-white"
+                    class="flex items-center justify-center h-12 w-12 rounded-md bg-papaDark-700 text-white"
                   >
                     <!-- Heroicon name: outline/lightning-bolt -->
                     <svg
@@ -159,7 +160,7 @@
                 </div>
                 <div class="ml-4">
                   <dt class="text-lg leading-6 font-bold ">
-                    Transfers are instant
+                    Different git sources
                   </dt>
                   <dd class="mt-2 text-base">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -172,7 +173,7 @@
               <div class="flex">
                 <div class="flex-shrink-0">
                   <div
-                    class="flex items-center justify-center h-12 w-12 rounded-md bg-cerise-600 text-white"
+                    class="flex items-center justify-center h-12 w-12 rounded-md bg-papaDark-700 text-white"
                   >
                     <!-- Heroicon name: outline/annotation -->
                     <svg
@@ -192,7 +193,7 @@
                 </div>
                 <div class="ml-4">
                   <dt class="text-lg leading-6 font-bold">
-                    Mobile notifications
+                    Efficiency
                   </dt>
                   <dd class="mt-2 text-base">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -205,7 +206,8 @@
           </div>
         </div>
       </div>
-    
+      <p class= "ml-2 text-white font-medium"> Powered by: Sorint.it </p>
+    </div>
   </div>
 </template>
 

@@ -52,7 +52,7 @@
                       <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
                     </svg>
                   </div>
-                  <div class="select-none">Private</div>
+                  <div>Private</div>
                 </label>
               </tr>
               <tr>
@@ -117,7 +117,7 @@
 
           <div class="p-4 border-t">
             <button
-              class="btn text-white bg-papaOrange-600 hover:bg-papaDark-700"
+              class="btn text-white bg-papaOrange-600 hover:bg-papaDark-700 border-solid border-2 border-white"
               @click="addRepositoriesField()"
               v-if="showBehaviorAddButton"
             >
@@ -146,7 +146,7 @@
           >
             <table style="width: 100%">
               <button
-                class="btn btn-red float-right mt-5"
+                class="btn btn-red float-right mt-3 hover:bg-papaDark-700 border-solid border-2 border-white"
                 @click="deleteRepositoriesField(counter)"
               >
                 Remove
@@ -219,7 +219,7 @@
 
       <div class="sm:mt-0 sm:ml-3">
         <button
-          class="px-10 py-3 border border-transparent text-base font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold py-2 px-4 rounded float-right mt-5"
+          class="px-10 py-3 font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold py-2 px-4 rounded float-right mt-5 border-solid border-2 border-white"
         >
           Create
         </button>
@@ -233,6 +233,7 @@
         <span class="block sm:inline">{{ createOrgError }}</span>
       </div>
     </div>
+
   </form>
 </template>
 
@@ -245,7 +246,7 @@ export default {
   data() {
     return {
       createOrgError: null,
-      orgIsPrivate: false,
+      orgIsPrivate: "false",
       orgName: null,
       selectedSourceID: null,
       getSourceListId: [],
@@ -256,12 +257,12 @@ export default {
 
       repositoriesTable: [
         {
-          repositoriesInclude: "",
+          repositoriesInclude: "*",
           repositoriesExclude: "",
         },
       ],
 
-      behaviorTypepicked: null,
+      behaviorTypepicked: "wildcard",
 
       behaviorIncludeTempValue: "",
       behaviorExcludeTempValue: "",
@@ -277,7 +278,7 @@ export default {
     checkBehavior() {
       this.errors = [];
 
-      console.log("I entered here");
+      console.log("I am checking the behaviour");
 
       if (!this.behaviorTypepicked) {
         this.errors.push(
@@ -286,6 +287,7 @@ export default {
         console.log("I pushed");
       }
 
+      //'behavior include' must have parameter if default is changed 
       if (this.repositoriesTable[0].repositoriesInclude === "") {
         this.errors.push(
           "Provide an 'include parameter' for the behavior, or remove the behavior section "
@@ -310,6 +312,22 @@ export default {
         this.errors.push("Please select a source ID");
       }
 
+      // if (this.orgIsPrivate != false) {
+      //   this.orgIsPrivate = "private";
+      //   console.log("i made it private");
+      // } else if (this.orgIsPrivate != true) {
+      //   this.orgIsPrivate = "public";
+      //   console.log("i made it public");
+      // }
+
+       if (this.orgIsPrivate === "false" || this.orgIsPrivate == false) {
+        this.orgIsPrivate = "public";
+        console.log("i made it public");
+      } else if (this.orgIsPrivate === "true" || this.orgIsPrivate == true) {
+        this.orgIsPrivate = "private";
+        console.log("i made it private");
+      }
+
       if (this.orgName && this.selectedSourceID != null) {
         //in-case behaviorAddButton is off. Then assign the fields to be sent to BE
         if (this.showBehaviorAddButton == false) {
@@ -326,9 +344,9 @@ export default {
       this.errors = [];
 
       axios
-        .post("http://localhost:8080/createorganization", {
+        .post("http://localhost:8080/api/createorganization", {
           name: this.orgName,
-          visibility: this.orgIsPrivate.toString(),
+          visibility: this.orgIsPrivate,
           gitSourceId: this.selectedSourceID,
           behaviourInclude: this.behaviorIncludeTempValue,
           behaviourExclude: this.behaviorExcludeTempValue,
@@ -346,7 +364,7 @@ export default {
     },
 
     getSourceId() {
-      axios.get("http://localhost:8080/gitsources").then((response) => {
+      axios.get("http://localhost:8080/api/gitsources").then((response) => {
         this.getSourceListId = response.data;
       });
     },

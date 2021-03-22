@@ -100,8 +100,8 @@
             </div>
           </div>
           <div v-else class="navbar-item">
-            <router-link class="btn bg-papaDark-700 hover:bg-papaOrange-600" to="/register">Sign up</router-link>
-            <router-link class="ml-2 btn bg-papaDark-700 hover:bg-papaOrange-600" to="/login">Login</router-link>
+            <router-link class="btn bg-papaDark-700 hover:bg-papaOrange-600 border-solid border-2 border-white" to="/register">Sign up</router-link>
+            <router-link class="ml-5 btn bg-papaDark-700 hover:bg-papaOrange-600 border-solid border-2 border-white" to="/login">Login</router-link>
           </div>
         </div>
       </div>
