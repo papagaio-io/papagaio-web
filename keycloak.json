@@ -1,0 +1,10 @@
+{
+  "realm": "sorinttest",
+  "auth-server-url": "https://login.sorintdev.it/auth",
+  "ssl-required": "external",
+  "resource": "stroodle",
+  "credentials": {
+    "secret": "faca2843-977c-43e9-9a25-12c5c252fe00"
+  },
+  "confidential-port": 0
+}

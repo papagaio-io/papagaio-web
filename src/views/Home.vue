@@ -32,6 +32,18 @@
           >
             Try Now
           </button>
+          <br>
+         <br>
+
+          <button
+              class="button-login"
+              variant="success"
+              @click="keycloak.login()"
+              
+            >
+              LOGIN <br />
+            </button>
+
         </div>
       </div>
 </div>
