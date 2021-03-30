@@ -22,7 +22,6 @@
                   </el-popover>
                 </div>
                 <h5 class="mb-3 text-xl">Organization name</h5>
-
                 <center>
                   <input
                     class="mb-4 focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4"
@@ -235,6 +234,7 @@
     </div>
 
   </form>
+  <!-- <p> test usertoken from new org {{userToken}} </p> -->
 </template>
 
 <script>
@@ -245,6 +245,7 @@ export default {
   props: {},
   data() {
     return {
+      userToken: this.$store.state.currentTokenId,
       createOrgError: null,
       orgIsPrivate: "false",
       orgName: null,
@@ -344,16 +345,19 @@ export default {
       this.errors = [];
 
       axios
-        .post("http://localhost:8080/api/createorganization", {
+        .post("https://papagaio.sorintdev.it/api/createorganization",  {
           name: this.orgName,
           visibility: this.orgIsPrivate,
           gitSourceId: this.selectedSourceID,
           behaviourInclude: this.behaviorIncludeTempValue,
           behaviourExclude: this.behaviorExcludeTempValue,
           behaviourType: this.behaviorTypeTempValue,
-        })
+        
+          
+        }, { headers: {"Authorization" : `Bearer ${this.userToken}`} } )
         .then((response) => {
-          this.createOrganizationResponse = response;
+          // this.createOrganizationResponse = response;
+          this.$store.state.createOrganizationBeResponse = response.data;
           this.$router.push("http://localhost:8080/confirmation");
         })
         .catch((error) => {
@@ -364,7 +368,7 @@ export default {
     },
 
     getSourceId() {
-      axios.get("http://localhost:8080/api/gitsources").then((response) => {
+      axios.get("https://papagaio.sorintdev.it/api/gitsources", { headers: {"Authorization" : `Bearer ${this.userToken}`} } ).then((response) => {
         this.getSourceListId = response.data;
       });
     },

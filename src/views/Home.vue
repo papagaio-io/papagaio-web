@@ -27,23 +27,13 @@
       <div class="mt-5 sm:mt-8 sm:flex sm:justify-center">
         <div class="sm:mt-0 sm:ml-3">
           <button
-            class="w-full flex items-center justify-center px-8 py-3 border-solid border-2 border-white font-medium rounded-md bg-papaOrange-500 hover:bg-papaDark-700 text-white font-bold py-2 px-4 "
+            class="w-full flex items-center justify-center px-8 py-3 border-solid border-2 border-white font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold py-2 px-4 "
             @click="this.$router.push('http://localhost:8081/neworganization')"
+        
           >
             Try Now
           </button>
-          <br>
-         <br>
-
-          <button
-              class="button-login"
-              variant="success"
-              @click="keycloak.login()"
-              
-            >
-              LOGIN <br />
-            </button>
-
+       
         </div>
       </div>
 </div>
@@ -52,7 +42,7 @@
 <!-- Body  -->
 
       <div class="panel mt-5 mb-2 bg-gray-100">
-        <div class="mb-2 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-3 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="lg:text-center">
             <h2
               class=" text-base xl:inline font-semibold tracking-wide  "
