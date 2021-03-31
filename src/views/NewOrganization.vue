@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="checkForm" action="" method="post">
     <div class="container mx-auto">
-      <h4 class="mb-2 text-3xl font-bold">Configure Organization</h4>
+      <h4 class="mt-2 mb-2 text-3xl font-bold">Configure a New Organization</h4>
       <!-- Beginning of form -->
       <div class="bg-gray-100">
         <div class="">
@@ -232,7 +232,6 @@
         <span class="block sm:inline">{{ createOrgError }}</span>
       </div>
     </div>
-
   </form>
   <!-- <p> test usertoken from new org {{userToken}} </p> -->
 </template>
@@ -288,7 +287,7 @@ export default {
         console.log("I pushed");
       }
 
-      //'behavior include' must have parameter if default is changed 
+      //'behavior include' must have parameter if default is changed
       if (this.repositoriesTable[0].repositoriesInclude === "") {
         this.errors.push(
           "Provide an 'include parameter' for the behavior, or remove the behavior section "
@@ -313,15 +312,7 @@ export default {
         this.errors.push("Please select a source ID");
       }
 
-      // if (this.orgIsPrivate != false) {
-      //   this.orgIsPrivate = "private";
-      //   console.log("i made it private");
-      // } else if (this.orgIsPrivate != true) {
-      //   this.orgIsPrivate = "public";
-      //   console.log("i made it public");
-      // }
-
-       if (this.orgIsPrivate === "false" || this.orgIsPrivate == false) {
+      if (this.orgIsPrivate === "false" || this.orgIsPrivate == false) {
         this.orgIsPrivate = "public";
         console.log("i made it public");
       } else if (this.orgIsPrivate === "true" || this.orgIsPrivate == true) {
@@ -345,16 +336,18 @@ export default {
       this.errors = [];
 
       axios
-        .post("https://papagaio.sorintdev.it/api/createorganization",  {
-          name: this.orgName,
-          visibility: this.orgIsPrivate,
-          gitSourceId: this.selectedSourceID,
-          behaviourInclude: this.behaviorIncludeTempValue,
-          behaviourExclude: this.behaviorExcludeTempValue,
-          behaviourType: this.behaviorTypeTempValue,
-        
-          
-        }, { headers: {"Authorization" : `Bearer ${this.userToken}`} } )
+        .post(
+          "https://papagaio.sorintdev.it/api/createorganization",
+          {
+            name: this.orgName,
+            visibility: this.orgIsPrivate,
+            gitSourceId: this.selectedSourceID,
+            behaviourInclude: this.behaviorIncludeTempValue,
+            behaviourExclude: this.behaviorExcludeTempValue,
+            behaviourType: this.behaviorTypeTempValue,
+          },
+          { headers: { Authorization: `Bearer ${this.userToken}` } }
+        )
         .then((response) => {
           // this.createOrganizationResponse = response;
           this.$store.state.createOrganizationBeResponse = response.data;
@@ -368,9 +361,13 @@ export default {
     },
 
     getSourceId() {
-      axios.get("https://papagaio.sorintdev.it/api/gitsources", { headers: {"Authorization" : `Bearer ${this.userToken}`} } ).then((response) => {
-        this.getSourceListId = response.data;
-      });
+      axios
+        .get("https://papagaio.sorintdev.it/api/gitsources", {
+          headers: { Authorization: `Bearer ${this.userToken}` },
+        })
+        .then((response) => {
+          this.getSourceListId = response.data;
+        });
     },
 
     addRepositoriesField() {
