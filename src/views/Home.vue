@@ -1,66 +1,79 @@
 <template>
-  <div class="flex flex-col items-center ">
+  <div class="flex flex-col items-center">
     <img
-      class="object-cover w-80 h-50 mb-1 "
+      class="object-cover w-80 h-50 mb-1"
       alt="Papagaio logo"
       src="../assets/img/papagaioMainLogo.jpg"
     />
-   <div class = "bg-papaDark-700 pt-2">
-    <div class="heroBody ">
+    <div class="bg-papaDark-700 pt-2">
+      <div class="heroBody">
+        <h4 class="mt-2 text-xl font-bold text-white">
+          Extention of
+          <a class=" " href="https://agola.io"
+            ><img
+              class="inline-block w-20"
+              alt="Papagaio logo"
+              src="../assets/img/agola-logo-name.svg"
+          /></a>
+        </h4>
 
-      <h4 class="mb-4 mt-3 text-xl font-bold text-white">
-        Extention of
-        <a class=" " href="https://agola.io"
-          ><img
-            class="inline-block w-20"
-            alt="Papagaio logo"
-            src="../assets/img/agola-logo-name.svg"
-        /></a>
-      </h4>
+        <p
+          class="mt-3 mb-2 text-base font-bold sm:max-w-4xl sm:mx-auto md:mt-5 md:text-xl text-white"
+        >
+          Agola is a CI/CD open source tool under the 2.0 Apache license.
+          Papagaio was developed on top to extend Agola's capabilities and
+          provide a more flexible control on workflow(Runs).
+        </p>
 
-      <p
-        class="mt-3 mb-4 text-base font-bold sm:max-w-4xl sm:mx-auto md:mt-5 md:text-xl text-white"
-      >
-        Agola is a CI/CD open source tool under the 2.0 Apache license. Papagaio was developed on top to extend Agola's capabilities and provide a more flexible control on workflow(Runs).    
-      </p>
-
-      <div class="mt-5 sm:mt-8 sm:flex sm:justify-center">
-        <div class="sm:mt-0 sm:ml-3">
-          <button
-            class="w-full flex items-center justify-center px-8 py-3 border-solid border-2 border-white font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold py-2 px-4 "
-            @click="this.$router.push('http://localhost:8081/neworganization')"
-        
-          >
-            Try Now
-          </button>
-       
+        <div v-if="userLoggedIn == false" class="mt-3 sm:mt-3 sm:flex sm:justify-center">
+          <div class="sm:mt-0 sm:ml-3">
+            <button
+              class="w-full flex items-center justify-center px-8 py-3 border-solid border-2 border-white font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold py-2 px-4"
+              @click="
+                $keycloak.login()
+              "
+            >
+              Sign In
+            </button>
+          </div>
         </div>
+
+         <div v-else class="mt-3 sm:mt-3 sm:flex sm:justify-center">
+          <div class="sm:mt-0 sm:ml-3">
+            <button
+              class="w-full flex items-center justify-center px-8 py-3 border-solid border-2 border-white font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold py-2 px-4"
+              @click="
+                this.$router.push('http://localhost:8081/neworganization')
+              "
+            >
+              Create Organization
+            </button>
+          </div>
+        </div>
+
+
       </div>
-</div>
 
+      <!-- Body  -->
 
-<!-- Body  -->
-
-      <div class="panel mt-5 mb-2 bg-gray-100">
+      <div class="panel mt-3 mb-2 bg-gray-100">
         <div class="mb-3 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="lg:text-center">
-            <h2
-              class=" text-base xl:inline font-semibold tracking-wide  "
-            >
-            <br> <!-- remove this  -->
+            <h2 class="text-base xl:inline font-semibold tracking-wide">
+              <br />
+              <!-- remove this  -->
               Why Papagaio?
             </h2>
             <p
-              class="mt-3 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl "
+              class="mt-3 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl"
             >
               A convenient way to run your project
             </p>
 
             <p
-              class="mt-3 mb-6 text-base font-medium  sm:max-w-xl sm:mx-auto md:mt-2 md:text-xl"
+              class="mt-3 mb-6 text-base font-medium sm:max-w-xl sm:mx-auto md:mt-2 md:text-xl"
             >
-              Lorem ipsum dolor sit amet consect adipisicing elit. Possimus
-              magnam voluptatum cupiditate veritatis in accusamus quisquam.
+              Configure your project using Papagaio and run it on Agola. 
             </p>
           </div>
 
@@ -95,7 +108,7 @@
                   </div>
                 </div>
                 <div class="ml-4">
-                  <dt class="text-lg leading-6 font-bold ">
+                  <dt class="text-lg leading-6 font-bold">
                     Better view of runs
                   </dt>
                   <dd class="mt-2 text-base">
@@ -131,7 +144,7 @@
                   <dt class="text-lg leading-6 font-bold">
                     Organization members
                   </dt>
-                  <dd class="mt-2 text-base ">
+                  <dd class="mt-2 text-base">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                     Maiores impedit perferendis suscipit eaque, iste dolor
                     cupiditate blanditiis ratione.
@@ -161,7 +174,7 @@
                   </div>
                 </div>
                 <div class="ml-4">
-                  <dt class="text-lg leading-6 font-bold ">
+                  <dt class="text-lg leading-6 font-bold">
                     Different git sources
                   </dt>
                   <dd class="mt-2 text-base">
@@ -195,7 +208,7 @@
                 </div>
                 <div class="ml-4">
                   <dt class="text-lg leading-6 font-bold">
-                    Efficiency
+                    Runs Notifications
                   </dt>
                   <dd class="mt-2 text-base">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -208,16 +221,28 @@
           </div>
         </div>
       </div>
-      <p class= "ml-2 text-white font-medium"> Powered by: Sorint.it </p>
+      <div>
+        <p class="ml-2 mb-3 mt-3 text-xs font-medium text-white">
+          Powered by 
+          <a class="pl-1 " href="https://sorint.it"
+            ><img
+              class="inline-block w-15 h-6"
+              alt="Papagaio logo"
+              src="../assets/img/SorintLab_spa.png"
+          /></a>
+        </p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
-  components: {
-    
-  },
+  components: {},
+  computed: {
+     userLoggedIn(){
+      return this.$store.state.loggedIn;
+    },
+  }
 };
 </script>

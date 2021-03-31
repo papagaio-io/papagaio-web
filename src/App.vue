@@ -28,7 +28,7 @@
             </button>
           </div>
 
-          <div v-else>
+          <!-- <div v-else>
             <button
               class="ml-5 btn bg-papaDark-700 hover:bg-papaOrange-600 border-solid border-2 border-white"
               @click="$keycloak.login()"
@@ -37,7 +37,7 @@
               Log In
             </button>
           </div>
-         
+          -->
         </div>
      <label v-show="false">{{userLoggedIn }}</label>
       

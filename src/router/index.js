@@ -3,6 +3,23 @@ import Home from '../views/Home.vue';
 import organizationsetup from "../views/OrganizationSetup.vue";
 import neworganization from "../views/NewOrganization.vue"
 import confirmation from "../views/Confirmation.vue"
+import pagenotfound from "../views/PageNotFound.vue";
+import store from '../store/index.js'
+
+
+const preventRoutes = {
+  beforeEnter: (to, from, next) => {
+
+    if(store.state.loggedIn == true){
+      next();
+    }else {
+      next("/");
+    }
+
+  }
+
+} 
+
 const routes = [
   {
     path: '/',
@@ -17,13 +34,21 @@ const routes = [
   {
     path: '/neworganization',
     name: 'NewOrganization',
-    component: neworganization
+    component: neworganization, ...preventRoutes 
+    
   },
   {
     path: '/confirmation',
     name: 'Confirmation',
     component: confirmation
   },
+  {
+    path: "/:catchAll(.*)",
+    name: '404Page',
+    component: pagenotfound,
+
+  },
+  
   {
     path: '/about',
     name: 'About',
@@ -32,6 +57,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
+ 
 
 ]
 

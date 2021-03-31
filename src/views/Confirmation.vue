@@ -17,8 +17,9 @@
       </div>
     </div>
     <p>I got this: {{ BeResponse }}</p>
-    <a href="{{BeResponse}}">123</a>
-    <a href="{{projectOnAgole}}">123</a>
+    <a href="{{BeResponse}}">Visit Agola</a> <br>
+    <a href="{{projectOnAgole}}">Visit Agola</a>
+    <a v-bind:href={projectOnAgole}> hello</a>
   </div>
 </template>
 
