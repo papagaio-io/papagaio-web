@@ -66,7 +66,7 @@
             <p
               class="mt-3 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl"
             >
-              A convenient way to run your project
+              The convenient way to run your project
             </p>
 
             <p
@@ -104,9 +104,7 @@
                     Email Notifications
                   </dt>
                   <dd class="mt-2 text-base">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Maiores impedit perferendis suscipit eaque, iste dolor
-                    cupiditate blanditiis ratione.
+                    Now you will be notified via email when runs (builds) fails. To stay posted !
                   </dd>
                 </div>
               </div>
@@ -137,9 +135,7 @@
                     Organization Members
                   </dt>
                   <dd class="mt-2 text-base">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Maiores impedit perferendis suscipit eaque, iste dolor
-                    cupiditate blanditiis ratione.
+                    Members are synchronised from git source.
                   </dd>
                 </div>
               </div>
@@ -170,9 +166,7 @@
                     Various Git Sources
                   </dt>
                   <dd class="mt-2 text-base">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Maiores impedit perferendis suscipit eaque, iste dolor
-                    cupiditate blanditiis ratione.
+                    Papagaio is now compatible with github and gitea, with a roadmap to scale up to other git sources.  
                   </dd>
                 </div>
               </div>
@@ -200,12 +194,10 @@
                 </div>
                 <div class="ml-4">
                   <dt class="text-lg leading-6 font-bold">
-                    Runs Notifications
+                   Ease to Use
                   </dt>
                   <dd class="mt-2 text-base">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Maiores impedit perferendis suscipit eaque, iste dolor
-                    cupiditate blanditiis ratione.
+                    High usability. Minimum configuration to avoid hustles and save our DevOps precious time. 
                   </dd>
                 </div>
               </div>

@@ -24,10 +24,9 @@
               class="mt-3 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl"
             >
           
-              <a v-bind:href ="projectOnAgole"> {{projectOnAgole}} </a>
+              <a v-bind:href ="projectOnAgole"> {{ BeResponse }} </a>
 
-              <a v-bind:href="projectOnAgole"> I am two </a>
-
+         
 
 
             </p>
@@ -44,11 +43,6 @@
   </div>
 
   <div>
-    <p
-      class="flex flex-col items-center mt-2 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl"
-    >
-      Beta page. Organization has been added successfully to Agola
-    </p>
 
     <div class="mt-5 sm:mt-8 sm:flex sm:justify-center">
       <div class="sm:mt-0 sm:ml-3">
@@ -60,10 +54,8 @@
         </button>
       </div>
     </div>
-    <p>I got this: {{ BeResponse }}</p>
-    <a href="{{BeResponse}}">Visit Agola</a> <br />
-    <a href="{{projectOnAgole}}">Visit Agola</a>
-    <a v-bind:href="{ projectOnAgole }"> hello</a>
+    
+ 
   </div>
 </template>
 
