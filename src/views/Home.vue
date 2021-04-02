@@ -59,9 +59,8 @@
         <div class="mb-3 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="lg:text-center">
             <h2 class="text-base xl:inline font-semibold tracking-wide">
-              <br />
-              <!-- remove this  -->
-              Why Papagaio?
+            <br>
+              Benefits ?
             </h2>
             <p
               class="mt-3 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl"
@@ -206,11 +205,11 @@
         </div>
       </div>
       <div>
-        <p class="ml-2 mb-3 mt-3 text-xs font-medium text-white">
+        <p class="ml-2 mb-3 mt-3 text-sm  text-white">
           Powered by
           <a class="pl-1" href="https://sorint.it"
             ><img
-              class="inline-block w-15 h-6"
+              class="inline-block w-21 h-6"
               alt="Papagaio logo"
               src="../assets/img/SorintLab_spa.png"
           /></a>

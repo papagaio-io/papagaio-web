@@ -1,131 +1,60 @@
 @tailwind base;
 @tailwind components;
-.ansi-black-fg {
-  color: #222;
+input:checked + svg {
+  display: block;
 }
 
-.ansi-black-bg {
-  background-color: #222;
+.radioButton {
+  display: inline;
 }
 
-.ansi-bright-black-fg {
-  color: #222;
+.radioButton input {
+  display: none;
 }
 
-.ansi-bright-black-bg {
-  background-color: #222;
+.radioButton label {
+  margin-right: 20px;
+  display: inline-block;
+  cursor: pointer;
 }
 
-.ansi-red-fg {
-  color: #c0392b;
+.radioButtonText span {
+  display: block;
+  padding: 5px 10px 5px 25px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  position: relative;
+  -webkit-transition: all 0.25s linear;
+  transition: all 0.25s linear;
 }
 
-.ansi-red-bg {
-  background-color: #c0392b;
+.radioButtonText span:before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  -webkit-transform: translatey(-50%);
+  transform: translatey(-50%);
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #ddd;
+  -webkit-transition: all 0.25s linear;
+  transition: all 0.25s linear;
 }
 
-.ansi-bright-red-fg {
-  color: #e74c3c;
+.radioButtonText input:checked + span {
+  background-color: #fff;
+  -webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
 }
 
-.ansi-bright-red-bg {
-  background-color: #e74c3c;
+.radioButtonText .orange input:checked + span {
+  border-color: #de6506;
 }
 
-.ansi-green-fg {
-  color: #27af60;
-}
-
-.ansi-green-bg {
-  background-color: #27af60;
-}
-
-.ansi-bright-green-fg {
-  color: #2ecc71;
-}
-
-.ansi-bright-green-bg {
-  background-color: #2ecc71;
-}
-
-.ansi-yellow-fg {
-  color: #f39c12;
-}
-
-.ansi-yellow-bg {
-  background-color: #f39c12;
-}
-
-.ansi-bright-yellow-fg {
-  color: #f1c40f;
-}
-
-.ansi-bright-yellow-bg {
-  background-color: #f1c40f;
-}
-
-.ansi-blue-fg {
-  color: #2e8dcd;
-}
-
-.ansi-blue-bg {
-  background-color: #2e8dcd;
-}
-
-.ansi-bright-blue-fg {
-  color: #3498db;
-}
-
-.ansi-bright-blue-bg {
-  background-color: #3498db;
-}
-
-.ansi-magenta-fg {
-  color: #8e44ad;
-}
-
-.ansi-magenta-bg {
-  background-color: #8e44ad;
-}
-
-.ansi-bright-magenta-fg {
-  color: #9b59b6;
-}
-
-.ansi-bright-magenta-bg {
-  background-color: #9b59b6;
-}
-
-.ansi-cyan-fg {
-  color: #0097a4;
-}
-
-.ansi-cyan-bg {
-  background-color: #0097a4;
-}
-
-.ansi-bright-cyan-fg {
-  color: #02c8d9;
-}
-
-.ansi-bright-cyan-bg {
-  background-color: #02c8d9;
-}
-
-.ansi-white-fg {
-  color: #bdc3c7;
-}
-
-.ansi-white-bg {
-  background-color: #bdc3c7;
-}
-
-.ansi-bright-white-fg {
-  color: #ffffff;
-}
-
-.ansi-bright-white-bg {
-  background-color: #ffffff;
+.radioButtonText .orange input:checked + span:before {
+  background-color: #de6506;
 }
 
 .heroBody {

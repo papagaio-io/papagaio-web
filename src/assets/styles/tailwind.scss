@@ -1,13 +1,56 @@
 @tailwind base;
 @tailwind components;
 
-@import "./_ansi.scss";
 
-.body {
- 
-  // width: 50%; margin: 0 auto;
- 
+
+input:checked + svg {
+  display: block;
+}
+
+.radioButton {
+  display: inline;
+}
+.radioButton input {
+  display: none;
+}
+.radioButton label {
+  margin-right: 20px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.radioButtonText span {
+  display: block;
+  padding: 5px 10px 5px 25px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  position: relative;
+  transition: all 0.25s linear;
+}
+.radioButtonText span:before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  -webkit-transform: translatey(-50%);
+          transform: translatey(-50%);
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #ddd;
+  transition: all 0.25s linear;
+}
+.radioButtonText input:checked + span {
+  background-color: #fff;
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+}
+
+.radioButtonText .orange input:checked + span {
   
+  border-color: #de6506;
+}
+.radioButtonText .orange input:checked + span:before {
+  background-color: #de6506;
 }
 
 .heroBody{

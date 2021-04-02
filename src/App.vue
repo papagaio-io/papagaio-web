@@ -24,7 +24,7 @@
               class="ml-5 btn bg-papaDark-700 hover:bg-papaOrange-600 border-solid border-2 border-white"
               @click="$keycloak.logout()"
             >
-              logout
+              Logout
             </button>
           </div>
 

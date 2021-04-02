@@ -1,10 +1,9 @@
 <template>
   <form @submit.prevent="checkForm" action="" method="post">
-    <div class="container mx-auto">
+    <div class="w-2/3 container mx-auto">
       <h4 class="mt-2 mb-2 text-3xl font-bold">Configure a New Organization</h4>
       <!-- Beginning of form -->
       <div class="bg-gray-100">
-        <div class="">
           <div class="p-4 border-t">
             <table style="width: 100%">
               <tr>
@@ -24,7 +23,7 @@
                 <h5 class="mb-3 text-xl">Organization name</h5>
                 <center>
                   <input
-                    class="mb-4 focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4"
+                    class="mb-4 border-l-8 focus:border-papaOrange-600 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4"
                     type="text"
                     placeholder="Type/paste an existing organization name"
                     v-model="orgName"
@@ -59,7 +58,7 @@
                 <div class="flex mb-3 relative w-64">
                   <select
                     v-model="selectedSourceID"
-                    class="block appearance-none w-full bg-white border focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline px-4 py-2 pr-8"
+                    class=" block appearance-none w-full bg-white border focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline px-4 py-2 pr-8"
                   >
                     <option value="null" disabled selected hidden display>
                       Select from list
@@ -108,7 +107,7 @@
               </div>
             </table>
           </div>
-        </div>
+        
 
         <!-- Behaviour Section -->
         <div class="">
@@ -158,10 +157,10 @@
                 <span class="font-bold ml-3">Include</span>
                 <center>
                   <input
-                    class="mb-4 focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4"
+                    class="mb-4 border-l-8 focus:border-papaOrange-600  appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4"
                     v-model="repositoriesField.repositoriesInclude"
                     type="text"
-                    placeholder=""
+                    placeholder="*"
                   />
                 </center>
               </tr>
@@ -171,21 +170,21 @@
 
                 <center>
                   <input
-                    class="mb-4 focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4"
+                    class="mb-4 border-l-8  focus:border-papaOrange-600  appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4"
                     v-model="repositoriesField.repositoriesExclude"
                     type="text"
                     placeholder=""
                   />
                 </center>
               </tr>
-              <tr>
+              <!-- <tr>
                 <h5 class="mb-3 text-xl">Behavior Type</h5>
                 <label class="text-lg">
                   <input
                     type="radio"
                     value="wildcard"
                     v-model="behaviorTypepicked"
-                    class="w-4 h-4"
+                    class="radio w-4 h-4"
                   />
                   Wildcard</label
                 >
@@ -194,10 +193,33 @@
                     type="radio"
                     value="regex"
                     v-model="behaviorTypepicked"
-                    class="w-4 h-4"
+                    class="radio w-4 h-4"
                   />
                   Regex</label
                 >
+              </tr> -->
+              <tr>
+                <h5 class="mb-3 text-xl">Behavior Type</h5>
+                <div class="radioButton radioButtonText">
+                  <label class="radio orange">
+                    <input 
+                    type="radio"
+                    value="wildcard" 
+                     v-model="behaviorTypepicked"
+                    />
+                    <span>Wildcard</span>
+                  </label>
+                </div>
+                <div class="radioButton radioButtonText">
+                  <label class="radio orange">
+                    <input type="radio" 
+                     value="regex"
+                     v-model="behaviorTypepicked"
+                    />
+                    <span>Regex</span>
+                  </label>
+                </div>
+
               </tr>
             </table>
           </div>
@@ -387,9 +409,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-input:checked + svg {
-  display: block;
-}
+
 </style>
 
 

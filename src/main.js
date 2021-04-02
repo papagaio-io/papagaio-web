@@ -16,7 +16,7 @@ import jwtDecode from "jwt-decode";
 import Keycloak from 'keycloak-js';
 
 const myApp = createApp(App)
-myApp.config.globalProperties.$keycloak = Keycloak;
+// myApp.config.globalProperties.$keycloak = Keycloak;
 
 
 
