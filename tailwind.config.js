@@ -6,7 +6,7 @@ module.exports = {
         padding: '4rem',
       },
       fontFamily: {
-          'sans': ['Verdana']
+          'sans': ['system-ui']
       },
       borderWidth: {
         default: '1px',

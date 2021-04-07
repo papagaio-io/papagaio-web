@@ -22,7 +22,7 @@
         >
           Agola is a CI/CD open source tool under the 2.0 Apache license.
           Papagaio was developed on top to extend Agola's capabilities and
-          provide a more flexible control on workflow(Runs).
+          provide a more flexible control on workflow (Runs).
         </p>
 
         <div
@@ -31,7 +31,7 @@
         >
           <div class="sm:mt-0 sm:ml-3">
             <button
-              class="w-full flex items-center justify-center px-8 py-3 border-solid border-2 border-white font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold py-2 px-4"
+              class="w-full flex items-center justify-center px-8 py-3 border-solid border-2 border-white rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold "
               @click="$keycloak.login()"
             >
               Sign In
@@ -42,7 +42,7 @@
         <div v-else class="mt-3 sm:mt-3 sm:flex sm:justify-center">
           <div class="sm:mt-0 sm:ml-3">
             <button
-              class="w-full flex items-center justify-center px-8 py-3 border-solid border-2 border-white font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold py-2 px-4"
+              class="w-full flex items-center justify-center px-8 py-3 border-solid border-2 border-white  rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold"
               @click="
                 this.$router.push('http://localhost:8081/neworganization')
               "
@@ -65,7 +65,7 @@
             <p
               class="mt-3 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl"
             >
-              The convenient way to run your project
+              Unchallenging way to run your project
             </p>
 
             <p
@@ -103,7 +103,7 @@
                     Email Notifications
                   </dt>
                   <dd class="mt-2 text-base">
-                    Now you will be notified via email when runs (builds) fails. To stay posted !
+                    Now you will be notified via email when runs (builds) fails. To stay posted!
                   </dd>
                 </div>
               </div>
@@ -134,7 +134,7 @@
                     Organization Members
                   </dt>
                   <dd class="mt-2 text-base">
-                    Members are synchronised from git source.
+                    Project members are synchronised from git source.
                   </dd>
                 </div>
               </div>
@@ -196,7 +196,7 @@
                    Ease to Use
                   </dt>
                   <dd class="mt-2 text-base">
-                    High usability. Minimum configuration to avoid hustles and save our DevOps precious time. 
+                    High usability. Minimum configuration to avoid hustles and save DevOps precious time. 
                   </dd>
                 </div>
               </div>

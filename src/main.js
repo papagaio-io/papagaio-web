@@ -10,28 +10,24 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import jwtDecode from "jwt-decode";
 
-// import KeycloakConfig from "../keycloak.json";
-// import VueKeycloakJs from "@dsb-norge/vue-keycloak-js";
+import KeycloakConfig from "../keycloak.json";
+
 
 import Keycloak from 'keycloak-js';
 
 const myApp = createApp(App)
-// myApp.config.globalProperties.$keycloak = Keycloak;
-
-
 
 let initOptions = {
-  url: 'https://login.sorintdev.it/auth', realm: 'sorinttest', clientId: 'stroodle', clientSecret: "faca2843-977c-43e9-9a25-12c5c252fe00"
+  url: KeycloakConfig["auth-server-url"], realm: KeycloakConfig.realm, clientId: KeycloakConfig.resource, clientSecret: KeycloakConfig.credentials.secret
 }
 
 const keycloak = Keycloak(initOptions)
 
-
+myApp.config.globalProperties.$keycloak = keycloak;
 myApp.use(ElementPlus)
 myApp.use(VueAxios, axios)
 myApp.use(store)
 myApp.use(router)
-myApp.config.globalProperties.$keycloak = keycloak;
 myApp.mount("#app");
 
 keycloak.init({
@@ -40,7 +36,7 @@ keycloak.init({
   checkLoginIframe: false
 }).then(async (auth) => {
   if (!auth) {
-    // window.location.reload()
+   
   } else if (auth) {
     console.log("I am signed in")
  
@@ -48,19 +44,9 @@ keycloak.init({
     store.state.loggedIn = true;
     store.state.currentTokenId = keycloak.token;
     
-    // await store.dispatch('keycloakStore/fillRoles', keycloak.realmAccess.roles)
-
-
   }
 }).catch((e) => {
   console.log('Serwer lezy: ' + e)
 })
 
-  //createApp(App).use(store).use(router).mount('#app')
-
-// createApp(App)
-// .use(ElementPlus)
-// .use(VueAxios, axios)
-// .use(store)
-// .use(router)
-// .mount("#app");
+  

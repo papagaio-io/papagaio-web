@@ -35,7 +35,7 @@ const routes = [
     path: '/neworganization',
     name: 'NewOrganization',
     component: neworganization, 
-    // ...preventRoutes 
+    ...preventRoutes 
     
   },
   {
