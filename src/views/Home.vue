@@ -18,7 +18,7 @@
         </h4>
 
         <p
-          class="mt-3 mb-2 text-base font-bold sm:max-w-4xl sm:mx-auto md:mt-5 md:text-xl text-white"
+          class="mt-3 mb-2 sm:max-w-4xl sm:mx-auto md:mt-5 md:text-xl text-white"
         >
           Agola is a CI/CD open source tool under the 2.0 Apache license.
           Papagaio was developed on top to extend Agola's capabilities and
@@ -31,7 +31,7 @@
         >
           <div class="sm:mt-0 sm:ml-3">
             <button
-              class="w-full flex items-center justify-center px-8 py-3 border-solid border-2 border-white rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold "
+              class="w-full flex items-center justify-center px-8 py-3 border-solid border-2 border-white rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold"
               @click="$keycloak.login()"
             >
               Sign In
@@ -42,7 +42,7 @@
         <div v-else class="mt-3 sm:mt-3 sm:flex sm:justify-center">
           <div class="sm:mt-0 sm:ml-3">
             <button
-              class="w-full flex items-center justify-center px-8 py-3 border-solid border-2 border-white  rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold"
+              class="w-full flex items-center justify-center px-8 py-3 border-solid border-2 border-white rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold"
               @click="
                 this.$router.push('http://localhost:8081/neworganization')
               "
@@ -54,12 +54,11 @@
       </div>
 
       <!-- Body  -->
-
-      <div class="panel mt-3 mb-2 bg-gray-100">
-        <div class="mb-3 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mt-2 mb-2 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="lg:text-center">
             <h2 class="text-base xl:inline font-semibold tracking-wide">
-            <br>
+              <br />
               Benefits ?
             </h2>
             <p
@@ -82,7 +81,7 @@
               <div class="flex">
                 <div class="flex-shrink-0">
                   <div
-                    class="flex items-center justify-center h-12 w-12 rounded-md bg-papaDark-700 text-white"
+                    class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-papaDark-700"
                   >
                     <!-- Heroicon name: outline/globe-alt -->
                     <svg
@@ -103,7 +102,8 @@
                     Email Notifications
                   </dt>
                   <dd class="mt-2 text-base">
-                    Now you will be notified via email when runs (builds) fails. To stay posted!
+                    Now you will be notified via email when runs (builds) fails.
+                    To stay posted!
                   </dd>
                 </div>
               </div>
@@ -111,7 +111,7 @@
               <div class="flex">
                 <div class="flex-shrink-0">
                   <div
-                    class="flex items-center justify-center h-12 w-12 rounded-md bg-papaDark-700 text-white"
+                    class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-papaDark-700"
                   >
                     <!-- Heroicon name: outline/scale -->
                     <svg
@@ -142,7 +142,7 @@
               <div class="flex">
                 <div class="flex-shrink-0">
                   <div
-                    class="flex items-center justify-center h-12 w-12 rounded-md bg-papaDark-700 text-white"
+                    class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-papaDark-700"
                   >
                     <!-- 2 -->
                     <svg
@@ -165,7 +165,8 @@
                     Various Git Sources
                   </dt>
                   <dd class="mt-2 text-base">
-                    Papagaio is now compatible with github and gitea, with a roadmap to scale up to other git sources.  
+                    Papagaio is now compatible with github and gitea, with a
+                    roadmap to scale up to other git sources.
                   </dd>
                 </div>
               </div>
@@ -173,7 +174,7 @@
               <div class="flex">
                 <div class="flex-shrink-0">
                   <div
-                    class="flex items-center justify-center h-12 w-12 rounded-md bg-papaDark-700 text-white"
+                    class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-papaDark-700"
                   >
                     <!-- 4-->
                     <svg
@@ -191,12 +192,11 @@
                     </svg>
                   </div>
                 </div>
-                <div class="ml-4">
-                  <dt class="text-lg leading-6 font-bold">
-                   Ease to Use
-                  </dt>
+                <div class="ml-4 mb-4">
+                  <dt class="text-lg leading-6 font-bold">Ease to Use</dt>
                   <dd class="mt-2 text-base">
-                    High usability. Minimum configuration to avoid hustles and save DevOps precious time. 
+                    High usability. Minimum configuration to avoid hustles and
+                    save DevOps precious time.
                   </dd>
                 </div>
               </div>
@@ -205,7 +205,7 @@
         </div>
       </div>
       <div>
-        <p class="ml-2 mb-3 mt-3 text-sm  text-white">
+        <p class="ml-2 mb-3 mt-3 text-sm text-white">
           Powered by
           <a class="pl-1" href="https://sorint.it"
             ><img

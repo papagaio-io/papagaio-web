@@ -91,7 +91,7 @@
             </tr>
             <!-- Showing corresponding URL-->
             <div class="" v-if="selectedSourceID != null">
-              <div class="panel p-2 bg-white border-2 border-dotted border-cerise-600 ">
+              <div class="p-2 bg-cerise-600 text-white ">
                
                   <h2 class="text-lg font-medium">
                     <!-- remove this  -->

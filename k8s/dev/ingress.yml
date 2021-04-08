@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: papagaio-web
+spec:
+  rules:
+    - host: papagaio.sorintdev.it
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: papagaio-web
+              servicePort: 80
