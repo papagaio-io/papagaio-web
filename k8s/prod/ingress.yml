@@ -5,7 +5,7 @@ metadata:
   namespace: prod
 spec:
   rules:
-    - host: papagaio.sorint.it
+    - host: papagaio-web.sorint.it
       http:
         paths:
           - path: /

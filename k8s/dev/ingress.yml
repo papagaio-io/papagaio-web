@@ -5,7 +5,7 @@ metadata:
   namespace: ci
 spec:
   rules:
-    - host: papagaio.sorintdev.it
+    - host: papagaio-web.sorintdev.it
       http:
         paths:
           - path: /
