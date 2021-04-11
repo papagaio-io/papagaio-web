@@ -22,7 +22,7 @@
         >
           Agola is a CI/CD open source tool under the 2.0 Apache license.
           Papagaio was developed on top to extend Agola's capabilities and
-          provide a more flexible control on workflow (Runs).
+          provide a more flexible control on the workflow (Runs).
         </p>
 
         <div
@@ -134,7 +134,7 @@
                     Organization Members
                   </dt>
                   <dd class="mt-2 text-base">
-                    Project members are synchronised from git source.
+                    Out-of-the-box, project members are synchronised from the git source.
                   </dd>
                 </div>
               </div>
@@ -196,7 +196,7 @@
                   <dt class="text-lg leading-6 font-bold">Ease to Use</dt>
                   <dd class="mt-2 text-base">
                     High usability. Minimum configuration to avoid hustles and
-                    save DevOps precious time.
+                    save Sorintian priceless time.
                   </dd>
                 </div>
               </div>

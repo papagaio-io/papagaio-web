@@ -90,25 +90,21 @@
               </div>
             </tr>
             <!-- Showing corresponding URL-->
+            
             <div class="" v-if="selectedSourceID != null">
-              <div class="p-2 bg-cerise-600 text-white ">
-               
-                  <h2 class="text-lg font-medium">
-                    <!-- remove this  -->
-                    Corresponding URL: 
-                  </h2>
-
+              <div class="p-1 bg-papaDark-600 text-white shadow-lg ">
+                Corresponding URL
                   <h2
-                    class=" text-base"
+                    class="border-l-8 border-papaDark-400 bg-white text-dark  p-1 text-base"
                     v-for="item in getSourceListId"
                     v-bind:key="item.id"
                   >
-                    {{ item.gitApiUrl }}
+                     {{ item.gitApiUrl }}
                   </h2>
                 
               </div>
             </div>
-
+         
 
           </table>
         </div>
@@ -150,7 +146,7 @@
           </tr>
           <table style="width: 100%">
             <button
-              class="btn btn-red float-right mt-3 hover:bg-papaDark-700 border-solid border-2 border-white"
+              class="btn btn-red text-white float-right mt-3 hover:bg-papaDark-700 border-solid border-2 border-white"
               @click="deleteRepositoriesField(counter)"
             >
               Remove
@@ -343,7 +339,7 @@ export default {
 
       axios
         .post(
-          "https://papagaio.sorintdev.it/api/createorganization",
+          "https://papagaio-api.sorintdev.it/api/createorganization",
           {
             name: this.orgName,
             visibility: this.orgIsPrivate,
@@ -368,7 +364,7 @@ export default {
 
     getSourceId() {
       axios
-        .get("https://papagaio.sorintdev.it/api/gitsources", {
+        .get("https://papagaio-api.sorintdev.it/api/gitsources", {
           headers: { Authorization: `Bearer ${this.userToken}` },
         })
         .then((response) => {
