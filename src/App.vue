@@ -45,7 +45,7 @@
     </nav>
   </div>
   <router-view />
-   <p >{{currentUserToken }}</p>
+   <!-- <p >{{currentUserToken }}</p> -->
 </template>
 
 <script>
