@@ -53,7 +53,7 @@
                 <div>Private</div>
               </label>
             </tr>
-
+            <!-- Git source -->
             <tr>
               <h5 class="mb-3 text-xl">Git source</h5>
               <div class="flex mb-3 relative w-64">
@@ -89,22 +89,22 @@
                 </div>
               </div>
             </tr>
+
             <!-- Showing corresponding URL-->
-            
+            <tr>
             <div class="" v-if="selectedSourceID != null">
-              <div class="p-1 bg-papaDark-600 text-white shadow-lg ">
+              <div class="p-1 bg-papaDark-600 text-white shadow-lg">
                 Corresponding URL
-                  <h2
-                    class="border-l-8 border-papaDark-400 bg-white text-dark  p-1 text-base"
-                    v-for="item in getSourceListId"
-                    v-bind:key="item.id"
-                  >
-                     {{ item.gitApiUrl }}
-                  </h2>
-                
+                <h2
+                  class="border-l-8 border-papaDark-400 bg-white text-dark p-1 text-base"
+                  v-for="item in getSourceListId"
+                  v-bind:key="item.id"
+                >
+                  {{ item.gitApiUrl }}
+                </h2>
               </div>
             </div>
-         
+            </tr>
 
           </table>
         </div>
@@ -204,13 +204,12 @@
           </table>
         </div>
       </div>
-      <p class = "mt-1" v-if="errors.length">
+      <p class="mt-1" v-if="errors.length">
         <el-alert
           title="Please check the following error(s) and try again :"
           type="error"
           :closable="false"
           show-icon
-          
         >
           <ul>
             <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
@@ -246,7 +245,7 @@ export default {
   props: {},
   data() {
     return {
-      userToken: this.$store.state.currentTokenId,
+      userToken: this.$store.getters.getAuthToken,
       createOrgError: null,
       orgIsPrivate: "false",
       orgName: null,

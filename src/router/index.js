@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 import organizationsetup from "../views/OrganizationSetup.vue";
+import dashboard from "../views/Dashboard"
 import neworganization from "../views/NewOrganization.vue"
 import confirmation from "../views/Confirmation.vue"
 import pagenotfound from "../views/PageNotFound.vue";
@@ -10,7 +11,7 @@ import store from '../store/index.js'
 const preventRoutes = {
   beforeEnter: (to, from, next) => {
 
-    if(store.state.loggedIn == true){
+    if(store.getters.getLoginState == true){
       next();
     }else {
       next("/");
@@ -25,6 +26,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/dashboard',
+    name:'Dashboard',
+    component: dashboard
   },
   {
     path: '/organizationsetup',

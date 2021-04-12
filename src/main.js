@@ -42,7 +42,7 @@ keycloak.init({
  
     store.state.currentUserName = keycloak.tokenParsed.preferred_username;
     store.state.loggedIn = true;
-    store.state.currentTokenId = keycloak.token;
+    store.state.currentAuthToken = keycloak.token;
     
   }
 }).catch((e) => {

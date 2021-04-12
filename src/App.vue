@@ -45,7 +45,7 @@
     </nav>
   </div>
   <router-view />
-   <!-- <p >{{currentUserToken }}</p> -->
+   <p >{{currentUserToken }}</p>
 </template>
 
 <script>
@@ -60,15 +60,16 @@ export default {
   mounted() {},
   computed: {
     currentUserToken() {
-      return this.$store.state.currentTokenId;
+      return this.$store.getters.getAuthToken;
     },
     userLoggedIn(){
-      return this.$store.state.loggedIn;
+      return this.$store.getters.getLoginState;
     },
     currentUsername(){
       
-    return this.$store.state.currentUserName;
+    return this.$store.getters.getUserName;
     },
+    
     
   },
   methods: {

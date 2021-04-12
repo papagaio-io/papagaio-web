@@ -224,7 +224,7 @@ export default {
   components: {},
   computed: {
     userLoggedIn() {
-      return this.$store.state.loggedIn;
+      return this.$store.getters.getLoginState;
     },
   },
 };
