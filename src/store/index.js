@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import axios from "axios";
 
 export default createStore({
   state: {
@@ -6,6 +7,7 @@ export default createStore({
     currentAuthToken: "",
     currentUserName: "",
     createOrganizationBeResponse: "",
+    dashBoardData: "",
   },
   getters:{
     getLoginState(state){
@@ -20,12 +22,35 @@ export default createStore({
     },
     getCreateOrganizationBeURLResponse(state){
       return state.createOrganizationBeResponse;
+    },
+    showdashBoardData(state){
+      return state.dashBoardData
     }
 
   },
   mutations: {
+    setDashBoardData(state, result){
+      state.dashBoardData = result;
+
+    }
+    
+
   },
   actions: {
+
+     getCurrentResponse({commit, state}) {
+        axios
+        .get("https://papagaio-api.sorintdev.it/api/report", {
+          headers: {
+            Authorization: `Bearer ${state.currentAuthToken}`,
+          },
+        })
+        .then(response => {commit("setDashBoardData",response.data)});
+        
+       
+    },
+
+
   },
   modules: {
   }

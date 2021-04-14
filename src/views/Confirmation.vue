@@ -54,7 +54,8 @@ export default {
   computed: {
     BeResponse() {
       // this.projectOnAgole = this.$store.state.createOrganizationBeResponse;
-      return this.$store.state.createOrganizationBeResponse;
+      return this.$store.getters.getCreateOrganizationBeURLResponse;
+       
     },
   },
   methods: {},

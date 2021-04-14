@@ -92,20 +92,19 @@
 
             <!-- Showing corresponding URL-->
             <tr>
-            <div class="" v-if="selectedSourceID != null">
-              <div class="p-1 bg-papaDark-600 text-white shadow-lg">
-                Corresponding URL
-                <h2
-                  class="border-l-8 border-papaDark-400 bg-white text-dark p-1 text-base"
-                  v-for="item in getSourceListId"
-                  v-bind:key="item.id"
-                >
-                  {{ item.gitApiUrl }}
-                </h2>
+              <div class="" v-if="selectedSourceID != null">
+                <div class="p-1 bg-papaDark-600 text-white shadow-lg">
+                  Corresponding URL
+                  <h2
+                    class="border-l-8 border-papaDark-400 bg-white text-dark p-1 text-base"
+                    v-for="item in getSourceListId"
+                    v-bind:key="item.id"
+                  >
+                    {{ item.gitApiUrl }}
+                  </h2>
+                </div>
               </div>
-            </div>
             </tr>
-
           </table>
         </div>
 
@@ -279,13 +278,10 @@ export default {
     checkBehavior() {
       this.errors = [];
 
-      console.log("I am checking the behaviour");
-
       if (!this.behaviorTypepicked) {
         this.errors.push(
           "Choose a 'behavior type', or remove the behavior section"
         );
-        console.log("I pushed");
       }
 
       //'behavior include' must have parameter if default is changed
@@ -315,10 +311,8 @@ export default {
 
       if (this.orgIsPrivate === "false" || this.orgIsPrivate == false) {
         this.orgIsPrivate = "public";
-        console.log("i made it public");
       } else if (this.orgIsPrivate === "true" || this.orgIsPrivate == true) {
         this.orgIsPrivate = "private";
-        console.log("i made it private");
       }
 
       if (this.orgName && this.selectedSourceID != null) {
@@ -357,7 +351,6 @@ export default {
         .catch((error) => {
           this.createOrganizationResponse = error.response.data;
           this.errors.push(error.response.data);
-          console.log(error);
         });
     },
 

@@ -40,10 +40,11 @@ keycloak.init({
   } else if (auth) {
     console.log("I am signed in")
  
+
     store.state.currentUserName = keycloak.tokenParsed.preferred_username;
     store.state.loggedIn = true;
     store.state.currentAuthToken = keycloak.token;
-    
+    store.dispatch('getCurrentResponse');
   }
 }).catch((e) => {
   console.log('Serwer lezy: ' + e)
