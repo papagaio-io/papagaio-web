@@ -31,6 +31,7 @@ export default createStore({
   mutations: {
     setDashBoardData(state, result){
       state.dashBoardData = result;
+      
 
     }
     

@@ -25,6 +25,7 @@ const keycloak = Keycloak(initOptions)
 
 myApp.config.globalProperties.$keycloak = keycloak;
 myApp.use(ElementPlus)
+
 myApp.use(VueAxios, axios)
 myApp.use(store)
 myApp.use(router)
@@ -40,7 +41,7 @@ keycloak.init({
   } else if (auth) {
     console.log("I am signed in")
  
-
+    //store auth and dispatch dashboard data
     store.state.currentUserName = keycloak.tokenParsed.preferred_username;
     store.state.loggedIn = true;
     store.state.currentAuthToken = keycloak.token;
