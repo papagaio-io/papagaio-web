@@ -37,18 +37,19 @@ keycloak.init({
   checkLoginIframe: false
 }).then(async (auth) => {
   if (!auth) {
-   
+
   } else if (auth) {
     console.log("I am signed in")
- 
+
     //store auth and dispatch dashboard data
     store.state.currentUserName = keycloak.tokenParsed.preferred_username;
     store.state.loggedIn = true;
     store.state.currentAuthToken = keycloak.token;
-    store.dispatch('getCurrentResponse');
+    store.dispatch('getAllOrganizationDashboard');
+    // store.dispatch('getOrganizationDashboard');
+    //store.dispatch('getProjectDashboard')
   }
 }).catch((e) => {
   console.log('Serwer lezy: ' + e)
 })
 
-  

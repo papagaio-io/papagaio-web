@@ -9,6 +9,6 @@ export default {
 
 
 
-function returnTest() {
-    return "Mohab";
+function returnTestConnection() {
+    return "0";
 }

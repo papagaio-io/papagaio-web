@@ -66,9 +66,9 @@
                   </option>
 
                   <option
-                    v-for="item in getSourceListId"
+                    v-for="item in gitSourceResponse"
                     v-bind:key="item.name"
-                    :value="item.id"
+                    :value="item.name"
                   >
                     {{ item.name }}
                   </option>
@@ -93,11 +93,11 @@
             <!-- Showing corresponding URL-->
             <tr>
               <div class="" v-if="selectedSourceID != null">
-                <div class="p-1 bg-papaDark-600 text-white shadow-lg">
+                <div class="p-1 bg-cerise-600 text-white shadow-xl font-medium">
                   Corresponding URL
                   <h2
-                    class="border-l-8 border-papaDark-400 bg-white text-dark p-1 text-base"
-                    v-for="item in getSourceListId"
+                    class="border-l-8 border-papaDark-400 bg-white text-dark p-1 font-medium"
+                    v-for="item in gitSourceResponse"
                     v-bind:key="item.id"
                   >
                     {{ item.gitApiUrl }}
@@ -249,7 +249,7 @@ export default {
       orgIsPrivate: "false",
       orgName: null,
       selectedSourceID: null,
-      getSourceListId: [],
+      gitSourceResponse: [],
       createOrganizationResponse: null,
       errors: [],
       key: "",
@@ -336,7 +336,7 @@ export default {
           {
             name: this.orgName,
             visibility: this.orgIsPrivate,
-            gitSourceId: this.selectedSourceID,
+            gitSourceName: this.selectedSourceID,
             behaviourInclude: this.behaviorIncludeTempValue,
             behaviourExclude: this.behaviorExcludeTempValue,
             behaviourType: this.behaviorTypeTempValue,
@@ -360,7 +360,7 @@ export default {
           headers: { Authorization: `Bearer ${this.userToken}` },
         })
         .then((response) => {
-          this.getSourceListId = response.data;
+          this.gitSourceResponse = response.data;
         });
     },
 
