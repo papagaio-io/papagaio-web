@@ -5,6 +5,7 @@
       alt="Papagaio logo"
       src="../assets/img/papagaioMainLogo.jpg"
     />
+    
     <div class="bg-papaDark-700 pt-2">
       <div class="heroBody">
         <h4 class="mt-2 text-xl font-bold text-white">
@@ -134,7 +135,8 @@
                     Organization Members
                   </dt>
                   <dd class="mt-2 text-base">
-                    Out-of-the-box, project members are synchronised from the git source.
+                    Out-of-the-box, project members are synchronised from the
+                    git source.
                   </dd>
                 </div>
               </div>

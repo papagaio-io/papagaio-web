@@ -5,7 +5,7 @@
         <div class="mr-6">
           <router-link
             class="font-semibold flex items-center flex-shrink-0 text-xl tracking-tight text-black"
-            to="/"
+            to="/dashboard"
           >
             <img
               class="w-10 mr-2"
@@ -16,9 +16,8 @@
         </div>
 
         <div class="navbar-item">
-          
           <div v-if="$keycloak.authenticated">
-          <label>{{currentUsername }}</label>
+            <label>{{ currentUsername }}</label>
 
             <button
               class="ml-5 btn bg-papaDark-700 hover:bg-papaOrange-600 border-solid border-2 border-white"
@@ -27,54 +26,33 @@
               Logout
             </button>
           </div>
-
-          <!-- <div v-else>
-            <button
-              class="ml-5 btn bg-papaDark-700 hover:bg-papaOrange-600 border-solid border-2 border-white"
-              @click="$keycloak.login()"
-              
-            >
-              Log In
-            </button>
-          </div>
-          -->
         </div>
-     <label v-show="false">{{userLoggedIn }}</label>
-      
+        <label v-show="false">{{ userLoggedIn }}</label>
       </div>
     </nav>
   </div>
   <router-view />
-   <!-- <p >{{currentUserToken }}</p> -->
+  <!-- <p >{{currentUserToken }}</p> -->
 </template>
 
 <script>
-
-
 export default {
   data() {
-    return {
-     
-    };
+    return {};
   },
   mounted() {},
   computed: {
     currentUserToken() {
       return this.$store.getters.getAuthToken;
     },
-    userLoggedIn(){
+    userLoggedIn() {
       return this.$store.getters.getLoginState;
     },
-    currentUsername(){
-      
-    return this.$store.getters.getUserName;
+    currentUsername() {
+      return this.$store.getters.getUserName;
     },
-    
-    
   },
-  methods: {
-    
-  },
+  methods: {},
 };
 </script>
 

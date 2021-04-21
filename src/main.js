@@ -46,8 +46,7 @@ keycloak.init({
     store.state.loggedIn = true;
     store.state.currentAuthToken = keycloak.token;
     store.dispatch('getAllOrganizationDashboard');
-    // store.dispatch('getOrganizationDashboard');
-    //store.dispatch('getProjectDashboard')
+   
   }
 }).catch((e) => {
   console.log('Serwer lezy: ' + e)

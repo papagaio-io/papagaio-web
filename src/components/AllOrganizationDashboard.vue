@@ -1,10 +1,10 @@
 <template>
-  <p class="text-lg text-center font-bold m-5">
-    All Organizations Dashboard Beta
-  </p>
-  <hr />
-  <table class="m-5 w-5/6 mx-auto bg-gray-200 text-gray-800">
-    <tr class="text-left border-b-2 border-gray-300">
+  <div class="container mx-auto">
+    <h4 class="mt-2 mb-2 text-3xl font-bold">Organizations</h4>
+    <!-- Body  -->
+    <div class=" bg-white ">
+   <table class="w-11/12 mx-auto text-dark border">
+    <tr class="text-center ">
       <th class="px-4 py-3"></th>
       <th class="px-4 py-3">Status</th>
       <th class="px-4 py-3">Name</th>
@@ -14,80 +14,38 @@
     </tr>
 
     <tr
-      class="bg-gray-100 border-b border-gray-200 cursor-pointer"
+      class="bg-gray-100 text-dark text-center cursor-pointer border-l-8 border-cerise-600 "
       v-for="currentView in getDashboard()"
       :key="currentView.id"
       @click="iWasClicked(currentView.organizationName)" 
     >
-      <td class="px-4 py-3">
+      <td class="px-4 py-3 border-b-2 border-dark">
         <img class= "w-10" :src="currentView.avatarUrl" alt="Organization Icon" />
        
       </td>
-      <td class="px-4 py-3">
+      <td class="px-4 py-3 border-b-2 border-dark">
         {{ showSuccessPercentage(currentView.worstReport) }}
       </td>
-      <td class="px-4 py-3">{{ currentView.organizationName }}</td>
-      <td class="px-4 py-3">
+      <td class="px-4 py-3 border-b-2 border-dark">{{ currentView.organizationName }}</td>
+      <td class="px-4 py-3 border-b-2 border-dark">
         {{ calculateDateIntervels(currentView.lastSuccessRunDate) }}
       </td>
-      <td class="px-4 py-3">
+      <td class="px-4 py-3 border-b-2 border-dark">
         {{ calculateDateIntervels(currentView.lastFailedRunDate) }}
       </td>
-      <td class="px-4 py-3">
+      <td class="px-4 py-3 border-b-2 border-dark">
         {{ calculateLastDurationIntervels(currentView.lastRunDuration) }}
       </td>
     </tr>
-    <!-- each row -->
-
-    <!-- <tr class="bg-gray-100 border-b border-gray-200">
-      <td class="px-4 py-3"> </td>
-      <td class="px-4 py-3"></td>
-      <td class="px-4 py-3"></td>
-      <td class="px-4 py-3"></td>
-      <td class="px-4 py-3"></td>
-      <td class="px-4 py-3"></td>
-    </tr>  -->
-    <!-- each row -->
-    <!-- <tr class="bg-gray-100 border-b border-gray-200">
-      <td class="px-4 py-3">-</td>
-      <td class="px-4 py-3">-</td>
-      <td class="px-4 py-3">-</td>
-      <td class="px-4 py-3">-</td>
-    </tr> -->
-    <!-- each row -->
-
+   
   </table>
 
-  <!-- Scaffold  -->
-  <!-- <hr />
-  Catching the data
-  <div id="ID1">
-    <ul>
-      <li v-for="currentView in getDashboard()" :key="currentView.id">
-        1 {{ currentView.name }} - {{ currentView.visibility }} 
+    </div>
 
-        <ul>
-          <li v-for="subTask in currentView.projects" :key="subTask.id">
-          2  {{ subTask.name }} - {{ subTask.branchs }}
-            <ul>
-              <li v-for="subTask2 in subTask.branchs" :key="subTask2.id">
-             3   {{ subTask2.name }} - {{ subTask2.state }}
-                <ul>
-                  <li v-for="subTask3 in subTask2" :key="subTask3.id">
-                    {{ subTask3.branchName }} {{ subTask3.projectName }}
-                    {{ subTask3.organizationName }} {{ subTask3.failedRuns }}
-                    {{ subTask3.failedRuns }}
-                    {{ subTask3.successRunsPercentage }}
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </div> -->
+ 
+  </div>
 </template>
+
 
 <script>
 import moment from "moment";
@@ -143,10 +101,15 @@ export default {
       return result;
     },
     iWasClicked(id){
+      
+       this.$store.commit("setcurrentDashboardToShow", "OrganizationDashboard");
+  
        this.$store.commit("setOrganizationURL",id);
        this.$store.dispatch('getOrganizationDashboard');
+     
       //  console.log(this.$store.state.organizationURL)
     },
+    
   },
 };
 </script>

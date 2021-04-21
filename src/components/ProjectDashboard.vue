@@ -1,55 +1,69 @@
 <template>
-  <!-- OrganizationDashboard  -->
-  <p class="text-lg text-center font-bold m-5">Project in Organization</p>
-  <hr />
-  <table class="m-5 w-5/6 mx-auto bg-gray-200 text-gray-800">
-    <tr class="text-left border-b-2 border-gray-300">
-      <th class="px-4 py-3">Name</th>
-      <th class="px-4 py-3">State</th>
-      <th class="px-4 py-3">Last success run date</th>
-      <th class="px-4 py-3">Last failed run date</th>
-      <th class="px-4 py-3">Last run duration</th>
-      <th class="px-4 py-3">Last success run URL</th>
-      <th class="px-4 py-3">Last failed run URL</th>
-    </tr>
+  <div class="w-full container mx-auto">
+    <h4 class="mt-2 mb-2 text-3xl font-bold">Organizations >> Projects >> Repositories</h4>
+    
+    <!-- Body  -->
+    <div class="flex bg-white">
+         <button
+       class=""
+        @click=" goBack() "
+       >
+     <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20" fill="currentColor">
+  <path fill-rule="evenodd" d="M15.707 15.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 010 1.414zm-6 0a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 1.414L5.414 10l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+</svg>
+       </button>
+      <table class="w-11/12 mx-auto text-dark border mr-16">
+        <tr class="text-center border-b-2 border-gray-300">
+          <th class="px-4 py-3">Name</th>
+          <th class="px-4 py-3">State</th>
+          <th class="px-4 py-3">Last success run date</th>
+          <th class="px-4 py-3">Last failed run date</th>
+          <th class="px-4 py-3">Last run duration</th>
+          <th class="px-4 py-3">Last success run URL</th>
+          <th class="px-4 py-3">Last failed run URL</th>
+        </tr>
 
-    <tr class="bg-gray-100 border-b border-gray-200"
-     v-for="currentView in getOrganizationsDashboard().branchs"
-      :key="currentView.id"
-    >
-      <td class="px-4 py-3">{{currentView["name"]}}</td>
-      <td class="px-4 py-3">{{currentView["state"]}}</td>
-      <td class="px-4 py-3">{{calculateDateIntervels (currentView["lastSuccessRunDate"])}}</td>
-      <td class="px-4 py-3">{{calculateDateIntervels(currentView["lastFailedRunDate"])}}</td>
-      <td class="px-4 py-3">{{calculateLastDurationIntervels (currentView["lastRunDuration"])}}</td>
-      <td class="px-4 py-3">{{currentView["lastSuccessRunURL"]}}</td>
-      <td class="px-4 py-3">{{currentView["lastFailedRunURL"]}}</td>
-    </tr>
-  </table>
+        <tr
+          class="bg-gray-100  text-dark text-center border-l-8 border-cerise-600"
+          v-for="currentView in getOrganizationsDashboard().branchs"
+          :key="currentView.id"
+        >
+          <td class="px-4 py-3 border-b-2 border-dark">{{ currentView["name"] }}</td>
+          <td class="px-4 py-3 border-b-2 border-dark">{{ currentView["state"] }}</td>
+          <td class="px-4 py-3 border-b-2 border-dark">
+            {{ calculateDateIntervels(currentView["lastSuccessRunDate"]) }}
+          </td>
+          <td class="px-4 py-3 border-b-2 border-dark">
+            {{ calculateDateIntervels(currentView["lastFailedRunDate"]) }}
+          </td>
+          <td class="px-4 py-3 border-b-2 border-dark">
+            {{ calculateLastDurationIntervels(currentView["lastRunDuration"]) }}
+          </td>
+          <td class="px-4 py-3 border-b-2 border-dark">{{ currentView["lastSuccessRunURL"] }}</td>
+          <td class="px-4 py-3 border-b-2 border-dark">{{ currentView["lastFailedRunURL"] }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </template>
-
 <script>
 import moment from "moment";
 import { mapActions } from "vuex";
 
 export default {
-  
   data() {
     return {
       responseTest: "",
     };
   },
-  mounted() {
-
-     
-  },
+  mounted() {},
 
   methods: {
     ...mapActions(["getProjectDashboard"]),
 
     getOrganizationsDashboard() {
       this.responseTest = this.$store.getters.showProjectDashboardData;
-   
+
       return this.responseTest;
     },
     calculateDateIntervels(received) {
@@ -65,14 +79,9 @@ export default {
       return result;
     },
 
-    // dealWithObject(received) {
-    //   if (received == null) return "N/A";
-    //   return received;
-    // },
-    // formatLastRunDuration(received) {
-    //   if (received == null) return "N/A";
-    //   return received;
-    // },
+    goBack() {
+      this.$store.commit("setcurrentDashboardToShow", "OrganizationDashboard");
+    },
   },
 };
 </script>

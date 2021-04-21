@@ -11,7 +11,8 @@ export default createStore({
     organizationsData:"",
     projectData: "",
     organizationURL: "",
-    projectURL: ""
+    projectURL: "",
+    currentDashboardToShow: "AllOrganizationDashboard",
     
   },
   getters:{
@@ -28,6 +29,9 @@ export default createStore({
     getCreateOrganizationBeURLResponse(state){
       return state.createOrganizationBeResponse;
     },
+    getcurrentDashboardToShow(state){
+      return state.currentDashboardToShow;
+    },
     showdashBoardData(state){
       return state.allOrganizationsData;
     },
@@ -41,10 +45,11 @@ export default createStore({
   },
   mutations: {
 
+    setcurrentDashboardToShow(state,payload){
+      state.currentDashboardToShow = payload;
+    },
     setAllOrganizationsDashboardData(state, result){
       state.allOrganizationsData = result;
-      
-
     },
     setOrganizationsDashboardData(state,result){
       state.organizationsData = result;
