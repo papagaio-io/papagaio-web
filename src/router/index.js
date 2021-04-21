@@ -30,7 +30,8 @@ const routes = [
   {
     path: '/dashboard',
     name:'Dashboard',
-    component: dashboard
+    component: dashboard,
+    ...preventRoutes 
   },
   {
     path: '/organizationsetup',

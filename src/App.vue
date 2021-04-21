@@ -5,7 +5,7 @@
         <div class="mr-6">
           <router-link
             class="font-semibold flex items-center flex-shrink-0 text-xl tracking-tight text-black"
-            to="/dashboard"
+            to="/"
           >
             <img
               class="w-10 mr-2"

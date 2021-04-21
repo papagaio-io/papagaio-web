@@ -45,10 +45,10 @@
             <button
               class="w-full flex items-center justify-center px-8 py-3 border-solid border-2 border-white rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold"
               @click="
-                this.$router.push('http://localhost:8081/neworganization')
+                this.$router.push('http://localhost:8081/dashboard')
               "
             >
-              Create Organization
+              Dashboard
             </button>
           </div>
         </div>
