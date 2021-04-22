@@ -1,6 +1,7 @@
 <template>
   <form @submit.prevent="checkForm" action="" method="post">
-    <div class="w-2/3 container mx-auto">
+    <div class="w-3/4 container mx-auto">
+     
       <h4 class="mt-2 mb-2 text-3xl font-bold">Configure a New Organization</h4>
       <!-- Beginning of form -->
       <div class="bg-gray-100">

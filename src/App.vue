@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <nav class="text-white bg-papaOrange-600 p-3">
+    <nav class=" text-white bg-papaOrange-600 p-3">
       <div class="container flex items-center justify-between flex-wrap">
-        <div class="mr-6">
+        <div class="ml-10">
           <router-link
             class="font-semibold flex items-center flex-shrink-0 text-xl tracking-tight text-black"
             to="/"
@@ -15,7 +15,7 @@
           </router-link>
         </div>
 
-        <div class="navbar-item">
+        <!-- <div class="navbar-item">
           <div v-if="$keycloak.authenticated">
             <label>{{ currentUsername }}</label>
 
@@ -26,17 +26,25 @@
               Logout
             </button>
           </div>
-        </div>
+        </div> -->
         <label v-show="false">{{ userLoggedIn }}</label>
       </div>
     </nav>
+     
   </div>
+  
   <router-view />
+  
+ <NavigationBar v-if="$keycloak.authenticated"> </NavigationBar>
   <!-- <p >{{currentUserToken }}</p> -->
 </template>
 
 <script>
+import NavigationBar from "./components/NavigationBar";
 export default {
+  components: {
+    NavigationBar,
+  },
   data() {
     return {};
   },

@@ -19,12 +19,12 @@
   <OrganizationDashboard />
   <ProjectDashboard /> -->
 
-    <button
+    <!-- <button
       class="float-right px-3 py-3 font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white mt-5 border-solid border-2 border-white"
       @click="this.$router.push('http://localhost:8081/neworganization')"
     >
       Add Organization
-    </button>
+    </button> -->
   </div>
 </template>
 

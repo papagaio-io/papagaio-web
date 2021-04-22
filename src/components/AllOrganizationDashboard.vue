@@ -26,9 +26,9 @@
               alt="Organization Icon"
             />
           </td>
-          <td class="px-4 py-3 border-b-2 border-dark">
+          <td class="border-b-2 border-dark">
             <img
-              class="w-10"
+              class="w-10 inline-block align-middle"
               :src="showSuccessPercentage(currentView.worstReport)"
               alt="Organization Icon"
             />

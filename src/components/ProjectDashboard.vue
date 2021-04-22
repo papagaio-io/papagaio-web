@@ -23,7 +23,7 @@
       <table class="w-11/12 mx-auto text-dark border mr-16">
         <tr class="text-center border-b-2 border-gray-300">
           <th class="px-4 py-3">Name</th>
-          <th class="px-4 py-3">State</th>
+          <th class="px-4 py-3">Status</th>
           <th class="px-4 py-3">Last success run date</th>
           <th class="px-4 py-3">Last failed run date</th>
           <th class="px-4 py-3">Last run duration</th>
@@ -42,7 +42,7 @@
           <td class="px-4 py-3 border-b-2 border-dark">
             <!-- {{ currentView["report"]["successRunsPercentage"] }} -->
             <img
-              class="w-10"
+              class="w-10 inline-block align-middle"
               :src="showSuccessPercentage(currentView)"
               alt="Organization Icon"
             />
@@ -101,6 +101,7 @@ export default {
     },
     showSuccessPercentage(recieved) {
       if (typeof recieved === "object" && recieved != null) {
+          console.log(recieved["report"]["successRunsPercentage"] )
         if (recieved["report"]["successRunsPercentage"] <= 20) {
           return require("../assets/img/thunder.png");
         } else if (recieved["report"]["successRunsPercentage"] <= 40) {

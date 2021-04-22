@@ -22,8 +22,8 @@
         <tr class="text-center border-gray-300 border-l-5 border-cerise-600">
           <th class="px-4 py-3">Status</th>
           <th class="px-4 py-3">Project name</th>
-          <th class="px-4 py-3">Failed runs</th>
-          <th class="px-4 py-3">Total runs</th>
+          <!-- <th class="px-4 py-3">Failed runs</th>
+          <th class="px-4 py-3">Total runs</th> -->
         </tr>
 
         <tr
@@ -35,7 +35,7 @@
           <td class="px-4 py-3 border-b-2 border-dark">
             <!-- {{ showProjectSuccessRunPercentage(currentView)}} -->
             <img
-              class="w-10"
+              class="w-10 inline-block align-middle"
               :src="showProjectSuccessRunPercentage(currentView)"
               alt="Organization Icon"
             />
@@ -43,12 +43,12 @@
           <td class="px-4 py-3 border-b-2 border-dark">
             {{ currentView["projectName"] }}
           </td>
-          <td class="px-4 py-3 border-b-2 border-dark">
+          <!-- <td class="px-4 py-3 border-b-2 border-dark">
             {{ showProjectFailedRuns(currentView) }}
           </td>
           <td class="px-4 py-3 border-b-2 border-dark">
             {{ showProjectTotalRuns(currentView) }}
-          </td>
+          </td> -->
         </tr>
       </table>
     </div>
@@ -57,7 +57,7 @@
 
 
 <script>
-import moment from "moment";
+
 import { mapActions } from "vuex";
 
 export default {

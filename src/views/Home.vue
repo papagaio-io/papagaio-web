@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-center">
     <img
-      class="object-cover w-80 h-50 mb-1"
+      class="object-cover w- 2/5 h-40 mb-1"
       alt="Papagaio logo"
       src="../assets/img/papagaioMainLogo.jpg"
     />
@@ -19,7 +19,7 @@
         </h4>
 
         <p
-          class="mt-3 mb-2 sm:max-w-4xl sm:mx-auto md:mt-5 md:text-xl text-white"
+          class="mt-3 mb-4 sm:max-w-4xl sm:mx-auto md:mt-5 md:text-xl text-white"
         >
           Agola is a CI/CD open source tool under the 2.0 Apache license.
           Papagaio was developed on top to extend Agola's capabilities and
@@ -40,7 +40,7 @@
           </div>
         </div>
 
-        <div v-else class="mt-3 sm:mt-3 sm:flex sm:justify-center">
+        <!-- <div v-else class="mt-3 sm:mt-3 sm:flex sm:justify-center">
           <div class="sm:mt-0 sm:ml-3">
             <button
               class="w-full flex items-center justify-center px-8 py-3 border-solid border-2 border-white rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold"
@@ -51,7 +51,7 @@
               Dashboard
             </button>
           </div>
-        </div>
+        </div> -->
       </div>
 
       <!-- Body  -->
@@ -65,7 +65,7 @@
             <p
               class="mt-3 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl"
             >
-              Unchallenging way to run your project
+              Unchallenging way to run (/slash) build your project
             </p>
 
             <p
