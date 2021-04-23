@@ -2,7 +2,7 @@
   <form @submit.prevent="checkForm" action="" method="post">
     <div class="w-3/4 container mx-auto">
      
-      <h4 class="mt-2 mb-2 text-3xl font-bold">Configure a New Organization</h4>
+      <h4 class="mt-2 mb-2 text-3xl font-bold">Add a New Organization</h4>
       <!-- Beginning of form -->
       <div class="bg-gray-100">
         <div class="p-4 border-t">
@@ -94,7 +94,7 @@
             <!-- Showing corresponding URL-->
             <tr>
               <div class="" v-if="selectedSourceID != null">
-                <div class="p-1 bg-cerise-600 text-white shadow-xl font-medium">
+                <div class="p-1 bg-grey-200  shadow-xl font-medium">
                   Corresponding URL
                   <h2
                     class="border-l-8 border-papaDark-400 bg-white text-dark p-1 font-medium"
@@ -149,7 +149,7 @@
               class="btn btn-red text-white float-right mt-3 hover:bg-papaDark-700 border-solid border-2 border-white"
               @click="deleteRepositoriesField(counter)"
             >
-              Remove
+              X
             </button>
 
             <label class="font-bold ml-2">Filter by name</label>

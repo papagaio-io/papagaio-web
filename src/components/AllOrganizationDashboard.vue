@@ -114,12 +114,15 @@ export default {
       return result;
     },
     iWasClicked(id) {
+      this.openedOrganization(id);
       this.$store.commit("setcurrentDashboardToShow", "OrganizationDashboard");
-
       this.$store.commit("setOrganizationURL", id);
       this.$store.dispatch("getOrganizationDashboard");
 
       //  console.log(this.$store.state.organizationURL)
+    },
+    openedOrganization(temp) {
+      temp = this.$store.commit("setCurrentOpenOrganizationInDashboard", temp);
     },
   },
 };

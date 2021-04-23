@@ -1,19 +1,23 @@
 <template>
   <div class="w-full container mx-auto">
-    <h4 class="mt-2 mb-2 text-3xl font-bold">Organizations >> Projects</h4>
+    <h4 class="mt-2 mb-2 text-3xl font-bold">Projects</h4>
+    <h4 class="mt-2 mb-6 text-xl font-bold text-gray-400">
+      <a class="cursor-pointer"  @click = navigateBack >Organizations</a> /
+      {{ this.$store.getters.getcurrentOpenOrganizationInDashboard }}
+    </h4>
 
     <!-- Body  -->
     <div class="flex bg-white">
-      <button class="" @click="goBack()">
+      <button class="" @click="navigateBack()">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="h-10 w-10"
+          class="h-20 w-30"
           viewBox="0 0 20 20"
           fill="currentColor"
         >
           <path
             fill-rule="evenodd"
-            d="M15.707 15.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 010 1.414zm-6 0a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 1.414L5.414 10l4.293 4.293a1 1 0 010 1.414z"
+            d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
             clip-rule="evenodd"
           />
         </svg>
@@ -57,7 +61,6 @@
 
 
 <script>
-
 import { mapActions } from "vuex";
 
 export default {
@@ -122,12 +125,17 @@ export default {
       } else return "N/A";
     },
     iWasClicked(id) {
+      this.openedOrganization(id)
       this.$store.commit("setcurrentDashboardToShow", "ProjectDashboard");
       this.$store.commit("setProjectURL", id);
       this.$store.dispatch("getProjectDashboard");
-      //  console.log(this.$store.state.organizationURL)
     },
-    goBack() {
+    //store to preview in navigation map
+    openedOrganization(temp) {
+      temp = this.$store.commit("setcurrentOpenProjectInDashboard", temp);
+    },
+
+    navigateBack() {
       this.$store.commit(
         "setcurrentDashboardToShow",
         "AllOrganizationDashboard"

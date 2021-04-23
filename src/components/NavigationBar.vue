@@ -31,7 +31,7 @@
               <div
                 class="flex font-semibold text-sm text-gray-300 my-4 font-sans uppercase"
               >
-                Dashboard
+                Panel
               </div>
             </div>
           </li>

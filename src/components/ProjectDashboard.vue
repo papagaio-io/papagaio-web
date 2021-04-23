@@ -1,12 +1,18 @@
 <template>
   <div class="w-full container mx-auto">
-    <h4 class="mt-2 mb-2 text-3xl font-bold">
-      Organizations >> Projects >> Repositories
+<h4 class="mt-2 mb-2 text-3xl font-bold">Repositories</h4>
+    <h4 class="mt-2 mb-6 text-xl font-bold text-gray-400">
+      <a class="cursor-pointer"  @click = navigateBackToOrganizations >Organizations</a> /
+      <a class="cursor-pointer" @click="navigateBack">{{
+        this.$store.getters.getcurrentOpenOrganizationInDashboard
+      }}</a>
+      /
+      {{ this.$store.getters.getcurrentOpenProjectInDashboard }}
     </h4>
 
     <!-- Body  -->
     <div class="flex bg-white">
-      <button class="" @click="goBack()">
+      <button class="" @click="navigateBack()">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-10 w-10"
@@ -101,7 +107,7 @@ export default {
     },
     showSuccessPercentage(recieved) {
       if (typeof recieved === "object" && recieved != null) {
-          console.log(recieved["report"]["successRunsPercentage"] )
+        console.log(recieved["report"]["successRunsPercentage"]);
         if (recieved["report"]["successRunsPercentage"] <= 20) {
           return require("../assets/img/thunder.png");
         } else if (recieved["report"]["successRunsPercentage"] <= 40) {
@@ -118,8 +124,14 @@ export default {
       // return recieved;
     },
 
-    goBack() {
+    navigateBack() {
       this.$store.commit("setcurrentDashboardToShow", "OrganizationDashboard");
+    },
+     navigateBackToOrganizations() {
+      this.$store.commit(
+        "setcurrentDashboardToShow",
+        "AllOrganizationDashboard"
+      );
     },
   },
 };
