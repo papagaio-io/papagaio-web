@@ -1,6 +1,10 @@
 <template>
   <div class="container mx-auto">
-    <h4 class="mt-2 mb-2 text-3xl font-bold">Organizations</h4>
+    <h4 class="mt-2 mb-2 text-3xl font-bold">Dashboard</h4>
+    <h4 class="mt-2 mb-6 text-xl font-bold text-gray-400">
+      <a class="cursor-pointer">All Organizations</a> 
+    
+    </h4>
     <!-- Body  -->
     <div class="bg-white">
       <table class="w-11/12 mx-auto text-dark border">
@@ -14,7 +18,7 @@
         </tr>
 
         <tr
-          class="bg-gray-100 text-dark text-center cursor-pointer border-l-8 border-cerise-600"
+          class="bg-gray-100 text-dark text-center cursor-pointer  hover:bg-gray-300 "
           v-for="currentView in getDashboard()"
           :key="currentView.id"
           @click="iWasClicked(currentView.organizationName)"

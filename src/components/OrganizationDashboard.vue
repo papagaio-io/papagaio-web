@@ -2,7 +2,7 @@
   <div class="w-full container mx-auto">
     <h4 class="mt-2 mb-2 text-3xl font-bold">Projects</h4>
     <h4 class="mt-2 mb-6 text-xl font-bold text-gray-400">
-      <a class="cursor-pointer"  @click = navigateBack >Organizations</a> /
+      <a class="cursor-pointer"  @click = navigateBack >All Organizations</a> >
       {{ this.$store.getters.getcurrentOpenOrganizationInDashboard }}
     </h4>
 
@@ -23,7 +23,7 @@
         </svg>
       </button>
       <table class="w-11/12 mx-auto text-dark border mr-16">
-        <tr class="text-center border-gray-300 border-l-5 border-cerise-600">
+        <tr class="text-center border-gray-300  ">
           <th class="px-4 py-3">Status</th>
           <th class="px-4 py-3">Project name</th>
           <!-- <th class="px-4 py-3">Failed runs</th>
@@ -31,7 +31,7 @@
         </tr>
 
         <tr
-          class="bg-gray-100 text-dark text-center cursor-pointer border-l-5 border-cerise-600"
+          class="bg-gray-100 text-dark text-center cursor-pointer  hover:bg-gray-300"
           v-for="currentView in getOrganizationsDashboard().projects"
           :key="currentView.id"
           @click="iWasClicked(currentView.projectName)"

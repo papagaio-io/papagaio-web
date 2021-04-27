@@ -10,7 +10,7 @@
       <div class="heroBody">
         <h4 class="mt-2 text-xl font-bold text-white">
           Extention of
-          <a class=" " href="https://agola.io"
+          <a class=" " href="https://agola.io" target="_blank" 
             ><img
               class="inline-block w-20"
               alt="Papagaio logo"
@@ -209,7 +209,7 @@
       <div>
         <p class="ml-2 mb-3 mt-3 text-sm text-white">
           Powered by
-          <a class="pl-1" href="https://sorint.it"
+          <a class="pl-1" href="https://sorint.it" target="_blank" 
             ><img
               class="inline-block w-21 h-6"
               alt="Papagaio logo"

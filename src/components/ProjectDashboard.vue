@@ -2,7 +2,7 @@
   <div class="w-full container mx-auto">
 <h4 class="mt-2 mb-2 text-3xl font-bold">Repositories</h4>
     <h4 class="mt-2 mb-6 text-xl font-bold text-gray-400">
-      <a class="cursor-pointer"  @click = navigateBackToOrganizations >Organizations</a> /
+      <a class="cursor-pointer"  @click = navigateBackToOrganizations >All Organizations</a> /
       <a class="cursor-pointer" @click="navigateBack">{{
         this.$store.getters.getcurrentOpenOrganizationInDashboard
       }}</a>
@@ -38,7 +38,7 @@
         </tr>
 
         <tr
-          class="bg-gray-100 text-dark text-center border-l-8 border-cerise-600"
+          class="bg-gray-100 text-dark text-center hover:bg-gray-300"
           v-for="currentView in getOrganizationsDashboard().branchs"
           :key="currentView.id"
         >
