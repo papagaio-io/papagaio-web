@@ -15,13 +15,14 @@
           <th class="px-4 py-3">Last success</th>
           <th class="px-4 py-3">Last failure</th>
           <th class="px-4 py-3">Last run duration</th>
+            <th class="px-4 py-3">On Agola</th>
         </tr>
 
         <tr
           class="bg-gray-100 text-dark text-center cursor-pointer  hover:bg-gray-300 "
           v-for="currentView in getDashboard()"
           :key="currentView.id"
-          @click="iWasClicked(currentView.organizationName)"
+          @click="navigateForward(currentView.organizationName)"
         >
           <td class="px-4 py-3 border-b-2 border-dark">
             <img
@@ -50,6 +51,19 @@
           </td>
           <td class="px-4 py-3 border-b-2 border-dark">
             {{ calculateLastDurationIntervels(currentView.lastRunDuration) }}
+          </td>
+          <td class="px-4 py-3 border-b-2 border-dark">
+            <a
+              @click.stop
+              :href="
+               currentView['organizationURL']
+              "
+              target="_blank"
+              ><img
+                class="inline-block w-12"
+                alt="Papagaio logo"
+                src="../assets/img/agola-logo-name.svg"
+            /></a>
           </td>
         </tr>
       </table>
@@ -82,25 +96,21 @@ export default {
       // console.log(this.responseTest[1].name);
       return this.responseTest;
     },
-    // showAvatarImg(recieved){
-    //   return require(recieved);
-    // },
-
     showSuccessPercentage(recieved) {
       if (typeof recieved === "object" && recieved != null) {
         if (recieved["successRunsPercentage"] <= 20) {
-          return require("../assets/img/thunder.png");
+          return require("../assets/img/5.png");
         } else if (recieved["successRunsPercentage"] <= 40) {
-          return require("../assets/img/rainy.png");
+          return require("../assets/img/4.png");
         } else if (recieved["successRunsPercentage"] <= 60) {
-          return require("../assets/img/MuchCloudy.png");
+          return require("../assets/img/3.png");
         } else if (recieved["successRunsPercentage"] <= 80) {
-          return require("../assets/img/cloudy.png");
+          return require("../assets/img/2.png");
         } else if (recieved["successRunsPercentage"] <= 100) {
-          return require("../assets/img/sunny.png");
+          return require("../assets/img/1.png");
         }
         // return recieved["successRunsPercentage"] + "%";
-      } else return require("../assets/img/sunny.png");
+      } else return require("../assets/img/1.png");
       // return recieved;
     },
 
@@ -117,7 +127,7 @@ export default {
       var result = date.toISOString().substr(11, 8);
       return result;
     },
-    iWasClicked(id) {
+    navigateForward(id) {
       this.openedOrganization(id);
       this.$store.commit("setcurrentDashboardToShow", "OrganizationDashboard");
       this.$store.commit("setOrganizationURL", id);

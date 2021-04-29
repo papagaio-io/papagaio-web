@@ -1,7 +1,6 @@
 <template>
   <form @submit.prevent="checkForm" action="" method="post">
     <div class="w-3/4 container mx-auto">
-     
       <h4 class="mt-2 mb-2 text-3xl font-bold">Add a New Organization</h4>
       <!-- Beginning of form -->
       <div class="bg-gray-100">
@@ -94,7 +93,7 @@
             <!-- Showing corresponding URL-->
             <tr>
               <div class="" v-if="selectedSourceID != null">
-                <div class="p-1 bg-grey-200  shadow-xl font-medium">
+                <div class="p-1 bg-grey-200 shadow-xl font-medium">
                   Corresponding URL
                   <h2
                     class="border-l-8 border-papaDark-400 bg-white text-dark p-1 font-medium"
@@ -234,6 +233,20 @@
       </div>
     </div>
   </form>
+  <el-dialog
+    title="Organization Already Exists"
+    v-model="dialogVisible"
+    width="30%"
+    :before-close="handleClose"
+  >
+    <span>Force create the organization? </span>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="forceSubmitForm">Yes</el-button>
+      </span>
+    </template>
+  </el-dialog>
   <!-- <p> test usertoken from new org {{userToken}} </p> -->
 </template>
 
@@ -255,6 +268,7 @@ export default {
       errors: [],
       key: "",
       showBehaviorAddButton: false,
+      dialogVisible: false,
 
       repositoriesTable: [
         {
@@ -345,8 +359,39 @@ export default {
           { headers: { Authorization: `Bearer ${this.userToken}` } }
         )
         .then((response) => {
-          // this.createOrganizationResponse = response;
-          this.$store.state.createOrganizationBeResponse = response.data;
+          if (response.data.agolaExists === true) {
+            console.log("I am true hbb");
+            this.forceSubmitConfirmation();
+          }
+          // console.log("I am not true");
+          // this.$store.state.createOrganizationBeResponse = response.data.agolaExists;
+          // this.$router.push("http://localhost:8080/confirmation");
+        })
+        .catch((error) => {
+          this.createOrganizationResponse = error.response.data;
+          this.errors.push(error.response.data);
+        });
+    },
+    forceSubmitConfirmation() {
+      this.dialogVisible = true;
+    },
+    forceSubmitForm() {
+      axios
+        .post(
+          "https://papagaio-api.sorintdev.it/api/createorganization?force",
+          {
+            name: this.orgName,
+            visibility: this.orgIsPrivate,
+            gitSourceName: this.selectedSourceID,
+            behaviourInclude: this.behaviorIncludeTempValue,
+            behaviourExclude: this.behaviorExcludeTempValue,
+            behaviourType: this.behaviorTypeTempValue,
+          },
+          { headers: { Authorization: `Bearer ${this.userToken}` } }
+        )
+        .then((response) => {
+          console.log("I reached the response of forced submit 2 ");
+          this.$store.state.createOrganizationBeResponse = response.data.organizationURL;
           this.$router.push("http://localhost:8080/confirmation");
         })
         .catch((error) => {

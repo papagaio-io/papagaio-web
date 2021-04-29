@@ -107,20 +107,20 @@ export default {
     },
     showSuccessPercentage(recieved) {
       if (typeof recieved === "object" && recieved != null) {
-        console.log(recieved["report"]["successRunsPercentage"]);
+    
         if (recieved["report"]["successRunsPercentage"] <= 20) {
-          return require("../assets/img/thunder.png");
+          return require("../assets/img/5.png");
         } else if (recieved["report"]["successRunsPercentage"] <= 40) {
-          return require("../assets/img/rainy.png");
+          return require("../assets/img/4.png");
         } else if (recieved["report"]["successRunsPercentage"] <= 60) {
-          return require("../assets/img/MuchCloudy.png");
+          return require("../assets/img/3.png");
         } else if (recieved["report"]["successRunsPercentage"] <= 80) {
-          return require("../assets/img/cloudy.png");
+          return require("../assets/img/2.png");
         } else if (recieved["report"]["successRunsPercentage"] <= 100) {
-          return require("../assets/img/sunny.png");
+          return require("../assets/img/1.png");
         }
         // return recieved["successRunsPercentage"] + "%";
-      } else return require("../assets/img/sunny.png");
+      } else return require("../assets/img/1.png");
       // return recieved;
     },
 

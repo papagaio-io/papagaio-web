@@ -17,7 +17,7 @@
     <component v-bind:is="showDashboard"> </component>
     <!-- <AllOrganizationDashboard />
   <OrganizationDashboard />
-  <ProjectDashboard /> -->
+  <RepositoryDashboard /> -->
 
     <!-- <button
       class="float-right px-3 py-3 font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white mt-5 border-solid border-2 border-white"
@@ -31,12 +31,12 @@
 <script>
 import AllOrganizationDashboard from "../components/AllOrganizationDashboard";
 import OrganizationDashboard from "../components/OrganizationDashboard";
-import ProjectDashboard from "../components/ProjectDashboard";
+import RepositoryDashboard from "../components/RepositoryDashboard";
 export default {
   components: {
     AllOrganizationDashboard,
     OrganizationDashboard,
-    ProjectDashboard,
+    RepositoryDashboard,
   },
   data() {
     return {

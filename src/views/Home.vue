@@ -65,7 +65,7 @@
             <p
               class="mt-3 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl"
             >
-              Unchallenging way to run (/slash) build your project
+              Unchallenging way to run/build your project
             </p>
 
             <p
