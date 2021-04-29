@@ -129,7 +129,7 @@ export default {
     },
     navigateForward(id) {
       this.openedOrganization(id);
-      this.$store.commit("setcurrentDashboardToShow", "OrganizationDashboard");
+      this.$store.commit("setcurrentDashboardToShow", "ProjectDashboard");
       this.$store.commit("setOrganizationURL", id);
       this.$store.dispatch("getOrganizationDashboard");
 

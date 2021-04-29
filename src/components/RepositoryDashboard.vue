@@ -125,7 +125,7 @@ export default {
     },
 
     navigateBack() {
-      this.$store.commit("setcurrentDashboardToShow", "OrganizationDashboard");
+      this.$store.commit("setcurrentDashboardToShow", "ProjectDashboard");
     },
      navigateBackToOrganizations() {
       this.$store.commit(

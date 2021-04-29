@@ -30,12 +30,12 @@
 
 <script>
 import AllOrganizationDashboard from "../components/AllOrganizationDashboard";
-import OrganizationDashboard from "../components/OrganizationDashboard";
+import ProjectDashboard from "../components/ProjectDashboard";
 import RepositoryDashboard from "../components/RepositoryDashboard";
 export default {
   components: {
     AllOrganizationDashboard,
-    OrganizationDashboard,
+    ProjectDashboard,
     RepositoryDashboard,
   },
   data() {
