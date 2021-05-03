@@ -25,10 +25,22 @@
                 <input
                   class="mb-4 border-l-8 focus:border-papaOrange-600 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4"
                   type="text"
-                  placeholder="Type/paste an existing organization name"
+                  placeholder="Type an existing git organization name"
                   v-model="orgName"
                 />
               </center>
+            </tr>
+            <tr>
+               <h5 class="mb-3 text-xl">Agola organization reference name</h5>
+              <center>
+                <input
+                  class="mb-4 border-l-8 focus:border-papaOrange-600 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4"
+                  type="text"
+                  placeholder="Type an organization name (with no special characters)  "
+                  v-model="agolaRefName"
+                />
+              </center>
+
             </tr>
 
             <tr>
@@ -262,19 +274,20 @@ export default {
       createOrgError: null,
       orgIsPrivate: "false",
       orgName: null,
+      agolaRefName: null, //not validate yet
       selectedSourceID: null,
       gitSourceResponse: [],
       createOrganizationResponse: null,
       errors: [],
       key: "",
-      showBehaviorAddButton: false,
+      showBehaviorAddButton: true,
       dialogVisible: false,
 
       repositoriesTable: [
-        {
-          repositoriesInclude: "*",
-          repositoriesExclude: "",
-        },
+        // {
+        //   repositoriesInclude: "*",
+        //   repositoriesExclude: "",
+        // },
       ],
 
       behaviorTypepicked: "wildcard",
@@ -350,6 +363,7 @@ export default {
           "https://papagaio-api.sorintdev.it/api/createorganization",
           {
             name: this.orgName,
+            agolaRef: this.agolaRefName,
             visibility: this.orgIsPrivate,
             gitSourceName: this.selectedSourceID,
             behaviourInclude: this.behaviorIncludeTempValue,
@@ -362,10 +376,10 @@ export default {
           if (response.data.agolaExists === true) {
             console.log("I am true hbb");
             this.forceSubmitConfirmation();
-          }
-          // console.log("I am not true");
-          // this.$store.state.createOrganizationBeResponse = response.data.agolaExists;
-          // this.$router.push("http://localhost:8080/confirmation");
+          }else
+          console.log("I am not true");
+          this.$store.state.createOrganizationBeResponse = response.data.organizationURL;
+          this.$router.push("http://localhost:8080/confirmation");
         })
         .catch((error) => {
           this.createOrganizationResponse = error.response.data;
@@ -381,6 +395,7 @@ export default {
           "https://papagaio-api.sorintdev.it/api/createorganization?force",
           {
             name: this.orgName,
+            agolaRef: this.agolaRefName,
             visibility: this.orgIsPrivate,
             gitSourceName: this.selectedSourceID,
             behaviourInclude: this.behaviorIncludeTempValue,
@@ -412,7 +427,7 @@ export default {
 
     addRepositoriesField() {
       this.repositoriesTable.push({
-        repositoriesInclude: "",
+        repositoriesInclude: "*",
         repositoriesExclude: "",
       });
       this.showBehaviorAddButton = false;

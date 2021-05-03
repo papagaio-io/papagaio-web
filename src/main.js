@@ -46,6 +46,7 @@ keycloak.init({
     store.state.loggedIn = true;
     store.state.currentAuthToken = keycloak.token;
     store.dispatch('getAllOrganizationDashboard');
+    store.dispatch('organizationsDefaultTriggerTimeInDb');
    
   }
 }).catch((e) => {

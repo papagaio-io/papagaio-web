@@ -15,6 +15,8 @@ export default createStore({
     currentDashboardToShow: "AllOrganizationDashboard",
     currentOpenOrganizationInDashboard: "",
     currentOpenProjectInDashboard: "",
+    organizationsDefaultTriggerTime: "",
+    runFailedDefaultTriggerTime: "",
   },
   getters: {
     getLoginState(state) {
@@ -47,6 +49,13 @@ export default createStore({
     },
     getcurrentOpenProjectInDashboard(state) {
       return state.currentOpenProjectInDashboard;
+    },
+    getorganizationsDefaultTriggerTime(state) {
+      return state.organizationsDefaultTriggerTime;
+
+    },
+    getrunFailedDefaultTriggerTime(state) {
+      return state.runFailedDefaultTriggerTime;
     }
 
   },
@@ -73,8 +82,26 @@ export default createStore({
     setCurrentOpenOrganizationInDashboard(state, payload) {
       state.currentOpenOrganizationInDashboard = payload;
     },
-    setcurrentOpenProjectInDashboard(state,payload){
+    setcurrentOpenProjectInDashboard(state, payload) {
       state.currentOpenProjectInDashboard = payload;
+    },
+    setorganizationsDefaultTriggerTime(state, payload) {
+      state.organizationsDefaultTriggerTime = payload;
+    },
+    setrunFailedDefaultTriggerTime(state, payload) {
+      state.runFailedDefaultTriggerTime = payload;
+    },
+    increaseDefaultRunInterval(state){
+      state.organizationsDefaultTriggerTime++;
+    },
+    decreaseDefaultRunInterval(state){
+      state.organizationsDefaultTriggerTime--;
+    },
+    increaseFailedRunInterval(state){
+      state.runFailedDefaultTriggerTime++;
+    },
+    decreaseFailedRunInterval(state){
+      state.runFailedDefaultTriggerTime--;
     }
 
 
@@ -89,8 +116,6 @@ export default createStore({
           },
         })
         .then(response => { commit("setAllOrganizationsDashboardData", response.data) });
-
-
     },
 
     getOrganizationDashboard({ commit, state }) {
@@ -104,8 +129,6 @@ export default createStore({
           commit("setOrganizationsDashboardData", response.data)
 
         });
-
-
     },
 
     getProjectDashboard({ commit, state }) {
@@ -119,8 +142,42 @@ export default createStore({
           commit("setProjectDashboardData", response.data)
 
         });
+    },
 
+    organizationsDefaultTriggerTimeInDb({ commit, state }) {
+      axios
+        .get("https://papagaio-api.sorintdev.it/api/gettriggersconfig", {
+          headers: {
+            Authorization: `Bearer ${state.currentAuthToken}`,
+          },
+        })
+        .then(response => {
+          commit("setorganizationsDefaultTriggerTime", response.data.organizationsDefaultTriggerTime)
+          commit("setrunFailedDefaultTriggerTime", response.data.runFailedDefaultTriggerTime)
 
+        });
+    },
+
+    setNewOrganizationsDefaultTriggerTimeInDb({ state }) {
+      axios
+        .post(
+          "https://papagaio-api.sorintdev.it/api/savetriggersconfig",
+          {
+            organizationsDefaultTriggerTime: state.organizationsDefaultTriggerTime,
+            runFailedDefaultTriggerTime: state.runFailedDefaultTriggerTime,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${state.currentAuthToken}`,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error.data);
+        });
     },
 
 

@@ -39,7 +39,7 @@
             <a
               @click="this.$router.push('http://localhost:8081/')"
               href="#"
-              class="relative flex flex-row items-center h-11 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent hover:bg-papaDark-700 text-white hover:text-gray-200 border-l-4 border-transparent hover:border-cerise-600 pr-6"
+              class="relative flex flex-row items-center h-11 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent hover:bg-papaDark-700 text-white hover:text-gray-200   pr-6"
             >
               <span class="inline-flex justify-center items-center ml-4">
                 <svg
@@ -67,7 +67,7 @@
                 this.$router.push('http://localhost:8081/neworganization')
               "
               href="#"
-              class="relative flex flex-row items-center h-11 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent hover:bg-papaDark-700 text-white hover:text-gray-200 border-l-4 border-transparent hover:border-cerise-600 pr-6"
+              class="relative flex flex-row items-center h-11 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent hover:bg-papaDark-700 text-white hover:text-gray-200  pr-6"
             >
               <span class="inline-flex justify-center items-center ml-4">
                 <svg
@@ -100,7 +100,7 @@
             <a
               @click="this.$router.push('http://localhost:8081/dashboard')"
               href="#"
-              class="relative flex flex-row items-center h-11 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent hover:bg-papaDark-700 text-white hover:text-gray-200 border-l-4 border-transparent hover:border-cerise-600 pr-6"
+              class="relative flex flex-row items-center h-11 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent hover:bg-papaDark-700 text-white hover:text-gray-200 pr-6"
             >
               <span class="inline-flex justify-center items-center ml-4">
                 <svg
@@ -135,7 +135,7 @@
             <a
               @click="this.$router.push('http://localhost:8081/triggerscan')"
               href="#"
-              class="relative flex flex-row items-center h-11 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent hover:bg-papaDark-700 text-white hover:text-gray-200 border-l-4 border-transparent hover:border-cerise-600 pr-6"
+              class="relative flex flex-row items-center h-11 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent hover:bg-papaDark-700 text-white hover:text-gray-200 pr-6"
             >
               <span class="inline-flex justify-center items-center ml-4">
                 <svg
@@ -165,7 +165,7 @@
             <a
               @click="$keycloak.logout()"
               href="#"
-              class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-papaDark-700 text-white hover:text-gray-200 border-l-4 border-transparent hover:border-cerise-600 pr-6"
+              class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-papaDark-700 text-white hover:text-gray-200  pr-6"
             >
               <span
                 class="inline-flex justify-center items-center ml-4 text-red-400"
