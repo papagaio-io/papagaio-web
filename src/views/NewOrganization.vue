@@ -10,10 +10,12 @@
               <div class="float-right">
                 <el-popover
                   placement="top-start"
-                  title="Setting a new organization"
-                  :width="300"
+                  title="Adding a new organization"
+                  :width="920"
                   trigger="hover"
-                  content="this is content, this is content, this is content"
+                  content="Fill this form to build your project on Agola, using Papagaio. As of today, 
+                  Papagaio can only help you run projects on gitea and wecode repos. 
+                   "
                 >
                   <template #reference>
                     <el-button>?</el-button>
@@ -135,10 +137,10 @@
           <div class="float-right">
             <el-popover
               placement="top-start"
-              title="Behaviour section"
-              :width="200"
+              title="Behavior section"
+              :width="600"
               trigger="hover"
-              content="In this section you should do everything and anything no matter how hard it is. if you believe life is underrated then you should rate it.Yea why not?.Unless you believe it is overrated then you should also rate it.Yea why not? So what do you think of this section"
+              content="If required, use the Behavior section to specify a behavior type using wildcard or regex."
             >
               <template #reference>
                 <el-button>?</el-button>

@@ -3,10 +3,11 @@
     <div class="float-right mb-2">
       <el-popover
         placement="top-start"
-        title="Setting a new organization"
-        :width="300"
+        title="Dashboard"
+        :width="1400"
         trigger="hover"
-        content="this is content, this is content, this is content"
+        content="All organizations available on Agola are shown here, with summarized and detialed status reports. Tab an organization to expand its project(s) and repo(s). 
+        (On Agola) will assist you to check the organization on Agola."
       >
         <template #reference>
           <el-button>?</el-button>

@@ -6,10 +6,10 @@
         <div class="float-right">
           <el-popover
             placement="top-start"
-            title="Reconfigure Scan Interval"
-            :width="300"
+            title="Scan Interval"
+            :width="850"
             trigger="hover"
-            content="this is content, this is content, this is content"
+            content="Here you can reconfigure the desired default interval runs for the organizations. Plus, the intervals for runs after fails occur."
           >
             <template #reference>
               <el-button>?</el-button>
@@ -68,9 +68,8 @@
           </div>
         </div>
 
-        <!-- <form @submit.prevent="checkForm" action="" method="post">
-         -->
-        <!-- Edit Section -->
+        
+        <!-- The editable section -->
         <div v-show="editIntervels">
           <h5 class="mt-5 mb-3 text-xl text-papaOrange-600">Edit intervals</h5>
           <hr />
@@ -235,7 +234,9 @@ export default {
     };
   },
 
-  computed: {},
+  computed: {
+
+  },
   methods: {
     checkForm() {
       //flush numeric values to store, and then check the period identifier to convert to minutes
@@ -332,7 +333,7 @@ export default {
       this.tempNumericFailedRunInterval--;
     },
 
-    //a funcation the formats the minutes recieved from BE.
+    //a function the formats the minutes recieved from BE.
     formatMinutesRecievedFromBE(n) {
       var value = n * 60;
 

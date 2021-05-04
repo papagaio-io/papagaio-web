@@ -2,8 +2,7 @@
   <div class="container mx-auto">
     <h4 class="mt-2 mb-2 text-3xl font-bold">Dashboard</h4>
     <h4 class="mt-2 mb-6 text-xl font-bold text-gray-400">
-      <a class="cursor-pointer">All Organizations</a> 
-    
+      <a class="cursor-pointer">All Organizations</a>
     </h4>
     <!-- Body  -->
     <div class="bg-white">
@@ -15,11 +14,12 @@
           <th class="px-4 py-3">Last success</th>
           <th class="px-4 py-3">Last failure</th>
           <th class="px-4 py-3">Last run duration</th>
-            <th class="px-4 py-3">On Agola</th>
+          <th class="px-4 py-3">On Agola</th>
+          <th class="px-4 py-3">Agola Reference Name</th>
         </tr>
 
         <tr
-          class="bg-gray-100 text-dark text-center cursor-pointer  hover:bg-gray-300 "
+          class="bg-gray-100 text-dark text-center cursor-pointer hover:bg-gray-300"
           v-for="currentView in getDashboard()"
           :key="currentView.id"
           @click="navigateForward(currentView.organizationName)"
@@ -55,15 +55,16 @@
           <td class="px-4 py-3 border-b-2 border-dark">
             <a
               @click.stop
-              :href="
-               currentView['organizationURL']
-              "
+              :href="currentView['organizationURL']"
               target="_blank"
               ><img
                 class="inline-block w-12"
                 alt="Papagaio logo"
                 src="../assets/img/agola-logo-name.svg"
             /></a>
+          </td>
+          <td class="px-4 py-3 border-b-2 border-dark">
+            {{ currentView.agolaRef }}
           </td>
         </tr>
       </table>
