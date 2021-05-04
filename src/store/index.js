@@ -91,19 +91,7 @@ export default createStore({
     setrunFailedDefaultTriggerTime(state, payload) {
       state.runFailedDefaultTriggerTime = payload;
     },
-    increaseDefaultRunInterval(state){
-      state.organizationsDefaultTriggerTime++;
-    },
-    decreaseDefaultRunInterval(state){
-      state.organizationsDefaultTriggerTime--;
-    },
-    increaseFailedRunInterval(state){
-      state.runFailedDefaultTriggerTime++;
-    },
-    decreaseFailedRunInterval(state){
-      state.runFailedDefaultTriggerTime--;
-    }
-
+   
 
   },
   actions: {

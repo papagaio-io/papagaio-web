@@ -46,27 +46,31 @@
             <h2
               class="border-l-8 border-papaDark-400 bg-white text-dark p-1 font-medium"
             >
-            
-              
-              {{ timeConvertingTest($store.getters.getorganizationsDefaultTriggerTime) }}
+              {{
+                formatMinutesRecievedFromBE(
+                  $store.getters.getorganizationsDefaultTriggerTime
+                )
+              }}
             </h2>
           </div>
 
           <div class="p-1 w-1/3 bg-grey-200 shadow-lg font-medium">
             Failed runs
             <h2
-              class="border-l-8 border-cerise-600 bg-white text-dark p-1 font-medium"
+              class="border-l-8 border-papaDark-400 bg-white text-dark p-1 font-medium"
             >
-             
-              {{ timeConvertingTest($store.getters.getrunFailedDefaultTriggerTime) }}
-              
+              {{
+                formatMinutesRecievedFromBE(
+                  $store.getters.getrunFailedDefaultTriggerTime
+                )
+              }}
             </h2>
           </div>
         </div>
 
         <!-- <form @submit.prevent="checkForm" action="" method="post">
          -->
-
+        <!-- Edit Section -->
         <div v-show="editIntervels">
           <h5 class="mt-5 mb-3 text-xl text-papaOrange-600">Edit intervals</h5>
           <hr />
@@ -74,9 +78,10 @@
             <div class="p-1 w-1/4 bg-red shadow-lg font-medium">
               Default runs
               <h2
-                class="border-l-8 border-papaDark-400 bg-white text-dark p-1 font-medium"
+                class="border-l-8 border-papaOrange-600 bg-white text-dark p-1 font-medium"
               >
-                {{ $store.getters.getorganizationsDefaultTriggerTime }}
+                <!-- {{ $store.getters.getorganizationsDefaultTriggerTime }} -->
+                {{ tempNumericDefaultRunInterval }}
                 {{ tempDefaultRunIntervelIdentifier }}
               </h2>
               <div class="flex justify-around mt-4">
@@ -89,6 +94,7 @@
                       Select
                     </option>
                     <option value="minute">Minute</option>
+                    <option value="hour">Hour</option>
                     <option value="day">Day</option>
                     <option value="week">Week</option>
                     <option value="month">Month</option>
@@ -131,9 +137,10 @@
             <div class="p-1 w-1/4 bg-red shadow-lg font-medium">
               Failed Runs
               <h2
-                class="border-l-8 border-papaDark-400 bg-white text-dark p-1 font-medium"
+                class="border-l-8 border-papaOrange-600 bg-white text-dark p-1 font-medium"
               >
-                {{ $store.getters.getrunFailedDefaultTriggerTime }}
+                <!-- {{ $store.getters.getrunFailedDefaultTriggerTime }} -->
+                {{ tempNumericFailedRunInterval }}
                 {{ tempFailedRunIntervelIdentifier }}
               </h2>
               <div class="flex justify-around mt-4">
@@ -146,6 +153,7 @@
                       Select
                     </option>
                     <option value="minute">Minute</option>
+                    <option value="hour">Hour</option>
                     <option value="day">Day</option>
                     <option value="week">Week</option>
                     <option value="month">Month</option>
@@ -204,7 +212,7 @@
         class="px-10 py-3 font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold py-2 px-4 rounded float-right mt-5 border-solid border-2 border-white"
         @click="checkForm()"
       >
-        Set
+        Save
       </button>
     </div>
   </div>
@@ -215,14 +223,13 @@ export default {
   data() {
     return {
       editIntervels: false,
-      //remove these two. Can be removed. 
-      currentDefaultRunInterval: this.$store.getters
-        .getorganizationsDefaultTriggerTime,
 
-      currentFailedRunInterval: this.$store.getters
-        .getrunFailedDefaultTriggerTime,
-      tempDefaultRunIntervelIdentifier: "mins",
-      tempFailedRunIntervelIdentifier: "mins",
+      tempNumericDefaultRunInterval: null,
+      tempNumericFailedRunInterval: null,
+
+      tempDefaultRunIntervelIdentifier: "minute",
+      tempFailedRunIntervelIdentifier: "minute",
+
       convertedNewDefaultRunIntervel: null,
       convertedNewFailedRunIntervel: null,
     };
@@ -231,6 +238,17 @@ export default {
   computed: {},
   methods: {
     checkForm() {
+      //flush numeric values to store, and then check the period identifier to convert to minutes
+      this.$store.commit(
+        "setorganizationsDefaultTriggerTime",
+        this.tempNumericDefaultRunInterval
+      );
+      this.$store.commit(
+        "setrunFailedDefaultTriggerTime",
+        this.tempNumericFailedRunInterval
+      );
+
+
       if (
         this.tempDefaultRunIntervelIdentifier === "minute" &&
         this.tempFailedRunIntervelIdentifier === "minute"
@@ -241,28 +259,33 @@ export default {
         console.log("new values are ready in minutes");
         console.log(this.convertedNewDefaultRunIntervel);
         console.log(this.convertedNewFailedRunIntervel);
-      } 
-      else if (this.tempDefaultRunIntervelIdentifier == "day") {
+      } else if (this.tempDefaultRunIntervelIdentifier == "hour") {
+        this.convertedNewDefaultRunIntervel =
+          this.$store.getters.getorganizationsDefaultTriggerTime * 60;
+        console.log("Default Run was hour and I converted it");
+        console.log(this.convertedNewDefaultRunIntervel);
+      } else if (this.tempDefaultRunIntervelIdentifier == "day") {
         this.convertedNewDefaultRunIntervel =
           this.$store.getters.getorganizationsDefaultTriggerTime * 1440;
         console.log("Default Run was day and I converted it");
         console.log(this.convertedNewDefaultRunIntervel);
-      }
-      
-      else if (this.tempDefaultRunIntervelIdentifier == "week") {
+      } else if (this.tempDefaultRunIntervelIdentifier == "week") {
         this.convertedNewDefaultRunIntervel =
           this.$store.getters.getorganizationsDefaultTriggerTime * 10080;
         console.log("Default Run was week and I converted it");
         console.log(this.convertedNewDefaultRunIntervel);
-      }
-       else if (this.tempDefaultRunIntervelIdentifier == "month") {
+      } else if (this.tempDefaultRunIntervelIdentifier == "month") {
         this.convertedNewDefaultRunIntervel =
           this.$store.getters.getorganizationsDefaultTriggerTime * 43800;
         console.log("Default Run was Month and I converted it");
         console.log(this.convertedNewDefaultRunIntervel);
-      } 
-      
-      if (this.tempFailedRunIntervelIdentifier == "day") {
+      }
+      if (this.tempFailedRunIntervelIdentifier == "hour") {
+        this.convertedNewFailedRunIntervel =
+          this.$store.getters.getrunFailedDefaultTriggerTime * 60;
+        console.log("Default Failed Run was hour and I converted it");
+        console.log(this.convertedNewFailedRunIntervel);
+      } else if (this.tempFailedRunIntervelIdentifier == "day") {
         this.convertedNewFailedRunIntervel =
           this.$store.getters.getrunFailedDefaultTriggerTime * 1440;
         console.log("Default Failed Run was day and I converted it");
@@ -281,35 +304,56 @@ export default {
         console.log("values are not clear");
       }
 
-
-      this.$store.commit('setorganizationsDefaultTriggerTime',this.convertedNewDefaultRunIntervel );
-      this.$store.commit('setrunFailedDefaultTriggerTime', this.convertedNewFailedRunIntervel);
-      this.$store.dispatch('setNewOrganizationsDefaultTriggerTimeInDb');
-      //response to be handled here 
+      this.$store.commit(
+        "setorganizationsDefaultTriggerTime",
+        this.convertedNewDefaultRunIntervel
+      );
+      this.$store.commit(
+        "setrunFailedDefaultTriggerTime",
+        this.convertedNewFailedRunIntervel
+      );
+      this.$store.dispatch("setNewOrganizationsDefaultTriggerTimeInDb");
+      //response to be handled here
       this.editIntervels = false;
-
+      //clear temp values for better editing view
+      this.tempNumericDefaultRunInterval = null;
+      this.tempNumericFailedRunInterval = null;
     },
     addOneDefaultIntervel() {
-      this.$store.commit("increaseDefaultRunInterval");
+      this.tempNumericDefaultRunInterval++;
     },
     decreaseOneDefaultIntervel() {
-      this.$store.commit("decreaseDefaultRunInterval");
+      this.tempNumericDefaultRunInterval--;
     },
     addOneFailedIntervel() {
-      this.$store.commit("increaseFailedRunInterval");
+      this.tempNumericFailedRunInterval++;
     },
     decreaseOneFailedIntervel() {
-      this.$store.commit("decreaseFailedRunInterval");
+      this.tempNumericFailedRunInterval--;
     },
-    timeConvertingTest(n) {
-        var num = n;
-        var hours = (num / 60);
-        var rhours = Math.floor(hours);
-        var minutes = (hours - rhours) * 60;
-        var rminutes = Math.round(minutes);
-        return num + " minutes = " + rhours + " hour(s) and " + rminutes + " minute(s).";
-}
 
+    //a funcation the formats the minutes recieved from BE.
+    formatMinutesRecievedFromBE(n) {
+      var value = n * 60;
+
+      var units = {
+        day: 24 * 60 * 60,
+        hour: 60 * 60,
+        minute: 60,
+        second: 1,
+      };
+
+      var result = [];
+
+      for (var name in units) {
+        var p = Math.floor(value / units[name]);
+        if (p == 1) result.push(" " + p + " " + name);
+        if (p >= 2) result.push(" " + p + " " + name + "s");
+        value %= units[name];
+      }
+
+      return result[0];
+    },
   },
 };
 </script>
