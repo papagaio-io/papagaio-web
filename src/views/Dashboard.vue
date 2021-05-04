@@ -4,7 +4,7 @@
       <el-popover
         placement="top-start"
         title="Dashboard"
-        :width="1400"
+        :width="600"
         trigger="hover"
         content="All organizations available on Agola are shown here, with summarized and detialed status reports. Tab an organization to expand its project(s) and repo(s). 
         (On Agola) will assist you to check the organization on Agola."

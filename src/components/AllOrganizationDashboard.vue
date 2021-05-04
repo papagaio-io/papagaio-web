@@ -11,11 +11,11 @@
           <th class="px-4 py-3"></th>
           <th class="px-4 py-3">Status</th>
           <th class="px-4 py-3">Name</th>
+            <th class="px-4 py-3">Agola reference</th>
           <th class="px-4 py-3">Last success</th>
           <th class="px-4 py-3">Last failure</th>
           <th class="px-4 py-3">Last run duration</th>
           <th class="px-4 py-3">On Agola</th>
-          <th class="px-4 py-3">Agola Reference Name</th>
         </tr>
 
         <tr
@@ -43,6 +43,9 @@
           <td class="px-4 py-3 border-b-2 border-dark">
             {{ currentView.organizationName }}
           </td>
+           <td class="px-4 py-3 border-b-2 border-dark">
+            {{ currentView.agolaRef }}
+          </td>
           <td class="px-4 py-3 border-b-2 border-dark">
             {{ calculateDateIntervels(currentView.lastSuccessRunDate) }}
           </td>
@@ -63,9 +66,7 @@
                 src="../assets/img/agola-logo-name.svg"
             /></a>
           </td>
-          <td class="px-4 py-3 border-b-2 border-dark">
-            {{ currentView.agolaRef }}
-          </td>
+         
         </tr>
       </table>
     </div>

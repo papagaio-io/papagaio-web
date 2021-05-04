@@ -33,7 +33,7 @@
               </center>
             </tr>
             <tr>
-               <h5 class="mb-3 text-xl">Agola organization reference name</h5>
+               <h5 class="mb-3 text-xl">Agola reference name</h5>
               <center>
                 <input
                   class="mb-4 border-l-8 focus:border-papaOrange-600 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4"
@@ -375,13 +375,19 @@ export default {
           { headers: { Authorization: `Bearer ${this.userToken}` } }
         )
         .then((response) => {
-          if (response.data.agolaExists === true) {
-            console.log("I am true hbb");
-            this.forceSubmitConfirmation();
-          }else
-          console.log("I am not true");
-          this.$store.state.createOrganizationBeResponse = response.data.organizationURL;
-          this.$router.push("http://localhost:8080/confirmation");
+        //   if (response.data.agolaExists === true) {
+        //     console.log("I am true hbb");
+        //     this.forceSubmitConfirmation();
+        //   }else
+        // {
+        //    console.log("I am not true");
+        //   this.$store.state.createOrganizationBeResponse = response.data.organizationURL;
+        //   this.$router.push("http://localhost:8080/confirmation");
+          
+        // }
+        this.$store.state.createOrganizationBeResponse = response.data;
+        this.$router.push("http://localhost:8080/confirmation");
+         
         })
         .catch((error) => {
           this.createOrganizationResponse = error.response.data;

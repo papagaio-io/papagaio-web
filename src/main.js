@@ -42,7 +42,7 @@ keycloak.init({
     console.log("I am signed in")
 
     //store auth and dispatch dashboard data
-    store.state.currentUserName = keycloak.tokenParsed.preferred_username;
+    store.state.currentUserName = keycloak.tokenParsed.name;
     store.state.loggedIn = true;
     store.state.currentAuthToken = keycloak.token;
     store.dispatch('getAllOrganizationDashboard');

@@ -237,6 +237,10 @@ export default {
   computed: {
 
   },
+  mounted() {
+    this.checkForUpdates();
+      
+  },
   methods: {
     checkForm() {
       //flush numeric values to store, and then check the period identifier to convert to minutes
@@ -355,6 +359,9 @@ export default {
 
       return result[0];
     },
+    checkForUpdates(){
+      this.$store.dispatch('organizationsDefaultTriggerTimeInDb');
+    }
   },
 };
 </script>
