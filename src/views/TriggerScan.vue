@@ -20,7 +20,8 @@
           <h5 class="text-xl">Current trigger intervals</h5>
           <button
             class="float-right ml-2"
-            @click="editIntervels = !editIntervels"
+            @click="editSectionVisibility()"
+            
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +69,6 @@
           </div>
         </div>
 
-        
         <!-- The editable section -->
         <div v-show="editIntervels">
           <h5 class="mt-5 mb-3 text-xl text-papaOrange-600">Edit intervals</h5>
@@ -193,16 +193,6 @@
             </div>
           </div>
         </div>
-        <!-- </form> -->
-        <!-- <div class="block">
-          <span class="demonstration">Default value</span>
-          <el-slider
-            v-model="value1"
-            :show-tooltip="false"
-            show-stops
-            max="3"
-          ></el-slider>
-        </div> -->
       </div>
     </div>
 
@@ -215,6 +205,19 @@
       </button>
     </div>
   </div>
+  <el-dialog
+    title="Ops, no adminstration privilege"
+    v-model="dialogVisible"
+    width="30%"    
+  >
+    <span>Account has no adminstration privilege to perform an edit.<br> Please contact Open Source circle for more details on this.</span>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogVisible = false">Okay</el-button>
+      </span>
+    </template>
+  </el-dialog>
+
 </template>
 
 <script>
@@ -222,6 +225,8 @@ export default {
   data() {
     return {
       editIntervels: false,
+      userAdministratorPrivilege: "",
+      dialogVisible: false,
 
       tempNumericDefaultRunInterval: null,
       tempNumericFailedRunInterval: null,
@@ -234,12 +239,10 @@ export default {
     };
   },
 
-  computed: {
-
-  },
+  computed: {},
   mounted() {
     this.checkForUpdates();
-      
+    this.isAdminstrator();
   },
   methods: {
     checkForm() {
@@ -252,7 +255,6 @@ export default {
         "setrunFailedDefaultTriggerTime",
         this.tempNumericFailedRunInterval
       );
-
 
       if (
         this.tempDefaultRunIntervelIdentifier === "minute" &&
@@ -320,10 +322,11 @@ export default {
       this.$store.dispatch("setNewOrganizationsDefaultTriggerTimeInDb");
       //response to be handled here
       this.editIntervels = false;
-      //clear temp values for better editing view
+      //clear temp values
       this.tempNumericDefaultRunInterval = null;
       this.tempNumericFailedRunInterval = null;
     },
+
     addOneDefaultIntervel() {
       this.tempNumericDefaultRunInterval++;
     },
@@ -359,12 +362,35 @@ export default {
 
       return result[0];
     },
-    checkForUpdates(){
-      this.$store.dispatch('organizationsDefaultTriggerTimeInDb');
+    checkForUpdates() {
+      this.$store.dispatch("organizationsDefaultTriggerTimeInDb");
+      
+      
+    },
+    //checks to give edit privileges 
+    isAdminstrator(){
+
+      this.$store.dispatch("getAdministratorPrivilegesForIntervelEditInDb").then((response) => {
+        this.userAdministratorPrivilege = response["isAdministrator"]
+         console.log("I assigned this response " + response["isAdministrator"])
+      });
+
+      // return false;
+      return this.userAdministratorPrivilege;
+    },
+    editSectionVisibility(){
+      if(this.isAdminstrator() == true){
+        return this.editIntervels = !this.editIntervels;
+
+      }else if(this.isAdminstrator() == false){
+        return this.dialogVisible = true;
+      }
     }
+    
   },
 };
 </script>
 
 <style>
+
 </style>

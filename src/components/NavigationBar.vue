@@ -24,13 +24,13 @@
             >
           </div> -->
         </div>
-        <button class="float-right ml-4" @click="show = !show">
+        <button class="float-right ml-4 bg-white " @click="show = !show">
           <svg
            v-if ="!show"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
-            fill="white"
+            fill="black"
             class="bi bi-chevron-double-down"
             viewBox="0 0 16 16"
           >
@@ -48,7 +48,7 @@
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
-            fill="white"
+            fill="black"
             class="bi bi-chevron-double-up"
             viewBox="0 0 16 16"
           >
@@ -63,7 +63,7 @@
           </svg>
         </button>
       </div>
-      <transition name="bounce">
+      <transition name="slidedown">
         <div v-show="show">
           <div class="overflow-y-auto overflow-x-hidden flex-grow">
             <ul class="flex flex-col py-6 space-y-1">
@@ -273,21 +273,21 @@ export default {
 </script>
 
 <style>
-.bounce-enter-active {
-  animation: bounce-in 0.4s;
+
+.slidedown-enter-active,
+.slidedown-leave-active {
+  transition: max-height 0.5s ease-in-out;
 }
-.bounce-leave-active {
-  animation: bounce-in 0.4s reverse;
+
+.slidedown-enter-to,
+.slidedown-leave-from {
+  overflow: hidden;
+  max-height: 1000px;
 }
-@keyframes bounce-in {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(1);
-  }
+
+.slidedown-enter-from,
+.slidedown-leave-to {
+  overflow: hidden;
+  max-height: 0;
 }
 </style>

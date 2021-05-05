@@ -17,6 +17,7 @@ export default createStore({
     currentOpenProjectInDashboard: "",
     organizationsDefaultTriggerTime: "",
     runFailedDefaultTriggerTime: "",
+    administratorPrivilegesForIntervelEdit: "",
   },
   getters: {
     getLoginState(state) {
@@ -56,6 +57,9 @@ export default createStore({
     },
     getrunFailedDefaultTriggerTime(state) {
       return state.runFailedDefaultTriggerTime;
+    },
+    getAdministratorPrivilegesForIntervelEdit(state){
+      return state.administratorPrivilegesForIntervelEdit;
     }
 
   },
@@ -91,7 +95,10 @@ export default createStore({
     setrunFailedDefaultTriggerTime(state, payload) {
       state.runFailedDefaultTriggerTime = payload;
     },
-   
+    setAdministratorPrivilegesForIntervelEdit(state,payload){
+      state.administratorPrivilegesForIntervelEdit = payload;
+    }
+
 
   },
   actions: {
@@ -167,6 +174,20 @@ export default createStore({
           console.log(error.data);
         });
     },
+
+    async getAdministratorPrivilegesForIntervelEditInDb({state}){
+      return await  axios
+      .get("https://papagaio-api.sorintdev.it/api/userinfo", {
+        headers: {
+          Authorization: `Bearer ${state.currentAuthToken}`,
+        },
+      })
+      .then(response => {
+        return response.data
+      }).catch((error) => {
+        console.log(error.data)
+      });
+    }
 
 
 
