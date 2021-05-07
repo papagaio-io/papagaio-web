@@ -1,6 +1,6 @@
 <template>
   <div class="w-3/4 container mx-auto">
-    <h4 class="mt-2 mb-2 text-3xl font-bold">Scan Interval</h4>
+    <h4 class="mt-2 mb-2 text-3xl font-bold">Scan Duration</h4>
     <div class="bg-gray-100">
       <div class="p-4 border-t">
         <div class="float-right">
@@ -9,7 +9,8 @@
             title="Scan Interval"
             :width="850"
             trigger="hover"
-            content="Here you can reconfigure the desired default interval runs for the organizations. Plus, the intervals for runs after fails occur."
+            content="Here you can reconfigure the desired default interval runs for the organizations.
+             Plus, the intervals for runs after fails occur."
           >
             <template #reference>
               <el-button>?</el-button>
@@ -17,12 +18,8 @@
           </el-popover>
         </div>
         <div class="flex mb-3">
-          <h5 class="text-xl">Current trigger intervals</h5>
-          <button
-            class="float-right ml-2"
-            @click="editSectionVisibility()"
-            
-          >
+          <h5 class="text-xl">Current trigger durations</h5>
+          <button class="float-right ml-2" @click="editSectionVisibility()">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
@@ -72,7 +69,7 @@
         <!-- The editable section -->
         <div v-show="editIntervels">
           <h5 class="mt-5 mb-3 text-xl text-papaOrange-600">Edit intervals</h5>
-          <hr />
+          <hr class="mt-5 mb-3"/>
           <div class="flex justify-around">
             <div class="p-1 w-1/4 bg-red shadow-lg font-medium">
               Default runs
@@ -208,16 +205,18 @@
   <el-dialog
     title="Ops, no adminstration privilege"
     v-model="dialogVisible"
-    width="30%"    
+    width="30%"
   >
-    <span>Account has no adminstration privilege to perform an edit.<br> Please contact Open Source circle for more details on this.</span>
+    <span
+      >Account has no adminstration privilege to perform an edit.<br />
+      Please contact the adminstator for more details on this.</span
+    >
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="dialogVisible = false">Okay</el-button>
       </span>
     </template>
   </el-dialog>
-
 </template>
 
 <script>
@@ -331,13 +330,17 @@ export default {
       this.tempNumericDefaultRunInterval++;
     },
     decreaseOneDefaultIntervel() {
-      this.tempNumericDefaultRunInterval--;
+      if (this.tempNumericDefaultRunInterval > 0) {
+        this.tempNumericDefaultRunInterval--;
+      }
     },
     addOneFailedIntervel() {
       this.tempNumericFailedRunInterval++;
     },
     decreaseOneFailedIntervel() {
-      this.tempNumericFailedRunInterval--;
+      if (this.tempNumericFailedRunInterval > 0) {
+        this.tempNumericFailedRunInterval--;
+      }
     },
 
     //a function the formats the minutes recieved from BE.
@@ -364,33 +367,31 @@ export default {
     },
     checkForUpdates() {
       this.$store.dispatch("organizationsDefaultTriggerTimeInDb");
-      
-      
     },
-    //checks to give edit privileges 
-    isAdminstrator(){
-
-      this.$store.dispatch("getAdministratorPrivilegesForIntervelEditInDb").then((response) => {
-        this.userAdministratorPrivilege = response["isAdministrator"]
-         console.log("I assigned this response " + response["isAdministrator"])
-      });
+    //checks to give edit privileges
+    isAdminstrator() {
+      this.$store
+        .dispatch("getAdministratorPrivilegesForIntervelEditInDb")
+        .then((response) => {
+          this.userAdministratorPrivilege = response["isAdministrator"];
+          console.log(
+            "I assigned this response " + response["isAdministrator"]
+          );
+        });
 
       // return false;
       return this.userAdministratorPrivilege;
     },
-    editSectionVisibility(){
-      if(this.isAdminstrator() == true){
-        return this.editIntervels = !this.editIntervels;
-
-      }else if(this.isAdminstrator() == false){
-        return this.dialogVisible = true;
+    editSectionVisibility() {
+      if (this.isAdminstrator() == true) {
+        return (this.editIntervels = !this.editIntervels);
+      } else if (this.isAdminstrator() == false) {
+        return (this.dialogVisible = true);
       }
-    }
-    
+    },
   },
 };
 </script>
 
 <style>
-
 </style>

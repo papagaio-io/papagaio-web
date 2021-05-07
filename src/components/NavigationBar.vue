@@ -2,9 +2,9 @@
   <!-- component -->
   <div class="bg-gray-50 text-gray-800">
     <div
-      class="fixed flex flex-col top-0 left-0 w-64 bg-papaOrange-600 h-2/2 shadow-lg"
+      class="fixed flex flex-col top-0 left-0 w-64 bg-papaOrange-600 h-2/2 shadow-2xl"
     >
-      <div class="justify-evenly flex items-center pl-6 h-16 border-b border-white-800">
+      <div class="justify-evenly flex items-center h-16 border-b-2 border-r-2 border-white">
         <!-- <img
           src="../assets/img/anonymousUser.png"
           alt=""
@@ -24,7 +24,7 @@
             >
           </div> -->
         </div>
-        <button class="float-right ml-4 bg-white " @click="show = !show">
+        <button class=" bg-white border-gray-400 " @click="show = !show">
           <svg
            v-if ="!show"
             xmlns="http://www.w3.org/2000/svg"
@@ -199,7 +199,7 @@
                   </span>
                   <span
                     class="ml-2 font-semibold text-sm tracking-wide truncate font-sans"
-                    >Set Scan Interval</span
+                    >Set Scan Duration</span
                   >
                 </a>
               </li>
@@ -276,7 +276,7 @@ export default {
 
 .slidedown-enter-active,
 .slidedown-leave-active {
-  transition: max-height 0.5s ease-in-out;
+  transition: max-height 0.2s ease-in-out;
 }
 
 .slidedown-enter-to,
