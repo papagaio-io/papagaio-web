@@ -17,9 +17,7 @@
     "vue-axios": "^3.2.4",
     "vue-moment": "^4.1.0",
     "vue-router": "^4.0.0-0",
-    "vue-scroll-table": "^0.2.11",
     "vuejs-logger": "^1.5.5",
-    "vuejs-smart-table": "^0.0.7",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {

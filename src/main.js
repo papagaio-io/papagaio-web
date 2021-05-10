@@ -4,6 +4,7 @@ import router from './router'
 import store from './store/index.js'
 import "@/assets/styles/tailwind.css";
 import ElementPlus from 'element-plus';
+// import 'mdb-vue-ui-kit/css/mdb.min.css'
 // import 'element-plus/lib/theme-chalk/index.css';
 import './assets/styles/element-variables.scss'
 import axios from 'axios'
@@ -45,7 +46,7 @@ keycloak.init({
     store.state.currentUserName = keycloak.tokenParsed.name;
     store.state.loggedIn = true;
     store.state.currentAuthToken = keycloak.token;
-    store.dispatch('getAllOrganizationDashboard');
+   // store.dispatch('getAllOrganizationDashboard');
     store.dispatch('organizationsDefaultTriggerTimeInDb');
    
   }

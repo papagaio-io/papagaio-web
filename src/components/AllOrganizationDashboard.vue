@@ -11,16 +11,17 @@
           <th class="px-4 py-3"></th>
           <th class="px-4 py-3">Status</th>
           <th class="px-4 py-3">Name</th>
-            <th class="px-4 py-3">Agola reference</th>
+          <th class="px-4 py-3">Agola reference</th>
           <th class="px-4 py-3">Last success</th>
           <th class="px-4 py-3">Last failure</th>
           <th class="px-4 py-3">Last run duration</th>
           <th class="px-4 py-3">On Agola</th>
+          <th class="px-4 py-3"></th>
         </tr>
 
         <tr
           class="bg-gray-100 text-dark text-center cursor-pointer hover:bg-gray-300"
-          v-for="currentView in getDashboard()"
+          v-for="currentView in $store.getters.showdashBoardData"
           :key="currentView.id"
           @click="navigateForward(currentView.organizationName)"
         >
@@ -43,7 +44,7 @@
           <td class="px-4 py-3 border-b-2 border-dark">
             {{ currentView.organizationName }}
           </td>
-           <td class="px-4 py-3 border-b-2 border-dark">
+          <td class="px-4 py-3 border-b-2 border-dark">
             {{ currentView.agolaRef }}
           </td>
           <td class="px-4 py-3 border-b-2 border-dark">
@@ -55,7 +56,7 @@
           <td class="px-4 py-3 border-b-2 border-dark">
             {{ calculateLastDurationIntervels(currentView.lastRunDuration) }}
           </td>
-          <td class="px-4 py-3 border-b-2 border-dark">
+          <td class="px-4 py-3 border-b-2 border-dark" @click.stop>
             <a
               @click.stop
               :href="currentView['organizationURL']"
@@ -66,7 +67,35 @@
                 src="../assets/img/agola-logo-name.svg"
             /></a>
           </td>
-         
+          <!-- <td @click.stop class="px-4 py-3 border-b-2 border-dark">
+            <button @click="deleteFromAgola(currentView.organizationName)">
+              From Agola
+            </button>
+          </td>
+          <td @click.stop class="px-4 py-3 border-b-2 border-dark">
+            <button @click="deleteFromPapagaio(currentView.organizationName)">
+              From Papa
+            </button>
+          </td> -->
+          <td @click.stop class="px-4 py-3 border-b-2 border-dark">
+            <el-dropdown size="small" split-button type="danger">
+              Delete
+              <template #dropdown>
+                <el-dropdown-menu>
+                  <el-dropdown-item
+                    @click="deleteFromAgola(currentView.organizationName)"
+                  >
+                    Agola & Papagaio</el-dropdown-item
+                  >
+                  <el-dropdown-item
+                    @click="deleteFromPapagaio(currentView.organizationName)"
+                  >
+                    Papagaio
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
+          </td>
         </tr>
       </table>
     </div>
@@ -85,19 +114,21 @@ export default {
   data() {
     return {
       userToken: this.$store.getters.getAuthToken,
-      responseTest: "",
+      // currentDashboardData: "",
+      dropdownOpen: false,
     };
+  },
+  mounted() {
+    this.checkforUpdates();
   },
 
   methods: {
     ...mapActions(["getAllOrganizationDashboard"]),
 
-    getDashboard() {
-      this.responseTest = this.$store.getters.showdashBoardData;
-
-      // console.log(this.responseTest[1].name);
-      return this.responseTest;
-    },
+    // getDashboard() {
+    //   this.currentDashboardData = this.$store.getters.showdashBoardData;
+    //   return this.currentDashboardData;
+    // },
     showSuccessPercentage(recieved) {
       if (typeof recieved === "object" && recieved != null) {
         if (recieved["successRunsPercentage"] <= 20) {
@@ -139,6 +170,20 @@ export default {
     },
     openedOrganization(temp) {
       temp = this.$store.commit("setCurrentOpenOrganizationInDashboard", temp);
+    },
+
+    deleteFromPapagaio(organization) {
+      this.$store.commit("setOrganizationToDelete", organization);
+      this.$store.dispatch("deleteOrganizationFromPapagaio", organization);
+      this.$store.dispatch("getAllOrganizationDashboard");
+    },
+    deleteFromAgola(organization) {
+      this.$store.commit("setOrganizationToDelete", organization);
+      this.$store.dispatch("deleteOrganizationFromAgola", organization);
+      this.$store.dispatch("getAllOrganizationDashboard");
+    },
+    checkforUpdates() {
+      this.$store.dispatch("getAllOrganizationDashboard");
     },
   },
 };

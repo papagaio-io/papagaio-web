@@ -18,6 +18,7 @@ export default createStore({
     organizationsDefaultTriggerTime: "",
     runFailedDefaultTriggerTime: "",
     administratorPrivilegesForIntervelEdit: "",
+    deleteThisOrganization: "",
   },
   getters: {
     getLoginState(state) {
@@ -58,7 +59,7 @@ export default createStore({
     getrunFailedDefaultTriggerTime(state) {
       return state.runFailedDefaultTriggerTime;
     },
-    getAdministratorPrivilegesForIntervelEdit(state){
+    getAdministratorPrivilegesForIntervelEdit(state) {
       return state.administratorPrivilegesForIntervelEdit;
     }
 
@@ -95,8 +96,12 @@ export default createStore({
     setrunFailedDefaultTriggerTime(state, payload) {
       state.runFailedDefaultTriggerTime = payload;
     },
-    setAdministratorPrivilegesForIntervelEdit(state,payload){
+    setAdministratorPrivilegesForIntervelEdit(state, payload) {
       state.administratorPrivilegesForIntervelEdit = payload;
+    },
+    setOrganizationToDelete(state,payload){
+      state.deleteThisOrganization = payload;
+
     }
 
 
@@ -175,22 +180,44 @@ export default createStore({
         });
     },
 
-    async getAdministratorPrivilegesForIntervelEditInDb({state}){
-      return await  axios
-      .get("https://papagaio-api.sorintdev.it/api/userinfo", {
-        headers: {
-          Authorization: `Bearer ${state.currentAuthToken}`,
-        },
-      })
-      .then(response => {
-        return response.data
-      }).catch((error) => {
-        console.log(error.data)
-      });
-    }
+    async getAdministratorPrivilegesForIntervelEditInDb({ state }) {
+      return await axios
+        .get("https://papagaio-api.sorintdev.it/api/userinfo", {
+          headers: {
+            Authorization: `Bearer ${state.currentAuthToken}`,
+          },
+        })
+        .then(response => {
+          return response.data
+        }).catch((error) => {
+          console.log(error.data)
+        });
+    },
+    //deletes the organization from Papagaio only
+    deleteOrganizationFromPapagaio({ state }) {
+      axios
+        .delete(`https://papagaio-api.sorintdev.it/api/deleteorganization/${state.deleteThisOrganization}?internalonly`, {
+          headers: {
+            Authorization: `Bearer ${state.currentAuthToken}`,
+          },
+        })
+        .then(response => {
+          console.log(response.data)
 
-
-
+        });
+    },
+    //deletes the organization from Agola and Papagaio
+    deleteOrganizationFromAgola({ state }) {
+      axios
+        .delete(`https://papagaio-api.sorintdev.it/api/deleteorganization/${state.deleteThisOrganization}`, {
+          headers: {
+            Authorization: `Bearer ${state.currentAuthToken}`,
+          },
+        })
+        .then(response => {
+          console.log(response.data)
+        });
+    },
 
 
   },
