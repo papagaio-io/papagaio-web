@@ -109,7 +109,7 @@ export default {
       // return recieved;
     },
     navigateForward(id) {
-      console.log(id);
+     
       this.openedOrganization(id);
       this.$store.commit("setcurrentDashboardToShow", "RepositoryDashboard");
       this.$store.commit("setProjectURL", id);

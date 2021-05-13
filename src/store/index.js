@@ -6,6 +6,15 @@ export default createStore({
     loggedIn: false,
     currentAuthToken: "",
     currentUserName: "",
+
+    Orgname: "",
+    OrgAgolaRef: "",
+    OrgVisibility: "",
+    OrgGitSourceName: "",
+    OrgBehaviorInclude: "",
+    OrgBehaviorExclude: "",
+    OrgBehaviorType: "",
+
     createOrganizationBeResponse: "",
     allOrganizationsData: "",
     organizationsData: "",
@@ -65,6 +74,17 @@ export default createStore({
 
   },
   mutations: {
+    setNewOrganizationData(state, payload) {
+
+      
+    state.Orgname = payload.tempName,
+    state.OrgAgolaRef = payload.tempAgolaRef,
+    state.OrgVisibility =  payload.tempVisibility,
+    state.OrgGitSourceName  = payload.tempGitSourceName,
+    state.OrgBehaviorInclude = payload.tempBehaviourInclude,
+    state.OrgBehaviorExclude = payload.tempBehaviorInclude,
+    state.OrgBehaviorType = payload.tempBehaviorType
+    },
 
     setcurrentDashboardToShow(state, payload) {
       state.currentDashboardToShow = payload;
@@ -99,7 +119,7 @@ export default createStore({
     setAdministratorPrivilegesForIntervelEdit(state, payload) {
       state.administratorPrivilegesForIntervelEdit = payload;
     },
-    setOrganizationToDelete(state,payload){
+    setOrganizationToDelete(state, payload) {
       state.deleteThisOrganization = payload;
 
     }
@@ -107,6 +127,80 @@ export default createStore({
 
   },
   actions: {
+
+    async newOrganization({ state }) { //<-------- set this function to "async"
+      return await axios //<------------ return your axios call here, and await 
+        .post(
+          "https://papagaio-api.sorintdev.it/api/createorganization",
+          {
+
+            name: state.Orgname,
+            agolaRef: state.OrgAgolaRef,
+            visibility: state.OrgVisibility,
+            gitSourceName: state.OrgGitSourceName,
+            behaviourInclude: state.OrgBehaviorInclude,
+            behaviourExclude: state.OrgBehaviorExclude,
+            behaviourType: state.OrgBehaviorType,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${state.currentAuthToken}`,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response.data);
+          return response //<--------- return the response here
+        })
+        .catch((error) => {
+          console.log(error.data);
+        });
+    },
+
+    //force create organization in case already exists in Agola
+    async forceNewOrganization({ state }) { 
+      return await axios 
+        .post(
+          "https://papagaio-api.sorintdev.it/api/createorganization?force",
+          {
+
+            name: state.Orgname,
+            agolaRef: state.OrgAgolaRef,
+            visibility: state.OrgVisibility,
+            gitSourceName: state.OrgGitSourceName,
+            behaviourInclude: state.OrgBehaviorInclude,
+            behaviourExclude: state.OrgBehaviorExclude,
+            behaviourType: state.OrgBehaviorType,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${state.currentAuthToken}`,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response.data);
+          return response 
+        })
+        .catch((error) => {
+          console.log(error.data);
+        });
+    },
+
+    //show the current available git sources
+    async getGitSourceId({ state }) {
+      return await axios
+        .get("https://papagaio-api.sorintdev.it/api/gitsources", {
+          headers: {
+            Authorization: `Bearer ${state.currentAuthToken}`,
+          },
+        })
+        .then(response => {
+          return response.data
+        }).catch((error) => {
+          console.log(error.data)
+        });
+    },
 
     getAllOrganizationDashboard({ commit, state }) {
       axios

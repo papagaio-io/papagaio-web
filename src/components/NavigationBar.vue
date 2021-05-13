@@ -4,7 +4,9 @@
     <div
       class="fixed flex flex-col top-0 left-0 w-64 bg-papaOrange-600 h-2/2 shadow-2xl"
     >
-      <div class="justify-evenly flex items-center h-16 border-b-2 border-r-2 border-white">
+      <div
+        class="justify-evenly flex items-center h-16 border-b-4 border-gray-200"
+      >
         <!-- <img
           src="../assets/img/anonymousUser.png"
           alt=""
@@ -24,41 +26,36 @@
             >
           </div> -->
         </div>
-        <button class=" bg-white border-gray-400 " @click="show = !show">
+        <button
+          class="bg-gray-200 border border-gray-900"
+          @click="show = !show"
+        >
           <svg
-           v-if ="!show"
+            v-if="!show"
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="black"
-            class="bi bi-chevron-double-down"
+            width="20"
+            height="20"
+            fill="currentColor"
+            class="bi bi-list"
             viewBox="0 0 16 16"
           >
             <path
               fill-rule="evenodd"
-              d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
-            />
-            <path
-              fill-rule="evenodd"
-              d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
             />
           </svg>
+
           <svg
           v-if="show"
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            fill="black"
-            class="bi bi-chevron-double-up"
+            width="20"
+            height="20"
+            fill="currentColor"
+            class="bi bi-x-lg"
             viewBox="0 0 16 16"
           >
             <path
-              fill-rule="evenodd"
-              d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708l6-6z"
-            />
-            <path
-              fill-rule="evenodd"
-              d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"
+              d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"
             />
           </svg>
         </button>
@@ -98,7 +95,7 @@
                   </span>
                   <span
                     class="ml-2 font-semibold text-sm tracking-wide truncate font-sans"
-                    >Overview</span
+                    >Quick Intro</span
                   >
                 </a>
               </li>
@@ -273,7 +270,6 @@ export default {
 </script>
 
 <style>
-
 .slidedown-enter-active,
 .slidedown-leave-active {
   transition: max-height 0.2s ease-in-out;

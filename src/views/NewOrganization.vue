@@ -33,7 +33,7 @@
               </center>
             </tr>
             <tr>
-               <h5 class="mb-3 text-xl">Agola reference name</h5>
+              <h5 class="mb-3 text-xl">Agola reference name</h5>
               <center>
                 <input
                   class="mb-4 border-l-8 focus:border-papaOrange-600 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4"
@@ -42,7 +42,6 @@
                   v-model="agolaRefName"
                 />
               </center>
-
             </tr>
 
             <tr>
@@ -248,12 +247,12 @@
     </div>
   </form>
   <el-dialog
-    title="Organization Already Exists"
+    title="Organization already exists on Agola"
     v-model="dialogVisible"
     width="30%"
     :before-close="handleClose"
   >
-    <span>Force create the organization? </span>
+    <span>Do you want to force create to add it on Papagaio ? </span>
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="dialogVisible = false">Cancel</el-button>
@@ -276,7 +275,7 @@ export default {
       createOrgError: null,
       orgIsPrivate: "false",
       orgName: null,
-      agolaRefName: null, //not validate yet
+      agolaRefName: null, //not validated yet
       selectedSourceID: null,
       gitSourceResponse: [],
       createOrganizationResponse: null,
@@ -285,12 +284,7 @@ export default {
       showBehaviorAddButton: true,
       dialogVisible: false,
 
-      repositoriesTable: [
-        // {
-        //   repositoriesInclude: "*",
-        //   repositoriesExclude: "",
-        // },
-      ],
+      repositoriesTable: [],
 
       behaviorTypepicked: "wildcard",
 
@@ -301,33 +295,10 @@ export default {
   },
 
   mounted() {
-    this.getSourceId();
+    this.gitSource();
   },
 
   methods: {
-    checkBehavior() {
-      this.errors = [];
-
-      if (!this.behaviorTypepicked) {
-        this.errors.push(
-          "Choose a 'behavior type', or remove the behavior section"
-        );
-      }
-
-      //'behavior include' must have parameter if default is changed
-      if (this.repositoriesTable[0].repositoriesInclude === "") {
-        this.errors.push(
-          "Provide an 'include parameter' for the behavior, or remove the behavior section "
-        );
-      }
-
-      if (!this.errors.length) {
-        this.behaviorIncludeTempValue = this.repositoriesTable[0].repositoriesInclude;
-        this.behaviorExcludeTempValue = this.repositoriesTable[0].repositoriesExclude;
-        this.behaviorTypeTempValue = this.behaviorTypepicked;
-        this.submitForm();
-      }
-    },
 
     checkForm: function (e) {
       this.errors = [];
@@ -357,64 +328,94 @@ export default {
       e.preventDefault();
     },
 
-    submitForm() {
+    checkBehavior() {
       this.errors = [];
 
-      axios
-        .post(
-          "https://papagaio-api.sorintdev.it/api/createorganization",
-          {
-            name: this.orgName,
-            agolaRef: this.agolaRefName,
-            visibility: this.orgIsPrivate,
-            gitSourceName: this.selectedSourceID,
-            behaviourInclude: this.behaviorIncludeTempValue,
-            behaviourExclude: this.behaviorExcludeTempValue,
-            behaviourType: this.behaviorTypeTempValue,
-          },
-          { headers: { Authorization: `Bearer ${this.userToken}` } }
-        )
+      if (!this.behaviorTypepicked) {
+        this.errors.push(
+          "Choose a 'behavior type', or remove the behavior section"
+        );
+      }
+
+      //'behavior include' must have parameter if default is changed
+      if (this.repositoriesTable[0].repositoriesInclude === "") {
+        this.errors.push(
+          "Provide an 'include parameter' for the behavior, or remove the behavior section "
+        );
+      }
+
+      if (!this.errors.length) {
+        this.behaviorIncludeTempValue = this.repositoriesTable[0].repositoriesInclude;
+        this.behaviorExcludeTempValue = this.repositoriesTable[0].repositoriesExclude;
+        this.behaviorTypeTempValue = this.behaviorTypepicked;
+        this.submitForm();
+      }
+    },
+
+    submitForm() {
+      this.errors = [];
+      
+
+      this.$store.commit("setNewOrganizationData", {
+        tempName: this.orgName,
+        tempAgolaRef: this.agolaRefName,
+        tempVisibility: this.orgIsPrivate,
+        tempGitSourceName: this.selectedSourceID,
+        tempBehaviourInclude: this.behaviorIncludeTempValue,
+        tempBehaviorInclude: this.behaviorExcludeTempValue,
+        tempBehaviorType: this.behaviorTypeTempValue,
+      });
+
+      this.$store
+        .dispatch("newOrganization")
         .then((response) => {
-        //   if (response.data.agolaExists === true) {
-        //     console.log("I am true hbb");
-        //     this.forceSubmitConfirmation();
-        //   }else
-        // {
-        //    console.log("I am not true");
-        //   this.$store.state.createOrganizationBeResponse = response.data.organizationURL;
-        //   this.$router.push("http://localhost:8080/confirmation");
+          if (response.data["errorCode"] === "AGOLA_REF_NOT_VALID") {
+            this.errors.push("Invalid Agola reference name");
+          } else if (response.data["errorCode"] === "NO_ERROR") {
+            this.$store.state.createOrganizationBeResponse =
+              response.data["organizationURL"];
+            this.$router.push("http://localhost:8080/confirmation");
+          } else if (response.data["errorCode"] === "ORG_GIT_NOT_FOUND") {
+            this.createOrganizationResponse = response.data["errorCode"];
+            this.errors.push("Organization's git could not be found");
+          } else if (response.data["errorCode"] === "ORG_AGOLA_EXISTS") {
+            this.forceSubmitConfirmation();
+          }else if (response.data["errorCode"] === "ORG_PAPAGAIO_EXISTS") 
+          {
+            this.errors.push("Organization already exists in Papagaio");
+          }
           
-        // }
-        this.$store.state.createOrganizationBeResponse = response.data;
-        this.$router.push("http://localhost:8080/confirmation");
-         
+          else {
+            this.errors.push(response.data["errorCode"]);
+          }
         })
         .catch((error) => {
           this.createOrganizationResponse = error.response.data;
           this.errors.push(error.response.data);
         });
     },
+
     forceSubmitConfirmation() {
       this.dialogVisible = true;
     },
+
     forceSubmitForm() {
-      axios
-        .post(
-          "https://papagaio-api.sorintdev.it/api/createorganization?force",
-          {
-            name: this.orgName,
-            agolaRef: this.agolaRefName,
-            visibility: this.orgIsPrivate,
-            gitSourceName: this.selectedSourceID,
-            behaviourInclude: this.behaviorIncludeTempValue,
-            behaviourExclude: this.behaviorExcludeTempValue,
-            behaviourType: this.behaviorTypeTempValue,
-          },
-          { headers: { Authorization: `Bearer ${this.userToken}` } }
-        )
+      this.errors = [];
+
+      this.$store.commit("setNewOrganizationData", {
+        tempName: this.orgName,
+        tempAgolaRef: this.agolaRefName,
+        tempVisibility: this.orgIsPrivate,
+        tempGitSourceName: this.selectedSourceID,
+        tempBehaviourInclude: this.behaviorIncludeTempValue,
+        tempBehaviorInclude: this.behaviorExcludeTempValue,
+        tempBehaviorType: this.behaviorTypeTempValue,
+      });
+      this.$store
+        .dispatch("forceNewOrganization")
         .then((response) => {
-          console.log("I reached the response of forced submit 2 ");
-          this.$store.state.createOrganizationBeResponse = response.data.organizationURL;
+          this.$store.state.createOrganizationBeResponse =
+            response.data["organizationURL"];
           this.$router.push("http://localhost:8080/confirmation");
         })
         .catch((error) => {
@@ -423,14 +424,10 @@ export default {
         });
     },
 
-    getSourceId() {
-      axios
-        .get("https://papagaio-api.sorintdev.it/api/gitsources", {
-          headers: { Authorization: `Bearer ${this.userToken}` },
-        })
-        .then((response) => {
-          this.gitSourceResponse = response.data;
-        });
+    gitSource() {
+      this.$store.dispatch("getGitSourceId").then((response) => {
+        this.gitSourceResponse = response;
+      });
     },
 
     addRepositoriesField() {

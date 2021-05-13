@@ -16,14 +16,14 @@
           <th class="px-4 py-3">Last failure</th>
           <th class="px-4 py-3">Last run duration</th>
           <th class="px-4 py-3">On Agola</th>
-          <th class="px-4 py-3"></th>
+          <th class="px-4 py-3">Delete from</th>
         </tr>
 
         <tr
           class="bg-gray-100 text-dark text-center cursor-pointer hover:bg-gray-300"
           v-for="currentView in $store.getters.showdashBoardData"
           :key="currentView.id"
-          @click="navigateForward(currentView.organizationName)"
+          @click="navigateForward(currentView.agolaRef)"
         >
           <td class="px-4 py-3 border-b-2 border-dark">
             <img
@@ -78,20 +78,32 @@
             </button>
           </td> -->
           <td @click.stop class="px-4 py-3 border-b-2 border-dark">
-            <el-dropdown size="small" split-button type="danger">
-              Delete
+            <el-dropdown split-button size= "small" type="danger">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="8"
+                height="8"
+                fill="currentColor"
+                class="bi bi-three-dots-vertical"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
+                />
+              </svg>
               <template #dropdown>
                 <el-dropdown-menu>
+                  
                   <el-dropdown-item
-                    @click="deleteFromAgola(currentView.organizationName)"
-                  >
-                    Agola & Papagaio</el-dropdown-item
-                  >
-                  <el-dropdown-item
-                    @click="deleteFromPapagaio(currentView.organizationName)"
+                    @click="deleteFromPapagaio(currentView.agolaRef)"
                   >
                     Papagaio
                   </el-dropdown-item>
+                  <el-dropdown-item
+                    @click="deleteFromAgola(currentView.agolaRef)"
+                  >
+                    Papagaio & Agola </el-dropdown-item
+                  >
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
@@ -173,14 +185,23 @@ export default {
     },
 
     deleteFromPapagaio(organization) {
+      let self = this;
       this.$store.commit("setOrganizationToDelete", organization);
       this.$store.dispatch("deleteOrganizationFromPapagaio", organization);
-      this.$store.dispatch("getAllOrganizationDashboard");
+      setTimeout(function () {
+         self.$store.dispatch("getAllOrganizationDashboard");
+      }, 1000);
+
+     
     },
     deleteFromAgola(organization) {
+      let self = this;
       this.$store.commit("setOrganizationToDelete", organization);
       this.$store.dispatch("deleteOrganizationFromAgola", organization);
-      this.$store.dispatch("getAllOrganizationDashboard");
+      setTimeout(function () {
+         self.$store.dispatch("getAllOrganizationDashboard");
+      }, 1000);
+
     },
     checkforUpdates() {
       this.$store.dispatch("getAllOrganizationDashboard");

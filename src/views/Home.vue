@@ -9,7 +9,7 @@
     <div class="bg-papaDark-700 pt-2">
       <div class="heroBody">
         <h4 class="mt-2 text-xl font-bold text-white">
-          Extention of
+          Plugin of
           <a class=" " href="https://agola.io" target="_blank" 
             ><img
               class="inline-block w-20"
