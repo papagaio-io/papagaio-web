@@ -222,6 +222,7 @@
           type="error"
           :closable="false"
           show-icon
+          size="large"
         >
           <ul>
             <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
@@ -264,7 +265,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import { ElLoading } from "element-plus";
 export default {
   components: {},
   name: "neworaganization",
@@ -275,7 +276,7 @@ export default {
       createOrgError: null,
       orgIsPrivate: "false",
       orgName: null,
-      agolaRefName: null, //not validated yet
+      agolaRefName: null,
       selectedSourceID: null,
       gitSourceResponse: [],
       createOrganizationResponse: null,
@@ -299,8 +300,9 @@ export default {
   },
 
   methods: {
-
     checkForm: function (e) {
+      //  let loadingInstance = ElLoading.service();
+
       this.errors = [];
 
       if (!this.orgName) {
@@ -353,8 +355,12 @@ export default {
     },
 
     submitForm() {
+      let loadingInstance = ElLoading.service({
+        text: "Adding Organization",
+        spinner: "el-icon-loading",
+        background: "rgba(244, 137, 36, 0.1)",
+      });
       this.errors = [];
-      
 
       this.$store.commit("setNewOrganizationData", {
         tempName: this.orgName,
@@ -369,6 +375,7 @@ export default {
       this.$store
         .dispatch("newOrganization")
         .then((response) => {
+          loadingInstance.close();
           if (response.data["errorCode"] === "AGOLA_REF_NOT_VALID") {
             this.errors.push("Invalid Agola reference name");
           } else if (response.data["errorCode"] === "NO_ERROR") {
@@ -380,12 +387,9 @@ export default {
             this.errors.push("Organization's git could not be found");
           } else if (response.data["errorCode"] === "ORG_AGOLA_EXISTS") {
             this.forceSubmitConfirmation();
-          }else if (response.data["errorCode"] === "ORG_PAPAGAIO_EXISTS") 
-          {
+          } else if (response.data["errorCode"] === "ORG_PAPAGAIO_EXISTS") {
             this.errors.push("Organization already exists in Papagaio");
-          }
-          
-          else {
+          } else {
             this.errors.push(response.data["errorCode"]);
           }
         })
@@ -400,6 +404,13 @@ export default {
     },
 
     forceSubmitForm() {
+      //to close confirmation dialog
+      this.dialogVisible = false;
+      let loadingInstance = ElLoading.service({
+        text: "Adding Organization",
+        spinner: "el-icon-loading",
+        background: "rgba(244, 137, 36, 0.1)",
+      });
       this.errors = [];
 
       this.$store.commit("setNewOrganizationData", {
@@ -414,6 +425,7 @@ export default {
       this.$store
         .dispatch("forceNewOrganization")
         .then((response) => {
+          loadingInstance.close();
           this.$store.state.createOrganizationBeResponse =
             response.data["organizationURL"];
           this.$router.push("http://localhost:8080/confirmation");

@@ -1,34 +1,17 @@
 <template>
   <div class="w-2/3 container mx-auto">
-    <h4 class="mt-2 mb-2 text-3xl font-bold">Confirmation</h4>
-    <!-- Body  -->
-    <div class="bg-papaDark-700 p-8">
-      <h4 class="text-base font-bold sm:max-w-4xl md:text-xl text-white">
-        Organization has been added successfully to Agola
-      </h4>
+    <h4 class="mt-2 mb-2 text-3xl font-bold">
+      Organization has been successfully added
+    </h4>
 
-      <div class="panel mt-3 mb-2 bg-gray-100">
-        <div class="mb-3 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"></div>
-        <div class="lg:text-center">
-          <h2 class="text-base xl:inline font-semibold tracking-wide">
-            <!-- remove this  -->
-            Redirect using this link
-          </h2>
-          <p
-            class="mt-3 mb-3 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl"
-          >
-            <a v-bind:href="BeResponse" target="_blank" > {{ BeResponse }} </a>
-          </p>
-
-          <!-- <p
-            class="mt-3 mb-6 text-base font-medium sm:max-w-xl sm:mx-auto md:mt-2 md:text-xl"
-          >
-            {Test} This is a dummy content for previewing purposes
-          </p> -->
-        </div>
-      </div>
+    <div class="p-1 w-full bg-red shadow-lg font-medium bg-gray-100">
+      URL on Agola
+      <h2
+        class="bg-white h-9 text-dark p-1 font-medium text-2xl lg:text-center"
+      >
+        <a v-bind:href="BeResponse" target="_blank"> {{ BeResponse }} </a>
+      </h2>
     </div>
-
     <div class="sm:mt-0 sm:ml-3">
       <button
         class="px-10 py-3 font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white float-right mt-5 border-solid border-2 border-white"
@@ -55,7 +38,6 @@ export default {
     BeResponse() {
       // this.projectOnAgole = this.$store.state.createOrganizationBeResponse;
       return this.$store.getters.getCreateOrganizationBeURLResponse;
-       
     },
   },
   methods: {},
