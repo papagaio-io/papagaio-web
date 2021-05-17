@@ -38,7 +38,7 @@
             </svg>
           </button>
         </div>
-        <div v-show="editIntervels != true" class="flex justify-around">
+        <div  class="flex justify-around">
           <div class="p-1 w-1/3 bg-red shadow-lg font-medium">
             Default runs
             <h2

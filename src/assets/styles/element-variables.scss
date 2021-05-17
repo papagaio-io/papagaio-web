@@ -1,7 +1,10 @@
 /* theme color */
-$--color-primary: #2a7952;
+$--color-primary: #de650e;
+
 
 /* icon font path, required */
 $--font-path: '~element-plus/lib/theme-chalk/fonts';
+
+
 
 @import "~element-plus/packages/theme-chalk/src/index";

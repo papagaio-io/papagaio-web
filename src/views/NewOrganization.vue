@@ -1,4 +1,5 @@
 <template>
+
   <form @submit.prevent="checkForm" action="" method="post">
     <div class="w-3/4 container mx-auto">
       <h4 class="mt-2 mb-2 text-3xl font-bold">Add a New Organization</h4>
@@ -101,6 +102,8 @@
                   </svg>
                 </div>
               </div>
+
+              
             </tr>
 
             <!-- Showing corresponding URL-->
@@ -119,6 +122,7 @@
               </div>
             </tr>
           </table>
+          
         </div>
 
         <!-- Behavior Section -->
@@ -158,7 +162,7 @@
           </tr>
           <table style="width: 100%">
             <button
-              class="btn btn-red text-white float-right mt-3 hover:bg-papaDark-700 border-solid border-2 border-white"
+              class="btn btn-red text-white float-right mt-3 hover:bg-red-400 border-solid border-2 border-white"
               @click="deleteRepositoriesField(counter)"
             >
               X
@@ -216,16 +220,17 @@
           </table>
         </div>
       </div>
-      <p class="mt-1" v-if="errors.length">
+      <p class="mt-1 " v-if="errors.length">
         <el-alert
           title="Please check the following error(s) and try again :"
           type="error"
+          effect="dark"
           :closable="false"
           show-icon
-          size="large"
+          
         >
           <ul>
-            <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+            <li class= "text-sm mb-1" v-for="error in errors" v-bind:key="error">{{ error }}</li>
           </ul>
         </el-alert>
       </p>
@@ -251,16 +256,17 @@
     title="Organization already exists on Agola"
     v-model="dialogVisible"
     width="30%"
-    :before-close="handleClose"
+    
   >
-    <span>Do you want to force create to add it on Papagaio ? </span>
+    <span>Do you want to force create to add it to Papagaio ?</span>
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="dialogVisible = false">Cancel</el-button>
         <el-button type="primary" @click="forceSubmitForm">Yes</el-button>
+        <el-button @click="dialogVisible = false">Cancel</el-button>
       </span>
     </template>
   </el-dialog>
+  
   <!-- <p> test usertoken from new org {{userToken}} </p> -->
 </template>
 
@@ -459,6 +465,47 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.spinner {
+  width: 40px;
+  height: 40px;
+
+  position: relative;
+  margin: 100px auto;
+}
+
+.double-bounce1, .double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #333;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
 </style>
 
 

@@ -4,8 +4,8 @@
       Organization has been successfully added
     </h4>
 
-    <div class="p-1 w-full bg-red shadow-lg font-medium bg-gray-100">
-      URL on Agola
+    <div class="p-2 w-full bg-red shadow-lg font-medium bg-gray-100">
+      <h1 class = "ml-1 text-lg">URL on Agola</h1>
       <h2
         class="bg-white h-9 text-dark p-1 font-medium text-2xl lg:text-center"
       >

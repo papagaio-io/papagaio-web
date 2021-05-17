@@ -69,35 +69,7 @@
           </td>
 
           <td @click.stop class="px-4 py-3 border-b-2 border-dark">
-            <!-- <el-dropdown split-button="false" size="small" type="danger">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="8"
-                height="8"
-                fill="currentColor"
-                class="bi bi-three-dots-vertical"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
-                />
-              </svg>
-              <template #dropdown>
-                <el-dropdown-menu>
-                  <el-dropdown-item
-                    @click="deleteFromPapagaio(currentView.agolaRef)"
-                  >
-                    Papagaio
-                  </el-dropdown-item>
-                  <el-dropdown-item
-                    @click="deleteFromAgola(currentView.agolaRef)"
-                  >
-                    Papagaio & Agola
-                  </el-dropdown-item>
-                </el-dropdown-menu>
-              </template>
-            </el-dropdown> -->
-
+      
             <el-dropdown>
               <el-button size="small" type="danger">
                 <svg
