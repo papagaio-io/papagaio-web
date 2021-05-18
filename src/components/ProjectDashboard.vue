@@ -39,7 +39,7 @@
           <td class="px-4 py-3 border-b-2 border-dark">
             <!-- {{ showProjectSuccessRunPercentage(currentView)}} -->
             <img
-              class="w-10 inline-block align-middle"
+              class="w-12 inline-block align-middle"
               :src="showProjectSuccessRunPercentage(currentView)"
               alt="Organization Icon"
             />
@@ -95,21 +95,20 @@ export default {
     showProjectSuccessRunPercentage(recieved) {
       if (typeof recieved === "object" && recieved["worstReport"] !== null) {
         if (recieved["worstReport"]["successRunsPercentage"] <= 20) {
-          return require("../assets/img/5.png");
+          return require("../assets/img/1.png");
         } else if (recieved["worstReport"]["successRunsPercentage"] <= 40) {
-          return require("../assets/img/4.png");
+          return require("../assets/img/2.png");
         } else if (recieved["worstReport"]["successRunsPercentage"] <= 60) {
           return require("../assets/img/3.png");
         } else if (recieved["worstReport"]["successRunsPercentage"] <= 80) {
-          return require("../assets/img/2.png");
+          return require("../assets/img/4.png");
         } else if (recieved["worstReport"]["successRunsPercentage"] <= 100) {
-          return require("../assets/img/1.png");
+          return require("../assets/img/5.png");
         }
-      } else return require("../assets/img/1.png");
+      } else return require("../assets/img/5.png");
       // return recieved;
     },
     navigateForward(id) {
-     
       this.openedOrganization(id);
       this.$store.commit("setcurrentDashboardToShow", "RepositoryDashboard");
       this.$store.commit("setProjectURL", id);

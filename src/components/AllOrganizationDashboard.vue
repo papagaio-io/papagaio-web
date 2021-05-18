@@ -16,7 +16,7 @@
           <th class="px-4 py-3">Last failure</th>
           <th class="px-4 py-3">Last run duration</th>
           <th class="px-4 py-3">On Agola</th>
-          <th class="px-4 py-3">Delete from</th>
+          <th class="px-4 py-3">Delete</th>
         </tr>
 
         <tr
@@ -34,7 +34,7 @@
           </td>
           <td class="border-b-2 border-dark">
             <img
-              class="w-10 inline-block align-middle"
+              class="w-12 inline-block align-middle"
               :src="showSuccessPercentage(currentView.worstReport)"
               alt="Organization Icon"
             />
@@ -69,7 +69,6 @@
           </td>
 
           <td @click.stop class="px-4 py-3 border-b-2 border-dark">
-      
             <el-dropdown>
               <el-button size="small" type="danger">
                 <svg
@@ -94,7 +93,7 @@
                   <el-dropdown-item
                     @click="deleteFromPapagaio(currentView.agolaRef)"
                   >
-                    Papagaio
+                    Papagaio only
                   </el-dropdown-item>
                   <el-dropdown-item
                     @click="deleteFromAgola(currentView.agolaRef)"
@@ -123,7 +122,7 @@ export default {
   data() {
     return {
       userToken: this.$store.getters.getAuthToken,
-      // currentDashboardData: "",
+
       dropdownOpen: false,
     };
   },
@@ -134,25 +133,21 @@ export default {
   methods: {
     ...mapActions(["getAllOrganizationDashboard"]),
 
-    // getDashboard() {
-    //   this.currentDashboardData = this.$store.getters.showdashBoardData;
-    //   return this.currentDashboardData;
-    // },
     showSuccessPercentage(recieved) {
       if (typeof recieved === "object" && recieved != null) {
         if (recieved["successRunsPercentage"] <= 20) {
-          return require("../assets/img/5.png");
+          return require("../assets/img/1.png");
         } else if (recieved["successRunsPercentage"] <= 40) {
-          return require("../assets/img/4.png");
+          return require("../assets/img/2.png");
         } else if (recieved["successRunsPercentage"] <= 60) {
           return require("../assets/img/3.png");
         } else if (recieved["successRunsPercentage"] <= 80) {
-          return require("../assets/img/2.png");
+          return require("../assets/img/4.png");
         } else if (recieved["successRunsPercentage"] <= 100) {
-          return require("../assets/img/1.png");
+          return require("../assets/img/5.png");
         }
         // return recieved["successRunsPercentage"] + "%";
-      } else return require("../assets/img/1.png");
+      } else return require("../assets/img/5.png");
       // return recieved;
     },
 

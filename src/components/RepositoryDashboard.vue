@@ -46,9 +46,8 @@
             {{ currentView["name"] }}
           </td>
           <td class="px-4 py-3 border-b-2 border-dark">
-            <!-- {{ currentView["report"]["successRunsPercentage"] }} -->
             <img
-              class="w-10 inline-block align-middle"
+              class="w-12 inline-block align-middle"
               :src="showSuccessPercentage(currentView)"
               alt="Organization Icon"
             />
@@ -109,18 +108,18 @@ export default {
       if (typeof recieved === "object" && recieved != null) {
     
         if (recieved["report"]["successRunsPercentage"] <= 20) {
-          return require("../assets/img/5.png");
+          return require("../assets/img/1.png");
         } else if (recieved["report"]["successRunsPercentage"] <= 40) {
-          return require("../assets/img/4.png");
+          return require("../assets/img/2.png");
         } else if (recieved["report"]["successRunsPercentage"] <= 60) {
           return require("../assets/img/3.png");
         } else if (recieved["report"]["successRunsPercentage"] <= 80) {
-          return require("../assets/img/2.png");
+          return require("../assets/img/4.png");
         } else if (recieved["report"]["successRunsPercentage"] <= 100) {
-          return require("../assets/img/1.png");
+          return require("../assets/img/5.png");
         }
         // return recieved["successRunsPercentage"] + "%";
-      } else return require("../assets/img/1.png");
+      } else return require("../assets/img/5.png");
       // return recieved;
     },
 

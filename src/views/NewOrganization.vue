@@ -1,5 +1,4 @@
 <template>
-
   <form @submit.prevent="checkForm" action="" method="post">
     <div class="w-3/4 container mx-auto">
       <h4 class="mt-2 mb-2 text-3xl font-bold">Add a New Organization</h4>
@@ -102,8 +101,6 @@
                   </svg>
                 </div>
               </div>
-
-              
             </tr>
 
             <!-- Showing corresponding URL-->
@@ -122,7 +119,6 @@
               </div>
             </tr>
           </table>
-          
         </div>
 
         <!-- Behavior Section -->
@@ -161,12 +157,30 @@
             <h5 class="mb-3 text-xl">Repositories</h5>
           </tr>
           <table style="width: 100%">
-            <button
-              class="btn btn-red text-white float-right mt-3 hover:bg-red-400 border-solid border-2 border-white"
+            <el-button
+              size="small"
+              type="danger"
+              key=""
               @click="deleteRepositoriesField(counter)"
+              class="float-right"
             >
-              X
-            </button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-trash"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                />
+              </svg>
+            </el-button>
 
             <label class="font-bold ml-2">Filter by name</label>
             <tr>
@@ -220,17 +234,18 @@
           </table>
         </div>
       </div>
-      <p class="mt-1 " v-if="errors.length">
+      <p class="mt-1" v-if="errors.length">
         <el-alert
           title="Please check the following error(s) and try again :"
           type="error"
           effect="dark"
           :closable="false"
           show-icon
-          
         >
           <ul>
-            <li class= "text-sm mb-1" v-for="error in errors" v-bind:key="error">{{ error }}</li>
+            <li class="text-sm mb-1" v-for="error in errors" v-bind:key="error">
+              {{ error }}
+            </li>
           </ul>
         </el-alert>
       </p>
@@ -242,23 +257,23 @@
           Create
         </button>
       </div>
+     
       <!-- to be removed -->
-      <div
+      <!-- <div
         v-if="createOrgError"
         class="mb-10 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
         role="alert"
       >
         <span class="block sm:inline">{{ createOrgError }}</span>
-      </div>
+      </div> -->
     </div>
   </form>
   <el-dialog
     title="Organization already exists on Agola"
     v-model="dialogVisible"
     width="30%"
-    
   >
-    <span>Do you want to force create to add it to Papagaio ?</span>
+    <span>Do you want to add it to Papagaio ?</span>
     <template #footer>
       <span class="dialog-footer">
         <el-button type="primary" @click="forceSubmitForm">Yes</el-button>
@@ -266,7 +281,7 @@
       </span>
     </template>
   </el-dialog>
-  
+
   <!-- <p> test usertoken from new org {{userToken}} </p> -->
 </template>
 
@@ -465,47 +480,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.spinner {
-  width: 40px;
-  height: 40px;
 
-  position: relative;
-  margin: 100px auto;
-}
-
-.double-bounce1, .double-bounce2 {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-color: #333;
-  opacity: 0.6;
-  position: absolute;
-  top: 0;
-  left: 0;
-  
-  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
-  animation: sk-bounce 2.0s infinite ease-in-out;
-}
-
-.double-bounce2 {
-  -webkit-animation-delay: -1.0s;
-  animation-delay: -1.0s;
-}
-
-@-webkit-keyframes sk-bounce {
-  0%, 100% { -webkit-transform: scale(0.0) }
-  50% { -webkit-transform: scale(1.0) }
-}
-
-@keyframes sk-bounce {
-  0%, 100% { 
-    transform: scale(0.0);
-    -webkit-transform: scale(0.0);
-  } 50% { 
-    transform: scale(1.0);
-    -webkit-transform: scale(1.0);
-  }
-}
 </style>
 
 
