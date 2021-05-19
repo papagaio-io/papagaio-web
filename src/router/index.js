@@ -11,8 +11,8 @@ import store from '../store/index.js'
 
 const preventRoutes = {
   beforeEach: (to, from, next) => {
-    console.log(store.state.getLoginState);
-    if (store.state.getLoginState === true) {
+    console.log(store.getters.getLoginState);
+    if (store.getters.getLoginState === "true") {
       console.log("i reached if")
       next();
     } else {

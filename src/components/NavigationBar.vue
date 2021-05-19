@@ -2,7 +2,7 @@
   <!-- component -->
   <div class="bg-gray-50 text-gray-800">
     <div
-      class="fixed flex flex-col top-0 left-0 w-64 bg-papaOrange-600 h-2/2 shadow-2xl"
+      class="fixed flex flex-col top-0 left-0 w-64 bg-papaOrange-600 h-2/2 shadow-lg"
     >
       <div
         class="justify-evenly flex items-center h-16 border-b-4 border-gray-200"

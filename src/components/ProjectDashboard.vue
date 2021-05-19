@@ -25,7 +25,7 @@
       <table class="w-11/12 mx-auto text-dark border mr-16">
         <tr class="text-center border-gray-300">
           <th class="px-4 py-3">Status</th>
-          <th class="px-4 py-3">Name</th>
+          <th class="px-4 py-3">Projects</th>
           <th class="px-4 py-3">On Agola</th>
           <!--  <th class="px-4 py-3">Total runs</th> -->
         </tr>

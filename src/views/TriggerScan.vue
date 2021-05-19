@@ -241,7 +241,7 @@ export default {
   computed: {},
   mounted() {
     this.checkForUpdates();
-    // this.isAdminstrator();
+    this.isAdminstrator();
   },
   methods: {
     checkForm() {

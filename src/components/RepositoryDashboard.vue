@@ -64,9 +64,24 @@
           <td class="px-4 py-3 border-b-2 border-dark">
             {{ currentView["lastSuccessRunURL"] }}
           </td>
+
           <td class="px-4 py-3 border-b-2 border-dark">
-            {{ currentView["lastFailedRunURL"] }}
+            <!-- {{ currentView["lastFailedRunURL"] }} -->
+
+             <a
+              @click.stop
+              :href="currentView['lastFailedRunURL']"
+              target="_blank"
+              ><img
+                class="inline-block w-12"
+                alt="Papagaio logo"
+                src="../assets/img/agola-logo-name.svg"
+            /></a>
+
+            
           </td>
+
+
         </tr>
       </table>
     </div>

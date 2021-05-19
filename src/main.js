@@ -43,7 +43,7 @@ keycloak.init({
     
     //store auth and dispatch dashboard data
     store.state.currentUserName = keycloak.tokenParsed.name;
-    store.state.loggedIn = true;
+    store.commit('setLoginState', "true");
     store.state.currentAuthToken = keycloak.token;
    // store.dispatch('getAllOrganizationDashboard');
     store.dispatch('organizationsDefaultTriggerTimeInDb');

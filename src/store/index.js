@@ -76,14 +76,17 @@ export default createStore({
   mutations: {
     setNewOrganizationData(state, payload) {
 
-      
-    state.Orgname = payload.tempName,
-    state.OrgAgolaRef = payload.tempAgolaRef,
-    state.OrgVisibility =  payload.tempVisibility,
-    state.OrgGitSourceName  = payload.tempGitSourceName,
-    state.OrgBehaviorInclude = payload.tempBehaviourInclude,
-    state.OrgBehaviorExclude = payload.tempBehaviorInclude,
-    state.OrgBehaviorType = payload.tempBehaviorType
+
+      state.Orgname = payload.tempName,
+        state.OrgAgolaRef = payload.tempAgolaRef,
+        state.OrgVisibility = payload.tempVisibility,
+        state.OrgGitSourceName = payload.tempGitSourceName,
+        state.OrgBehaviorInclude = payload.tempBehaviourInclude,
+        state.OrgBehaviorExclude = payload.tempBehaviorInclude,
+        state.OrgBehaviorType = payload.tempBehaviorType
+    },
+    setLoginState(state, payload) {
+      state.loggedIn = payload;
     },
 
     setcurrentDashboardToShow(state, payload) {
@@ -158,8 +161,8 @@ export default createStore({
     },
 
     //force create organization in case already exists in Agola
-    async forceNewOrganization({ state }) { 
-      return await axios 
+    async forceNewOrganization({ state }) {
+      return await axios
         .post(
           "https://papagaio-api.sorintdev.it/api/createorganization?force",
           {
@@ -180,7 +183,7 @@ export default createStore({
         )
         .then((response) => {
           console.log(response.data);
-          return response 
+          return response
         })
         .catch((error) => {
           console.log(error.data);

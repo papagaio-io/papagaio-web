@@ -116,7 +116,7 @@
     <span>Are you sure you want to delete this organization from Papagiao ?</span>
     <template #footer>
       <span class="dialog-footer">
-        <el-button type="primary" @click="forceSubmitForm">Yes</el-button>
+        <el-button type="primary" @click="forceSubmitForm()">Yes</el-button>
         <el-button @click="dialogVisible = false">Cancel</el-button>
       </span>
     </template>
