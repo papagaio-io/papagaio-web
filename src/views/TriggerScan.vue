@@ -241,7 +241,7 @@ export default {
   computed: {},
   mounted() {
     this.checkForUpdates();
-    this.isAdminstrator();
+    // this.isAdminstrator();
   },
   methods: {
     checkForm() {
@@ -262,50 +262,39 @@ export default {
         this.convertedNewDefaultRunIntervel = this.$store.getters.getorganizationsDefaultTriggerTime;
         this.convertedNewFailedRunIntervel = this.$store.getters.getrunFailedDefaultTriggerTime;
 
-        console.log("new values are ready in minutes");
-        console.log(this.convertedNewDefaultRunIntervel);
-        console.log(this.convertedNewFailedRunIntervel);
       } else if (this.tempDefaultRunIntervelIdentifier == "hour") {
         this.convertedNewDefaultRunIntervel =
           this.$store.getters.getorganizationsDefaultTriggerTime * 60;
-        console.log("Default Run was hour and I converted it");
-        console.log(this.convertedNewDefaultRunIntervel);
+      
       } else if (this.tempDefaultRunIntervelIdentifier == "day") {
         this.convertedNewDefaultRunIntervel =
           this.$store.getters.getorganizationsDefaultTriggerTime * 1440;
-        console.log("Default Run was day and I converted it");
-        console.log(this.convertedNewDefaultRunIntervel);
+       
       } else if (this.tempDefaultRunIntervelIdentifier == "week") {
         this.convertedNewDefaultRunIntervel =
           this.$store.getters.getorganizationsDefaultTriggerTime * 10080;
-        console.log("Default Run was week and I converted it");
-        console.log(this.convertedNewDefaultRunIntervel);
+     
       } else if (this.tempDefaultRunIntervelIdentifier == "month") {
         this.convertedNewDefaultRunIntervel =
           this.$store.getters.getorganizationsDefaultTriggerTime * 43800;
-        console.log("Default Run was Month and I converted it");
-        console.log(this.convertedNewDefaultRunIntervel);
+       
       }
       if (this.tempFailedRunIntervelIdentifier == "hour") {
         this.convertedNewFailedRunIntervel =
           this.$store.getters.getrunFailedDefaultTriggerTime * 60;
-        console.log("Default Failed Run was hour and I converted it");
-        console.log(this.convertedNewFailedRunIntervel);
+       
       } else if (this.tempFailedRunIntervelIdentifier == "day") {
         this.convertedNewFailedRunIntervel =
           this.$store.getters.getrunFailedDefaultTriggerTime * 1440;
-        console.log("Default Failed Run was day and I converted it");
-        console.log(this.convertedNewFailedRunIntervel);
+      
       } else if (this.tempFailedRunIntervelIdentifier == "week") {
         this.convertedNewFailedRunIntervel =
           this.$store.getters.getrunFailedDefaultTriggerTime * 10080;
-        console.log("Default Failed Run was week and I converted it");
-        console.log(this.convertedNewFailedRunIntervel);
+     
       } else if (this.tempFailedRunIntervelIdentifier == "month") {
         this.convertedNewFailedRunIntervel =
           this.$store.getters.getrunFailedDefaultTriggerTime * 43800;
-        console.log("Default Failed Run was Month and I converted it");
-        console.log(this.convertedNewFailedRunIntervel);
+      
       } else {
         console.log("values are not clear");
       }
@@ -365,23 +354,23 @@ export default {
 
       return result[0];
     },
+
     checkForUpdates() {
       this.$store.dispatch("organizationsDefaultTriggerTimeInDb");
     },
+
     //checks to give edit privileges
     isAdminstrator() {
       this.$store
         .dispatch("getAdministratorPrivilegesForIntervelEditInDb")
         .then((response) => {
           this.userAdministratorPrivilege = response["isAdministrator"];
-          console.log(
-            "I assigned this response " + response["isAdministrator"]
-          );
         });
 
       // return false;
       return this.userAdministratorPrivilege;
     },
+    
     editSectionVisibility() {
       if (this.isAdminstrator() == true) {
         return (this.editIntervels = !this.editIntervels);

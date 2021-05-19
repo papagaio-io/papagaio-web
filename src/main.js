@@ -40,8 +40,7 @@ keycloak.init({
   if (!auth) {
 
   } else if (auth) {
-    console.log("I am signed in")
-
+    
     //store auth and dispatch dashboard data
     store.state.currentUserName = keycloak.tokenParsed.name;
     store.state.loggedIn = true;

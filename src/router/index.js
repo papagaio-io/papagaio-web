@@ -10,17 +10,19 @@ import store from '../store/index.js'
 
 
 const preventRoutes = {
-  beforeEnter: (to, from, next) => {
-
-    if(store.getters.getLoginState == true){
+  beforeEach: (to, from, next) => {
+    console.log(store.state.getLoginState);
+    if (store.state.getLoginState === true) {
+      console.log("i reached if")
       next();
-    }else {
+    } else {
+      console.log("i reached else")
       next("/");
     }
 
   }
 
-} 
+}
 
 const routes = [
   {
@@ -30,9 +32,9 @@ const routes = [
   },
   {
     path: '/dashboard',
-    name:'Dashboard',
+    name: 'Dashboard',
     component: dashboard,
-    ...preventRoutes 
+    ...preventRoutes
   },
   {
     path: '/organizationsetup',
@@ -42,9 +44,9 @@ const routes = [
   {
     path: '/neworganization',
     name: 'NewOrganization',
-    component: neworganization, 
-    ...preventRoutes 
-    
+    component: neworganization,
+    ...preventRoutes
+
   },
   {
     path: '/confirmation',
@@ -62,7 +64,7 @@ const routes = [
     component: pagenotfound,
 
   },
-  
+
   {
     path: '/about',
     name: 'About',
@@ -71,11 +73,12 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
- 
+
 
 ]
 
 const router = createRouter({
+  mode: "history",
   history: createWebHistory(process.env.BASE_URL),
   routes
 })

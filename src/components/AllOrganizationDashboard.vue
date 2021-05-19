@@ -91,7 +91,7 @@
               <template #dropdown>
                 <el-dropdown-menu>
                   <el-dropdown-item
-                    @click="deleteFromPapagaio(currentView.agolaRef)"
+                    @click="open(currentView.agolaRef)"
                   >
                     Papagaio only
                   </el-dropdown-item>
@@ -108,6 +108,35 @@
       </table>
     </div>
   </div>
+    <el-dialog
+    title="Delete from Papagaio only"
+    v-model="dialogVisible"
+    width="30%"
+  >
+    <span>Are you sure you want to delete this organization from Papagiao ?</span>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button type="primary" @click="forceSubmitForm">Yes</el-button>
+        <el-button @click="dialogVisible = false">Cancel</el-button>
+      </span>
+    </template>
+  </el-dialog>
+
+  <!-- <el-dialog
+    title="Delete from Papagaio & Agola "
+    v-model="dialogVisible"
+    width="30%"
+  >
+    <span>Are you sure you want to delete this organization from Papagiao and Agola ?</span>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button type="primary" @click="forceSubmitForm">Yes</el-button>
+        <el-button @click="dialogVisible = false">Cancel</el-button>
+      </span>
+    </template>
+  </el-dialog> -->
+
+  
 </template>
 
 
@@ -122,7 +151,7 @@ export default {
   data() {
     return {
       userToken: this.$store.getters.getAuthToken,
-
+      dialogVisible: false,
       dropdownOpen: false,
     };
   },
@@ -170,11 +199,29 @@ export default {
       this.$store.commit("setOrganizationURL", id);
       this.$store.dispatch("getOrganizationDashboard");
 
-      //  console.log(this.$store.state.organizationURL)
+    
     },
     openedOrganization(temp) {
       temp = this.$store.commit("setCurrentOpenOrganizationInDashboard", temp);
     },
+
+    open(organization) {
+        this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
+          cancelButtonText: 'Cancel',
+          confirmButtonText: 'OK',
+          type: 'warning'
+        }).then(() => {
+            this.deleteFromPapagaio(organization);
+            this.$message({
+            type: 'success',
+            message: 'Delete completed'
+          });
+        }).catch(() => {
+         
+        });
+      },
+      
+
 
     deleteFromPapagaio(organization) {
       let self = this;
