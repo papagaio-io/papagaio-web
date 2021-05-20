@@ -7,7 +7,7 @@
         <div class="p-4 ">
           <table style="width: 100%">
             <tr>
-              <div class="float-right">
+               <div class="float-right">
                 <el-popover
                   placement="top-start"
                   title="Adding a new organization"
@@ -22,6 +22,9 @@
                   </template>
                 </el-popover>
               </div>
+            </tr>
+            <tr>
+             
               <h5 class="mb-3 text-xl">Organization name</h5>
               <center>
                 <input

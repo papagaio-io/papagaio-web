@@ -62,7 +62,17 @@
             {{ calculateLastDurationIntervels(currentView["lastRunDuration"]) }}
           </td>
           <td class="px-4 py-3 border-b-2 border-dark">
-            {{ currentView["lastSuccessRunURL"] }}
+            <!-- {{ currentView["lastSuccessRunURL"] }} -->
+            <a
+              @click.stop
+              :href="currentView['lastSuccessRunURL']"
+              target="_blank"
+              ><img
+                class="inline-block w-12"
+                alt="Papagaio logo"
+                src="../assets/img/agola-logo-name.svg"
+            /></a>
+
           </td>
 
           <td class="px-4 py-3 border-b-2 border-dark">
