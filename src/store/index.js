@@ -152,8 +152,8 @@ export default createStore({
           }
         )
         .then((response) => {
-          console.log(response.data);
-          return response //<--------- return the response here
+         
+          return response 
         })
         .catch((error) => {
           console.log(error.data);
@@ -182,7 +182,7 @@ export default createStore({
           }
         )
         .then((response) => {
-          console.log(response.data);
+         
           return response
         })
         .catch((error) => {

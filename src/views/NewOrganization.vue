@@ -22,8 +22,7 @@
                   </template>
                 </el-popover>
               </div>
-            </tr>
-            <tr>
+          
              
               <h5 class="mb-3 text-xl">Organization name</h5>
               <center>
@@ -261,14 +260,6 @@
         </button>
       </div>
      
-      <!-- to be removed -->
-      <!-- <div
-        v-if="createOrgError"
-        class="mb-10 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
-        role="alert"
-      >
-        <span class="block sm:inline">{{ createOrgError }}</span>
-      </div> -->
     </div>
   </form>
   <el-dialog
@@ -427,7 +418,7 @@ export default {
     },
 
     forceSubmitForm() {
-      //to close confirmation dialog
+      // close confirmation dialog
       this.dialogVisible = false;
       let loadingInstance = ElLoading.service({
         text: "Adding Organization",

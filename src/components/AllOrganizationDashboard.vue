@@ -91,7 +91,7 @@
               <template #dropdown>
                 <el-dropdown-menu>
                   <el-dropdown-item
-                    @click="open(currentView.agolaRef)"
+                    @click="confirmDeleteOnPapagaio(currentView.agolaRef)"
                   >
                     Papagaio only
                   </el-dropdown-item>
@@ -108,34 +108,7 @@
       </table>
     </div>
   </div>
-    <el-dialog
-    title="Delete from Papagaio only"
-    v-model="dialogVisible"
-    width="30%"
-  >
-    <span>Are you sure you want to delete this organization from Papagiao ?</span>
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button type="primary" @click="forceSubmitForm()">Yes</el-button>
-        <el-button @click="dialogVisible = false">Cancel</el-button>
-      </span>
-    </template>
-  </el-dialog>
-
-  <!-- <el-dialog
-    title="Delete from Papagaio & Agola "
-    v-model="dialogVisible"
-    width="30%"
-  >
-    <span>Are you sure you want to delete this organization from Papagiao and Agola ?</span>
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button type="primary" @click="forceSubmitForm">Yes</el-button>
-        <el-button @click="dialogVisible = false">Cancel</el-button>
-      </span>
-    </template>
-  </el-dialog> -->
-
+  
   
 </template>
 
@@ -204,17 +177,17 @@ export default {
     openedOrganization(temp) {
       temp = this.$store.commit("setCurrentOpenOrganizationInDashboard", temp);
     },
-
-    open(organization) {
-        this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
+//under construction 
+    confirmDeleteOnPapagaio(organization) {
+        this.$confirm('Are you sure you want to delete this organization from Papagaio only', 'Warning', {
           cancelButtonText: 'Cancel',
-          confirmButtonText: 'OK',
+          confirmButtonText: 'Yes',
           type: 'warning'
         }).then(() => {
             this.deleteFromPapagaio(organization);
             this.$message({
             type: 'success',
-            message: 'Delete completed'
+            message: 'Organization Delete'
           });
         }).catch(() => {
          

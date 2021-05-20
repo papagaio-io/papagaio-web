@@ -1,8 +1,11 @@
 <template>
   <div class="w-full container mx-auto">
-<h4 class="mt-2 mb-2 text-3xl font-bold">Repositories</h4>
+    <h4 class="mt-2 mb-2 text-3xl font-bold">Repositories</h4>
     <h4 class="mt-2 mb-6 text-xl font-bold text-gray-400">
-      <a class="cursor-pointer"  @click = navigateBackToOrganizations >All Organizations</a> /
+      <a class="cursor-pointer" @click="navigateBackToOrganizations"
+        >All Organizations</a
+      >
+      /
       <a class="cursor-pointer" @click="navigateBack">{{
         this.$store.getters.getcurrentOpenOrganizationInDashboard
       }}</a>
@@ -13,7 +16,7 @@
     <!-- Body  -->
     <div class="flex bg-white">
       <button class="" @click="navigateBack()">
-     <svg
+        <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-20 w-30"
           viewBox="0 0 20 20"
@@ -61,8 +64,11 @@
           <td class="px-4 py-3 border-b-2 border-dark">
             {{ calculateLastDurationIntervels(currentView["lastRunDuration"]) }}
           </td>
-
-          <td v-show="currentView['lastSuccessRunDate'] != null " class="px-4 py-3 border-b-2 border-dark">
+          <!-- if exist a success URL show it-->
+          <td
+            v-show="currentView['lastSuccessRunDate'] != null"
+            class="px-4 py-3 border-b-2 border-dark"
+          >
             <!-- {{ currentView["lastSuccessRunURL"] }} -->
             <a
               @click.stop
@@ -73,16 +79,22 @@
                 alt="Papagaio logo"
                 src="../assets/img/agola-logo-name.svg"
             /></a>
-
           </td>
-          <td v-show="currentView['lastSuccessRunDate'] == null " class="px-4 py-3 border-b-2 border-dark">
-          N/A
+          <!-- Show N/A if no success URL -->
+          <td
+            v-show="currentView['lastSuccessRunDate'] == null"
+            class="px-4 py-3 border-b-2 border-dark"
+          >
+            N/A
           </td>
-<!-- if exist a URL show -->
-          <td v-show="currentView['lastFailedRunDate'] != null "  class="px-4 py-3 border-b-2 border-dark">
+          <!-- if exist a failed URL show it-->
+          <td
+            v-show="currentView['lastFailedRunDate'] != null"
+            class="px-4 py-3 border-b-2 border-dark"
+          >
             <!-- {{ currentView["lastFailedRunURL"] }} -->
 
-             <a
+            <a
               @click.stop
               :href="currentView['lastFailedRunURL']"
               target="_blank"
@@ -94,12 +106,12 @@
 
             <!-- Show N/A if no failed URL  -->
           </td>
-           <td v-show="currentView['lastFailedRunDate'] == null "  class="px-4 py-3 border-b-2 border-dark">
-           N/A
-            
+          <td
+            v-show="currentView['lastFailedRunDate'] == null"
+            class="px-4 py-3 border-b-2 border-dark"
+          >
+            N/A
           </td>
-
-
         </tr>
       </table>
     </div>
@@ -139,7 +151,6 @@ export default {
     },
     showSuccessPercentage(recieved) {
       if (typeof recieved === "object" && recieved != null) {
-    
         if (recieved["report"]["successRunsPercentage"] <= 20) {
           return require("../assets/img/1.png");
         } else if (recieved["report"]["successRunsPercentage"] <= 40) {
@@ -159,7 +170,7 @@ export default {
     navigateBack() {
       this.$store.commit("setcurrentDashboardToShow", "ProjectDashboard");
     },
-     navigateBackToOrganizations() {
+    navigateBackToOrganizations() {
       this.$store.commit(
         "setcurrentDashboardToShow",
         "AllOrganizationDashboard"
