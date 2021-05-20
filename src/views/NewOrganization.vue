@@ -4,7 +4,7 @@
       <h4 class="mt-2 mb-2 text-3xl font-bold">Add a New Organization</h4>
       <!-- Beginning of form -->
       <div class="bg-gray-100">
-        <div class="p-4 border-t">
+        <div class="p-4 ">
           <table style="width: 100%">
             <tr>
               <div class="float-right">

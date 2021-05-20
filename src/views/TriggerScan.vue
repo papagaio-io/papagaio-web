@@ -2,7 +2,7 @@
   <div class="w-3/4 container mx-auto">
     <h4 class="mt-2 mb-2 text-3xl font-bold">Scan Duration</h4>
     <div class="bg-gray-100">
-      <div class="p-4 border-t">
+      <div class="p-4">
         <div class="float-right">
           <el-popover
             placement="top-start"
