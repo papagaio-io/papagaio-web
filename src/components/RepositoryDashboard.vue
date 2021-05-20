@@ -30,8 +30,8 @@
         <tr class="text-center border-b-2 border-gray-300">
           <th class="px-4 py-3">Name</th>
           <th class="px-4 py-3">Status</th>
-          <th class="px-4 py-3">Last success run date</th>
-          <th class="px-4 py-3">Last failed run date</th>
+          <th class="px-4 py-3">Last success run</th>
+          <th class="px-4 py-3">Last failed run</th>
           <th class="px-4 py-3">Last run duration</th>
           <th class="px-4 py-3">Last success run URL</th>
           <th class="px-4 py-3">Last failed run URL</th>
@@ -61,7 +61,8 @@
           <td class="px-4 py-3 border-b-2 border-dark">
             {{ calculateLastDurationIntervels(currentView["lastRunDuration"]) }}
           </td>
-          <td class="px-4 py-3 border-b-2 border-dark">
+
+          <td v-show="currentView['lastSuccessRunDate'] != null " class="px-4 py-3 border-b-2 border-dark">
             <!-- {{ currentView["lastSuccessRunURL"] }} -->
             <a
               @click.stop
@@ -74,8 +75,11 @@
             /></a>
 
           </td>
-
-          <td class="px-4 py-3 border-b-2 border-dark">
+          <td v-show="currentView['lastSuccessRunDate'] == null " class="px-4 py-3 border-b-2 border-dark">
+          N/A
+          </td>
+<!-- if exist a URL show -->
+          <td v-show="currentView['lastFailedRunDate'] != null "  class="px-4 py-3 border-b-2 border-dark">
             <!-- {{ currentView["lastFailedRunURL"] }} -->
 
              <a
@@ -88,6 +92,10 @@
                 src="../assets/img/agola-logo-name.svg"
             /></a>
 
+            <!-- Show N/A if no failed URL  -->
+          </td>
+           <td v-show="currentView['lastFailedRunDate'] == null "  class="px-4 py-3 border-b-2 border-dark">
+           N/A
             
           </td>
 

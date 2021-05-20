@@ -6,7 +6,7 @@
       <div class="bg-gray-100">
         <div class="p-4 ">
           <table style="width: 100%">
-            <tr>
+            <tr> 
                <div class="float-right">
                 <el-popover
                   placement="top-start"
