@@ -2,7 +2,11 @@
   <div class="container mx-auto">
     <h4 class="mt-2 mb-2 text-3xl font-bold">Dashboard</h4>
     <h4 class="mt-2 mb-6 text-xl font-bold text-gray-400">
-      <a class="cursor-pointer">All Organizations</a>
+      <a
+        class="cursor-pointer hover:text-papaDark-700"
+        @click="$router.push('http://localhost:8081/dashboard')"
+        >All Organizations</a
+      >
     </h4>
     <!-- Body  -->
     <div class="bg-white">
@@ -96,7 +100,7 @@
                     Papagaio only
                   </el-dropdown-item>
                   <el-dropdown-item
-                    @click="deleteFromAgola(currentView.agolaRef)"
+                    @click="confirmDeleteFromAgola(currentView.agolaRef)"
                   >
                     Papagaio & Agola
                   </el-dropdown-item>
@@ -108,8 +112,6 @@
       </table>
     </div>
   </div>
-  
-  
 </template>
 
 
@@ -171,30 +173,51 @@ export default {
       this.$store.commit("setcurrentDashboardToShow", "ProjectDashboard");
       this.$store.commit("setOrganizationURL", id);
       this.$store.dispatch("getOrganizationDashboard");
-
-    
     },
     openedOrganization(temp) {
       temp = this.$store.commit("setCurrentOpenOrganizationInDashboard", temp);
     },
-//under construction 
+    //under construction
     confirmDeleteOnPapagaio(organization) {
-        this.$confirm('Are you sure you want to delete this organization from Papagaio only', 'Warning', {
-          cancelButtonText: 'Cancel',
-          confirmButtonText: 'Yes',
-          type: 'warning'
-        }).then(() => {
-            this.deleteFromPapagaio(organization);
-            this.$message({
-            type: 'success',
-            message: 'Organization Delete'
+      this.$confirm(
+        "Are you sure you want to delete this organization from Papagaio only",
+        "Warning",
+        {
+          cancelButtonText: "Cancel",
+          confirmButtonText: "Yes",
+          type: "warning",
+        }
+      )
+        .then(() => {
+          this.deleteFromPapagaio(organization);
+          this.$message({
+            type: "success",
+            message: "Organization Delete",
           });
-        }).catch(() => {
-         
-        });
-      },
-      
+        })
+        .catch(() => {});
+    },
 
+    //under construction
+    confirmDeleteFromAgola(organization) {
+      this.$confirm(
+        "Are you sure you want to delete this organization from Papagaio & Agola",
+        "Warning",
+        {
+          cancelButtonText: "Cancel",
+          confirmButtonText: "Yes",
+          type: "warning",
+        }
+      )
+        .then(() => {
+          this.deleteFromAgola(organization);
+          this.$message({
+            type: "success",
+            message: "Organization Delete",
+          });
+        })
+        .catch(() => {});
+    },
 
     deleteFromPapagaio(organization) {
       let self = this;

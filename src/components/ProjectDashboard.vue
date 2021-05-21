@@ -2,8 +2,13 @@
   <div class="w-full container mx-auto">
     <h4 class="mt-2 mb-2 text-3xl font-bold">Projects</h4>
     <h4 class="mt-2 mb-6 text-xl font-bold text-gray-400">
-      <a class="cursor-pointer" @click="navigateBack">All Organizations</a> /
-      {{ this.$store.getters.getcurrentOpenOrganizationInDashboard }}
+      <a class="cursor-pointer hover:text-papaDark-700" @click="navigateBack"
+        >All Organizations</a
+      >
+      /
+      <a class="cursor-not-allowed">
+        {{ this.$store.getters.getcurrentOpenOrganizationInDashboard }}
+      </a>
     </h4>
 
     <!-- Body  -->

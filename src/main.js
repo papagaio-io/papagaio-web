@@ -10,10 +10,7 @@ import './assets/styles/element-variables.scss'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import jwtDecode from "jwt-decode";
-
 import KeycloakConfig from "../keycloak.json";
-
-
 import Keycloak from 'keycloak-js';
 
 const myApp = createApp(App)

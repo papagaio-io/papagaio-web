@@ -25,25 +25,25 @@
           
              
               <h5 class="mb-3 text-xl">Organization name</h5>
-              <center>
+             <div class = "flex justify-center">
                 <input
                   class="mb-4 border-l-8 focus:border-papaOrange-600 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4"
                   type="text"
                   placeholder="Type an existing git organization name"
                   v-model="orgName"
                 />
-              </center>
+             </div>
             </tr>
             <tr>
               <h5 class="mb-3 text-xl">Agola reference name</h5>
-              <center>
+            <div class="flex justify-center">
                 <input
                   class="mb-4 border-l-8 focus:border-papaOrange-600 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4"
                   type="text"
                   placeholder="Type an organization name (with no special characters)  "
                   v-model="agolaRefName"
                 />
-              </center>
+            </div>
             </tr>
 
             <tr>
@@ -187,27 +187,27 @@
             <label class="font-bold ml-2">Filter by name</label>
             <tr>
               <span class="font-bold ml-3">Include</span>
-              <center>
+             <div class="flex justify-center">
                 <input
                   class="mb-4 border-l-8 focus:border-papaOrange-600 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4"
                   v-model="repositoriesField.repositoriesInclude"
                   type="text"
                   placeholder="*"
                 />
-              </center>
+             </div>
             </tr>
 
             <tr>
               <span class="font-bold ml-3">Exclude</span>
 
-              <center>
+              <div class="flex justify-center">
                 <input
                   class="mb-4 border-l-8 focus:border-papaOrange-600 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4"
                   v-model="repositoriesField.repositoriesExclude"
                   type="text"
                   placeholder=""
                 />
-              </center>
+              </div>
             </tr>
 
             <tr>

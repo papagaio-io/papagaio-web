@@ -6,23 +6,25 @@ import neworganization from "../views/NewOrganization.vue"
 import confirmation from "../views/Confirmation.vue"
 import triggerscan from "../views/TriggerScan.vue";
 import pagenotfound from "../views/PageNotFound.vue";
-import store from '../store/index.js'
+// import store from '../store/index.js'
+import store from '../store/index'
 
 
 const preventRoutes = {
-  beforeEach: (to, from, next) => {
-    console.log(store.getters.getLoginState);
+  beforeEnter: (to, from, next) => {
     if (store.getters.getLoginState === "true") {
-      console.log("i reached if")
+
       next();
     } else {
-      console.log("i reached else")
+
       next("/");
     }
 
   }
 
 }
+
+
 
 const routes = [
   {
@@ -34,7 +36,8 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: dashboard,
-    ...preventRoutes
+    ...preventRoutes,
+
   },
   {
     path: '/organizationsetup',
@@ -51,12 +54,14 @@ const routes = [
   {
     path: '/confirmation',
     name: 'Confirmation',
-    component: confirmation
+    component: confirmation,
+    ...preventRoutes
   },
   {
     path: '/triggerscan',
     name: 'Triggerscan',
-    component: triggerscan
+    component: triggerscan,
+    ...preventRoutes
   },
   {
     path: "/:catchAll(.*)",

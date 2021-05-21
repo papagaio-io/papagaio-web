@@ -201,7 +201,7 @@ export default createStore({
         .then(response => {
           return response.data
         }).catch((error) => {
-          console.log(error.data)
+          //console.log(error.data)
         });
     },
 

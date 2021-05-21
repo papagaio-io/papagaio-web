@@ -2,15 +2,19 @@
   <div class="w-full container mx-auto">
     <h4 class="mt-2 mb-2 text-3xl font-bold">Repositories</h4>
     <h4 class="mt-2 mb-6 text-xl font-bold text-gray-400">
-      <a class="cursor-pointer" @click="navigateBackToOrganizations"
+      <a
+        class="cursor-pointer hover:text-papaDark-700"
+        @click="navigateBackToOrganizations"
         >All Organizations</a
       >
       /
-      <a class="cursor-pointer" @click="navigateBack">{{
+      <a class="cursor-pointer hover:text-papaDark-700" @click="navigateBack">{{
         this.$store.getters.getcurrentOpenOrganizationInDashboard
       }}</a>
       /
-      {{ this.$store.getters.getcurrentOpenProjectInDashboard }}
+      <a class="cursor-not-allowed">
+        {{ this.$store.getters.getcurrentOpenProjectInDashboard }}
+      </a>
     </h4>
 
     <!-- Body  -->

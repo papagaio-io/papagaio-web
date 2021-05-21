@@ -9,7 +9,7 @@
           >
             <img
               class="w-10 mr-2"
-              src="./assets/img/papagaio-logo-circle.png"
+              src="./assets/img/papagaioIcon.png"
             />
             Papagaio
           </router-link>
