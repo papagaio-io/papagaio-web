@@ -74,7 +74,8 @@
 
           <td @click.stop class="px-4 py-3 border-b-2 border-dark">
             <el-dropdown>
-              <el-button size="small" type="danger">
+              <el-button size="small" type="danger" >
+                
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -91,7 +92,8 @@
                     d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
                   />
                 </svg>
-              </el-button>
+              
+                </el-button>
               <template #dropdown>
                 <el-dropdown-menu>
                   <el-dropdown-item
@@ -112,6 +114,23 @@
       </table>
     </div>
   </div>
+  <el-dialog
+    title="Ops, no adminstration privilege"
+    v-model="notAdminstratorDialogVisible"
+    width="30%"
+  >
+    <span
+      >Account has no adminstration privilege to perform a delete.<br />
+      Please contact the adminstator for more details on this.</span
+    >
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="notAdminstratorDialogVisible = false"
+          >Okay</el-button
+        >
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 
@@ -128,10 +147,12 @@ export default {
       userToken: this.$store.getters.getAuthToken,
       dialogVisible: false,
       dropdownOpen: false,
+      notAdminstratorDialogVisible: false,
     };
   },
   mounted() {
     this.checkforUpdates();
+    this.isAdminstrator();
   },
 
   methods: {
@@ -177,48 +198,70 @@ export default {
     openedOrganization(temp) {
       temp = this.$store.commit("setCurrentOpenOrganizationInDashboard", temp);
     },
+
+    isAdminstrator() {
+      this.$store
+        .dispatch("getAdministratorPrivilegesForIntervelEditInDb")
+        .then((response) => {
+          this.userAdministratorPrivilege = response["isAdministrator"];
+        });
+
+      // return false;
+      return this.userAdministratorPrivilege;
+    },
+
     //under construction
     confirmDeleteOnPapagaio(organization) {
-      this.$confirm(
-        "Are you sure you want to delete this organization from Papagaio only",
-        "Warning",
-        {
-          cancelButtonText: "Cancel",
-          confirmButtonText: "Yes",
-          type: "warning",
-        }
-      )
-        .then(() => {
-          this.deleteFromPapagaio(organization);
-          this.$message({
-            type: "success",
-            message: "Organization Delete",
-          });
-        })
-        .catch(() => {});
+      if (this.isAdminstrator() == true) {
+        this.$confirm(
+          `Are you sure you want to delete ${organization} from Papagaio only ?`,
+          "Warning",
+          {
+            cancelButtonText: "Cancel",
+            confirmButtonText: "Yes",
+            type: "warning",
+          }
+        )
+          .then(() => {
+            this.deleteFromPapagaio(organization);
+            this.$message({
+              type: "success",
+              message: "Organization Delete",
+            });
+          })
+          .catch(() => {});
+      } else {
+        this.notAdminstratorDialogVisible = true;
+      }
     },
 
     //under construction
     confirmDeleteFromAgola(organization) {
-      this.$confirm(
-        "Are you sure you want to delete this organization from Papagaio & Agola",
-        "Warning",
-        {
-          cancelButtonText: "Cancel",
-          confirmButtonText: "Yes",
-          type: "warning",
-        }
-      )
-        .then(() => {
-          this.deleteFromAgola(organization);
-          this.$message({
-            type: "success",
-            message: "Organization Delete",
-          });
-        })
-        .catch(() => {});
+      if (this.isAdminstrator() == true) {
+        this.$confirm(
+          `Are you sure you want to delete ${organization} from Papagaio & Agola ?`,
+          "Warning",
+          {
+            
+            cancelButtonText: "Cancel",
+            confirmButtonText: "Yes",
+            type: "warning",
+          }
+        )
+          .then(() => {
+            this.deleteFromAgola(organization);
+            this.$message({
+              type: "success",
+              message: "Organization Delete",
+            });
+          })
+          .catch(() => {});
+      } else {
+        this.notAdminstratorDialogVisible = true;
+      }
     },
 
+    //deletes and updates
     deleteFromPapagaio(organization) {
       let self = this;
       this.$store.commit("setOrganizationToDelete", organization);
@@ -227,6 +270,7 @@ export default {
         self.$store.dispatch("getAllOrganizationDashboard");
       }, 1000);
     },
+    //deletes and updates
     deleteFromAgola(organization) {
       let self = this;
       this.$store.commit("setOrganizationToDelete", organization);

@@ -5,12 +5,12 @@
       alt="Papagaio logo"
       src="../assets/img/papagaioMainLogo.jpg"
     />
-    
+
     <div class="bg-papaDark-700 pt-2">
       <div class="heroBody">
         <h4 class="mt-2 text-xl font-bold text-white">
           Plugin of
-          <a class=" " href="https://agola.io" target="_blank" 
+          <a class=" " href="https://agola.io" target="_blank"
             ><img
               class="inline-block w-20"
               alt="Papagaio logo"
@@ -22,8 +22,8 @@
           class="mt-3 mb-4 sm:max-w-4xl sm:mx-auto md:mt-5 md:text-xl text-white"
         >
           Agola is a CI/CD open source tool under the 2.0 Apache license.
-          Papagaio was developed on top to extend Agola's capabilities and
-          provide a more flexible control on the workflow (Runs).
+          Papagaio was developed to complement Agola, extend its capabilities,
+          and to provide ease-of-use features.
         </p>
 
         <div
@@ -60,25 +60,127 @@
           <div class="lg:text-center">
             <h2 class="text-base xl:inline font-semibold tracking-wide">
               <br />
-              Benefits ?
+              What to expect ?
             </h2>
             <p
               class="mt-3 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl"
             >
-              Unchallenging way to run/build your project
-            </p>
-
-            <p
-              class="mt-3 mb-6 text-base font-medium sm:max-w-xl sm:mx-auto md:mt-2 md:text-xl"
-            >
               Configure your project using Papagaio and run it on Agola.
             </p>
+
+            <!-- <p
+              class="mt-3 mb-6 text-base font-medium sm:max-w-xl sm:mx-auto md:mt-2 md:text-xl"
+            >
+            Unchallenging way to run/build your project
+            </p> -->
           </div>
 
           <div class="mt-10">
             <dl
               class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10"
             >
+              <!-- 1 -->
+
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <div
+                    class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-papaDark-700"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div class="ml-4 mb-4">
+                  <dt class="text-lg leading-6 font-bold">
+                    Speed up your work on Agola
+                  </dt>
+                  <dd class="mt-2 text-base">
+                    High usability & simple configuration. By automating the
+                    process of adding organizations, projects, branches, and
+                    members to Agola. Optionally offering the ability to
+                    specify a build strategy. Plus, setting intervals for both, synchronizing
+                    organization’s projects and members, along with recovering
+                    failed runs of projects.
+                  </dd>
+                </div>
+              </div>
+
+              <!-- 2 -->
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <div
+                    class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-papaDark-700"
+                  >
+                    <!-- Heroicon name: outline/scale -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-12 w-12"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 13v-1m4 1v-3m4 3V8M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div class="ml-4">
+                  <dt class="text-lg leading-6 font-bold">Dashboard</dt>
+                  <dd class="mt-2 text-base">
+                    Friendly previewing of the whole organization structure
+                    which helps in monitoring significant information of the
+                    projects. e.g. project health. Exclusively, redirect links
+                    to view the organization on Agola. Delete/remove
+                    organizations from Papagaio only, or Agola & Papagaio.
+                  </dd>
+                </div>
+              </div>
+
+              <!-- 3-->
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <div
+                    class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-papaDark-700"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div class="ml-4">
+                  <dt class="text-lg leading-6 font-bold">Git sources</dt>
+                  <dd class="mt-2 mb-2 text-base">
+                    Supports Gitea and Github repositories.
+                  </dd>
+                </div>
+              </div>
+
+              <!-- 4-->
               <div class="flex">
                 <div class="flex-shrink-0">
                   <div
@@ -102,103 +204,9 @@
                   <dt class="text-lg leading-6 font-bold">
                     Email Notifications
                   </dt>
-                  <dd class="mt-2 text-base">
-                    Now you will be notified via email when runs (builds) fails.
-                    To stay posted!
-                  </dd>
-                </div>
-              </div>
-
-              <div class="flex">
-                <div class="flex-shrink-0">
-                  <div
-                    class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-papaDark-700"
-                  >
-                    <!-- Heroicon name: outline/scale -->
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <div class="ml-4">
-                  <dt class="text-lg leading-6 font-bold">
-                    Organization Members
-                  </dt>
-                  <dd class="mt-2 text-base">
-                    Out-of-the-box, project members are synchronised from the
-                    git source.
-                  </dd>
-                </div>
-              </div>
-
-              <div class="flex">
-                <div class="flex-shrink-0">
-                  <div
-                    class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-papaDark-700"
-                  >
-                    <!-- 2 -->
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <div class="ml-4">
-                  <dt class="text-lg leading-6 font-bold">
-                    Various Git Sources
-                  </dt>
-                  <dd class="mt-2 text-base">
-                    Papagaio is now compatible with github and gitea, with a
-                    roadmap to scale up to other git sources.
-                  </dd>
-                </div>
-              </div>
-
-              <div class="flex">
-                <div class="flex-shrink-0">
-                  <div
-                    class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-papaDark-700"
-                  >
-                    <!-- 4-->
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <div class="ml-4 mb-4">
-                  <dt class="text-lg leading-6 font-bold">Ease to Use</dt>
-                  <dd class="mt-2 text-base">
-                    High usability. Minimum configuration to avoid hustles and
-                    save Sorintian priceless time.
+                  <dd class="mt-2 mb-2 text-base">
+                    Papagaio scans and notifies users for
+                    any failed project runs.
                   </dd>
                 </div>
               </div>
@@ -209,7 +217,7 @@
       <div>
         <p class="ml-2 mb-3 mt-3 text-sm text-white">
           Powered by
-          <a class="pl-1" href="https://sorint.it" target="_blank" 
+          <a class="pl-1" href="https://sorint.it" target="_blank"
             ><img
               class="inline-block w-21 h-6"
               alt="Papagaio logo"
