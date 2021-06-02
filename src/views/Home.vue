@@ -23,7 +23,7 @@
         >
           Agola is a CI/CD open source tool under the 2.0 Apache license.
           Papagaio was developed to complement Agola, extend its capabilities,
-          and to provide ease-of-use features.
+          & to provide ease-of-use features.
         </p>
 
         <div
@@ -65,7 +65,7 @@
             <p
               class="mt-3 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl"
             >
-              Configure your project using Papagaio and run it on Agola.
+              Configure your project using Papagaio & run it on Agola
             </p>
 
             <!-- <p
@@ -107,10 +107,10 @@
                   </dt>
                   <dd class="mt-2 text-base">
                     High usability & simple configuration. By automating the
-                    process of adding organizations, projects, branches, and
+                    process of adding organizations, projects, branches, &
                     members to Agola. Optionally offering the ability to
                     specify a build strategy. Plus, setting intervals for both, synchronizing
-                    organization’s projects and members, along with recovering
+                    organization’s projects & members, along with recovering
                     failed runs of projects.
                   </dd>
                 </div>
@@ -175,7 +175,7 @@
                 <div class="ml-4">
                   <dt class="text-lg leading-6 font-bold">Git sources</dt>
                   <dd class="mt-2 mb-2 text-base">
-                    Supports Gitea and Github repositories.
+                    Supports Gitea & Github repositories.
                   </dd>
                 </div>
               </div>
@@ -205,7 +205,7 @@
                     Email Notifications
                   </dt>
                   <dd class="mt-2 mb-2 text-base">
-                    Papagaio scans and notifies users for
+                    Papagaio scans & notifies users for
                     any failed project runs.
                   </dd>
                 </div>

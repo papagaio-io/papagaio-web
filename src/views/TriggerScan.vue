@@ -362,7 +362,7 @@ export default {
     //checks to give edit privileges
     isAdminstrator() {
       this.$store
-        .dispatch("getAdministratorPrivilegesForIntervelEditInDb")
+        .dispatch("getAdministratorPrivileges")
         .then((response) => {
           this.userAdministratorPrivilege = response["isAdministrator"];
         });

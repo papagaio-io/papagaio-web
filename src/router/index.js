@@ -12,11 +12,14 @@ import store from '../store/index'
 
 const preventRoutes = {
   beforeEnter: (to, from, next) => {
+    // console.log(store.getters.getLoginState);
+    // console.log(this.$keycloak.authenticated);
     if (store.getters.getLoginState === "true") {
 
       next();
     } else {
 
+      
       next("/");
     }
 

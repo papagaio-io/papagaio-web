@@ -63,6 +63,7 @@
             {{ calculateDateIntervels(currentView["lastSuccessRunDate"]) }}
           </td>
           <td class="px-4 py-3 border-b-2 border-dark">
+         
             {{ calculateDateIntervels(currentView["lastFailedRunDate"]) }}
           </td>
           <td class="px-4 py-3 border-b-2 border-dark">
@@ -96,8 +97,6 @@
             v-show="currentView['lastFailedRunDate'] != null"
             class="px-4 py-3 border-b-2 border-dark"
           >
-            <!-- {{ currentView["lastFailedRunURL"] }} -->
-
             <a
               @click.stop
               :href="currentView['lastFailedRunURL']"

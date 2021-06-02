@@ -32,7 +32,6 @@
           <th class="px-4 py-3">Status</th>
           <th class="px-4 py-3">Projects</th>
           <th class="px-4 py-3">On Agola</th>
-          <!--  <th class="px-4 py-3">Total runs</th> -->
         </tr>
 
         <tr
@@ -42,7 +41,6 @@
           @click="navigateForward(currentView.projectName)"
         >
           <td class="px-4 py-3 border-b-2 border-dark">
-            <!-- {{ showProjectSuccessRunPercentage(currentView)}} -->
             <img
               class="w-12 inline-block align-middle"
               :src="showProjectSuccessRunPercentage(currentView)"
@@ -52,13 +50,22 @@
           <td class="px-4 py-3 border-b-2 border-dark">
             {{ currentView["projectName"] }}
           </td>
-          <td class="px-4 py-3 border-b-2 border-dark">
+          <td
+            v-show="currentView['projectURL'] != null"
+            class="px-4 py-3 border-b-2 border-dark"
+          >
             <a @click.stop :href="currentView['projectURL']" target="_blank"
               ><img
                 class="inline-block w-12"
                 alt="Papagaio logo"
                 src="../assets/img/agola-logo-name.svg"
             /></a>
+          </td>
+          <td
+            v-show="currentView['projectURL'] == null"
+            class="px-4 py-3 border-b-2 border-dark"
+          >
+            N/A
           </td>
         </tr>
       </table>

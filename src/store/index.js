@@ -7,6 +7,8 @@ export default createStore({
     currentAuthToken: "",
     currentUserName: "",
 
+    GitSourceToGetOrganizationFrom: "", //dynamic variable to access user's Git source to catch all organization available in in there.
+
     Orgname: "",
     OrgAgolaRef: "",
     OrgVisibility: "",
@@ -131,6 +133,52 @@ export default createStore({
   },
   actions: {
 
+       //show the current available git sources
+       async getGitSourceId({ state }) {
+        return await axios
+          .get("https://papagaio-api.sorintdev.it/api/gitsources", {
+            headers: {
+              Authorization: `Bearer ${state.currentAuthToken}`,
+            },
+          })
+          .then(response => {
+            return response.data
+          }).catch((error) => {
+            //console.log(error.data)
+          });
+      },
+  
+      //gets all organizations from specific git source
+      async getOrganizationsFromSpecificGitSource({ state }) {
+        return await axios
+          .get(`https://papagaio-api.sorintdev.it/api/gitorganizations/${state.GitSourceToGetOrganizationFrom}`, {
+            headers: {
+              Authorization: `Bearer ${state.currentAuthToken}`,
+            },
+          })
+          .then(response => {
+            return response.data
+          }).catch((error) => {
+            //console.log(error.data)
+          });
+      },
+
+      //gets all Agola reference names to validate exists
+      async getExistingAgolaReferenceNames({ state }) {
+        return await axios
+          .get("https://papagaio-api.sorintdev.it/api/agolarefs", {
+            headers: {
+              Authorization: `Bearer ${state.currentAuthToken}`,
+            },
+          })
+          .then(response => {
+            return response.data
+          }).catch((error) => {
+            //console.log(error.data)
+          });
+      },
+
+
     async newOrganization({ state }) { //<-------- set this function to "async"
       return await axios //<------------ return your axios call here, and await 
         .post(
@@ -190,21 +238,7 @@ export default createStore({
         });
     },
 
-    //show the current available git sources
-    async getGitSourceId({ state }) {
-      return await axios
-        .get("https://papagaio-api.sorintdev.it/api/gitsources", {
-          headers: {
-            Authorization: `Bearer ${state.currentAuthToken}`,
-          },
-        })
-        .then(response => {
-          return response.data
-        }).catch((error) => {
-          //console.log(error.data)
-        });
-    },
-
+ 
     getAllOrganizationDashboard({ commit, state }) {
       axios
         .get("https://papagaio-api.sorintdev.it/api/report", {
@@ -277,7 +311,7 @@ export default createStore({
         });
     },
 
-    async getAdministratorPrivilegesForIntervelEditInDb({ state }) {
+    async getAdministratorPrivileges({ state }) {
       return await axios
         .get("https://papagaio-api.sorintdev.it/api/userinfo", {
           headers: {

@@ -43,7 +43,6 @@
               alt="Organization Icon"
             />
 
-            <!-- {{ showSuccessPercentage(currentView.worstReport) }} -->
           </td>
           <td class="px-4 py-3 border-b-2 border-dark">
             {{ currentView.organizationName }}
@@ -201,7 +200,7 @@ export default {
 
     isAdminstrator() {
       this.$store
-        .dispatch("getAdministratorPrivilegesForIntervelEditInDb")
+        .dispatch("getAdministratorPrivileges")
         .then((response) => {
           this.userAdministratorPrivilege = response["isAdministrator"];
         });
@@ -214,7 +213,7 @@ export default {
     confirmDeleteOnPapagaio(organization) {
       if (this.isAdminstrator() == true) {
         this.$confirm(
-          `Are you sure you want to delete ${organization} from Papagaio only ?`,
+          `Are you sure you want to delete '${organization}' from Papagaio only ?`,
           "Warning",
           {
             cancelButtonText: "Cancel",

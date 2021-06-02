@@ -2,126 +2,191 @@
   <form @submit.prevent="checkForm" action="" method="post">
     <div class="w-3/4 container mx-auto">
       <h4 class="mt-2 mb-2 text-3xl font-bold">Add a New Organization</h4>
+
       <!-- Beginning of form -->
-      <div class="bg-gray-100">
-        <div class="p-4 ">
-          <table style="width: 100%">
-            <tr> 
-               <div class="float-right">
-                <el-popover
-                  placement="top-start"
-                  title="Adding a new organization"
-                  :width="920"
-                  trigger="hover"
-                  content="Fill this form to build your project on Agola, using Papagaio. As of today, 
+      <div class="bg-gray-100 p-2">
+        <!-- Git source -->
+        <div class="float-right">
+          <el-popover
+            placement="top-start"
+            title="Adding a new organization"
+            :width="920"
+            trigger="hover"
+            content="Fill this form to build your project on Agola, using Papagaio. As of today, 
                   Papagaio can only help you run projects on gitea and wecode repos. 
                    "
-                >
-                  <template #reference>
-                    <el-button>?</el-button>
-                  </template>
-                </el-popover>
-              </div>
-          
-             
-              <h5 class="mb-3 text-xl">Organization name</h5>
-             <div class = "flex justify-center">
-                <input
-                  class="mb-4 border-l-8 focus:border-papaOrange-600 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4"
-                  type="text"
-                  placeholder="Type an existing git organization name"
-                  v-model="orgName"
-                />
-             </div>
-            </tr>
-            <tr>
-              <h5 class="mb-3 text-xl">Agola reference name</h5>
-            <div class="flex justify-center">
-                <input
-                  class="mb-4 border-l-8 focus:border-papaOrange-600 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4"
-                  type="text"
-                  placeholder="Type an organization name (with no special characters)  "
-                  v-model="agolaRefName"
-                />
-            </div>
-            </tr>
-
-            <tr>
-              <h5 class="mb-3 text-xl">Visibility</h5>
-
-              <label class="mb-4 flex justify-start items-start">
-                <div
-                  class="bg-white border-2 rounded border-gray-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500"
-                >
-                  <input
-                    type="checkbox"
-                    v-model="orgIsPrivate"
-                    class="opacity-0 absolute"
-                  />
-                  <svg
-                    class="fill-current hidden w-4 h-4 text-papaOrange-600 pointer-events-none"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
-                  </svg>
-                </div>
-                <div>Private</div>
-              </label>
-            </tr>
-            <!-- Git source -->
-            <tr>
-              <h5 class="mb-3 text-xl">Git source</h5>
-              <div class="flex mb-3 relative w-64">
-                <select
-                  v-model="selectedSourceID"
-                  class="block appearance-none w-full bg-white border focus:border-papaDark-700 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline px-4 py-2 pr-8"
-                >
-                  <option value="null" disabled selected hidden display>
-                    Select from list
-                  </option>
-
-                  <option
-                    v-for="item in gitSourceResponse"
-                    v-bind:key="item.name"
-                    :value="item.name"
-                  >
-                    {{ item.name }}
-                  </option>
-                </select>
-
-                <div
-                  class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2"
-                >
-                  <svg
-                    class="fill-current h-4 w-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                    ></path>
-                  </svg>
-                </div>
-              </div>
-            </tr>
-
-            <!-- Showing corresponding URL-->
-            <tr>
-              <div class="" v-if="selectedSourceID != null">
-                <div class="p-1 bg-grey-200 shadow-xl font-medium">
-                  Corresponding URL
-                  <h2
-                    class="border-l-8 border-papaDark-400 bg-white text-dark p-1 font-medium"
-                    v-for="item in gitSourceResponse"
-                    v-bind:key="item.id"
-                  >
-                    {{ item.gitApiUrl }}
-                  </h2>
-                </div>
-              </div>
-            </tr>
-          </table>
+          >
+            <template #reference>
+              <el-button>?</el-button>
+            </template>
+          </el-popover>
         </div>
+        <div class="flex">
+          <div>
+            <h5 class="mb-3 text-xl">Git source</h5>
+            <el-select
+              v-model="selectedSourceID"
+              @change="getAvailableOrganizationInGitSource"
+              placeholder="Select"
+              class="inline-input mb-4 border-l-8 border-papaOrange-600 px-1 w-3/4"
+            >
+              <el-option value="null" label="Select"> Select </el-option>
+              <el-option
+                v-for="item in gitSourceResponse"
+                :key="item.value"
+                :label="item.name"
+                :value="item.name"
+              >
+                {{ item.name }}
+              </el-option>
+            </el-select>
+          </div>
+          <!-- Showing corresponding URL-->
+          <div
+            v-if="selectedSourceID != null && selectedSourceID != 'null'"
+            class="w-2/3 mt-5 ml-4"
+          >
+            <div class="p-1 bg-grey-200 shadow-lg font-medium">
+              Corresponding URL
+              <h2
+                class="border-l-8 border-papaDark-400 bg-white text-dark p-1 font-medium"
+                v-for="item in gitSourceResponse"
+                v-bind:key="item.id"
+              >
+                {{ item.gitApiUrl }}
+              </h2>
+            </div>
+          </div>
+        </div>
+
+        <table style="width: 100%">
+          <tr>
+            <!-- Organization Name-->
+            <h5 class="mb-3 text-xl">Organization name</h5>
+
+            <div class="flex justify-center">
+              <el-select
+                v-model="orgName"
+                filterable
+                placeholder="Select"
+                class="inline-input mb-4 border-l-8 border-papaOrange-600 px-1 w-3/4"
+                @change="AgolaReferenceNameSuggestion()"
+              >
+                <el-option value="null" label="Select"> Select </el-option>
+                <el-option
+                  v-for="item in availableOrganizationInGitSource"
+                  :key="item.value"
+                  :label="item"
+                  :value="item"
+                >
+                </el-option>
+              </el-select>
+            </div>
+          </tr>
+
+          <!-- Agola reference name section -->
+          <tr>
+            <h5 class="mb-3 text-xl">Agola reference name</h5>
+            <!-- Create new checkbox -->
+            <label class="mb-4 flex justify-start items-start">
+              <div
+                class="bg-white border-2 rounded border-gray-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500"
+              >
+                <input
+                  type="checkbox"
+                  v-model="createNewAgolaReferenceName"
+                  class="opacity-0 absolute"
+                  @change="
+                    selectFromExistingAgolaReferenceName = !selectFromExistingAgolaReferenceName
+                  "
+                />
+                <svg
+                  class="fill-current hidden w-4 h-4 text-papaOrange-600 pointer-events-none"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
+                </svg>
+              </div>
+              <div>Create new</div>
+            </label>
+
+            <!-- Agola ref. input field-->
+            <div class="flex justify-center">
+              <div class="w-3/4">
+                <el-input
+                  :disabled="!createNewAgolaReferenceName"
+                  class="mb-4 border-l-8 border-papaOrange-600 px-1 w-11/12"
+                  placeholder="Auto-generated name"
+                  v-model="agolaRefName"
+                  @change="checkIfAgolaRefNameExists()"
+                ></el-input>
+
+                <label class="flex inline-block mb-4">
+                  <div
+                    class="bg-white border-2 rounded border-gray-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500"
+                  >
+                    <input
+                      type="checkbox"
+                      v-model="orgIsPrivate"
+                      class="opacity-0 absolute"
+                    />
+                    <svg
+                      class="fill-current hidden w-4 h-4 text-papaOrange-600 pointer-events-none"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
+                    </svg>
+                  </div>
+                  Set private on Agola
+                </label>
+              </div>
+            </div>
+          </tr>
+
+          <!-- Existing Agola ref. -->
+          <tr>
+            <label class="mb-4 flex justify-start items-start">
+              <div
+                class="bg-white border-2 rounded border-gray-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500"
+              >
+                <input
+                  type="checkbox"
+                  v-model="selectFromExistingAgolaReferenceName"
+                  class="opacity-0 absolute"
+                  @change="
+                    createNewAgolaReferenceName = !createNewAgolaReferenceName
+                  "
+                />
+                <svg
+                  class="fill-current hidden w-4 h-4 text-papaOrange-600 pointer-events-none"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
+                </svg>
+              </div>
+              <div>Select from existing</div>
+            </label>
+
+            <div class="flex justify-center">
+              <el-select
+                v-model="ExistingAgolaRefName"
+                :disabled="!selectFromExistingAgolaReferenceName"
+                filterable
+                placeholder="Select"
+                class="inline-input mb-4 border-l-8 border-papaOrange-600 px-1 w-3/4"
+              >
+                <el-option value="null" label="Select"> Select </el-option>
+                <el-option
+                  v-for="item in existingAgolaReferenceNameInDB"
+                  :key="item.value"
+                  :label="item"
+                  :value="item"
+                >
+                </el-option>
+              </el-select>
+            </div>
+          </tr>
+        </table>
 
         <!-- Behavior Section -->
         <p class="panel-title text-white bg-papaDark-700">Behavior</p>
@@ -187,14 +252,14 @@
             <label class="font-bold ml-2">Filter by name</label>
             <tr>
               <span class="font-bold ml-3">Include</span>
-             <div class="flex justify-center">
+              <div class="flex justify-center">
                 <input
                   class="mb-4 border-l-8 focus:border-papaOrange-600 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4"
                   v-model="repositoriesField.repositoriesInclude"
                   type="text"
                   placeholder="*"
                 />
-             </div>
+              </div>
             </tr>
 
             <tr>
@@ -236,6 +301,7 @@
           </table>
         </div>
       </div>
+      <!-- Error alerts message-->
       <p class="mt-1" v-if="errors.length">
         <el-alert
           title="Please check the following error(s) and try again :"
@@ -252,6 +318,23 @@
         </el-alert>
       </p>
 
+      <!-- Info alerts message-->
+      <p class="mt-1" v-if="infos.length">
+        <el-alert
+          title="For your info :"
+          type="info"
+          effect="dark"
+          :closable="false"
+          show-icon
+        >
+          <ul>
+            <li class="text-sm mb-1" v-for="info in infos" v-bind:key="info">
+              {{ info }}
+            </li>
+          </ul>
+        </el-alert>
+      </p>
+
       <div class="sm:mt-0 sm:ml-3">
         <button
           class="px-10 py-3 font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold py-2 px-4 rounded float-right mt-5 border-solid border-2 border-white"
@@ -259,7 +342,6 @@
           Create
         </button>
       </div>
-     
     </div>
   </form>
   <el-dialog
@@ -267,7 +349,7 @@
     v-model="dialogVisible"
     width="30%"
   >
-    <span>Do you want to add it to Papagaio ?</span>
+    <span>This reference name is already used for an organization on Agola.<br> Do you want to override? </span>
     <template #footer>
       <span class="dialog-footer">
         <el-button type="primary" @click="forceSubmitForm()">Yes</el-button>
@@ -275,11 +357,25 @@
       </span>
     </template>
   </el-dialog>
-  <!-- <p> test usertoken from new org {{userToken}} </p> -->
+  <!-- <p>I have {{ availableOrganizationInGitSource }}</p> -->
+  <!-- <p>I have2 {{ orgName }}</p> -->
+  <!-- <p>
+    Current Agola references names in DB {{ existingAgolaReferenceNameInDB }}
+  </p> -->
+  <p>New checkbox {{ createNewAgolaReferenceName }}</p>
+  <p>Existing checkbox {{ selectFromExistingAgolaReferenceName }}</p>
+  <p>The user choosed an Existing {{ ExistingAgolaRefName }}</p>
+
+  <br>
+  <br>
+  <p>Agola reference that we deal with {{ agolaRefName }}</p>
+  <p>Private/Public {{ orgIsPrivate }}</p>
+  
 </template>
 
 <script>
 import { ElLoading } from "element-plus";
+
 export default {
   components: {},
   name: "neworaganization",
@@ -287,14 +383,22 @@ export default {
   data() {
     return {
       userToken: this.$store.getters.getAuthToken,
-      createOrgError: null,
-      orgIsPrivate: "false",
+
+      availableOrganizationInGitSource: [],
+      existingAgolaReferenceNameInDB: [],
+
+      createNewAgolaReferenceName: true,
+      selectFromExistingAgolaReferenceName: false,
+
+      orgIsPrivate: false,
       orgName: "",
       agolaRefName: "",
+      ExistingAgolaRefName: "",
       selectedSourceID: null,
       gitSourceResponse: [],
       createOrganizationResponse: null,
-      errors: [],
+      errors: [], //array of errors to users
+      infos: [], //array of info to users
       key: "",
       showBehaviorAddButton: true,
       dialogVisible: false,
@@ -311,19 +415,87 @@ export default {
 
   mounted() {
     this.gitSource();
+    // this.currentAvailableAgolaReferenceNames();
+  },
+  computed: {
+    randomName() {
+      let randomNumber = Math.floor(Math.random() * 10);
+      return randomNumber;
+    },
+  },
+
+  watch: {
+    agolaRefName: "checkIfAgolaRefNameExists",
   },
 
   methods: {
+
+    gitSource() {
+      this.$store.dispatch("getGitSourceId").then((response) => {
+        this.gitSourceResponse = response;
+      });
+    },
+
+    getAvailableOrganizationInGitSource() {
+      this.$store.state.GitSourceToGetOrganizationFrom = this.selectedSourceID;
+
+      this.$store
+        .dispatch("getOrganizationsFromSpecificGitSource")
+        .then((response) => {
+          this.availableOrganizationInGitSource = response;
+        });
+    },
+
+    AgolaReferenceNameSuggestion() {
+      // loop and make sure the name doesn't exist before proposing it
+
+      this.$store
+        .dispatch("getExistingAgolaReferenceNames")
+        .then((response) => {
+          this.existingAgolaReferenceNameInDB = response;
+        });
+
+      this.agolaRefName = this.orgName + this.randomName;
+      return this.agolaRefName;
+    },
+    checkIfAgolaRefNameExists() {
+      if(this.createNewAgolaReferenceName == true) {
+
+this.infos = [];
+      if (this.existingAgolaReferenceNameInDB.indexOf(this.agolaRefName) > -1) {
+        this.infos.push("This name exists already ya Basha");
+      } else {
+        //Not in the array. Name doesn't exist
+      }
+      }
+      
+
+    },
+
+    // currentAvailableAgolaReferenceNames() {
+    //   this.$store
+    //     .dispatch("getExistingAgolaReferenceNames")
+    //     .then((response) => {
+    //       this.existingAgolaReferenceNameInDB = response;
+    //     });
+
+    //   return this.existingAgolaReferenceNameInDB;
+    // },
+
     checkForm: function (e) {
-      //  let loadingInstance = ElLoading.service();
+      
+      //checks which agolaRefName to use
+      if(this.selectFromExistingAgolaReferenceName == true){
+        this.agolaRefName = this.ExistingAgolaRefName
+      }
 
       this.errors = [];
 
       if (!this.orgName) {
-        this.errors.push("- Provide an existing organization name");
+        this.errors.push("Provide an existing organization name");
       }
       if (!this.selectedSourceID) {
-        this.errors.push("- Select a git source");
+        this.errors.push("Select a git source");
       }
 
       if (this.orgIsPrivate === "false" || this.orgIsPrivate == false) {
@@ -369,6 +541,12 @@ export default {
     },
 
     submitForm() {
+
+      //directly force submit in-case users chooses an existing Agola Ref. Name
+      if(this.selectFromExistingAgolaReferenceName == true) {
+        this.forceSubmitForm();
+      }
+
       let loadingInstance = ElLoading.service({
         text: "Adding Organization",
         spinner: "el-icon-loading",
@@ -440,6 +618,7 @@ export default {
         .dispatch("forceNewOrganization")
         .then((response) => {
           loadingInstance.close();
+          console.log(response)
           this.$store.state.createOrganizationBeResponse =
             response.data["organizationURL"];
           this.$router.push("http://localhost:8080/confirmation");
@@ -450,11 +629,6 @@ export default {
         });
     },
 
-    gitSource() {
-      this.$store.dispatch("getGitSourceId").then((response) => {
-        this.gitSourceResponse = response;
-      });
-    },
 
     addRepositoriesField() {
       this.repositoriesTable.push({
@@ -473,7 +647,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 </style>
 
 
