@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <nav class=" text-white bg-papaOrange-600 p-3">
+    <nav class=" text-white bg-papaDark-800 p-3">
       <div class="container flex items-center justify-between flex-wrap">
         <div class="ml-10">
           <router-link
-            class="font-semibold flex items-center flex-shrink-0 text-xl tracking-tight text-black"
+            class="font-semibold flex items-center flex-shrink-0 text-xl tracking-tight text-gray-200"
             to="/"
           >
             <img

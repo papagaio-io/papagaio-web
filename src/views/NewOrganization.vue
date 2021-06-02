@@ -4,7 +4,7 @@
       <h4 class="mt-2 mb-2 text-3xl font-bold">Add a New Organization</h4>
 
       <!-- Beginning of form -->
-      <div class="bg-gray-100 p-2">
+      <div class="bg-gray-100 p-4">
         <!-- Git source -->
         <div class="float-right">
           <el-popover
@@ -187,13 +187,14 @@
             </div>
           </tr>
         </table>
+      </div>
 
-        <!-- Behavior Section -->
-        <p class="panel-title text-white bg-papaDark-700">Behavior</p>
-
+      <!-- Behavior Section -->
+      <p class="panel-title text-white bg-papaDark-700">Behavior</p>
+      <div class="bg-gray-100">
         <div class="p-4">
           <button
-            class="btn text-white bg-papaOrange-600 hover:bg-papaDark-700 border-solid border-2 border-white"
+            class="btn text-white bg-papaDark-800 hover:bg-papaDark-700 border-solid border-2 border-white"
             @click="addRepositoriesField()"
             v-if="showBehaviorAddButton"
           >
@@ -321,9 +322,9 @@
       <!-- Info alerts message-->
       <p class="mt-1" v-if="infos.length">
         <el-alert
-          title="For your info :"
-          type="info"
-          effect="dark"
+          title="Warning"
+          type="warning"
+          effect="light"
           :closable="false"
           show-icon
         >
@@ -337,7 +338,7 @@
 
       <div class="sm:mt-0 sm:ml-3">
         <button
-          class="px-10 py-3 font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold py-2 px-4 rounded float-right mt-5 border-solid border-2 border-white"
+          class="px-10 py-3 font-medium rounded-md bg-papaDark-800 hover:bg-papaDark-700 text-white font-bold py-2 px-4 rounded float-right mt-5 border-solid border-2 border-white"
         >
           Create
         </button>
@@ -349,7 +350,10 @@
     v-model="dialogVisible"
     width="30%"
   >
-    <span>This reference name is already used for an organization on Agola.<br> Do you want to override? </span>
+    <span
+      >This reference name is already used for an organization on Agola.<br />
+      Do you want to override?
+    </span>
     <template #footer>
       <span class="dialog-footer">
         <el-button type="primary" @click="forceSubmitForm()">Yes</el-button>
@@ -366,11 +370,10 @@
   <p>Existing checkbox {{ selectFromExistingAgolaReferenceName }}</p>
   <p>The user choosed an Existing {{ ExistingAgolaRefName }}</p>
 
-  <br>
-  <br>
+  <br />
+  <br />
   <p>Agola reference that we deal with {{ agolaRefName }}</p>
   <p>Private/Public {{ orgIsPrivate }}</p>
-  
 </template>
 
 <script>
@@ -429,7 +432,6 @@ export default {
   },
 
   methods: {
-
     gitSource() {
       this.$store.dispatch("getGitSourceId").then((response) => {
         this.gitSourceResponse = response;
@@ -459,17 +461,16 @@ export default {
       return this.agolaRefName;
     },
     checkIfAgolaRefNameExists() {
-      if(this.createNewAgolaReferenceName == true) {
-
-this.infos = [];
-      if (this.existingAgolaReferenceNameInDB.indexOf(this.agolaRefName) > -1) {
-        this.infos.push("This name exists already ya Basha");
-      } else {
-        //Not in the array. Name doesn't exist
+      if (this.createNewAgolaReferenceName == true) {
+        this.infos = [];
+        if (
+          this.existingAgolaReferenceNameInDB.indexOf(this.agolaRefName) > -1
+        ) {
+          this.infos.push("This reference name is already in use. Please compose another one, or choose from existing names.");
+        } else {
+          //Not in the array. Name doesn't exist
+        }
       }
-      }
-      
-
     },
 
     // currentAvailableAgolaReferenceNames() {
@@ -483,10 +484,9 @@ this.infos = [];
     // },
 
     checkForm: function (e) {
-      
       //checks which agolaRefName to use
-      if(this.selectFromExistingAgolaReferenceName == true){
-        this.agolaRefName = this.ExistingAgolaRefName
+      if (this.selectFromExistingAgolaReferenceName == true) {
+        this.agolaRefName = this.ExistingAgolaRefName;
       }
 
       this.errors = [];
@@ -541,9 +541,8 @@ this.infos = [];
     },
 
     submitForm() {
-
       //directly force submit in-case users chooses an existing Agola Ref. Name
-      if(this.selectFromExistingAgolaReferenceName == true) {
+      if (this.selectFromExistingAgolaReferenceName == true) {
         this.forceSubmitForm();
       }
 
@@ -618,7 +617,7 @@ this.infos = [];
         .dispatch("forceNewOrganization")
         .then((response) => {
           loadingInstance.close();
-          console.log(response)
+          console.log(response);
           this.$store.state.createOrganizationBeResponse =
             response.data["organizationURL"];
           this.$router.push("http://localhost:8080/confirmation");
@@ -628,7 +627,6 @@ this.infos = [];
           this.errors.push(error.response.data);
         });
     },
-
 
     addRepositoriesField() {
       this.repositoriesTable.push({

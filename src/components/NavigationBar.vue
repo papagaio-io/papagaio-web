@@ -2,7 +2,7 @@
   <!-- component -->
   <div class="bg-gray-50 text-gray-800">
     <div
-      class="fixed flex flex-col top-0 left-0 w-64 bg-papaOrange-600 h-2/2 shadow-lg"
+      class="fixed flex flex-col top-0 left-0 w-64 bg-papaDark-800 h-2/2 shadow-lg"
     >
       <div
         class="justify-evenly flex items-center h-16 border-b-4 border-gray-200"
@@ -77,7 +77,8 @@
                 <a
                   @click="this.$router.push('http://localhost:8081/')"
                   href="#"
-                  class="relative flex flex-row items-center h-11 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent hover:bg-papaDark-700 text-white hover:text-gray-200 pr-6"
+                  class="relative flex flex-row items-center h-11  hover:bg-papaDark-700 text-white hover:text-gray-200 pr-6"
+                  :class="$route.name === 'Home' ? 'border-l-6 border-gray-200 ' : '' "
                 >
                   <span class="inline-flex justify-center items-center ml-4">
                     <svg
@@ -105,7 +106,8 @@
                     this.$router.push('http://localhost:8081/neworganization')
                   "
                   href="#"
-                  class="relative flex flex-row items-center h-11 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent hover:bg-papaDark-700 text-white hover:text-gray-200 pr-6"
+                  class="relative flex flex-row items-center h-11  hover:bg-papaDark-700 text-white hover:text-gray-200 pr-6"
+                  :class="$route.name === 'NewOrganization' ? 'border-l-6 border-fuchsia-600 ' : '' "
                 >
                   <span class="inline-flex justify-center items-center ml-4">
                     <svg
@@ -138,7 +140,8 @@
                 <a
                   @click="this.$router.push('http://localhost:8081/dashboard')"
                   href="#"
-                  class="relative flex flex-row items-center h-11 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent hover:bg-papaDark-700 text-white hover:text-gray-200 pr-6"
+                  class="relative flex flex-row items-center h-11 hover:bg-papaDark-700 text-white hover:text-gray-200 pr-6"
+                  :class="$route.name === 'Dashboard' ? 'border-l-6 border-gray-200 ' : '' "
                 >
                   <span class="inline-flex justify-center items-center ml-4">
                     <svg
@@ -175,7 +178,8 @@
                     this.$router.push('http://localhost:8081/triggerscan')
                   "
                   href="#"
-                  class="relative flex flex-row items-center h-11 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent hover:bg-papaDark-700 text-white hover:text-gray-200 pr-6"
+                  class="relative flex flex-row items-center h-11 hover:bg-papaDark-700 text-white hover:text-gray-200 pr-6"
+                  :class="$route.name === 'Triggerscan' ? 'border-l-6 border-gray-200 ' : '' "
                 >
                   <span class="inline-flex justify-center items-center ml-4">
                     <svg

@@ -32,7 +32,7 @@
         >
           <div class="sm:mt-0 sm:ml-3">
             <button
-              class="w-full flex items-center justify-center px-8 py-3 border-solid border-2 border-white rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold"
+              class="w-full flex items-center justify-center px-8 py-3 border-solid border-2 border-white rounded-md bg-papaDark-800 hover:bg-papaDark-700 text-white font-bold"
               @click="$keycloak.login()"
             >
               Sign In

@@ -38,7 +38,7 @@
             </svg>
           </button>
         </div>
-        <div  class="flex justify-around">
+        <div class="flex justify-around">
           <div class="p-1 w-1/3 bg-red shadow-lg font-medium">
             Default runs
             <h2
@@ -69,7 +69,7 @@
         <!-- The editable section -->
         <div v-show="editIntervels">
           <h5 class="mt-5 mb-3 text-xl text-papaOrange-600">Edit intervals</h5>
-          <hr class="mt-5 mb-3"/>
+          <hr class="mt-5 mb-3" />
           <div class="flex justify-around">
             <div class="p-1 w-1/4 bg-red shadow-lg font-medium">
               Default runs
@@ -81,6 +81,20 @@
                 {{ tempDefaultRunIntervelIdentifier }}
               </h2>
               <div class="flex justify-around mt-4">
+                <el-select
+                  class="inline-input mb-4 border-l-8 border-papaOrange-600 px-1 w-3/4"
+                  v-model="tempDefaultRunIntervelIdentifier"
+                  placeholder="Select"
+                >
+                  <!-- <el-option value="null" label="Select"> Select </el-option> -->
+                  <el-option value="minute">Minute</el-option>
+                  <el-option value="hour">Hour</el-option>
+                  <el-option value="day">Day</el-option>
+                  <el-option value="week">Week</el-option>
+                  <el-option value="month">Month</el-option>
+                </el-select>
+
+                <!-- 
                 <div class="flex mb-3 relative">
                   <select
                     class="block appearance-none w-full bg-white border focus:border-papaDark-700 rounded py-2 px-5 leading-tight focus:outline-none focus:shadow-outline"
@@ -109,7 +123,8 @@
                       ></path>
                     </svg>
                   </div>
-                </div>
+                </div> -->
+
                 <div class="sm:mt-0 sm:ml-3">
                   <button
                     class="px-5 py-1 font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white border-solid border-2 border-white"
@@ -140,7 +155,25 @@
                 {{ tempFailedRunIntervelIdentifier }}
               </h2>
               <div class="flex justify-around mt-4">
-                <div class="flex mb-3 relative">
+
+
+
+
+      <el-select
+                  class="inline-input mb-4 border-l-8 border-papaOrange-600 px-1 w-3/4"
+                  v-model="tempFailedRunIntervelIdentifier"
+                  placeholder="Select"
+                >
+                  <!-- <el-option value="null" label="Select"> Select </el-option> -->
+                  <el-option value="minute">Minute</el-option>
+                  <el-option value="hour">Hour</el-option>
+                  <el-option value="day">Day</el-option>
+                  <el-option value="week">Week</el-option>
+                  <el-option value="month">Month</el-option>
+                </el-select>
+
+
+                <!-- <div class="flex mb-3 relative">
                   <select
                     class="block appearance-none w-full bg-white border focus:border-papaDark-700 rounded py-2 px-5 leading-tight focus:outline-none focus:shadow-outline"
                     v-model="tempFailedRunIntervelIdentifier"
@@ -168,7 +201,11 @@
                       ></path>
                     </svg>
                   </div>
-                </div>
+                </div> -->
+
+
+
+
                 <div class="sm:mt-0 sm:ml-3">
                   <button
                     class="px-5 py-1 font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white border-solid border-2 border-white"
@@ -195,7 +232,7 @@
 
     <div class="sm:mt-0 sm:ml-3" v-show="editIntervels">
       <button
-        class="px-10 py-3 font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold py-2 px-4 rounded float-right mt-5 border-solid border-2 border-white"
+        class="px-10 py-3 font-medium rounded-md bg-papaDark-800 hover:bg-papaDark-700 text-white font-bold py-2 px-4 rounded float-right mt-5 border-solid border-2 border-white"
         @click="checkForm()"
       >
         Save
@@ -261,40 +298,31 @@ export default {
       ) {
         this.convertedNewDefaultRunIntervel = this.$store.getters.getorganizationsDefaultTriggerTime;
         this.convertedNewFailedRunIntervel = this.$store.getters.getrunFailedDefaultTriggerTime;
-
       } else if (this.tempDefaultRunIntervelIdentifier == "hour") {
         this.convertedNewDefaultRunIntervel =
           this.$store.getters.getorganizationsDefaultTriggerTime * 60;
-      
       } else if (this.tempDefaultRunIntervelIdentifier == "day") {
         this.convertedNewDefaultRunIntervel =
           this.$store.getters.getorganizationsDefaultTriggerTime * 1440;
-       
       } else if (this.tempDefaultRunIntervelIdentifier == "week") {
         this.convertedNewDefaultRunIntervel =
           this.$store.getters.getorganizationsDefaultTriggerTime * 10080;
-     
       } else if (this.tempDefaultRunIntervelIdentifier == "month") {
         this.convertedNewDefaultRunIntervel =
           this.$store.getters.getorganizationsDefaultTriggerTime * 43800;
-       
       }
       if (this.tempFailedRunIntervelIdentifier == "hour") {
         this.convertedNewFailedRunIntervel =
           this.$store.getters.getrunFailedDefaultTriggerTime * 60;
-       
       } else if (this.tempFailedRunIntervelIdentifier == "day") {
         this.convertedNewFailedRunIntervel =
           this.$store.getters.getrunFailedDefaultTriggerTime * 1440;
-      
       } else if (this.tempFailedRunIntervelIdentifier == "week") {
         this.convertedNewFailedRunIntervel =
           this.$store.getters.getrunFailedDefaultTriggerTime * 10080;
-     
       } else if (this.tempFailedRunIntervelIdentifier == "month") {
         this.convertedNewFailedRunIntervel =
           this.$store.getters.getrunFailedDefaultTriggerTime * 43800;
-      
       } else {
         console.log("values are not clear");
       }
@@ -361,16 +389,14 @@ export default {
 
     //checks to give edit privileges
     isAdminstrator() {
-      this.$store
-        .dispatch("getAdministratorPrivileges")
-        .then((response) => {
-          this.userAdministratorPrivilege = response["isAdministrator"];
-        });
+      this.$store.dispatch("getAdministratorPrivileges").then((response) => {
+        this.userAdministratorPrivilege = response["isAdministrator"];
+      });
 
       // return false;
       return this.userAdministratorPrivilege;
     },
-    
+
     editSectionVisibility() {
       if (this.isAdminstrator() == true) {
         return (this.editIntervels = !this.editIntervels);

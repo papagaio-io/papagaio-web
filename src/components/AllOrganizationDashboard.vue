@@ -72,7 +72,7 @@
           </td>
 
           <td @click.stop class="px-4 py-3 border-b-2 border-dark">
-            <el-dropdown>
+            <el-dropdown trigger="click" placement = "top">
               <el-button size="small" type="danger" >
                 
                 <svg
