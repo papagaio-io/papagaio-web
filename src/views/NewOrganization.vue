@@ -312,7 +312,7 @@
           show-icon
         >
           <ul>
-            <li class="text-sm mb-1" v-for="error in errors" v-bind:key="error">
+            <li class="text-base mb-1" v-for="error in errors" v-bind:key="error">
               {{ error }}
             </li>
           </ul>
@@ -324,12 +324,12 @@
         <el-alert
           title="Warning"
           type="warning"
-          effect="light"
+          effect="dark"
           :closable="false"
           show-icon
         >
           <ul>
-            <li class="text-sm mb-1" v-for="info in infos" v-bind:key="info">
+            <li class="text-base mb-1" v-for="info in infos" v-bind:key="info">
               {{ info }}
             </li>
           </ul>
@@ -366,14 +366,14 @@
   <!-- <p>
     Current Agola references names in DB {{ existingAgolaReferenceNameInDB }}
   </p> -->
-  <p>New checkbox {{ createNewAgolaReferenceName }}</p>
+  <!-- <p>New checkbox {{ createNewAgolaReferenceName }}</p>
   <p>Existing checkbox {{ selectFromExistingAgolaReferenceName }}</p>
   <p>The user choosed an Existing {{ ExistingAgolaRefName }}</p>
 
   <br />
   <br />
   <p>Agola reference that we deal with {{ agolaRefName }}</p>
-  <p>Private/Public {{ orgIsPrivate }}</p>
+  <p>Private/Public {{ orgIsPrivate }}</p> -->
 </template>
 
 <script>
@@ -473,16 +473,6 @@ export default {
       }
     },
 
-    // currentAvailableAgolaReferenceNames() {
-    //   this.$store
-    //     .dispatch("getExistingAgolaReferenceNames")
-    //     .then((response) => {
-    //       this.existingAgolaReferenceNameInDB = response;
-    //     });
-
-    //   return this.existingAgolaReferenceNameInDB;
-    // },
-
     checkForm: function (e) {
       //checks which agolaRefName to use
       if (this.selectFromExistingAgolaReferenceName == true) {
@@ -549,7 +539,7 @@ export default {
       let loadingInstance = ElLoading.service({
         text: "Adding Organization",
         spinner: "el-icon-loading",
-        background: "rgba(244, 137, 36, 0.1)",
+        background: "rgba(44, 96, 80,0.1)",
       });
       this.errors = [];
 
@@ -600,7 +590,7 @@ export default {
       let loadingInstance = ElLoading.service({
         text: "Adding Organization",
         spinner: "el-icon-loading",
-        background: "rgba(244, 137, 36, 0.1)",
+        background: "rgba(rgba(44, 96, 80, 0.1))",
       });
       this.errors = [];
 

@@ -5,7 +5,7 @@
       class="fixed flex flex-col top-0 left-0 w-64 bg-papaDark-800 h-2/2 shadow-lg"
     >
       <div
-        class="justify-evenly flex items-center h-16 border-b-4 border-gray-200"
+        class="justify-evenly flex items-center h-16 border-b-2 border-gray-200"
       >
         <!-- <img
           src="../assets/img/anonymousUser.png"
@@ -33,8 +33,8 @@
           <svg
             v-if="!show"
             xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
+            width="24"
+            height="24"
             fill="currentColor"
             class="bi bi-list"
             viewBox="0 0 16 16"
@@ -48,8 +48,8 @@
           <svg
           v-if="show"
             xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
+            width="24"
+            height="24"
             fill="currentColor"
             class="bi bi-x-lg"
             viewBox="0 0 16 16"

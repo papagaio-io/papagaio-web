@@ -127,7 +127,7 @@
 
                 <div class="sm:mt-0 sm:ml-3">
                   <button
-                    class="px-5 py-1 font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white border-solid border-2 border-white"
+                    class="px-5 py-1 font-medium rounded-md bg-papaDark-800 hover:bg-papaDark-700 text-white border-solid border-2 border-white"
                     @click="decreaseOneDefaultIntervel()"
                   >
                     -
@@ -136,7 +136,7 @@
 
                 <div class="sm:mt-0 sm:ml-3">
                   <button
-                    class="px-5 py-1 font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white border-solid border-2 border-white"
+                    class="px-5 py-1 font-medium rounded-md bg-papaDark-800 hover:bg-papaDark-700 text-white border-solid border-2 border-white"
                     @click="addOneDefaultIntervel()"
                   >
                     +
@@ -208,7 +208,7 @@
 
                 <div class="sm:mt-0 sm:ml-3">
                   <button
-                    class="px-5 py-1 font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white border-solid border-2 border-white"
+                    class="px-5 py-1 font-medium rounded-md bg-papaDark-800 hover:bg-papaDark-700 text-white border-solid border-2 border-white"
                     @click="decreaseOneFailedIntervel()"
                   >
                     -
@@ -217,7 +217,7 @@
 
                 <div class="sm:mt-0 sm:ml-3">
                   <button
-                    class="px-5 py-1 font-medium rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white border-solid border-2 border-white"
+                    class="px-5 py-1 font-medium rounded-md bg-papaDark-800 hover:bg-papaDark-700 text-white border-solid border-2 border-white"
                     @click="addOneFailedIntervel()"
                   >
                     +
@@ -336,7 +336,7 @@ export default {
         this.convertedNewFailedRunIntervel
       );
       this.$store.dispatch("setNewOrganizationsDefaultTriggerTimeInDb");
-      //response to be handled here
+      this.messageConfirmation();
       this.editIntervels = false;
       //clear temp values
       this.tempNumericDefaultRunInterval = null;
@@ -404,6 +404,14 @@ export default {
         return (this.dialogVisible = true);
       }
     },
+
+     messageConfirmation() {
+        this.$message({
+          message: 'New intervels set successfully',
+          type: 'success'
+        });
+      },
+
   },
 };
 </script>

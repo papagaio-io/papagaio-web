@@ -225,7 +225,7 @@ export default {
             this.deleteFromPapagaio(organization);
             this.$message({
               type: "success",
-              message: "Organization Delete",
+              message: ` ${organization} has been deleted successfully`,
             });
           })
           .catch(() => {});
@@ -251,7 +251,7 @@ export default {
             this.deleteFromAgola(organization);
             this.$message({
               type: "success",
-              message: "Organization Delete",
+              message: ` ${organization} has been deleted successfully`,
             });
           })
           .catch(() => {});
