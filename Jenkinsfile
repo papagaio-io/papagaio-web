@@ -64,9 +64,11 @@ podTemplate(
 
       container('docker') {
         stage('Docker') {
-          docker.withRegistry(dockerRegistry, 'nexus') {
+          docker.withRegistry('', 'hub') {
             def img = docker.build(app, '.')
-            (target == 'uat' || target == 'va') ? img.push(version) : img.push('latest');
+            docker.withRegistry('https://registry.sorintdev.it', 'nexus'){
+                (target == 'uat' || target == 'va') ? img.push(version) : img.push('latest');
+            }
           }
         }
       }
