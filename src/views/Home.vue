@@ -10,7 +10,7 @@
       <div class="heroBody">
         <h4 class="mt-2 text-xl font-bold text-white">
           Plugin of
-          <a class=" " href="https://agola.io" target="_blank"
+          <a class="" href="https://agola.io" target="_blank"
             ><img
               class="inline-block w-20"
               alt="Papagaio logo"
@@ -19,20 +19,37 @@
         </h4>
 
         <p
-          class="mt-3 mb-4 sm:max-w-4xl sm:mx-auto md:mt-5 md:text-xl text-white"
+          class="
+            mt-3
+            mb-4
+            sm:max-w-4xl
+            sm:mx-auto
+            md:mt-5
+            md:text-xl
+            text-white
+          "
         >
           Agola is a CI/CD open source tool under the 2.0 Apache license.
-          Papagaio was developed to complement Agola, extend its capabilities,
-          & to provide ease-of-use features.
+          Papagaio was developed to complement Agola, extend its capabilities, &
+          to provide ease-of-use features.
         </p>
 
         <div
-          v-if="userLoggedIn == false"
+          v-if="$keycloak.authenticated == false"
           class="mt-3 sm:mt-3 sm:flex sm:justify-center"
         >
           <div class="sm:mt-0 sm:ml-3">
             <button
-              class="w-full flex items-center justify-center px-8 py-3 border-solid border-2 border-white rounded-md bg-papaDark-800 hover:bg-papaDark-700 text-white font-bold"
+              class="
+                px-10
+                py-3
+                font-medium
+                bg-papaDark-800
+                hover:bg-papaDark-700
+                text-white
+                float-right
+                border-solid border-2 border-white
+              "
               @click="$keycloak.login()"
             >
               Sign In
@@ -63,7 +80,14 @@
               What to expect ?
             </h2>
             <p
-              class="mt-3 text-3xl leading-8 font-extrabold tracking-tight sm:text-4xl"
+              class="
+                mt-3
+                text-3xl
+                leading-8
+                font-extrabold
+                tracking-tight
+                sm:text-4xl
+              "
             >
               Configure your project using Papagaio & run it on Agola
             </p>
@@ -77,14 +101,28 @@
 
           <div class="mt-10">
             <dl
-              class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10"
+              class="
+                space-y-10
+                md:space-y-0
+                md:grid md:grid-cols-2
+                md:gap-x-8 md:gap-y-10
+              "
             >
               <!-- 1 -->
 
               <div class="flex">
                 <div class="flex-shrink-0">
                   <div
-                    class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-papaDark-700"
+                    class="
+                      flex
+                      items-center
+                      justify-center
+                      h-12
+                      w-12
+                      rounded-md
+                      bg-white
+                      text-papaDark-700
+                    "
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -108,10 +146,10 @@
                   <dd class="mt-2 text-base">
                     High usability & simple configuration. By automating the
                     process of adding organizations, projects, branches, &
-                    members to Agola. Optionally offering the ability to
-                    specify a build strategy. Plus, setting intervals for both, synchronizing
-                    organization’s projects & members, along with recovering
-                    failed runs of projects.
+                    members to Agola. Optionally offering the ability to specify
+                    a build strategy. Plus, setting intervals for both,
+                    synchronizing organization’s projects & members, along with
+                    recovering failed runs of projects.
                   </dd>
                 </div>
               </div>
@@ -120,7 +158,16 @@
               <div class="flex">
                 <div class="flex-shrink-0">
                   <div
-                    class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-papaDark-700"
+                    class="
+                      flex
+                      items-center
+                      justify-center
+                      h-12
+                      w-12
+                      rounded-md
+                      bg-white
+                      text-papaDark-700
+                    "
                   >
                     <!-- Heroicon name: outline/scale -->
                     <svg
@@ -155,7 +202,16 @@
               <div class="flex">
                 <div class="flex-shrink-0">
                   <div
-                    class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-papaDark-700"
+                    class="
+                      flex
+                      items-center
+                      justify-center
+                      h-12
+                      w-12
+                      rounded-md
+                      bg-white
+                      text-papaDark-700
+                    "
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -184,7 +240,16 @@
               <div class="flex">
                 <div class="flex-shrink-0">
                   <div
-                    class="flex items-center justify-center h-12 w-12 rounded-md bg-white text-papaDark-700"
+                    class="
+                      flex
+                      items-center
+                      justify-center
+                      h-12
+                      w-12
+                      rounded-md
+                      bg-white
+                      text-papaDark-700
+                    "
                   >
                     <!-- Heroicon name: outline/globe-alt -->
                     <svg
@@ -205,8 +270,7 @@
                     Email Notifications
                   </dt>
                   <dd class="mt-2 mb-2 text-base">
-                    Papagaio scans & notifies users for
-                    any failed project runs.
+                    Papagaio scans & notifies users for any failed project runs.
                   </dd>
                 </div>
               </div>

@@ -24,7 +24,12 @@
         </tr>
 
         <tr
-          class="bg-gray-100 text-dark text-center cursor-pointer hover:bg-gray-300"
+          class="
+            bg-gray-100
+            text-dark text-center
+            cursor-pointer
+            hover:bg-gray-300
+          "
           v-for="currentView in $store.getters.showdashBoardData"
           :key="currentView.id"
           @click="navigateForward(currentView.agolaRef)"
@@ -42,7 +47,6 @@
               :src="showSuccessPercentage(currentView.worstReport)"
               alt="Organization Icon"
             />
-
           </td>
           <td class="px-4 py-3 border-b-2 border-dark">
             {{ currentView.organizationName }}
@@ -72,9 +76,8 @@
           </td>
 
           <td @click.stop class="px-4 py-3 border-b-2 border-dark">
-            <el-dropdown trigger="click" placement = "top">
-              <el-button size="small" type="danger" >
-                
+            <el-dropdown trigger="click" placement="top">
+              <el-button size="small" type="danger">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -91,8 +94,7 @@
                     d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
                   />
                 </svg>
-              
-                </el-button>
+              </el-button>
               <template #dropdown>
                 <el-dropdown-menu>
                   <el-dropdown-item
@@ -199,11 +201,9 @@ export default {
     },
 
     isAdminstrator() {
-      this.$store
-        .dispatch("getAdministratorPrivileges")
-        .then((response) => {
-          this.userAdministratorPrivilege = response["isAdministrator"];
-        });
+      this.$store.dispatch("getAdministratorPrivileges").then((response) => {
+        this.userAdministratorPrivilege = response["isAdministrator"];
+      });
 
       // return false;
       return this.userAdministratorPrivilege;
@@ -223,10 +223,6 @@ export default {
         )
           .then(() => {
             this.deleteFromPapagaio(organization);
-            this.$message({
-              type: "success",
-              message: ` ${organization} has been deleted successfully`,
-            });
           })
           .catch(() => {});
       } else {
@@ -241,7 +237,6 @@ export default {
           `Are you sure you want to delete ${organization} from Papagaio & Agola ?`,
           "Warning",
           {
-            
             cancelButtonText: "Cancel",
             confirmButtonText: "Yes",
             type: "warning",
@@ -249,10 +244,6 @@ export default {
         )
           .then(() => {
             this.deleteFromAgola(organization);
-            this.$message({
-              type: "success",
-              message: ` ${organization} has been deleted successfully`,
-            });
           })
           .catch(() => {});
       } else {
@@ -264,19 +255,35 @@ export default {
     deleteFromPapagaio(organization) {
       let self = this;
       this.$store.commit("setOrganizationToDelete", organization);
-      this.$store.dispatch("deleteOrganizationFromPapagaio", organization);
-      setTimeout(function () {
-        self.$store.dispatch("getAllOrganizationDashboard");
-      }, 1000);
+      this.$store
+        .dispatch("deleteOrganizationFromPapagaio", organization)
+        .then((response) => {
+          this.$message({
+            type: "success",
+            message: ` ${organization} has been deleted successfully`,
+          });
+          setTimeout(function () {
+            self.$store.dispatch("getAllOrganizationDashboard");
+          }, 1000);
+        });
     },
+
     //deletes and updates
     deleteFromAgola(organization) {
       let self = this;
       this.$store.commit("setOrganizationToDelete", organization);
-      this.$store.dispatch("deleteOrganizationFromAgola", organization);
-      setTimeout(function () {
-        self.$store.dispatch("getAllOrganizationDashboard");
-      }, 1000);
+      this.$store
+        .dispatch("deleteOrganizationFromAgola", organization)
+        .then((response) => {
+          this.$message({
+            type: "success",
+            message: ` ${organization} has been deleted successfully`,
+          });
+
+          setTimeout(function () {
+            self.$store.dispatch("getAllOrganizationDashboard");
+          }, 1000);
+        });
     },
     checkforUpdates() {
       this.$store.dispatch("getAllOrganizationDashboard");

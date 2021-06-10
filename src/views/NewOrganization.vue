@@ -21,14 +21,22 @@
             </template>
           </el-popover>
         </div>
+
         <div class="flex">
-          <div>
-            <h5 class="mb-3 text-xl">Git source</h5>
+          <div >
+            <h5 class="mb-3 text-xl font-medium">Git source</h5>
+
             <el-select
               v-model="selectedSourceID"
               @change="getAvailableOrganizationInGitSource"
               placeholder="Select"
-              class="inline-input mb-4 border-l-8 border-papaOrange-600 px-1 w-3/4"
+              class="
+                inline-input
+                mb-3
+                border-l-8 border-papaOrange-600
+                px-1
+                w-3/5
+              "
             >
               <el-option value="null" label="Select"> Select </el-option>
               <el-option
@@ -40,7 +48,12 @@
                 {{ item.name }}
               </el-option>
             </el-select>
+            <!-- error message-->
+            <h6 class="text-red-600" v-if="errorGitSourceSelect.length">
+              Please specify the Git source
+            </h6>
           </div>
+
           <!-- Showing corresponding URL-->
           <div
             v-if="selectedSourceID != null && selectedSourceID != 'null'"
@@ -49,7 +62,13 @@
             <div class="p-1 bg-grey-200 shadow-lg font-medium">
               Corresponding URL
               <h2
-                class="border-l-8 border-papaDark-400 bg-white text-dark p-1 font-medium"
+                class="
+                  border-l-8 border-papaDark-400
+                  bg-white
+                  text-dark
+                  p-1
+                  font-medium
+                "
                 v-for="item in gitSourceResponse"
                 v-bind:key="item.id"
               >
@@ -59,17 +78,22 @@
           </div>
         </div>
 
+        <!-- Organization Name-->
         <table style="width: 100%">
           <tr>
-            <!-- Organization Name-->
-            <h5 class="mb-3 text-xl">Organization name</h5>
-
+            <h5 class="mb-3 mt-10 text-xl font-medium">Organization name</h5>
             <div class="flex justify-center">
               <el-select
                 v-model="orgName"
                 filterable
                 placeholder="Select"
-                class="inline-input mb-4 border-l-8 border-papaOrange-600 px-1 w-3/4"
+                class="
+                  inline-input
+                  mb-3
+                  border-l-8 border-papaOrange-600
+                  px-1
+                  w-3/4
+                "
                 @change="AgolaReferenceNameSuggestion()"
               >
                 <el-option value="null" label="Select"> Select </el-option>
@@ -82,26 +106,50 @@
                 </el-option>
               </el-select>
             </div>
+            <!-- Error  message for Organization Name-->
+            <h6 class="text-red-600" v-if="errorOrganizationName.length">
+              Please select the organization required to run
+            </h6>
           </tr>
 
           <!-- Agola reference name section -->
           <tr>
-            <h5 class="mb-3 text-xl">Agola reference name</h5>
+            <h5 class="mb-3 mt-10 text-xl font-medium">Agola reference name</h5>
             <!-- Create new checkbox -->
             <label class="mb-4 flex justify-start items-start">
               <div
-                class="bg-white border-2 rounded border-gray-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500"
+                class="
+                  bg-white
+                  border-2
+                  rounded-full
+                  border-gray-400
+                  w-5
+                  h-5
+                  flex flex-shrink-0
+                  justify-center
+                  items-center
+                  mr-2
+                  focus-within:border-blue-500
+                "
               >
                 <input
                   type="checkbox"
                   v-model="createNewAgolaReferenceName"
                   class="opacity-0 absolute"
                   @change="
-                    selectFromExistingAgolaReferenceName = !selectFromExistingAgolaReferenceName
+                    selectFromExistingAgolaReferenceName =
+                      !selectFromExistingAgolaReferenceName
                   "
                 />
                 <svg
-                  class="fill-current hidden w-4 h-4 text-papaOrange-600 pointer-events-none"
+                  class="
+                    fill-current
+                    hidden
+                    w-4
+                    h-4
+                    text-papaOrange-600
+                    pointer-events-none
+                  "
                   viewBox="0 0 20 20"
                 >
                   <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
@@ -123,7 +171,19 @@
 
                 <label class="flex inline-block mb-4">
                   <div
-                    class="bg-white border-2 rounded border-gray-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500"
+                    class="
+                      bg-white
+                      border-2
+                      rounded
+                      border-gray-400
+                      w-5
+                      h-5
+                      flex flex-shrink-0
+                      justify-center
+                      items-center
+                      mr-2
+                      focus-within:border-blue-500
+                    "
                   >
                     <input
                       type="checkbox"
@@ -131,7 +191,14 @@
                       class="opacity-0 absolute"
                     />
                     <svg
-                      class="fill-current hidden w-4 h-4 text-papaOrange-600 pointer-events-none"
+                      class="
+                        fill-current
+                        hidden
+                        w-4
+                        h-4
+                        text-papaOrange-600
+                        pointer-events-none
+                      "
                       viewBox="0 0 20 20"
                     >
                       <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
@@ -141,13 +208,45 @@
                 </label>
               </div>
             </div>
+            <!-- Info alerts message-->
+            <p class="mt-1 mb-3" v-if="infos.length">
+              <el-alert
+                title="Warning"
+                type="warning"
+                effect="dark"
+                :closable="false"
+                show-icon
+              >
+                <ul>
+                  <li
+                    class="text-sm mb-1"
+                    v-for="info in infos"
+                    v-bind:key="info"
+                  >
+                    {{ info }}
+                  </li>
+                </ul>
+              </el-alert>
+            </p>
           </tr>
 
           <!-- Existing Agola ref. -->
           <tr>
             <label class="mb-4 flex justify-start items-start">
               <div
-                class="bg-white border-2 rounded border-gray-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500"
+                class="
+                  bg-white
+                  border-2
+                  rounded-full
+                  border-gray-400
+                  w-5
+                  h-5
+                  flex flex-shrink-0
+                  justify-center
+                  items-center
+                  mr-2
+                  focus-within:border-blue-500
+                "
               >
                 <input
                   type="checkbox"
@@ -158,7 +257,14 @@
                   "
                 />
                 <svg
-                  class="fill-current hidden w-4 h-4 text-papaOrange-600 pointer-events-none"
+                  class="
+                    fill-current
+                    hidden
+                    w-4
+                    h-4
+                    text-papaOrange-600
+                    pointer-events-none
+                  "
                   viewBox="0 0 20 20"
                 >
                   <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
@@ -173,7 +279,13 @@
                 :disabled="!selectFromExistingAgolaReferenceName"
                 filterable
                 placeholder="Select"
-                class="inline-input mb-4 border-l-8 border-papaOrange-600 px-1 w-3/4"
+                class="
+                  inline-input
+                  mb-4
+                  border-l-8 border-papaOrange-600
+                  px-1
+                  w-3/4
+                "
               >
                 <el-option value="null" label="Select"> Select </el-option>
                 <el-option
@@ -194,7 +306,13 @@
       <div class="bg-gray-100">
         <div class="p-4">
           <button
-            class="btn text-white bg-papaDark-800 hover:bg-papaDark-700 border-solid border-2 border-white"
+            class="
+              btn
+              text-white
+              bg-papaDark-800
+              hover:bg-papaDark-700
+              border-solid border-2 border-white
+            "
             @click="addRepositoriesField()"
             v-if="showBehaviorAddButton"
           >
@@ -255,7 +373,19 @@
               <span class="font-bold ml-3">Include</span>
               <div class="flex justify-center">
                 <input
-                  class="mb-4 border-l-8 focus:border-papaOrange-600 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4"
+                  class="
+                    mb-4
+                    border-l-8
+                    focus:border-papaOrange-600
+                    appearance-none
+                    border
+                    rounded
+                    py-2
+                    px-3
+                    leading-tight
+                    focus:outline-none
+                    w-3/4
+                  "
                   v-model="repositoriesField.repositoriesInclude"
                   type="text"
                   placeholder="*"
@@ -268,7 +398,19 @@
 
               <div class="flex justify-center">
                 <input
-                  class="mb-4 border-l-8 focus:border-papaOrange-600 appearance-none border rounded py-2 px-3 leading-tight focus:outline-none w-3/4"
+                  class="
+                    mb-4
+                    border-l-8
+                    focus:border-papaOrange-600
+                    appearance-none
+                    border
+                    rounded
+                    py-2
+                    px-3
+                    leading-tight
+                    focus:outline-none
+                    w-3/4
+                  "
                   v-model="repositoriesField.repositoriesExclude"
                   type="text"
                   placeholder=""
@@ -302,7 +444,7 @@
           </table>
         </div>
       </div>
-      <!-- Error alerts message-->
+      <!-- General error alerts message-->
       <p class="mt-1" v-if="errors.length">
         <el-alert
           title="Please check the following error(s) and try again :"
@@ -312,25 +454,12 @@
           show-icon
         >
           <ul>
-            <li class="text-base mb-1" v-for="error in errors" v-bind:key="error">
+            <li
+              class="text-base mb-1"
+              v-for="error in errors"
+              v-bind:key="error"
+            >
               {{ error }}
-            </li>
-          </ul>
-        </el-alert>
-      </p>
-
-      <!-- Info alerts message-->
-      <p class="mt-1" v-if="infos.length">
-        <el-alert
-          title="Warning"
-          type="warning"
-          effect="dark"
-          :closable="false"
-          show-icon
-        >
-          <ul>
-            <li class="text-base mb-1" v-for="info in infos" v-bind:key="info">
-              {{ info }}
             </li>
           </ul>
         </el-alert>
@@ -338,7 +467,17 @@
 
       <div class="sm:mt-0 sm:ml-3">
         <button
-          class="px-10 py-3 font-medium rounded-md bg-papaDark-800 hover:bg-papaDark-700 text-white font-bold py-2 px-4 rounded float-right mt-5 border-solid border-2 border-white"
+          class="
+            mt-5
+            px-10
+            py-3
+            font-medium
+            bg-papaDark-800
+            hover:bg-papaDark-700
+            text-white
+            float-right
+            border-solid border-2 border-white
+          "
         >
           Create
         </button>
@@ -362,18 +501,15 @@
     </template>
   </el-dialog>
   <!-- <p>I have {{ availableOrganizationInGitSource }}</p> -->
-  <!-- <p>I have2 {{ orgName }}</p> -->
-  <!-- <p>
-    Current Agola references names in DB {{ existingAgolaReferenceNameInDB }}
-  </p> -->
-  <!-- <p>New checkbox {{ createNewAgolaReferenceName }}</p>
-  <p>Existing checkbox {{ selectFromExistingAgolaReferenceName }}</p>
-  <p>The user choosed an Existing {{ ExistingAgolaRefName }}</p>
-
-  <br />
-  <br />
-  <p>Agola reference that we deal with {{ agolaRefName }}</p>
-  <p>Private/Public {{ orgIsPrivate }}</p> -->
+  <p>I have2 {{ orgName }}</p>
+  <!-- <p>Current Agola references names in DB {{ existingAgolaReferenceNameInDB }}</p> -->
+  <!-- <p>New checkbox {{ createNewAgolaReferenceName }}</p> -->
+  <!-- <p>Existing checkbox {{ selectFromExistingAgolaReferenceName }}</p> -->
+  <!-- <p>The user choosed an Existing {{ ExistingAgolaRefName }}</p> -->
+  <!-- <br /> -->
+  <!-- <br /> -->
+  <!-- <p>Agola reference that we deal with {{ agolaRefName }}</p> -->
+  <!-- <p>Private/Public {{ orgIsPrivate }}</p> -->
 </template>
 
 <script>
@@ -402,11 +538,18 @@ export default {
       createOrganizationResponse: null,
       errors: [], //array of errors to users
       infos: [], //array of info to users
+      errorOrganizationName: [],
+      errorGitSourceSelect: [],
       key: "",
       showBehaviorAddButton: true,
       dialogVisible: false,
 
-      repositoriesTable: [],
+      repositoriesTable: [
+        // {
+        //   repositoriesInclude: "*",
+        //   repositoriesExclude: "",
+        // },
+      ],
 
       behaviorTypepicked: "wildcard",
 
@@ -419,10 +562,13 @@ export default {
   mounted() {
     this.gitSource();
     // this.currentAvailableAgolaReferenceNames();
+    if (!this.$keycloak.authenticated){
+      location.reload();
+    }
   },
   computed: {
     randomName() {
-      let randomNumber = Math.floor(Math.random() * 10);
+      let randomNumber = Math.floor(Math.random() * 100);
       return randomNumber;
     },
   },
@@ -451,13 +597,16 @@ export default {
     AgolaReferenceNameSuggestion() {
       // loop and make sure the name doesn't exist before proposing it
 
-      this.$store
-        .dispatch("getExistingAgolaReferenceNames")
-        .then((response) => {
-          this.existingAgolaReferenceNameInDB = response;
-        });
+      if (this.orgName !== "null" || !this.orgName) {
+        this.$store
+          .dispatch("getExistingAgolaReferenceNames")
+          .then((response) => {
+            this.existingAgolaReferenceNameInDB = response;
+          });
 
-      this.agolaRefName = this.orgName + this.randomName;
+        this.agolaRefName = this.orgName + this.randomName;
+        return this.agolaRefName;
+      } else this.agolaRefName = "";
       return this.agolaRefName;
     },
     checkIfAgolaRefNameExists() {
@@ -466,7 +615,9 @@ export default {
         if (
           this.existingAgolaReferenceNameInDB.indexOf(this.agolaRefName) > -1
         ) {
-          this.infos.push("This reference name is already in use. Please compose another one, or choose from existing names.");
+          this.infos.push(
+            "This reference name is already in use. Please compose another one, or choose from existing names."
+          );
         } else {
           //Not in the array. Name doesn't exist
         }
@@ -480,12 +631,16 @@ export default {
       }
 
       this.errors = [];
+      this.errorOrganizationName = [];
+      this.errorGitSourceSelect = [];
 
-      if (!this.orgName) {
-        this.errors.push("Provide an existing organization name");
+      if (!this.orgName || this.orgName === "null") {
+        this.errorOrganizationName.push("");
       }
       if (!this.selectedSourceID) {
-        this.errors.push("Select a git source");
+        this.errorGitSourceSelect.push(
+          "Please select the required git source in which the organization exists"
+        );
       }
 
       if (this.orgIsPrivate === "false" || this.orgIsPrivate == false) {
@@ -523,8 +678,10 @@ export default {
       }
 
       if (!this.errors.length) {
-        this.behaviorIncludeTempValue = this.repositoriesTable[0].repositoriesInclude;
-        this.behaviorExcludeTempValue = this.repositoriesTable[0].repositoriesExclude;
+        this.behaviorIncludeTempValue =
+          this.repositoriesTable[0].repositoriesInclude;
+        this.behaviorExcludeTempValue =
+          this.repositoriesTable[0].repositoriesExclude;
         this.behaviorTypeTempValue = this.behaviorTypepicked;
         this.submitForm();
       }
@@ -590,7 +747,7 @@ export default {
       let loadingInstance = ElLoading.service({
         text: "Adding Organization",
         spinner: "el-icon-loading",
-        background: "rgba(rgba(44, 96, 80, 0.1))",
+        background: "rgba(44, 96, 80,0.1)",
       });
       this.errors = [];
 

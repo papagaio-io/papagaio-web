@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
-import organizationsetup from "../views/OrganizationSetup.vue";
 import dashboard from "../views/Dashboard"
 import neworganization from "../views/NewOrganization.vue"
 import confirmation from "../views/Confirmation.vue"
@@ -10,23 +9,42 @@ import pagenotfound from "../views/PageNotFound.vue";
 import store from '../store/index'
 
 
+
 const preventRoutes = {
+
+  // beforeRouteEnter(to, from, next) {
+  //   next(vm => {
+  //     // access to component instance via `vm`
+  //    // console.log(vm.$keycloak.authenticated);
+  //     if (vm.$keycloak.authenticated) {
+
+  //       next();
+  //     } else {
+
+  //       next("/");
+  //     }
+
+
+  //   })
+  // }
+
+
+
   beforeEnter: (to, from, next) => {
     // console.log(store.getters.getLoginState);
-    // console.log(this.$keycloak.authenticated);
+    // console.log(this.$keycloak.token);
     if (store.getters.getLoginState === "true") {
 
       next();
     } else {
 
-      
-      next("/");
+
+      next("http://localhost:8080/");
     }
 
   }
 
 }
-
 
 
 const routes = [
@@ -41,11 +59,6 @@ const routes = [
     component: dashboard,
     ...preventRoutes,
 
-  },
-  {
-    path: '/organizationsetup',
-    name: 'OrganizationSetup',
-    component: organizationsetup
   },
   {
     path: '/neworganization',
@@ -72,16 +85,6 @@ const routes = [
     component: pagenotfound,
 
   },
-
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  },
-
 
 ]
 

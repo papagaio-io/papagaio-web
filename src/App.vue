@@ -1,41 +1,32 @@
 <template>
   <div id="app">
-    <nav class=" text-white bg-papaDark-800 p-3">
+    <nav class="text-white bg-papaDark-800 p-3">
       <div class="container flex items-center justify-between flex-wrap">
         <div class="ml-10">
           <router-link
-            class="font-semibold flex items-center flex-shrink-0 text-xl tracking-tight text-gray-200"
-            to="/"
+            class="
+              font-semibold
+              flex
+              items-center
+              flex-shrink-0
+              text-xl
+              tracking-tight
+              text-white
+            "
+            to="/dashboard"
           >
-            <img
-              class="w-10 mr-2"
-              src="./assets/img/papagaioIcon.png"
-            />
+            <img class="w-10 mr-2" src="./assets/img/papagaioIcon.png" />
             Papagaio
           </router-link>
         </div>
-
-        <!-- <div class="navbar-item">
-          <div v-if="$keycloak.authenticated">
-            <label>{{ currentUsername }}</label>
-
-            <button
-              class="ml-5 btn bg-papaDark-700 hover:bg-papaOrange-600 border-solid border-2 border-white"
-              @click="$keycloak.logout()"
-            >
-              Logout
-            </button>
-          </div>
-        </div> -->
         <label v-show="false">{{ userLoggedIn }}</label>
       </div>
     </nav>
-     
   </div>
-  
+
   <router-view />
-  
- <NavigationBar v-if="$keycloak.authenticated"> </NavigationBar>
+
+  <NavigationBar v-if="$keycloak.authenticated"> </NavigationBar>
   <!-- <p >{{currentUserToken }}</p> -->
 </template>
 
@@ -48,7 +39,9 @@ export default {
   data() {
     return {};
   },
-  mounted() {},
+  onUpdate() {
+    this.userAuthenticated();
+  },
   computed: {
     currentUserToken() {
       return this.$store.getters.getAuthToken;
@@ -60,7 +53,20 @@ export default {
       return this.$store.getters.getUserName;
     },
   },
-  methods: {},
+  methods: {
+    userAuthenticated() {
+      
+      if (this.$keycloak.authenticated === false) {
+        this.$store.commit("setLoginState", "false");
+        console.log("I checked if user is authenticated. Answer is no");
+      } 
+      else if (this.$keycloak.authenticated === true) {
+        console.log("seems like the user is authenticated");
+      }
+
+    
+    },
+  },
 };
 </script>
 

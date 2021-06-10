@@ -13,6 +13,7 @@ import jwtDecode from "jwt-decode";
 import KeycloakConfig from "../keycloak.json";
 import Keycloak from 'keycloak-js';
 
+
 const myApp = createApp(App)
 
 let initOptions = {
@@ -23,7 +24,6 @@ const keycloak = Keycloak(initOptions)
 
 myApp.config.globalProperties.$keycloak = keycloak;
 myApp.use(ElementPlus)
-
 myApp.use(VueAxios, axios)
 myApp.use(store)
 myApp.use(router)
@@ -37,16 +37,17 @@ keycloak.init({
   if (!auth) {
 
   } else if (auth) {
-    
+    router.push("/dashboard");
     //store auth and dispatch dashboard data
     store.state.currentUserName = keycloak.tokenParsed.name;
     store.commit('setLoginState', "true");
     store.state.currentAuthToken = keycloak.token;
-   // store.dispatch('getAllOrganizationDashboard');
     store.dispatch('organizationsDefaultTriggerTimeInDb');
    
   }
 }).catch((e) => {
   console.log('Serwer lezy: ' + e)
 })
+
+
 

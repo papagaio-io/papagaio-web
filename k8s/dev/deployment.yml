@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: papagaio-web
-  namespace: ci
+  namespace: ci-dev
   labels:
     app: papagaio-web
 spec:

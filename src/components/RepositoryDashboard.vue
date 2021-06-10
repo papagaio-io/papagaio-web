@@ -43,7 +43,7 @@
           <th class="px-4 py-3">Last success run URL</th>
           <th class="px-4 py-3">Last failed run URL</th>
         </tr>
-
+        
         <tr
           class="bg-gray-100 text-dark text-center hover:bg-gray-300"
           v-for="currentView in getOrganizationsDashboard().branchs"
@@ -63,7 +63,7 @@
             {{ calculateDateIntervels(currentView["lastSuccessRunDate"]) }}
           </td>
           <td class="px-4 py-3 border-b-2 border-dark">
-         
+          <!-- handle this response (0001-01-01T00:00:00Z)-->
             {{ calculateDateIntervels(currentView["lastFailedRunDate"]) }}
           </td>
           <td class="px-4 py-3 border-b-2 border-dark">
@@ -116,8 +116,12 @@
             N/A
           </td>
         </tr>
+        
       </table>
     </div>
+    
+    <!-- <el-empty v-if="getOrganizationsDashboard().branchs.length < 1" description="No data found"></el-empty> -->
+   
   </div>
 </template>
 <script>

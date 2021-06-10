@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: papagaio-web
-  namespace: ci
+  namespace: ci-dev
   labels:
     app: papagaio-web
 spec:

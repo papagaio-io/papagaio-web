@@ -136,7 +136,7 @@ export default createStore({
        //show the current available git sources
        async getGitSourceId({ state }) {
         return await axios
-          .get("https://papagaio-api.sorintdev.it/api/gitsources", {
+          .get("https://papagaiodev.sorintdev.it/api/gitsources", {
             headers: {
               Authorization: `Bearer ${state.currentAuthToken}`,
             },
@@ -151,7 +151,7 @@ export default createStore({
       //gets all organizations from specific git source
       async getOrganizationsFromSpecificGitSource({ state }) {
         return await axios
-          .get(`https://papagaio-api.sorintdev.it/api/gitorganizations/${state.GitSourceToGetOrganizationFrom}`, {
+          .get(`https://papagaiodev.sorintdev.it/api/gitorganizations/${state.GitSourceToGetOrganizationFrom}`, {
             headers: {
               Authorization: `Bearer ${state.currentAuthToken}`,
             },
@@ -166,7 +166,7 @@ export default createStore({
       //gets all Agola reference names to validate exists
       async getExistingAgolaReferenceNames({ state }) {
         return await axios
-          .get("https://papagaio-api.sorintdev.it/api/agolarefs", {
+          .get("https://papagaiodev.sorintdev.it/api/agolarefs", {
             headers: {
               Authorization: `Bearer ${state.currentAuthToken}`,
             },
@@ -182,7 +182,7 @@ export default createStore({
     async newOrganization({ state }) { //<-------- set this function to "async"
       return await axios //<------------ return your axios call here, and await 
         .post(
-          "https://papagaio-api.sorintdev.it/api/createorganization",
+          "https://papagaiodev.sorintdev.it/api/createorganization",
           {
 
             name: state.Orgname,
@@ -212,7 +212,7 @@ export default createStore({
     async forceNewOrganization({ state }) {
       return await axios
         .post(
-          "https://papagaio-api.sorintdev.it/api/createorganization?force",
+          "https://papagaiodev.sorintdev.it/api/createorganization?force",
           {
 
             name: state.Orgname,
@@ -241,7 +241,7 @@ export default createStore({
  
     getAllOrganizationDashboard({ commit, state }) {
       axios
-        .get("https://papagaio-api.sorintdev.it/api/report", {
+        .get("https://papagaiodev.sorintdev.it/api/report", {
           headers: {
             Authorization: `Bearer ${state.currentAuthToken}`,
           },
@@ -251,7 +251,7 @@ export default createStore({
 
     getOrganizationDashboard({ commit, state }) {
       axios
-        .get(`https://papagaio-api.sorintdev.it/api/report/${state.organizationURL}`, {
+        .get(`https://papagaiodev.sorintdev.it/api/report/${state.organizationURL}`, {
           headers: {
             Authorization: `Bearer ${state.currentAuthToken}`,
           },
@@ -264,7 +264,7 @@ export default createStore({
 
     getProjectDashboard({ commit, state }) {
       axios
-        .get(`https://papagaio-api.sorintdev.it/api/report/${state.organizationURL}/${state.projectURL}`, {
+        .get(`https://papagaiodev.sorintdev.it/api/report/${state.organizationURL}/${state.projectURL}`, {
           headers: {
             Authorization: `Bearer ${state.currentAuthToken}`,
           },
@@ -277,7 +277,7 @@ export default createStore({
 
     organizationsDefaultTriggerTimeInDb({ commit, state }) {
       axios
-        .get("https://papagaio-api.sorintdev.it/api/gettriggersconfig", {
+        .get("https://papagaiodev.sorintdev.it/api/gettriggersconfig", {
           headers: {
             Authorization: `Bearer ${state.currentAuthToken}`,
           },
@@ -292,7 +292,7 @@ export default createStore({
     setNewOrganizationsDefaultTriggerTimeInDb({ state }) {
       axios
         .post(
-          "https://papagaio-api.sorintdev.it/api/savetriggersconfig",
+          "https://papagaiodev.sorintdev.it/api/savetriggersconfig",
           {
             organizationsDefaultTriggerTime: state.organizationsDefaultTriggerTime,
             runFailedDefaultTriggerTime: state.runFailedDefaultTriggerTime,
@@ -313,7 +313,7 @@ export default createStore({
 
     async getAdministratorPrivileges({ state }) {
       return await axios
-        .get("https://papagaio-api.sorintdev.it/api/userinfo", {
+        .get("https://papagaiodev.sorintdev.it/api/userinfo", {
           headers: {
             Authorization: `Bearer ${state.currentAuthToken}`,
           },
@@ -325,28 +325,32 @@ export default createStore({
         });
     },
     //deletes the organization from Papagaio only
-    deleteOrganizationFromPapagaio({ state }) {
-      axios
-        .delete(`https://papagaio-api.sorintdev.it/api/deleteorganization/${state.deleteThisOrganization}?internalonly`, {
+    async deleteOrganizationFromPapagaio({ state }) {
+      return await axios
+        .delete(`https://papagaiodev.sorintdev.it/api/deleteorganization/${state.deleteThisOrganization}?internalonly`, {
           headers: {
             Authorization: `Bearer ${state.currentAuthToken}`,
           },
         })
         .then(response => {
-          console.log(response.data)
+          return response.data
 
+        }).catch((error) => {
+          console.log(error.data)
         });
     },
     //deletes the organization from Agola and Papagaio
-    deleteOrganizationFromAgola({ state }) {
-      axios
-        .delete(`https://papagaio-api.sorintdev.it/api/deleteorganization/${state.deleteThisOrganization}`, {
+    async deleteOrganizationFromAgola({ state }) {
+      return await axios
+        .delete(`https://papagaiodev.sorintdev.it/api/deleteorganization/${state.deleteThisOrganization}`, {
           headers: {
             Authorization: `Bearer ${state.currentAuthToken}`,
           },
         })
         .then(response => {
-          console.log(response.data)
+          return response.data
+        }).catch((error) => {
+          console.log(error.data)
         });
     },
 

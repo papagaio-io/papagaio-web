@@ -34,6 +34,11 @@ export default {
       // showDashboard: this.$store.getters.getcurrentDashboardToShow,
     };
   },
+  mounted() {
+    if (!this.$keycloak.authenticated){
+      location.reload();
+    }
+  },
   computed: {
     showDashboard() {
       return this.$store.getters.getcurrentDashboardToShow;
