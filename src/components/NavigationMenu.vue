@@ -15,8 +15,7 @@
               text-gray-400
               hover:text-white
               hover:bg-papaDark-700
-              focus:outline-none
-              focus:ring-2 focus:ring-inset focus:ring-white
+          
             "
           >
             <span class="sr-only">Open main menu</span>
@@ -274,7 +273,6 @@
                         text-white
                         items-center
                         h-11
-                        focus:outline-none
                         hover:bg-papaDark-700
                         hover:text-gray-200
                         pr-6

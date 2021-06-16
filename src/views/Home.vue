@@ -39,7 +39,7 @@
           v-if="$keycloak.authenticated == false"
           class="mt-3 sm:mt-3 sm:flex sm:justify-center"
         >
-          <div class="sm:mt-0 sm:ml-3">
+          <div class="flex justify-center sm:mt-0 sm:ml-3">
             <button
               class="
                 px-10
