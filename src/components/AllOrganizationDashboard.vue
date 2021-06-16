@@ -9,7 +9,7 @@
       >
     </h4>
     <!-- Body  -->
-    <div class="bg-white">
+    <div class="bg-white ">
       <table class="w-11/12 mx-auto text-dark border">
         <tr class="text-center">
           <th class="px-4 py-3"></th>
@@ -188,6 +188,10 @@ export default {
       var date = new Date(null);
       date.setMilliseconds(received); // specify value for SECONDS here
       var result = date.toISOString().substr(11, 8);
+      if(result === "00:00:00")
+      {
+        return "N/A"
+      }
       return result;
     },
     navigateForward(id) {

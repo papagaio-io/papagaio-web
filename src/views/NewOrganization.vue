@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="checkForm" action="" method="post">
-    <div class="w-3/4 container mx-auto">
+    <div class="w-full sm:w-3/4 container mx-auto">
       <h4 class="mt-2 mb-2 text-3xl font-bold">Add a New Organization</h4>
 
       <!-- Beginning of form -->
@@ -501,7 +501,7 @@
     </template>
   </el-dialog>
   <!-- <p>I have {{ availableOrganizationInGitSource }}</p> -->
-  <p>I have2 {{ orgName }}</p>
+  <!-- <p>I have2 {{ orgName }}</p> -->
   <!-- <p>Current Agola references names in DB {{ existingAgolaReferenceNameInDB }}</p> -->
   <!-- <p>New checkbox {{ createNewAgolaReferenceName }}</p> -->
   <!-- <p>Existing checkbox {{ selectFromExistingAgolaReferenceName }}</p> -->
@@ -562,8 +562,9 @@ export default {
   mounted() {
     this.gitSource();
     // this.currentAvailableAgolaReferenceNames();
-    if (!this.$keycloak.authenticated){
-      location.reload();
+
+    if(!this.$keycloak.authenticated) {
+      window.location.reload()
     }
   },
   computed: {

@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <nav class="text-white bg-papaDark-800 p-3">
-      <div class="container flex items-center justify-between flex-wrap">
-        <div class="ml-10">
+     <label v-show="false">{{ userLoggedIn }}</label>
+    <NavigationMenu v-if="$keycloak.authenticated"> </NavigationMenu>
+    <!-- <nav class="text-white bg-papaDark-800 py-3">
+      <div class="container flex items-center flex-wrap">
+        <div class="mr-auto ml-36">
           <router-link
             class="
               font-semibold
@@ -11,7 +13,7 @@
               flex-shrink-0
               text-xl
               tracking-tight
-              text-white
+              text-
             "
             to="/dashboard"
           >
@@ -19,28 +21,27 @@
             Papagaio
           </router-link>
         </div>
-        <label v-show="false">{{ userLoggedIn }}</label>
+       
       </div>
-    </nav>
+    </nav> -->
   </div>
-
   <router-view />
 
-  <NavigationBar v-if="$keycloak.authenticated"> </NavigationBar>
+  <!-- <NavigationBar v-if="$keycloak.authenticated"> </NavigationBar> -->
   <!-- <p >{{currentUserToken }}</p> -->
 </template>
 
 <script>
 import NavigationBar from "./components/NavigationBar";
+import NavigationMenu from "./components/NavigationMenu.vue"
+
 export default {
   components: {
     NavigationBar,
+    NavigationMenu,
   },
   data() {
     return {};
-  },
-  onUpdate() {
-    this.userAuthenticated();
   },
   computed: {
     currentUserToken() {
@@ -51,20 +52,6 @@ export default {
     },
     currentUsername() {
       return this.$store.getters.getUserName;
-    },
-  },
-  methods: {
-    userAuthenticated() {
-      
-      if (this.$keycloak.authenticated === false) {
-        this.$store.commit("setLoginState", "false");
-        console.log("I checked if user is authenticated. Answer is no");
-      } 
-      else if (this.$keycloak.authenticated === true) {
-        console.log("seems like the user is authenticated");
-      }
-
-    
     },
   },
 };

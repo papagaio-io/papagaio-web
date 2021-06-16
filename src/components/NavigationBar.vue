@@ -1,9 +1,12 @@
 <template>
   <!-- component -->
-  <div class="bg-gray-50 text-gray-800">
+  
+  <div class=" ">
+    
     <div
-      class="fixed flex flex-col top-0 left-0 w-64 bg-papaDark-800 h-2/2 shadow-lg"
+      class="fixed flex flex-col top-0 left-0 w-52  bg-papaDark-800 h-2/2 shadow-lg"
     >
+    
       <div
         class="justify-evenly flex items-center h-16 border-b-2 border-gray-200"
       >
@@ -75,7 +78,7 @@
               </li>
               <li>
                 <a
-                  @click="this.$router.push('http://localhost:8081/')"
+                  @click="this.$router.push('http://localhost:8081/') , closeMenu() "
                   href="#"
                   class="relative flex flex-row items-center h-11  hover:bg-papaDark-700 text-white hover:text-gray-200 pr-6"
                   :class="$route.name === 'Home' ? 'border-l-6 border-gray-200 ' : '' "
@@ -103,8 +106,9 @@
               <li>
                 <a
                   @click="
-                    this.$router.push('http://localhost:8081/neworganization')
+                    this.$router.push('http://localhost:8081/neworganization') , closeMenu()
                   "
+                  
                   href="#"
                   class="relative flex flex-row items-center h-11  hover:bg-papaDark-700 text-white hover:text-gray-200 pr-6"
                   :class="$route.name === 'NewOrganization' ? 'border-l-6 border-fuchsia-600 ' : '' "
@@ -130,15 +134,15 @@
                     class="ml-2 font-semibold text-sm tracking-wide truncate font-sans"
                     >Add Organization</span
                   >
-                  <span
+                  <!-- <span
                     class="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-blue-500 bg-blue-100 rounded-full"
                     >New</span
-                  >
+                  > -->
                 </a>
               </li>
               <li>
                 <a
-                  @click="this.$router.push('http://localhost:8081/dashboard')"
+                  @click="this.$router.push('http://localhost:8081/dashboard') , closeMenu() "
                   href="#"
                   class="relative flex flex-row items-center h-11 hover:bg-papaDark-700 text-white hover:text-gray-200 pr-6"
                   :class="$route.name === 'Dashboard' ? 'border-l-6 border-gray-200 ' : '' "
@@ -175,7 +179,7 @@
               <li>
                 <a
                   @click="
-                    this.$router.push('http://localhost:8081/triggerscan')
+                    this.$router.push('http://localhost:8081/triggerscan') , closeMenu()
                   "
                   href="#"
                   class="relative flex flex-row items-center h-11 hover:bg-papaDark-700 text-white hover:text-gray-200 pr-6"
@@ -243,7 +247,11 @@
         </div>
       </transition>
     </div>
+   
   </div>
+
+  
+  
 </template>
 
 <script>
@@ -269,7 +277,12 @@ export default {
       return this.$store.getters.getAuthToken;
     },
   },
-  methods: {},
+  methods: {
+closeMenu(){
+  this.show = false;
+}
+
+  },
 };
 </script>
 

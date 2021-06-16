@@ -33,7 +33,9 @@ export default {
       projectOnAgole: "",
     };
   },
-  mounted() {},
+  mounted() {
+   
+  },
   computed: {
     BeResponse() {
      

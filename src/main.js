@@ -9,7 +9,6 @@ import ElementPlus from 'element-plus';
 import './assets/styles/element-variables.scss'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import jwtDecode from "jwt-decode";
 import KeycloakConfig from "../keycloak.json";
 import Keycloak from 'keycloak-js';
 
@@ -48,6 +47,4 @@ keycloak.init({
 }).catch((e) => {
   console.log('Serwer lezy: ' + e)
 })
-
-
 

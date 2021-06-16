@@ -35,9 +35,6 @@ export default {
     };
   },
   mounted() {
-    if (!this.$keycloak.authenticated){
-      location.reload();
-    }
   },
   computed: {
     showDashboard() {

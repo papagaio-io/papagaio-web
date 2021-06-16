@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: papagaio-web
+  namespace: ci-stable
+  labels:
+    app: papagaio-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: papagaio-web
+  template:
+    metadata:
+      labels:
+        app: papagaio-web
+    spec:
+      terminationGracePeriodSeconds: 0
+      restartPolicy: Always
+      containers:
+        - image: registry.sorintdev.it/papagaio-web
+          imagePullPolicy: Always
+          name: papagaio-web
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - name: papagaio-web-config
+              mountPath: /usr/share/nginx/html/config
+      volumes:
+        - name: papagaio-web-config
+          secret:
+            secretName: papagaio-web-secret

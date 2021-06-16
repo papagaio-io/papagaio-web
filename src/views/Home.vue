@@ -1,7 +1,8 @@
 <template>
-  <div class="flex flex-col items-center">
+  
+  <div class="flex flex-col container mx-auto mt-5 w-full sm:w-3/4 ">
     <img
-      class="object-cover w- 2/5 h-40 mb-1"
+      class="w-2/5 mx-auto"
       alt="Papagaio logo"
       src="../assets/img/papagaioMainLogo.jpg"
     />
@@ -291,6 +292,7 @@
       </div>
     </div>
   </div>
+    
 </template>
 
 <script>
@@ -301,5 +303,6 @@ export default {
       return this.$store.getters.getLoginState;
     },
   },
+  mounted (){}
 };
 </script>
