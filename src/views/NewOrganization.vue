@@ -563,7 +563,7 @@ export default {
     this.gitSource();
     // this.currentAvailableAgolaReferenceNames();
 
-    if(!this.$keycloak.authenticated) {
+    if(this.$keycloak.authenticated === false) {
       window.location.reload()
     }
   },

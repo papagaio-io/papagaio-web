@@ -2,7 +2,7 @@
   
   <div class="flex flex-col container mx-auto mt-5 w-full sm:w-3/4 ">
     <img
-      class="w-2/5 mx-auto"
+      class="w-full sm:w-2/5 mx-auto"
       alt="Papagaio logo"
       src="../assets/img/papagaioMainLogo.jpg"
     />
@@ -30,7 +30,7 @@
             text-white
           "
         >
-          Agola is a CI/CD open source tool under the 2.0 Apache license.
+          Agola 2.0 is a CI/CD open source tool under the 2.0 Apache license.
           Papagaio was developed to complement Agola, extend its capabilities, &
           to provide ease-of-use features.
         </p>
@@ -268,7 +268,7 @@
                 </div>
                 <div class="ml-4">
                   <dt class="text-lg leading-6 font-bold">
-                    Email Notifications
+                    Email notifications
                   </dt>
                   <dd class="mt-2 mb-2 text-base">
                     Papagaio scans & notifies users for any failed project runs.
@@ -284,7 +284,7 @@
           Powered by
           <a class="pl-1" href="https://sorint.it" target="_blank"
             ><img
-              class="inline-block w-21 h-6"
+              class="inline-block w-30 h-7"
               alt="Papagaio logo"
               src="../assets/img/SorintLab_spa.png"
           /></a>

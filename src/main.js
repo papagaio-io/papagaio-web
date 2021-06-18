@@ -36,6 +36,7 @@ keycloak.init({
   if (!auth) {
 
   } else if (auth) {
+    console.log("Hello from the main")
     router.push("/dashboard");
     //store auth and dispatch dashboard data
     store.state.currentUserName = keycloak.tokenParsed.name;

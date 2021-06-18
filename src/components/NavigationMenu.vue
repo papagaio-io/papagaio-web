@@ -12,10 +12,9 @@
               justify-center
               p-2
               rounded-md
-              text-gray-400
+              text-gray-200
               hover:text-white
               hover:bg-papaDark-700
-          
             "
           >
             <span class="sr-only">Open main menu</span>

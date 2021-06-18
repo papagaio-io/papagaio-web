@@ -22,7 +22,7 @@ module.exports = {
         padding: '1rem',
       },
       fontFamily: {
-          'sans': ['system-ui']
+          'sans': ['system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji']
       },
       borderWidth: {
         default: '1px',
