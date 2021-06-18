@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import axios from "axios";
+import Config from '../ApiConfig';
 
 export default createStore({
   state: {
@@ -136,7 +137,7 @@ export default createStore({
        //show the current available git sources
        async getGitSourceId({ state }) {
         return await axios
-          .get("https://papagaiodev.sorintdev.it/api/gitsources", {
+          .get(`${Config.ApiUrl}/gitsources`, {
             headers: {
               Authorization: `Bearer ${state.currentAuthToken}`,
             },
@@ -151,7 +152,7 @@ export default createStore({
       //gets all organizations from specific git source
       async getOrganizationsFromSpecificGitSource({ state }) {
         return await axios
-          .get(`https://papagaiodev.sorintdev.it/api/gitorganizations/${state.GitSourceToGetOrganizationFrom}`, {
+          .get(`${Config.ApiUrl}/gitorganizations/${state.GitSourceToGetOrganizationFrom}`, {
             headers: {
               Authorization: `Bearer ${state.currentAuthToken}`,
             },
@@ -166,7 +167,7 @@ export default createStore({
       //gets all Agola reference names to validate exists
       async getExistingAgolaReferenceNames({ state }) {
         return await axios
-          .get("https://papagaiodev.sorintdev.it/api/agolarefs", {
+          .get(`${Config.ApiUrl}/agolarefs`, {
             headers: {
               Authorization: `Bearer ${state.currentAuthToken}`,
             },
@@ -182,7 +183,7 @@ export default createStore({
     async newOrganization({ state }) { //<-------- set this function to "async"
       return await axios //<------------ return your axios call here, and await 
         .post(
-          "https://papagaiodev.sorintdev.it/api/createorganization",
+          `${Config.ApiUrl}/createorganization`,
           {
 
             name: state.Orgname,
@@ -212,7 +213,7 @@ export default createStore({
     async forceNewOrganization({ state }) {
       return await axios
         .post(
-          "https://papagaiodev.sorintdev.it/api/createorganization?force",
+          `${Config.ApiUrl}/createorganization?force`,
           {
 
             name: state.Orgname,
@@ -241,7 +242,7 @@ export default createStore({
  
     getAllOrganizationDashboard({ commit, state }) {
       axios
-        .get("https://papagaiodev.sorintdev.it/api/report", {
+        .get(`${Config.ApiUrl}/report`, {
           headers: {
             Authorization: `Bearer ${state.currentAuthToken}`,
           },
@@ -251,7 +252,7 @@ export default createStore({
 
     getOrganizationDashboard({ commit, state }) {
       axios
-        .get(`https://papagaiodev.sorintdev.it/api/report/${state.organizationURL}`, {
+        .get(`${Config.ApiUrl}/report/${state.organizationURL}`, {
           headers: {
             Authorization: `Bearer ${state.currentAuthToken}`,
           },
@@ -264,7 +265,7 @@ export default createStore({
 
     getProjectDashboard({ commit, state }) {
       axios
-        .get(`https://papagaiodev.sorintdev.it/api/report/${state.organizationURL}/${state.projectURL}`, {
+        .get(`${Config.ApiUrl}/report/${state.organizationURL}/${state.projectURL}`, {
           headers: {
             Authorization: `Bearer ${state.currentAuthToken}`,
           },
@@ -277,7 +278,7 @@ export default createStore({
 
     organizationsDefaultTriggerTimeInDb({ commit, state }) {
       axios
-        .get("https://papagaiodev.sorintdev.it/api/gettriggersconfig", {
+        .get(`${Config.ApiUrl}/gettriggersconfig`, {
           headers: {
             Authorization: `Bearer ${state.currentAuthToken}`,
           },
@@ -292,7 +293,7 @@ export default createStore({
     setNewOrganizationsDefaultTriggerTimeInDb({ state }) {
       axios
         .post(
-          "https://papagaiodev.sorintdev.it/api/savetriggersconfig",
+          `${Config.ApiUrl}/savetriggersconfig`,
           {
             organizationsDefaultTriggerTime: state.organizationsDefaultTriggerTime,
             runFailedDefaultTriggerTime: state.runFailedDefaultTriggerTime,
@@ -313,7 +314,7 @@ export default createStore({
 
     async getAdministratorPrivileges({ state }) {
       return await axios
-        .get("https://papagaiodev.sorintdev.it/api/userinfo", {
+        .get(`${Config.ApiUrl}/userinfo`, {
           headers: {
             Authorization: `Bearer ${state.currentAuthToken}`,
           },
@@ -327,7 +328,7 @@ export default createStore({
     //deletes the organization from Papagaio only
     async deleteOrganizationFromPapagaio({ state }) {
       return await axios
-        .delete(`https://papagaiodev.sorintdev.it/api/deleteorganization/${state.deleteThisOrganization}?internalonly`, {
+        .delete(`${Config.ApiUrl}/deleteorganization/${state.deleteThisOrganization}?internalonly`, {
           headers: {
             Authorization: `Bearer ${state.currentAuthToken}`,
           },
@@ -342,7 +343,7 @@ export default createStore({
     //deletes the organization from Agola and Papagaio
     async deleteOrganizationFromAgola({ state }) {
       return await axios
-        .delete(`https://papagaiodev.sorintdev.it/api/deleteorganization/${state.deleteThisOrganization}`, {
+        .delete(`${Config.ApiUrl}/deleteorganization/${state.deleteThisOrganization}`, {
           headers: {
             Authorization: `Bearer ${state.currentAuthToken}`,
           },
