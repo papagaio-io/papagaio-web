@@ -30,7 +30,7 @@
             text-white
           "
         >
-          Agola (this is Agola Stable) is a CI/CD open source tool under the 2.0 Apache license.
+          Agola is a CI/CD open source tool under the 2.0 Apache license.
           Papagaio was developed to complement Agola, extend its capabilities, &
           to provide ease-of-use features.
         </p>
