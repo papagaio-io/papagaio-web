@@ -3,6 +3,15 @@
 input:checked + svg {
   display: block;
 }
+.toggle-checkbox:checked {
+  @apply: right-0 border-gray-200;
+  right: 0;
+  border-color: #00ff5ea1;
+}
+.toggle-checkbox:checked + .toggle-label {
+  @apply: bg-gray-200;
+  background-color: #00ff5ea1;
+}
 
 .radioButton {
   display: inline;
