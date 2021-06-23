@@ -507,7 +507,7 @@
   <!-- <br /> -->
   <!-- <p>Agola reference that we deal with {{ agolaRefName }}</p> -->
   <!-- <p>Private/Public {{ orgIsPrivate }}</p> -->
-  {{ defaultBehaviorSectionSwitch }}
+  <!-- {{ defaultBehaviorSectionSwitch }} -->
 </template>
 
 <script>
@@ -770,6 +770,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+.loading {
+  background: transparent url('https://miro.medium.com/max/882/1*9EBHIOzhE1XfMYoKz1JcsQ.gif') center no-repeat;
+  height: 400px;
+  width: 400px;
+}
 </style>
 
 
