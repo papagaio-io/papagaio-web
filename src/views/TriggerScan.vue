@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full sm:w-3/4 container mx-auto">
+  <div class="w-full sm:w-3/4 container mx-auto ">
     <h4 class="mt-2 mb-2 text-3xl font-bold">Scan Duration</h4>
-    <div class="bg-gray-100">
+    <div class="bg-gray-100 ">
       <div class="p-4">
         <div class="float-right">
           <el-popover
@@ -39,7 +39,7 @@
           </button>
         </div>
         <div class="flex justify-around">
-          <div class="p-1 w-1/3 bg-red shadow-lg font-medium">
+          <div class="p-1 w-1/1 sm:w-1/5 shadow-lg font-medium">
             Default runs
             <h2
               class="
@@ -58,7 +58,7 @@
             </h2>
           </div>
 
-          <div class="p-1 w-1/3 bg-grey-200 shadow-lg font-medium">
+          <div class="p-1 w-1/1 sm:w-1/5 bg-grey-200 shadow-lg font-medium">
             Failed runs
             <h2
               class="
@@ -83,7 +83,7 @@
           <h5 class="mt-5 mb-3 text-xl text-papaOrange-600">Edit intervals</h5>
           <hr class="mt-5 mb-3" />
           <div class="flex justify-around">
-            <div class="p-1 w-1/4 bg-red shadow-lg font-medium">
+            <div class="p-1 w-1/1 sm:w-1/5 shadow-lg font-medium">
               Default runs
               <h2
                 class="
@@ -154,7 +154,7 @@
               </div>
             </div>
 
-            <div class="p-1 w-1/4 bg-red shadow-lg font-medium">
+            <div class="p-1 p-1 w-1/1 sm:w-1/5 shadow-lg font-medium shadow-lg font-medium">
               Failed Runs
               <h2
                 class="

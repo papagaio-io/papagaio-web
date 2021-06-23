@@ -2,10 +2,10 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: papagaio-web
-  namespace: prod
+  namespace: ci
 spec:
   rules:
-    - host: papagaio.sorint.it
+    - host: papagaio.sorintdev.it
       http:
         paths:
           - path: /

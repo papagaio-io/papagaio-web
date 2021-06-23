@@ -23,7 +23,7 @@
         </div>
 
         <div class="flex">
-          <div >
+          <div>
             <h5 class="mb-3 text-xl font-medium">Git source</h5>
 
             <el-select
@@ -302,24 +302,68 @@
       </div>
 
       <!-- Behavior Section -->
-      <p class="panel-title text-white bg-papaDark-700">Behavior</p>
-      <div class="bg-gray-100">
-        <div class="p-4">
-          <button
+      <div class="panel-title text-white bg-papaDark-700">
+        Behavior
+        <div v-if="defaultBehaviorSectionSwitch" class="inline">- Default</div>
+        <!-- switch button -->
+        <div
+          class="
+            relative
+            inline-block
+            float-right
+            w-14
+            mr-2
+            align-middle
+            select-none
+            transition
+            duration-200
+            ease-in
+          "
+        >
+          <input
+            type="checkbox"
+            v-model="defaultBehaviorSectionSwitch"
+            name="toggle"
+            id="toggle"
             class="
-              btn
-              text-white
-              bg-papaDark-800
-              hover:bg-papaDark-700
-              border-solid border-2 border-white
+              toggle-checkbox
+              absolute
+              block
+              w-8
+              h-8
+              rounded-full
+              bg-white
+              border-4
+              appearance-none
+              cursor-pointer
             "
-            @click="addRepositoriesField()"
-            v-if="showBehaviorAddButton"
-          >
-            Add
-          </button>
+          />
+          <label
+            for="toggle"
+            class="
+              toggle-label
+              block
+              overflow-hidden
+              h-8
+              rounded-full
+              bg-papaOrange-600
+              cursor-pointer
+            "
+          ></label>
+        </div>
+      </div>
 
-          <div class="float-right">
+      <div
+        class="bg-gray-100"
+        :class="
+          defaultBehaviorSectionSwitch
+            ? 'bg-gray-50 opacity-50 cursor-not-allowed'
+            : ''
+        "
+      >
+        <!-- help hover -->
+        <div class="p-4">
+          <div class="inline float-right">
             <el-popover
               placement="top-start"
               title="Behavior section"
@@ -332,118 +376,71 @@
               </template>
             </el-popover>
           </div>
-        </div>
 
-        <div
-          class="p-4"
-          v-for="(repositoriesField, counter) in repositoriesTable"
-          v-bind:key="counter"
-        >
+          <div>
+            <h5 class="text-xl mb-5 font-medium">Repositories</h5>
+          </div>
+
           <tr>
-            <h5 class="mb-3 text-xl">Repositories</h5>
+            <h5 class="mb-3 font-bold">Behavior type</h5>
+            <div class="radioButton radioButtonText">
+              <label class="radio orange">
+                <input
+                  :disabled="defaultBehaviorSectionSwitch"
+                  type="radio"
+                  value="wildcard"
+                  v-model="behaviorTypepicked"
+                />
+                <span>Wildcard</span>
+              </label>
+            </div>
+            <div class="radioButton radioButtonText">
+              <label class="radio orange">
+                <input
+                  :disabled="defaultBehaviorSectionSwitch"
+                  type="radio"
+                  value="regex"
+                  v-model="behaviorTypepicked"
+                />
+                <span>Regex</span>
+              </label>
+            </div>
           </tr>
-          <table style="width: 100%">
-            <el-button
-              size="small"
-              type="danger"
-              key=""
-              @click="deleteRepositoriesField(counter)"
-              class="float-right"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="bi bi-trash"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
-                />
-              </svg>
-            </el-button>
 
+          <table class="mt-10" style="width: 100%">
             <label class="font-bold ml-2">Filter by name</label>
             <tr>
-              <span class="font-bold ml-3">Include</span>
+              <span class="ml-3">Include</span>
               <div class="flex justify-center">
-                <input
-                  class="
-                    mb-4
-                    border-l-8
-                    focus:border-papaOrange-600
-                    appearance-none
-                    border
-                    rounded
-                    py-2
-                    px-3
-                    leading-tight
-                    focus:outline-none
-                    w-3/4
-                  "
-                  v-model="repositoriesField.repositoriesInclude"
-                  type="text"
-                  placeholder="*"
-                />
+                <div class="w-3/4">
+                  <el-input
+                    :disabled="defaultBehaviorSectionSwitch"
+                    class="mb-4 border-l-8 border-papaOrange-600 px-1 w-11/12"
+                    placeholder="*"
+                    v-model="repositoriesInclude"
+                  ></el-input>
+                </div>
               </div>
             </tr>
 
             <tr>
-              <span class="font-bold ml-3">Exclude</span>
+              <span class="ml-3">Exclude</span>
 
               <div class="flex justify-center">
-                <input
-                  class="
-                    mb-4
-                    border-l-8
-                    focus:border-papaOrange-600
-                    appearance-none
-                    border
-                    rounded
-                    py-2
-                    px-3
-                    leading-tight
-                    focus:outline-none
-                    w-3/4
-                  "
-                  v-model="repositoriesField.repositoriesExclude"
-                  type="text"
-                  placeholder=""
-                />
-              </div>
-            </tr>
-
-            <tr>
-              <h5 class="mb-3 text-xl">Behavior type</h5>
-              <div class="radioButton radioButtonText">
-                <label class="radio orange">
-                  <input
-                    type="radio"
-                    value="wildcard"
-                    v-model="behaviorTypepicked"
-                  />
-                  <span>Wildcard</span>
-                </label>
-              </div>
-              <div class="radioButton radioButtonText">
-                <label class="radio orange">
-                  <input
-                    type="radio"
-                    value="regex"
-                    v-model="behaviorTypepicked"
-                  />
-                  <span>Regex</span>
-                </label>
+                <div class="w-3/4">
+                  <el-input
+                    :disabled="defaultBehaviorSectionSwitch"
+                    class="mb-4 border-l-8 border-papaOrange-600 px-1 w-11/12"
+                    placeholder=""
+                    v-model="repositoriesExclude"
+                  ></el-input>
+                </div>
               </div>
             </tr>
           </table>
         </div>
       </div>
+
       <!-- General error alerts message-->
       <p class="mt-1" v-if="errors.length">
         <el-alert
@@ -510,6 +507,7 @@
   <!-- <br /> -->
   <!-- <p>Agola reference that we deal with {{ agolaRefName }}</p> -->
   <!-- <p>Private/Public {{ orgIsPrivate }}</p> -->
+  <!-- {{ defaultBehaviorSectionSwitch }} -->
 </template>
 
 <script>
@@ -542,15 +540,10 @@ export default {
       errorGitSourceSelect: [],
       key: "",
       showBehaviorAddButton: true,
+      defaultBehaviorSectionSwitch: true,
       dialogVisible: false,
-
-      repositoriesTable: [
-        // {
-        //   repositoriesInclude: "*",
-        //   repositoriesExclude: "",
-        // },
-      ],
-
+      repositoriesInclude: "*",
+      repositoriesExclude: "",
       behaviorTypepicked: "wildcard",
 
       behaviorIncludeTempValue: "",
@@ -563,8 +556,8 @@ export default {
     this.gitSource();
     // this.currentAvailableAgolaReferenceNames();
 
-    if(this.$keycloak.authenticated === false) {
-      window.location.reload()
+    if (this.$keycloak.authenticated === false) {
+      window.location.reload();
     }
   },
   computed: {
@@ -610,6 +603,7 @@ export default {
       } else this.agolaRefName = "";
       return this.agolaRefName;
     },
+
     checkIfAgolaRefNameExists() {
       if (this.createNewAgolaReferenceName == true) {
         this.infos = [];
@@ -619,8 +613,6 @@ export default {
           this.infos.push(
             "This reference name is already in use. Please compose another one, or choose from existing names."
           );
-        } else {
-          //Not in the array. Name doesn't exist
         }
       }
     },
@@ -652,9 +644,9 @@ export default {
 
       if (this.orgName && this.selectedSourceID != null) {
         //in-case behaviorAddButton is off. Then assign the fields to be sent to BE
-        if (this.showBehaviorAddButton == false) {
+        if (this.defaultBehaviorSectionSwitch == false) {
           this.checkBehavior();
-        } else if (this.showBehaviorAddButton == true) {
+        } else if (this.defaultBehaviorSectionSwitch == true) {
           this.submitForm();
         }
       }
@@ -672,17 +664,15 @@ export default {
       }
 
       //'behavior include' must have parameter if default is changed
-      if (this.repositoriesTable[0].repositoriesInclude === "") {
+      if (this.repositoriesInclude === "") {
         this.errors.push(
           "Provide an 'include parameter' for the behavior, or remove the behavior section "
         );
       }
 
       if (!this.errors.length) {
-        this.behaviorIncludeTempValue =
-          this.repositoriesTable[0].repositoriesInclude;
-        this.behaviorExcludeTempValue =
-          this.repositoriesTable[0].repositoriesExclude;
+        this.behaviorIncludeTempValue = this.repositoriesInclude;
+        this.behaviorExcludeTempValue = this.repositoriesExclude;
         this.behaviorTypeTempValue = this.behaviorTypepicked;
         this.submitForm();
       }
@@ -775,24 +765,17 @@ export default {
           this.errors.push(error.response.data);
         });
     },
-
-    addRepositoriesField() {
-      this.repositoriesTable.push({
-        repositoriesInclude: "*",
-        repositoriesExclude: "",
-      });
-      this.showBehaviorAddButton = false;
-    },
-
-    deleteRepositoriesField(counter) {
-      this.repositoriesTable.splice(counter, 1);
-      this.showBehaviorAddButton = true;
-    },
   },
 };
 </script>
 
 <style scoped lang="scss">
+
+.loading {
+  background: transparent url('https://miro.medium.com/max/882/1*9EBHIOzhE1XfMYoKz1JcsQ.gif') center no-repeat;
+  height: 400px;
+  width: 400px;
+}
 </style>
 
 
