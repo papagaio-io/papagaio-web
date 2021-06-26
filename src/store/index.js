@@ -4,6 +4,9 @@ import Config from '../ApiConfig';
 
 export default createStore({
   state: {
+    gitSourceAuthenticationChoice: '',
+    userTokenUrlPath: '',
+
     loggedIn: false,
     currentAuthToken: "",
     currentUserName: "",
@@ -134,7 +137,41 @@ export default createStore({
   },
   actions: {
 
-       //show the current available git sources
+      //authentication API available 
+      async gitSourceAuthenticationMethods() {
+        return await axios
+          .get(`${Config.ApiUrl}/gitsources`)
+          .then(response => {
+            return response.data
+          }).catch((error) => {
+            //console.log(error.data)
+          });
+      }, 
+
+       //authentication URL based on user's choice 
+       async gitSourceAuthenticationURL({ state }) {
+        return await axios
+          .get(`${Config.ApiUrl}/auth/login/${state.gitSourceAuthenticationChoice}` )
+          .then(response => {
+            return response.data
+          }).catch((error) => {
+            //console.log(error.data)
+          });
+      },
+
+      //extract user's token details from url response. In-case of a valid authentication  
+      async getUserTokenDetails({ state }) {
+        return await axios
+          .get(`${Config.ApiUrl}${state.userTokenUrlPath}`)
+          .then(response => {
+            return response.data
+          }).catch((error) => {
+            //console.log(error.data)
+          });
+      },
+
+
+       //show the current available git sources when creating an organization
        async getGitSourceId({ state }) {
         return await axios
           .get(`${Config.ApiUrl}/gitsources`, {

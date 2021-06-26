@@ -1,6 +1,5 @@
 <template>
-  
-  <div class="flex flex-col container mx-auto mt-5 w-full sm:w-3/4 ">
+  <div class="flex flex-col container mx-auto mt-5 w-full sm:w-3/4">
     <img
       class="w-full sm:w-2/5 mx-auto"
       alt="Papagaio logo"
@@ -58,18 +57,29 @@
           </div>
         </div>
 
-        <!-- <div v-else class="mt-3 sm:mt-3 sm:flex sm:justify-center">
-          <div class="sm:mt-0 sm:ml-3">
-            <button
-              class="w-full flex items-center justify-center px-8 py-3 border-solid border-2 border-white rounded-md bg-papaOrange-600 hover:bg-papaDark-700 text-white font-bold"
-              @click="
-                this.$router.push('http://localhost:8081/dashboard')
-              "
+        <div class="flex justify-center sm:mt-0 sm:ml-3">
+          <table class="">
+            <tr
+              class="cursor-pointer"
+              v-for="currentView in authenticationMethodsToPreview"
+              :key="currentView.id"
+             
             >
-              Dashboard
-            </button>
-          </div>
-        </div> -->
+              <td class="">
+                <a
+                 :href="authenticationChoice(currentView['name'])"
+                >
+                <img
+                  class="w-12 inline-block align-middle"
+                  :src="showAuthenticationIcon(currentView['gitType'])"
+                  alt="Organization Icon"
+                 
+                />
+                </a>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
 
       <!-- Body  -->
@@ -292,17 +302,53 @@
       </div>
     </div>
   </div>
-    
+  hello {{ navigationURL }}
 </template>
 
 <script>
 export default {
   components: {},
+  data() {
+    return {
+      authenticationMethodsToPreview: "",
+      navigationURL: "",
+    };
+  },
   computed: {
     userLoggedIn() {
       return this.$store.getters.getLoginState;
     },
   },
-  mounted (){}
+  mounted() {
+    this.authenticationOptions();
+  },
+  methods: {
+    authenticationOptions() {
+      this.$store
+        .dispatch("gitSourceAuthenticationMethods")
+        .then((response) => {
+          this.authenticationMethodsToPreview = response;
+          console.log(response);
+        });
+    },
+
+    showAuthenticationIcon(recieved) {
+      if (recieved === "gitea") {
+        return require("../assets/img/Gitea_Logo.png");
+      }
+    },
+
+    authenticationChoice(recieved) {
+      this.$store.state.gitSourceAuthenticationChoice = recieved;
+
+      this.$store.dispatch("gitSourceAuthenticationURL").then((response) => {
+        this.navigationURL = response["oauth2_redirect"];
+        console.log(response);
+      });
+      
+
+      return this.navigationURL;
+    },
+  },
 };
 </script>
