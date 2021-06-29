@@ -1,7 +1,7 @@
 <template>
   <div id="app">
      <label v-show="false">{{ userLoggedIn }}</label>
-    <NavigationMenu v-if="$keycloak.authenticated"> </NavigationMenu>
+    <NavigationMenu v-if="this.$store.state.loggedIn"> </NavigationMenu>
     <!-- <nav class="text-white bg-papaDark-800 py-3">
       <div class="container flex items-center flex-wrap">
         <div class="mr-auto ml-36">

@@ -10,6 +10,7 @@ export default createStore({
     loggedIn: false,
     currentAuthToken: "",
     currentUserName: "",
+    userIsAdmin: "",
 
     GitSourceToGetOrganizationFrom: "", //dynamic variable to access user's Git source to catch all organization available in in there.
 
@@ -43,7 +44,6 @@ export default createStore({
       return state.currentAuthToken;
     },
     getUserName(state) {
-
       return state.currentUserName;
     },
     getCreateOrganizationBeURLResponse(state) {
@@ -80,10 +80,18 @@ export default createStore({
 
   },
   mutations: {
+    currentUserSession(state, payload) {
+        state.loggedIn = payload.tempLoggedIn,
+        state.currentAuthToken = payload.tempCurrentAuthToken,
+        state.currentUserName = payload.tempCurrentUserName,
+        state.userAvatar = payload.tempUserAvatar,
+        state.userIsAdmin = payload.tempUserIsAdmin
+
+    },
+
     setNewOrganizationData(state, payload) {
 
-
-      state.Orgname = payload.tempName,
+        state.Orgname = payload.tempName,
         state.OrgAgolaRef = payload.tempAgolaRef,
         state.OrgVisibility = payload.tempVisibility,
         state.OrgGitSourceName = payload.tempGitSourceName,
@@ -137,84 +145,84 @@ export default createStore({
   },
   actions: {
 
-      //authentication API available 
-      async gitSourceAuthenticationMethods() {
-        return await axios
-          .get(`${Config.ApiUrl}/gitsources`)
-          .then(response => {
-            return response.data
-          }).catch((error) => {
-            //console.log(error.data)
-          });
-      }, 
+    //authentication API available 
+    async gitSourceAuthenticationMethods() {
+      return await axios
+        .get(`${Config.ApiUrl}/gitsources`)
+        .then(response => {
+          return response.data
+        }).catch((error) => {
+          //console.log(error.data)
+        });
+    },
 
-       //authentication URL based on user's choice 
-       async gitSourceAuthenticationURL({ state }) {
-        return await axios
-          .get(`${Config.ApiUrl}/auth/login/${state.gitSourceAuthenticationChoice}` )
-          .then(response => {
-            return response.data
-          }).catch((error) => {
-            //console.log(error.data)
-          });
-      },
+    //authentication URL based on user's choice 
+    async gitSourceAuthenticationURL({ state }) {
+      return await axios
+        .get(`${Config.ApiUrl}/auth/login/${state.gitSourceAuthenticationChoice}`)
+        .then(response => {
+          return response.data
+        }).catch((error) => {
+          //console.log(error.data)
+        });
+    },
 
-      //extract user's token details from url response. In-case of a valid authentication  
-      async getUserTokenDetails({ state }) {
-        return await axios
-          .get(`${Config.ApiUrl}${state.userTokenUrlPath}`)
-          .then(response => {
-            return response.data
-          }).catch((error) => {
-            //console.log(error.data)
-          });
-      },
+    //extract user's token details from url response. In-case of a valid authentication  
+    async getUserTokenDetails({ state }) {
+      return await axios
+        .get(`${Config.ApiUrl}${state.userTokenUrlPath}`)
+        .then(response => {
+          return response.data
+        }).catch((error) => {
+          //console.log(error.data)
+        });
+    },
 
 
-       //show the current available git sources when creating an organization
-       async getGitSourceId({ state }) {
-        return await axios
-          .get(`${Config.ApiUrl}/gitsources`, {
-            headers: {
-              Authorization: `Bearer ${state.currentAuthToken}`,
-            },
-          })
-          .then(response => {
-            return response.data
-          }).catch((error) => {
-            //console.log(error.data)
-          });
-      },
-  
-      //gets all organizations from specific git source
-      async getOrganizationsFromSpecificGitSource({ state }) {
-        return await axios
-          .get(`${Config.ApiUrl}/gitorganizations/${state.GitSourceToGetOrganizationFrom}`, {
-            headers: {
-              Authorization: `Bearer ${state.currentAuthToken}`,
-            },
-          })
-          .then(response => {
-            return response.data
-          }).catch((error) => {
-            //console.log(error.data)
-          });
-      },
+    //show the current available git sources when creating an organization
+    async getGitSourceId({ state }) {
+      return await axios
+        .get(`${Config.ApiUrl}/gitsources`, {
+          headers: {
+            Authorization: `Bearer ${state.currentAuthToken}`,
+          },
+        })
+        .then(response => {
+          return response.data
+        }).catch((error) => {
+          //console.log(error.data)
+        });
+    },
 
-      //gets all Agola reference names to validate exists
-      async getExistingAgolaReferenceNames({ state }) {
-        return await axios
-          .get(`${Config.ApiUrl}/agolarefs`, {
-            headers: {
-              Authorization: `Bearer ${state.currentAuthToken}`,
-            },
-          })
-          .then(response => {
-            return response.data
-          }).catch((error) => {
-            //console.log(error.data)
-          });
-      },
+    //gets all organizations from specific git source
+    async getOrganizationsFromSpecificGitSource({ state }) {
+      return await axios
+        .get(`${Config.ApiUrl}/gitorganizations/${state.GitSourceToGetOrganizationFrom}`, {
+          headers: {
+            Authorization: `Bearer ${state.currentAuthToken}`,
+          },
+        })
+        .then(response => {
+          return response.data
+        }).catch((error) => {
+          //console.log(error.data)
+        });
+    },
+
+    //gets all Agola reference names to validate exists
+    async getExistingAgolaReferenceNames({ state }) {
+      return await axios
+        .get(`${Config.ApiUrl}/agolarefs`, {
+          headers: {
+            Authorization: `Bearer ${state.currentAuthToken}`,
+          },
+        })
+        .then(response => {
+          return response.data
+        }).catch((error) => {
+          //console.log(error.data)
+        });
+    },
 
 
     async newOrganization({ state }) { //<-------- set this function to "async"
@@ -238,8 +246,8 @@ export default createStore({
           }
         )
         .then((response) => {
-         
-          return response 
+
+          return response
         })
         .catch((error) => {
           console.log(error.data);
@@ -268,7 +276,7 @@ export default createStore({
           }
         )
         .then((response) => {
-         
+
           return response
         })
         .catch((error) => {
@@ -276,7 +284,7 @@ export default createStore({
         });
     },
 
- 
+
     getAllOrganizationDashboard({ commit, state }) {
       axios
         .get(`${Config.ApiUrl}/report`, {

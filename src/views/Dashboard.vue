@@ -17,6 +17,12 @@
 
     <component v-bind:is="showDashboard"> </component>
   </div>
+   {{this.$store.state.loggedIn}}
+  {{this.$store.state.currentAuthToken}}
+   {{this.$store.state.currentUserName}}
+    {{this.$store.state.userAvatar}}
+     {{this.$store.state.userIsAdmin}}
+
 </template>
 
 <script>

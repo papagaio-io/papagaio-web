@@ -154,7 +154,7 @@
                   <dt class="text-lg leading-6 font-bold">
                     Speed up your work on Agola
                   </dt>
-                  <dd class="mt-2 text-base">
+                  <dd class="mt-2 text-base text-justify">
                     High usability & simple configuration. By automating the
                     process of adding organizations, projects, branches, &
                     members to Agola. Optionally offering the ability to specify
@@ -198,8 +198,8 @@
                   </div>
                 </div>
                 <div class="ml-4">
-                  <dt class="text-lg leading-6 font-bold">Dashboard</dt>
-                  <dd class="mt-2 text-base">
+                  <dt class="text-lg leading-6 font-bold ">Dashboard</dt>
+                  <dd class="mt-2 text-base text-justify">
                     Friendly previewing of the whole organization structure
                     which helps in monitoring significant information of the
                     projects. e.g. project health. Exclusively, redirect links
