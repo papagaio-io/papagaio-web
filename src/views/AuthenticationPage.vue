@@ -43,13 +43,16 @@ export default {
         tempCurrentUserName: response['userInfo']['login'],
         tempUserAvatar: response['userInfo']['avatar_url'],
         tempUserIsAdmin: response['userInfo']['is_admin'],
+        
       });
+      this.$store.dispatch('organizationsDefaultTriggerTimeInDb');
 
         this.userDetailsResponse = response['token'];
        
       });
 
       this.$router.push("/dashboard");
+      this.$store.dispatch("getAllOrganizationDashboard");
         
     },
   },

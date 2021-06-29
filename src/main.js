@@ -28,7 +28,7 @@ myApp.use(store)
 myApp.use(router)
 myApp.mount("#app");
 
-store.dispatch('organizationsDefaultTriggerTimeInDb');
+// store.dispatch('organizationsDefaultTriggerTimeInDb');
 
 
 // keycloak.init({
