@@ -5,8 +5,8 @@ import Config from '../ApiConfig';
 
 export default createStore({
   state: {
-    plugins: [createPersistedState()],
     
+
     gitSourceAuthenticationChoice: '',
     userTokenUrlPath: '',
 
@@ -403,6 +403,8 @@ export default createStore({
 
 
   },
+ 
   modules: {
-  }
+  },
+  plugins: [createPersistedState()],
 })
