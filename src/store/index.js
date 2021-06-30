@@ -197,7 +197,7 @@ export default createStore({
     //gets all organizations from specific git source
     async getOrganizationsFromSpecificGitSource({ state }) {
       return await axios
-        .get(`${Config.ApiUrl}/gitorganizations/${state.GitSourceToGetOrganizationFrom}`, {
+        .get(`${Config.ApiUrl}/gitorganizations`, {
           headers: {
             Authorization: `Bearer ${state.currentAuthToken}`,
           },
