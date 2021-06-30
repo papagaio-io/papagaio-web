@@ -53,7 +53,7 @@ export default {
         self.$store.dispatch("getAllOrganizationDashboard");
         self.$router.push("/dashboard");
         
-      }, 500);
+      }, 1000);
 
       
 

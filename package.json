@@ -19,7 +19,8 @@
     "vue-moment": "^4.1.0",
     "vue-router": "^4.0.0-0",
     "vuejs-logger": "^1.5.5",
-    "vuex": "^4.0.0-0"
+    "vuex": "^4.0.0-0",
+    "vuex-persistedstate": "^4.0.0-beta.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss7-compat": "^2.0.3",

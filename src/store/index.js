@@ -1,9 +1,12 @@
 import { createStore } from 'vuex'
+import createPersistedState from "vuex-persistedstate";
 import axios from "axios";
 import Config from '../ApiConfig';
 
 export default createStore({
   state: {
+    plugins: [createPersistedState()],
+    
     gitSourceAuthenticationChoice: '',
     userTokenUrlPath: '',
 
@@ -11,8 +14,6 @@ export default createStore({
     currentAuthToken: "",
     currentUserName: "",
     userIsAdmin: "",
-
-    GitSourceToGetOrganizationFrom: "", //dynamic variable to access user's Git source to catch all organization available in in there.
 
     Orgname: "",
     OrgAgolaRef: "",
