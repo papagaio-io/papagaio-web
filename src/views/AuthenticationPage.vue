@@ -50,9 +50,9 @@ export default {
         this.userDetailsResponse = response['token'];
        
       });
-
-      this.$router.push("/dashboard");
+      
       this.$store.dispatch("getAllOrganizationDashboard");
+      this.$router.push("/dashboard");
         
     },
   },
