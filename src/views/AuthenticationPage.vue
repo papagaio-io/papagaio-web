@@ -50,20 +50,18 @@ export default {
         this.userDetailsResponse = response['token'];
        
       });
-      
-      //this.$store.dispatch("getAllOrganizationDashboard");
-      //this.$router.push("/dashboard");
-        this.reloadData();
-    },
 
-    reloadData() {
-      
-      let self = this;
+        let self = this;
       setTimeout(function () {
             self.$store.dispatch("getAllOrganizationDashboard");
             this.$router.push("/dashboard");
           }, 500);
-    }
+      
+      //this.$store.dispatch("getAllOrganizationDashboard");
+      //this.$router.push("/dashboard");
+        
+    },
+
   },
 };
 </script>
