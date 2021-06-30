@@ -27,10 +27,10 @@ export default {
     };
   },
   mounted() {
-    this.getURL();
+    this.onSuccessfulAuthentication();
   },
   methods: {
-    getURL() {
+    onSuccessfulAuthentication() {
       this.currentURL = this.$route.fullPath;
 
       this.$store.state.userTokenUrlPath = this.$route.fullPath;
@@ -51,10 +51,19 @@ export default {
        
       });
       
-      this.$store.dispatch("getAllOrganizationDashboard");
-      this.$router.push("/dashboard");
-        
+      //this.$store.dispatch("getAllOrganizationDashboard");
+      //this.$router.push("/dashboard");
+        this.reloadData();
     },
+
+    reloadData() {
+      
+      let self = this;
+      setTimeout(function () {
+            self.$store.dispatch("getAllOrganizationDashboard");
+            this.$router.push("/dashboard");
+          }, 500);
+    }
   },
 };
 </script>
