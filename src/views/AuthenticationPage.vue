@@ -36,32 +36,30 @@ export default {
       this.$store.state.userTokenUrlPath = this.$route.fullPath;
 
       this.$store.dispatch("getUserTokenDetails").then((response) => {
-
         this.$store.commit("currentUserSession", {
-        tempLoggedIn: true,
-        tempCurrentAuthToken: response['token'],
-        tempCurrentUserName: response['userInfo']['login'],
-        tempUserAvatar: response['userInfo']['avatar_url'],
-        tempUserIsAdmin: response['userInfo']['is_admin'],
-        
-      });
-      this.$store.dispatch('organizationsDefaultTriggerTimeInDb');
+          tempLoggedIn: true,
+          tempCurrentAuthToken: response["token"],
+          tempCurrentUserName: response["userInfo"]["login"],
+          tempUserAvatar: response["userInfo"]["avatar_url"],
+          tempUserIsAdmin: response["userInfo"]["is_admin"],
+        });
+        this.$store.dispatch("organizationsDefaultTriggerTimeInDb");
 
-        this.userDetailsResponse = response['token'];
-       
+        this.userDetailsResponse = response["token"];
       });
 
-        let self = this;
+      let self = this;
       setTimeout(function () {
-            self.$store.dispatch("getAllOrganizationDashboard");
-            this.$router.push("/dashboard");
-          }, 500);
+        self.$store.dispatch("getAllOrganizationDashboard");
+        self.$router.push("/dashboard");
+        
+      }, 500);
+
       
+
       //this.$store.dispatch("getAllOrganizationDashboard");
       //this.$router.push("/dashboard");
-        
     },
-
   },
 };
 </script>
