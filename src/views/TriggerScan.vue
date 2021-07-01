@@ -287,9 +287,6 @@ export default {
   computed: {},
   mounted() {
     this.checkForUpdates();
-    this.isAdminstrator();
-  
-  
   },
   methods: {
     checkForm() {
@@ -400,20 +397,10 @@ export default {
       this.$store.dispatch("organizationsDefaultTriggerTimeInDb");
     },
 
-    //checks to give edit privileges
-    isAdminstrator() {
-      this.$store.dispatch("getAdministratorPrivileges").then((response) => {
-        this.userAdministratorPrivilege = response["isAdministrator"];
-      });
-
-      // return false;
-      return this.userAdministratorPrivilege;
-    },
-
     editSectionVisibility() {
-      if (this.isAdminstrator() == true) {
+      if (this.$store.state.userIsAdmin == true) {
         return (this.editIntervels = !this.editIntervels);
-      } else if (this.isAdminstrator() == false) {
+      } else if (this.$store.state.userIsAdmin == false) {
         return (this.dialogVisible = true);
       }
     },

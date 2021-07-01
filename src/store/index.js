@@ -34,7 +34,6 @@ export default createStore({
     currentOpenProjectInDashboard: "",
     organizationsDefaultTriggerTime: "",
     runFailedDefaultTriggerTime: "",
-    administratorPrivilegesForIntervelEdit: "",
     deleteThisOrganization: "",
   },
   getters: {
@@ -75,9 +74,7 @@ export default createStore({
     getrunFailedDefaultTriggerTime(state) {
       return state.runFailedDefaultTriggerTime;
     },
-    getAdministratorPrivilegesForIntervelEdit(state) {
-      return state.administratorPrivilegesForIntervelEdit;
-    }
+   
 
   },
   mutations: {
@@ -134,9 +131,7 @@ export default createStore({
     setrunFailedDefaultTriggerTime(state, payload) {
       state.runFailedDefaultTriggerTime = payload;
     },
-    setAdministratorPrivilegesForIntervelEdit(state, payload) {
-      state.administratorPrivilegesForIntervelEdit = payload;
-    },
+  
     setOrganizationToDelete(state, payload) {
       state.deleteThisOrganization = payload;
 
@@ -358,19 +353,6 @@ export default createStore({
         });
     },
 
-    async getAdministratorPrivileges({ state }) {
-      return await axios
-        .get(`${Config.ApiUrl}/userinfo`, {
-          headers: {
-            Authorization: `Bearer ${state.currentAuthToken}`,
-          },
-        })
-        .then(response => {
-          return response.data
-        }).catch((error) => {
-          console.log(error.data)
-        });
-    },
     //deletes the organization from Papagaio only
     async deleteOrganizationFromPapagaio({ state }) {
       return await axios
