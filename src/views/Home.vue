@@ -61,7 +61,7 @@
           <table class="">
             <tr
               class="cursor-pointer"
-              v-for="currentView in authenticationMethodsToPreview"
+              v-for="currentView in authenticationMethodsAvailable"
               :key="currentView.id"
              
             >
@@ -310,7 +310,7 @@ export default {
   components: {},
   data() {
     return {
-      authenticationMethodsToPreview: "",
+      authenticationMethodsAvailable: "",
       navigationURL: "",
     };
   },
@@ -327,7 +327,7 @@ export default {
       this.$store
         .dispatch("gitSourceAuthenticationMethods")
         .then((response) => {
-          this.authenticationMethodsToPreview = response;
+          this.authenticationMethodsAvailable = response;
           console.log(response);
         });
     },

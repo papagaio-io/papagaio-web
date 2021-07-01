@@ -5,85 +5,26 @@
 
       <!-- Beginning of form -->
       <div class="bg-gray-100 p-4">
-
-        <!-- Git source -->
-        <div class="float-right">
-          <el-popover
-            placement="top-start"
-            title="Adding a new organization"
-            :width="920"
-            trigger="hover"
-            content="Fill this form to build your project on Agola, using Papagaio. As of today, 
-                  Papagaio can only help you run projects on gitea and wecode repos. 
-                   "
-          >
-            <template #reference>
-              <el-button>?</el-button>
-            </template>
-          </el-popover>
-        </div>
-
-<!--
-        <div class="flex">
-          <div>
-            <h5 class="mb-3 text-xl font-medium">Git source</h5>
-
-            <el-select
-              v-model="selectedSourceID"
-              @change="getAvailableOrganizationInGitSource"
-              placeholder="Select"
-              class="
-                inline-input
-                mb-3
-                border-l-8 border-papaOrange-600
-                px-1
-                w-3/5
-              "
-            >
-              <el-option value="null" label="Select"> Select </el-option>
-              <el-option
-                v-for="item in gitSourceResponse"
-                :key="item.value"
-                :label="item.name"
-                :value="item.name"
-              >
-                {{ item.name }}
-              </el-option>
-            </el-select>
-          error message
-            <h6 class="text-red-600" v-if="errorGitSourceSelect.length">
-              Please specify the Git source
-            </h6>
-          </div>
-
-          Showing corresponding URL
-          <div
-            v-if="selectedSourceID != null && selectedSourceID != 'null'"
-            class="w-2/3 mt-5 ml-4"
-          >
-            <div class="p-1 bg-grey-200 shadow-lg font-medium">
-              Corresponding URL
-              <h2
-                class="
-                  border-l-8 border-papaDark-400
-                  bg-white
-                  text-dark
-                  p-1
-                  font-medium
-                "
-                v-for="item in gitSourceResponse"
-                v-bind:key="item.id"
-              >
-                {{ item.gitApiUrl }}
-              </h2>
-            </div>
-          </div>
-        </div>
--->
         <!-- Organization Name-->
         <table style="width: 100%">
-          <tr>
-            <h5 class="mb-3 mt-10 text-xl font-medium">Organization name</h5>
+          <div class="inline float-right">
+            <el-popover
+              placement="top-start"
+              title="Adding a new organization"
+              :width="920"
+              trigger="hover"
+              content="Fill this form to build your project on Agola, using Papagaio. As of today, 
+                  Papagaio can only help you run projects on gitea and wecode repos. 
+                   "
+            >
+              <template #reference>
+                <el-button>?</el-button>
+              </template>
+            </el-popover>
+          </div>
+
+          <div>
+            <h5 class="mb-3 text-xl font-medium">Organization name</h5>
             <div class="flex justify-center">
               <el-select
                 v-model="orgName"
@@ -112,7 +53,7 @@
             <h6 class="text-red-600" v-if="errorOrganizationName.length">
               Please select the organization required to run
             </h6>
-          </tr>
+          </div>
 
           <!-- Agola reference name section -->
           <tr>
@@ -533,14 +474,13 @@ export default {
       orgName: "",
       agolaRefName: "",
       ExistingAgolaRefName: "",
-      selectedSourceID: '',
-      // gitSourceResponse: [],
+      selectedSourceID: "",
+
       createOrganizationResponse: null,
       errors: [], //array of errors to users
       infos: [], //array of info to users
       errorOrganizationName: [],
-      // errorGitSourceSelect: [],
-      key: "",
+
       showBehaviorAddButton: true,
       defaultBehaviorSectionSwitch: true,
       dialogVisible: false,
@@ -555,14 +495,9 @@ export default {
   },
 
   mounted() {
-    // this.gitSource();
-    // this.currentAvailableAgolaReferenceNames();
-    this.getAvailableOrganizationInGitSource() ;
-
-    if (this.$keycloak.authenticated === false) {
-      window.location.reload();
-    }
+    this.getAvailableOrganizationInGitSource();
   },
+
   computed: {
     randomName() {
       let randomNumber = Math.floor(Math.random() * 100);
@@ -575,15 +510,7 @@ export default {
   },
 
   methods: {
-    // gitSource() {
-    //   this.$store.dispatch("getGitSourceId").then((response) => {
-    //     this.gitSourceResponse = response;
-    //   });
-    // },
-
     getAvailableOrganizationInGitSource() {
-      // this.$store.state.GitSourceToGetOrganizationFrom = this.selectedSourceID;
-
       this.$store
         .dispatch("getOrganizationsFromSpecificGitSource")
         .then((response) => {
@@ -633,11 +560,6 @@ export default {
       if (!this.orgName || this.orgName === "null") {
         this.errorOrganizationName.push("");
       }
-      // if (!this.selectedSourceID) {
-      //   this.errorGitSourceSelect.push(
-      //     "Please select the required git source in which the organization exists"
-      //   );
-      // }
 
       if (this.orgIsPrivate === "false" || this.orgIsPrivate == false) {
         this.orgIsPrivate = "public";
@@ -773,12 +695,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
-.loading {
-  background: transparent url('https://miro.medium.com/max/882/1*9EBHIOzhE1XfMYoKz1JcsQ.gif') center no-repeat;
-  height: 400px;
-  width: 400px;
-}
 </style>
 
 
