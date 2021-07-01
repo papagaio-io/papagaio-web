@@ -5,6 +5,7 @@
 
       <!-- Beginning of form -->
       <div class="bg-gray-100 p-4">
+
         <!-- Git source -->
         <div class="float-right">
           <el-popover
@@ -22,6 +23,7 @@
           </el-popover>
         </div>
 
+<!--
         <div class="flex">
           <div>
             <h5 class="mb-3 text-xl font-medium">Git source</h5>
@@ -48,13 +50,13 @@
                 {{ item.name }}
               </el-option>
             </el-select>
-            <!-- error message-->
+          error message
             <h6 class="text-red-600" v-if="errorGitSourceSelect.length">
               Please specify the Git source
             </h6>
           </div>
 
-          <!-- Showing corresponding URL-->
+          Showing corresponding URL
           <div
             v-if="selectedSourceID != null && selectedSourceID != 'null'"
             class="w-2/3 mt-5 ml-4"
@@ -77,7 +79,7 @@
             </div>
           </div>
         </div>
-
+-->
         <!-- Organization Name-->
         <table style="width: 100%">
           <tr>
@@ -531,13 +533,13 @@ export default {
       orgName: "",
       agolaRefName: "",
       ExistingAgolaRefName: "",
-      selectedSourceID: null,
-      gitSourceResponse: [],
+      selectedSourceID: '',
+      // gitSourceResponse: [],
       createOrganizationResponse: null,
       errors: [], //array of errors to users
       infos: [], //array of info to users
       errorOrganizationName: [],
-      errorGitSourceSelect: [],
+      // errorGitSourceSelect: [],
       key: "",
       showBehaviorAddButton: true,
       defaultBehaviorSectionSwitch: true,
@@ -553,8 +555,9 @@ export default {
   },
 
   mounted() {
-    this.gitSource();
+    // this.gitSource();
     // this.currentAvailableAgolaReferenceNames();
+    this.getAvailableOrganizationInGitSource() ;
 
     if (this.$keycloak.authenticated === false) {
       window.location.reload();
@@ -572,14 +575,14 @@ export default {
   },
 
   methods: {
-    gitSource() {
-      this.$store.dispatch("getGitSourceId").then((response) => {
-        this.gitSourceResponse = response;
-      });
-    },
+    // gitSource() {
+    //   this.$store.dispatch("getGitSourceId").then((response) => {
+    //     this.gitSourceResponse = response;
+    //   });
+    // },
 
     getAvailableOrganizationInGitSource() {
-      this.$store.state.GitSourceToGetOrganizationFrom = this.selectedSourceID;
+      // this.$store.state.GitSourceToGetOrganizationFrom = this.selectedSourceID;
 
       this.$store
         .dispatch("getOrganizationsFromSpecificGitSource")
@@ -625,16 +628,16 @@ export default {
 
       this.errors = [];
       this.errorOrganizationName = [];
-      this.errorGitSourceSelect = [];
+      // this.errorGitSourceSelect = [];
 
       if (!this.orgName || this.orgName === "null") {
         this.errorOrganizationName.push("");
       }
-      if (!this.selectedSourceID) {
-        this.errorGitSourceSelect.push(
-          "Please select the required git source in which the organization exists"
-        );
-      }
+      // if (!this.selectedSourceID) {
+      //   this.errorGitSourceSelect.push(
+      //     "Please select the required git source in which the organization exists"
+      //   );
+      // }
 
       if (this.orgIsPrivate === "false" || this.orgIsPrivate == false) {
         this.orgIsPrivate = "public";
@@ -642,7 +645,7 @@ export default {
         this.orgIsPrivate = "private";
       }
 
-      if (this.orgName && this.selectedSourceID != null) {
+      if (this.orgName != null) {
         //in-case behaviorAddButton is off. Then assign the fields to be sent to BE
         if (this.defaultBehaviorSectionSwitch == false) {
           this.checkBehavior();

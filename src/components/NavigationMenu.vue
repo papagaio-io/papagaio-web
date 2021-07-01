@@ -32,16 +32,19 @@
           "
         >
           <div class="flex-shrink-0 flex items-center">
-          <router-link  to="/dashboard">   <img
-              class="block lg:hidden h-8 w-auto"
-              src="../assets/img/papagaioIconOnWhite.png"
-              
-            /> </router-link>
-            <router-link  to="/dashboard"> <img
-              class="hidden lg:block h-8 w-auto"
-              src="../assets/img/papagaioIconOnWhite.png"
-              alt="Workflow"
-            /> </router-link>
+            <router-link to="/dashboard">
+              <img
+                class="block lg:hidden h-8 w-auto"
+                src="../assets/img/papagaioIconOnWhite.png"
+              />
+            </router-link>
+            <router-link to="/dashboard">
+              <img
+                class="hidden lg:block h-8 w-auto"
+                src="../assets/img/papagaioIconOnWhite.png"
+                alt="Workflow"
+              />
+            </router-link>
           </div>
           <div class="hidden sm:block sm:ml-6">
             <div class="flex space-x-4">
@@ -262,62 +265,60 @@
           </button> -->
 
             <!-- Profile dropdown (logout) -->
-         
-                    <a
-                      @click="$keycloak.logout()"
-                      href="#"
-                      class="
-                        relative
-                        flex flex-row
-                        text-white
-                        items-center
-                        h-11
-                        hover:bg-papaDark-700
-                        hover:text-gray-200
-                        pr-6
-                      "
-                    >
-                      <span
-                        class="
-                          inline-flex
-                          justify-center
-                          items-center
-                          ml-4
-                          text-red-400
-                        "
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="white"
-                          class="bi bi-box-arrow-right"
-                          viewBox="0 0 16 16"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"
-                          />
-                          <path
-                            fill-rule="evenodd"
-                            d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"
-                          />
-                        </svg>
-                      </span>
-                      <span
-                        class="
-                          ml-2
-                          font-semibold
-                          text-sm
-                          tracking-wide
-                          truncate
-                          font-sans
-                        "
-                        >Logout</span
-                      >
-                    </a>
-                  
-               
+
+            <a
+              @click="logout()"
+              href="#"
+              class="
+                relative
+                flex flex-row
+                text-white
+                items-center
+                h-11
+                hover:bg-papaDark-700
+                hover:text-gray-200
+                pr-6
+              "
+            >
+              <span
+                class="
+                  inline-flex
+                  justify-center
+                  items-center
+                  ml-4
+                  text-red-400
+                "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="white"
+                  class="bi bi-box-arrow-right"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"
+                  />
+                </svg>
+              </span>
+              <span
+                class="
+                  ml-2
+                  font-semibold
+                  text-sm
+                  tracking-wide
+                  truncate
+                  font-sans
+                "
+                >Logout</span
+              >
+            </a>
           </div>
         </div>
       </div>
@@ -527,6 +528,45 @@ export default {
       navigation,
       open,
     };
+  },
+  methods: {
+    logout() {
+
+       // this.deleteAllCookies;
+
+
+          this.$store.commit("currentUserSession", {
+          tempLoggedIn: false,
+          tempCurrentAuthToken: '',
+          tempCurrentUserName: '',
+          tempUserAvatar: '',
+          tempUserIsAdmin: '',
+        });
+
+        
+       //location.reload();
+       //this.$router.push('/');
+        
+    },
+
+    deleteAllCookies() {
+      var cookies = document.cookie.split(";");
+      for (var i = 0; i < cookies.length; i++)
+        deleteCookie(cookies[i].split("=")[0]);
+    },
+
+    setCookie(name, value, expirydays) {
+      var d = new Date();
+      d.setTime(d.getTime() + expirydays * 24 * 60 * 60 * 1000);
+      var expires = "expires=" + d.toUTCString();
+      document.cookie = name + "=" + value + "; " + expires;
+
+     
+    },
+
+    deleteCookie(name) {
+      setCookie(name, "", -1);
+    },
   },
 };
 </script>
