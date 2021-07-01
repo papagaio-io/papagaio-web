@@ -153,7 +153,7 @@ export default {
   },
   mounted() {
     this.checkforUpdates();
-    this.isAdminstrator();
+    
   },
 
   methods: {
@@ -204,18 +204,10 @@ export default {
       temp = this.$store.commit("setCurrentOpenOrganizationInDashboard", temp);
     },
 
-    isAdminstrator() {
-      this.$store.dispatch("getAdministratorPrivileges").then((response) => {
-        this.userAdministratorPrivilege = response["isAdministrator"];
-      });
-
-      // return false;
-      return this.userAdministratorPrivilege;
-    },
-
+    
     //under construction
     confirmDeleteOnPapagaio(organization) {
-      if (this.isAdminstrator() == true) {
+      if (this.$store.state.userIsAdmin == true) {
         this.$confirm(
           `Are you sure you want to delete '${organization}' from Papagaio only ?`,
           "Warning",
@@ -236,7 +228,7 @@ export default {
 
     //under construction
     confirmDeleteFromAgola(organization) {
-      if (this.isAdminstrator() == true) {
+      if (this.$store.state.userIsAdmin == true) {
         this.$confirm(
           `Are you sure you want to delete ${organization} from Papagaio & Agola ?`,
           "Warning",
