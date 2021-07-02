@@ -335,8 +335,8 @@ export default createStore({
         .post(
           `${Config.ApiUrl}/savetriggersconfig`,
           {
-            organizationsTriggerTime: state.organizationsDefaultTriggerTime,
-            runFailedTriggerTime: state.runFailedDefaultTriggerTime,
+            organizationsTriggerTime1: state.organizationsDefaultTriggerTime,
+            runFailedTriggerTime1: state.runFailedDefaultTriggerTime,
           },
           {
             headers: {
@@ -350,7 +350,7 @@ export default createStore({
             return response.status;
           }
           else {
-            console.log("somehting went wrong when I tried to change");
+            return 500;
           }
           
         })

@@ -353,6 +353,7 @@ export default {
           this.messageConfirmation();
         }
         else {
+          this.messageError();
           console.log('I am in the trigger file and something went wrong')
         }
 });
@@ -419,6 +420,12 @@ export default {
       this.$message({
         message: "New intervels set successfully",
         type: "success",
+      });
+    },
+     messageError() {
+      this.$message({
+        message: "Ops. Something went wrong. Please try again later",
+        type: "error",
       });
     },
   },
