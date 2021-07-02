@@ -6,7 +6,6 @@ import Config from '../ApiConfig';
 export default createStore({
   state: {
     
-
     gitSourceAuthenticationChoice: '',
     userTokenUrlPath: '',
 
@@ -336,8 +335,8 @@ export default createStore({
         .post(
           `${Config.ApiUrl}/savetriggersconfig`,
           {
-            organizationsDefaultTriggerTime: state.organizationsDefaultTriggerTime,
-            runFailedDefaultTriggerTime: state.runFailedDefaultTriggerTime,
+            organizationsTriggerTime: state.organizationsDefaultTriggerTime,
+            runFailedTriggerTime: state.runFailedDefaultTriggerTime,
           },
           {
             headers: {

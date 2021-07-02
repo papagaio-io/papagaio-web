@@ -34,7 +34,7 @@
           to provide ease-of-use features.
         </p>
 
-        <div
+        <!-- <div
           v-if="$keycloak.authenticated == false"
           class="mt-3 sm:mt-3 sm:flex sm:justify-center"
         >
@@ -55,7 +55,7 @@
               Sign In
             </button>
           </div>
-        </div>
+        </div> -->
 
         <div class="flex justify-center sm:mt-0 sm:ml-3">
           <table class="">
