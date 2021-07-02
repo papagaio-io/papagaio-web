@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full sm:w-3/4 container mx-auto ">
+  <div class="w-full sm:w-3/4 container mx-auto">
     <h4 class="mt-2 mb-2 text-3xl font-bold">Scan Duration</h4>
-    <div class="bg-gray-100 ">
+    <div class="bg-gray-100">
       <div class="p-4">
         <div class="float-right">
           <el-popover
@@ -154,7 +154,17 @@
               </div>
             </div>
 
-            <div class="p-1 p-1 w-1/1 sm:w-1/5 shadow-lg font-medium shadow-lg font-medium">
+            <div
+              class="
+                p-1 p-1
+                w-1/1
+                sm:w-1/5
+                shadow-lg
+                font-medium
+                shadow-lg
+                font-medium
+              "
+            >
               Failed Runs
               <h2
                 class="
@@ -347,16 +357,15 @@ export default {
       );
       //this.$store.dispatch("setNewOrganizationsDefaultTriggerTimeInDb");
 
-      this.$store.dispatch("setNewOrganizationsDefaultTriggerTimeInDb").then((response) => {
-        if(response == 200)
-        {
-          this.messageConfirmation();
-        }
-        else {
-          this.messageError();
-          console.log('I am in the trigger file and something went wrong')
-        }
-});
+      this.$store
+        .dispatch("setNewOrganizationsDefaultTriggerTimeInDb")
+        .then((response) => {
+          if (response == 200) {
+            this.messageConfirmation();
+          } else {
+            this.messageError();
+          }
+        });
       //this.messageConfirmation();
       this.editIntervels = false;
       //clear temp values
@@ -422,7 +431,7 @@ export default {
         type: "success",
       });
     },
-     messageError() {
+    messageError() {
       this.$message({
         message: "Ops. Something went wrong. Please try again later",
         type: "error",

@@ -335,8 +335,8 @@ export default createStore({
         .post(
           `${Config.ApiUrl}/savetriggersconfig`,
           {
-            organizationsTriggerTime1: state.organizationsDefaultTriggerTime,
-            runFailedTriggerTime1: state.runFailedDefaultTriggerTime,
+            organizationsTriggerTime: state.organizationsDefaultTriggerTime,
+            runFailedTriggerTime: state.runFailedDefaultTriggerTime,
           },
           {
             headers: {
