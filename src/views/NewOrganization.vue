@@ -13,8 +13,8 @@
               title="Adding a new organization"
               :width="920"
               trigger="hover"
-              content="Fill this form to build your project on Agola, using Papagaio. As of today, 
-                  Papagaio can only help you run projects on gitea and wecode repos. 
+              content="Fill this form to build your project on Agola, using Papagaio. Choose the reguired organization from the captured list of your specified git source.
+              Agola reference name is a unique identifier for each organization. Used internally by Agola. 
                    "
             >
               <template #reference>

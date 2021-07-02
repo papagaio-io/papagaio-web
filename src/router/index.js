@@ -11,41 +11,41 @@ import store from '../store/index'
 
 
 
-// const preventRoutes = {
+const preventRoutes = {
 
-//   beforeRouteEnter(to, from, next) {
-//     next(vm => {
-//       // access to component instance via `vm`
-//      // console.log(vm.$keycloak.authenticated);
-//       if (vm.$keycloak.authenticated) {
+  // beforeRouteEnter(to, from, next) {
+  //   next(vm => {
+  //     // access to component instance via `vm`
+  //    // console.log(vm.$keycloak.authenticated);
+  //     if (vm.$keycloak.authenticated) {
 
-//         next();
-//       } else {
+  //       next();
+  //     } else {
 
-//         next("/");
-//       }
-
-
-//     })
-//   }
+  //       next("/");
+  //     }
 
 
-
-//   beforeEnter: (to, from, next) => {
-//     // console.log(store.getters.getLoginState);
-//     // console.log(this.$keycloak.token);
-//     if (store.getters.getLoginState === "true") {
-
-//       next();
-//     } else {
+  //   })
+  // }
 
 
-//       next("http://localhost:8080/");
-//     }
 
-//   }
+  beforeEnter: (to, from, next) => {
+    // console.log(store.getters.getLoginState);
+    // console.log(this.$keycloak.token);
+    if ($store.state.loggedIn == true) {
 
-// }
+      next();
+    } else {
+
+
+      next("http://localhost:8081/");
+    }
+
+  }
+
+}
 
 
 const routes = [
@@ -58,27 +58,27 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: dashboard,
-    // ...preventRoutes,
+    ...preventRoutes,
 
   },
   {
     path: '/neworganization',
     name: 'NewOrganization',
     component: neworganization,
-    // ...preventRoutes
+    ...preventRoutes
 
   },
   {
     path: '/confirmation',
     name: 'Confirmation',
     component: confirmation,
-    // ...preventRoutes
+    ...preventRoutes
   },
   {
     path: '/triggerscan',
     name: 'Triggerscan',
     component: triggerscan,
-    // ...preventRoutes
+    ...preventRoutes
   },
   {
     path: '/auth/callback',
