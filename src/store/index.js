@@ -152,7 +152,7 @@ export default createStore({
         });
     },
 
-    //authentication URL based on user's choice 
+    //authentication URL based on user's choice of signIn method
     async gitSourceAuthenticationURL({ state }) {
       return await axios
         .get(`${Config.ApiUrl}/auth/login/${state.gitSourceAuthenticationChoice}`)
@@ -190,7 +190,7 @@ export default createStore({
         });
     },
 
-    //gets all organizations from specific git source
+    //gets all organizations available through user's token 
     async getOrganizationsFromSpecificGitSource({ state }) {
       return await axios
         .get(`${Config.ApiUrl}/gitorganizations`, {
@@ -205,7 +205,7 @@ export default createStore({
         });
     },
 
-    //gets all Agola reference names to validate exists
+    //gets all Agola reference names available in db
     async getExistingAgolaReferenceNames({ state }) {
       return await axios
         .get(`${Config.ApiUrl}/agolarefs`, {
@@ -250,7 +250,7 @@ export default createStore({
         });
     },
 
-    //force create organization in case already exists in Agola
+    //force create an organization 
     async forceNewOrganization({ state }) {
       return await axios
         .post(
@@ -325,8 +325,8 @@ export default createStore({
           },
         })
         .then(response => {
-          commit("setorganizationsDefaultTriggerTime", response.data.organizationsDefaultTriggerTime)
-          commit("setrunFailedDefaultTriggerTime", response.data.runFailedDefaultTriggerTime)
+          commit("setorganizationsDefaultTriggerTime", response.data.organizationsTriggerTime)
+          commit("setrunFailedDefaultTriggerTime", response.data.runFailedTriggerTime)
 
         });
     },

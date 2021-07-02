@@ -28,26 +28,3 @@ myApp.use(store)
 myApp.use(router)
 myApp.mount("#app");
 
-// store.dispatch('organizationsDefaultTriggerTimeInDb');
-
-
-// keycloak.init({
-//   onLoad: "check-sso",
-
-//   checkLoginIframe: false
-// }).then(async (auth) => {
-//   if (!auth) {
-
-//   } else if (auth) {
-//     router.push("/dashboard");
-//     //store auth and dispatch dashboard data
-//     store.state.currentUserName = keycloak.tokenParsed.name;
-//     store.commit('setLoginState', "true");
-//     store.state.currentAuthToken = keycloak.token;
-   
-   
-//   }
-// }).catch((e) => {
-//   console.log('Serwer lezy: ' + e)
-// })
-
