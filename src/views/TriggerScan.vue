@@ -345,8 +345,18 @@ export default {
         "setrunFailedDefaultTriggerTime",
         this.convertedNewFailedRunIntervel
       );
-      this.$store.dispatch("setNewOrganizationsDefaultTriggerTimeInDb");
-      this.messageConfirmation();
+      //this.$store.dispatch("setNewOrganizationsDefaultTriggerTimeInDb");
+
+      this.$store.dispatch("setNewOrganizationsDefaultTriggerTimeInDb").then((response) => {
+        if(response == 200)
+        {
+          this.messageConfirmation();
+        }
+        else {
+          console.log('I am in the trigger file and something went wrong')
+        }
+});
+      //this.messageConfirmation();
       this.editIntervels = false;
       //clear temp values
       this.tempNumericDefaultRunInterval = null;

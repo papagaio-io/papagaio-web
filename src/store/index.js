@@ -330,8 +330,8 @@ export default createStore({
         });
     },
 
-    setNewOrganizationsDefaultTriggerTimeInDb({ state }) {
-      axios
+    async setNewOrganizationsDefaultTriggerTimeInDb({ state }) {
+      return await axios
         .post(
           `${Config.ApiUrl}/savetriggersconfig`,
           {
@@ -345,7 +345,14 @@ export default createStore({
           }
         )
         .then((response) => {
-          console.log(response.data);
+          if(response.status == 200)
+          {
+            return response.status;
+          }
+          else {
+            console.log("somehting went wrong when I tried to change");
+          }
+          
         })
         .catch((error) => {
           console.log(error.data);
