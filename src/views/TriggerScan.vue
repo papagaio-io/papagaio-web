@@ -52,7 +52,7 @@
             >
               {{
                 formatMinutesRecievedFromBE(
-                  $store.getters.getorganizationsDefaultTriggerTime
+                  $store.getters.getOrganizationsDefaultTriggerTime
                 )
               }}
             </h2>
@@ -71,18 +71,36 @@
             >
               {{
                 formatMinutesRecievedFromBE(
-                  $store.getters.getrunFailedDefaultTriggerTime
+                  $store.getters.getRunFailedDefaultTriggerTime
                 )
+              }}
+            </h2>
+          </div>
+
+          <div class="p-1 w-1/1 sm:w-1/5 bg-grey-200 shadow-lg font-medium">
+            User trigger
+            <h2
+              class="
+                border-l-8 border-papaDark-400
+                bg-white
+                text-dark
+                p-1
+                font-medium
+              "
+            >
+              {{
+                formatMinutesRecievedFromBE($store.getters.getUsersTriggerTime)
               }}
             </h2>
           </div>
         </div>
 
-        <!-- The editable section -->
+        <!-- The edit section -->
         <div v-show="editIntervels">
           <h5 class="mt-5 mb-3 text-xl text-papaOrange-600">Edit intervals</h5>
           <hr class="mt-5 mb-3" />
           <div class="flex justify-around">
+            <!-- The default runs -->
             <div class="p-1 w-1/1 sm:w-1/5 shadow-lg font-medium">
               Default runs
               <h2
@@ -94,7 +112,7 @@
                   font-medium
                 "
               >
-                <!-- {{ $store.getters.getorganizationsDefaultTriggerTime }} -->
+                <!-- {{ $store.getters.getOrganizationsDefaultTriggerTime }} -->
                 {{ tempNumericDefaultRunInterval }}
                 {{ tempDefaultRunIntervelIdentifier }}
               </h2>
@@ -154,18 +172,9 @@
               </div>
             </div>
 
-            <div
-              class="
-                p-1 p-1
-                w-1/1
-                sm:w-1/5
-                shadow-lg
-                font-medium
-                shadow-lg
-                font-medium
-              "
-            >
-              Failed Runs
+            <!-- The failed runs -->
+            <div class="p-1 p-1 w-1/1 sm:w-1/5 shadow-lg font-medium">
+              Failed runs
               <h2
                 class="
                   border-l-8 border-papaOrange-600
@@ -175,7 +184,7 @@
                   font-medium
                 "
               >
-                <!-- {{ $store.getters.getrunFailedDefaultTriggerTime }} -->
+                <!-- {{ $store.getters.getRunFailedDefaultTriggerTime }} -->
                 {{ tempNumericFailedRunInterval }}
                 {{ tempFailedRunIntervelIdentifier }}
               </h2>
@@ -234,6 +243,77 @@
                 </div>
               </div>
             </div>
+
+            <!-- The user triggers-->
+            <div class="p-1 p-1 w-1/1 sm:w-1/5 shadow-lg font-medium">
+              User trigger
+              <h2
+                class="
+                  border-l-8 border-papaOrange-600
+                  bg-white
+                  text-dark
+                  p-1
+                  font-medium
+                "
+              >
+                {{ tempNumericUsersTriggerInterval }}
+                {{ tempUsersTriggerIntervelIdentifier }}
+              </h2>
+              <div class="flex justify-around mt-4">
+                <el-select
+                  class="
+                    inline-input
+                    mb-4
+                    border-l-8 border-papaOrange-600
+                    px-1
+                    w-3/4
+                  "
+                  v-model="tempUsersTriggerIntervelIdentifier"
+                  placeholder="Select"
+                >
+                  <!-- <el-option value="null" label="Select"> Select </el-option> -->
+                  <el-option value="minute">Minute</el-option>
+                  <el-option value="hour">Hour</el-option>
+                  <el-option value="day">Day</el-option>
+                  <el-option value="week">Week</el-option>
+                  <el-option value="month">Month</el-option>
+                </el-select>
+
+                <div class="sm:mt-0 sm:ml-3">
+                  <button
+                    class="
+                      px-5
+                      py-1
+                      font-medium
+                      bg-papaDark-800
+                      hover:bg-papaDark-700
+                      text-white
+                      border-solid border-2 border-white
+                    "
+                    @click="decreaseOneUsersIntervel()"
+                  >
+                    -
+                  </button>
+                </div>
+
+                <div class="sm:mt-0 sm:ml-3">
+                  <button
+                    class="
+                      px-5
+                      py-1
+                      font-medium
+                      bg-papaDark-800
+                      hover:bg-papaDark-700
+                      text-white
+                      border-solid border-2 border-white
+                    "
+                    @click="addOneUsersIntervel()"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -280,17 +360,19 @@ export default {
   data() {
     return {
       editIntervels: false,
-      userAdministratorPrivilege: "",
       dialogVisible: false,
 
       tempNumericDefaultRunInterval: null,
       tempNumericFailedRunInterval: null,
+      tempNumericUsersTriggerInterval: null,
 
       tempDefaultRunIntervelIdentifier: "minute",
       tempFailedRunIntervelIdentifier: "minute",
+      tempUsersTriggerIntervelIdentifier: "minute",
 
       convertedNewDefaultRunIntervel: null,
       convertedNewFailedRunIntervel: null,
+      convertedNewUsersTriggerIntervel: null,
     };
   },
 
@@ -299,63 +381,92 @@ export default {
     this.checkForUpdates();
   },
   methods: {
+    checkForUpdates() {
+      this.$store.dispatch("organizationsDefaultTriggerTimeInDb");
+    },
+
     checkForm() {
       //flush numeric values to store, and then check the period identifier to convert to minutes
       this.$store.commit(
-        "setorganizationsDefaultTriggerTime",
+        "setOrganizationsDefaultTriggerTime",
         this.tempNumericDefaultRunInterval
       );
       this.$store.commit(
-        "setrunFailedDefaultTriggerTime",
+        "setRunFailedDefaultTriggerTime",
         this.tempNumericFailedRunInterval
+      );
+      this.$store.commit(
+        "setUsersTriggerTime",
+        this.tempNumericUsersTriggerInterval
       );
 
       if (
         this.tempDefaultRunIntervelIdentifier === "minute" &&
-        this.tempFailedRunIntervelIdentifier === "minute"
+        this.tempFailedRunIntervelIdentifier === "minute" &&
+        this.tempUsersTriggerIntervelIdentifier === "minute"
       ) {
+        this.convertedNewDefaultRunIntervel = this.$store.getters.getOrganizationsDefaultTriggerTime;
+        this.convertedNewFailedRunIntervel = this.$store.getters.getRunFailedDefaultTriggerTime;
+        this.convertedNewUsersTriggerIntervel = this.$store.getters.getUsersTriggerTime;
+      } 
+      
+      else if (this.tempDefaultRunIntervelIdentifier == "hour") {
         this.convertedNewDefaultRunIntervel =
-          this.$store.getters.getorganizationsDefaultTriggerTime;
-        this.convertedNewFailedRunIntervel =
-          this.$store.getters.getrunFailedDefaultTriggerTime;
-      } else if (this.tempDefaultRunIntervelIdentifier == "hour") {
-        this.convertedNewDefaultRunIntervel =
-          this.$store.getters.getorganizationsDefaultTriggerTime * 60;
+          this.$store.getters.getOrganizationsDefaultTriggerTime * 60;
       } else if (this.tempDefaultRunIntervelIdentifier == "day") {
         this.convertedNewDefaultRunIntervel =
-          this.$store.getters.getorganizationsDefaultTriggerTime * 1440;
+          this.$store.getters.getOrganizationsDefaultTriggerTime * 1440;
       } else if (this.tempDefaultRunIntervelIdentifier == "week") {
         this.convertedNewDefaultRunIntervel =
-          this.$store.getters.getorganizationsDefaultTriggerTime * 10080;
+          this.$store.getters.getOrganizationsDefaultTriggerTime * 10080;
       } else if (this.tempDefaultRunIntervelIdentifier == "month") {
         this.convertedNewDefaultRunIntervel =
-          this.$store.getters.getorganizationsDefaultTriggerTime * 43800;
-      }
-      if (this.tempFailedRunIntervelIdentifier == "hour") {
-        this.convertedNewFailedRunIntervel =
-          this.$store.getters.getrunFailedDefaultTriggerTime * 60;
-      } else if (this.tempFailedRunIntervelIdentifier == "day") {
-        this.convertedNewFailedRunIntervel =
-          this.$store.getters.getrunFailedDefaultTriggerTime * 1440;
-      } else if (this.tempFailedRunIntervelIdentifier == "week") {
-        this.convertedNewFailedRunIntervel =
-          this.$store.getters.getrunFailedDefaultTriggerTime * 10080;
-      } else if (this.tempFailedRunIntervelIdentifier == "month") {
-        this.convertedNewFailedRunIntervel =
-          this.$store.getters.getrunFailedDefaultTriggerTime * 43800;
-      } else {
-        console.log("values are not clear");
+          this.$store.getters.getOrganizationsDefaultTriggerTime * 43800;
       }
 
+      if (this.tempFailedRunIntervelIdentifier == "hour") {
+        this.convertedNewFailedRunIntervel =
+          this.$store.getters.getRunFailedDefaultTriggerTime * 60;
+      } else if (this.tempFailedRunIntervelIdentifier == "day") {
+        this.convertedNewFailedRunIntervel =
+          this.$store.getters.getRunFailedDefaultTriggerTime * 1440;
+      } else if (this.tempFailedRunIntervelIdentifier == "week") {
+        this.convertedNewFailedRunIntervel =
+          this.$store.getters.getRunFailedDefaultTriggerTime * 10080;
+      } else if (this.tempFailedRunIntervelIdentifier == "month") {
+        this.convertedNewFailedRunIntervel =
+          this.$store.getters.getRunFailedDefaultTriggerTime * 43800;
+      } 
+
+      if (this.tempUsersTriggerIntervelIdentifier == "hour") {
+        this.convertedNewUsersTriggerIntervel =
+          this.$store.getters.getUsersTriggerTime * 60;
+      } else if (this.tempUsersTriggerIntervelIdentifier == "day") {
+        this.convertedNewUsersTriggerIntervel =
+          this.$store.getters.getUsersTriggerTime * 1440;
+      } else if (this.tempUsersTriggerIntervelIdentifier == "week") {
+        this.convertedNewUsersTriggerIntervel =
+          this.$store.getters.getUsersTriggerTime * 10080;
+      } else if (this.tempUsersTriggerIntervelIdentifier == "month") {
+        this.convertedNewUsersTriggerIntervel =
+          this.$store.getters.getUsersTriggerTime * 43800;
+      } 
+      
+      
+
       this.$store.commit(
-        "setorganizationsDefaultTriggerTime",
+        "setOrganizationsDefaultTriggerTime",
         this.convertedNewDefaultRunIntervel
       );
       this.$store.commit(
-        "setrunFailedDefaultTriggerTime",
+        "setRunFailedDefaultTriggerTime",
         this.convertedNewFailedRunIntervel
       );
-      //this.$store.dispatch("setNewOrganizationsDefaultTriggerTimeInDb");
+
+      this.$store.commit(
+        "setUsersTriggerTime",
+        this.convertedNewUsersTriggerIntervel
+      );
 
       this.$store
         .dispatch("setNewOrganizationsDefaultTriggerTimeInDb")
@@ -389,6 +500,14 @@ export default {
         this.tempNumericFailedRunInterval--;
       }
     },
+    addOneUsersIntervel() {
+      this.tempNumericUsersTriggerInterval++;
+    },
+    decreaseUsersIntervel() {
+      if (this.tempNumericUsersTriggerInterval > 0) {
+        this.tempNumericUsersTriggerInterval--;
+      }
+    },
 
     //a function the formats the minutes recieved from BE.
     formatMinutesRecievedFromBE(n) {
@@ -411,10 +530,6 @@ export default {
       }
 
       return result[0];
-    },
-
-    checkForUpdates() {
-      this.$store.dispatch("organizationsDefaultTriggerTimeInDb");
     },
 
     editSectionVisibility() {

@@ -31,8 +31,11 @@ export default createStore({
     currentDashboardToShow: "AllOrganizationDashboard",
     currentOpenOrganizationInDashboard: "",
     currentOpenProjectInDashboard: "",
+
     organizationsDefaultTriggerTime: "",
     runFailedDefaultTriggerTime: "",
+    usersTriggerTime: "",
+
     deleteThisOrganization: "",
   },
   getters: {
@@ -66,13 +69,16 @@ export default createStore({
     getcurrentOpenProjectInDashboard(state) {
       return state.currentOpenProjectInDashboard;
     },
-    getorganizationsDefaultTriggerTime(state) {
+    getOrganizationsDefaultTriggerTime(state) {
       return state.organizationsDefaultTriggerTime;
 
     },
-    getrunFailedDefaultTriggerTime(state) {
+    getRunFailedDefaultTriggerTime(state) {
       return state.runFailedDefaultTriggerTime;
     },
+    getUsersTriggerTime(state){
+      return state.usersTriggerTime;
+    }
    
 
   },
@@ -124,16 +130,17 @@ export default createStore({
     setcurrentOpenProjectInDashboard(state, payload) {
       state.currentOpenProjectInDashboard = payload;
     },
-    setorganizationsDefaultTriggerTime(state, payload) {
+    setOrganizationsDefaultTriggerTime(state, payload) {
       state.organizationsDefaultTriggerTime = payload;
     },
-    setrunFailedDefaultTriggerTime(state, payload) {
+    setRunFailedDefaultTriggerTime(state, payload) {
       state.runFailedDefaultTriggerTime = payload;
     },
-  
+    setUsersTriggerTime(state, payload){
+      state.usersTriggerTime = payload;
+    },
     setOrganizationToDelete(state, payload) {
       state.deleteThisOrganization = payload;
-
     }
 
 
@@ -324,8 +331,9 @@ export default createStore({
           },
         })
         .then(response => {
-          commit("setorganizationsDefaultTriggerTime", response.data.organizationsTriggerTime)
-          commit("setrunFailedDefaultTriggerTime", response.data.runFailedTriggerTime)
+          commit("setOrganizationsDefaultTriggerTime", response.data.organizationsTriggerTime)
+          commit("setRunFailedDefaultTriggerTime", response.data.runFailedTriggerTime)
+          commit("setUsersTriggerTime", response.data.usersTriggerTime)
 
         });
     },
@@ -337,6 +345,7 @@ export default createStore({
           {
             organizationsTriggerTime: state.organizationsDefaultTriggerTime,
             runFailedTriggerTime: state.runFailedDefaultTriggerTime,
+            usersTriggerTime: state.usersTriggerTime,
           },
           {
             headers: {

@@ -32,7 +32,6 @@ const preventRoutes = {
 
 
   beforeEnter: (to, from, next) => {
-    // console.log(this.$keycloak.token);
     if (store.getters.getLoginState == true) {
 
       next();
