@@ -400,15 +400,29 @@ export default {
         this.tempNumericUsersTriggerInterval
       );
 
-      if (
-        this.tempDefaultRunIntervelIdentifier === "minute" &&
-        this.tempFailedRunIntervelIdentifier === "minute" &&
-        this.tempUsersTriggerIntervelIdentifier === "minute"
-      ) {
+      //check if identifiers are in minutes. As no checks will be needed
+
+      if(this.tempDefaultRunIntervelIdentifier === "minute")
+      {
         this.convertedNewDefaultRunIntervel = this.$store.getters.getOrganizationsDefaultTriggerTime;
+      }
+      if( this.tempFailedRunIntervelIdentifier === "minute"){
         this.convertedNewFailedRunIntervel = this.$store.getters.getRunFailedDefaultTriggerTime;
+      }
+      if(this.tempUsersTriggerIntervelIdentifier === "minute"){
         this.convertedNewUsersTriggerIntervel = this.$store.getters.getUsersTriggerTime;
-      } 
+
+      }
+
+      // if (
+      //   this.tempDefaultRunIntervelIdentifier === "minute" &&
+      //   this.tempFailedRunIntervelIdentifier === "minute" &&
+      //   this.tempUsersTriggerIntervelIdentifier === "minute"
+      // ) {
+      //   this.convertedNewDefaultRunIntervel = this.$store.getters.getOrganizationsDefaultTriggerTime;
+      //   this.convertedNewFailedRunIntervel = this.$store.getters.getRunFailedDefaultTriggerTime;
+      //   this.convertedNewUsersTriggerIntervel = this.$store.getters.getUsersTriggerTime;
+      // } 
       
       else if (this.tempDefaultRunIntervelIdentifier == "hour") {
         this.convertedNewDefaultRunIntervel =
