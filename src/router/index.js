@@ -32,15 +32,14 @@ const preventRoutes = {
 
 
   beforeEnter: (to, from, next) => {
-    // console.log(store.getters.getLoginState);
     // console.log(this.$keycloak.token);
-    if ($store.state.loggedIn == true) {
+    if (store.getters.getLoginState == true) {
 
       next();
     } else {
 
 
-      next("http://localhost:8081/");
+      next("/");
     }
 
   }
@@ -82,7 +81,7 @@ const routes = [
   },
   {
     path: '/auth/callback',
-    name:'AuthenticationPage',
+    name: 'AuthenticationPage',
     component: authenticationpage,
 
   },
