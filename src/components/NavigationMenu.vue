@@ -532,7 +532,7 @@ export default {
   methods: {
     logout() {
 
-       // this.deleteAllCookies;
+       this.deleteAllCookies;
 
 
           this.$store.commit("currentUserSession", {
@@ -544,8 +544,8 @@ export default {
         });
 
         
-       //location.reload();
-       //this.$router.push('/');
+       location.reload();
+       this.$router.push('/');
         
     },
 

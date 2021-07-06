@@ -290,7 +290,7 @@
                       text-white
                       border-solid border-2 border-white
                     "
-                    @click="decreaseOneUsersIntervel()"
+                    @click="decreaseUsersIntervel()"
                   >
                     -
                   </button>
@@ -361,10 +361,11 @@ export default {
     return {
       editIntervels: false,
       dialogVisible: false,
+      
 
-      tempNumericDefaultRunInterval: null,
-      tempNumericFailedRunInterval: null,
-      tempNumericUsersTriggerInterval: null,
+      tempNumericDefaultRunInterval: 1,
+      tempNumericFailedRunInterval: 1,
+      tempNumericUsersTriggerInterval: 1,
 
       tempDefaultRunIntervelIdentifier: "minute",
       tempFailedRunIntervelIdentifier: "minute",
@@ -414,15 +415,6 @@ export default {
 
       }
 
-      // if (
-      //   this.tempDefaultRunIntervelIdentifier === "minute" &&
-      //   this.tempFailedRunIntervelIdentifier === "minute" &&
-      //   this.tempUsersTriggerIntervelIdentifier === "minute"
-      // ) {
-      //   this.convertedNewDefaultRunIntervel = this.$store.getters.getOrganizationsDefaultTriggerTime;
-      //   this.convertedNewFailedRunIntervel = this.$store.getters.getRunFailedDefaultTriggerTime;
-      //   this.convertedNewUsersTriggerIntervel = this.$store.getters.getUsersTriggerTime;
-      // } 
       
       else if (this.tempDefaultRunIntervelIdentifier == "hour") {
         this.convertedNewDefaultRunIntervel =
@@ -491,8 +483,10 @@ export default {
             this.messageError();
           }
         });
-      //this.messageConfirmation();
+      
+
       this.editIntervels = false;
+      
       //clear temp values
       this.tempNumericDefaultRunInterval = null;
       this.tempNumericFailedRunInterval = null;
