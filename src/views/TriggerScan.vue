@@ -99,7 +99,7 @@
         <div v-show="editIntervels">
           <h5 class="mt-5 mb-3 text-xl text-papaOrange-600">Edit intervals</h5>
           <hr class="mt-5 mb-3" />
-          <div class="flex justify-around">
+          <div class="flex flex-col md:flex-row justify-around">
             <!-- The default runs -->
             <div class="p-1 w-1/1 sm:w-1/5 shadow-lg font-medium">
               Default runs
