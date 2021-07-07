@@ -18,7 +18,7 @@
           </el-popover>
         </div>
         <div class="flex mb-3">
-          <h5 class="text-xl">Current trigger durations</h5>
+          <h5 class="text-xl font-medium">Current trigger durations</h5>
           <button class="float-right ml-2" @click="editSectionVisibility()">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +38,7 @@
             </svg>
           </button>
         </div>
-        <div class="flex justify-around">
+        <div class="flex justify-around  mt-6">
           <div class="p-1 w-1/1 sm:w-1/5 shadow-lg font-medium">
             Default runs
             <h2
@@ -99,7 +99,8 @@
         <div v-show="editIntervels">
           <h5 class="mt-5 mb-3 text-xl text-papaOrange-600">Edit intervals</h5>
           <hr class="mt-5 mb-3" />
-          <div class="flex flex-col md:flex-row justify-around">
+          <div class="flex flex-col sm:flex-row justify-around">
+            
             <!-- The default runs -->
             <div class="p-1 w-1/1 sm:w-1/5 shadow-lg font-medium">
               Default runs

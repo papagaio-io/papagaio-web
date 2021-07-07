@@ -180,6 +180,21 @@ export default createStore({
         });
     },
 
+    signUserOut(context) {
+
+      context.commit("currentUserSession", {
+        tempLoggedIn: false,
+        tempCurrentAuthToken: '',
+        tempCurrentUserName: '',
+        tempUserAvatar: '',
+        tempUserIsAdmin: '',
+      });
+
+      location.reload();
+      this.$router.push('/');
+
+    },
+
 
     //show the current available git sources when creating an organization
     async getGitSourceId({ state }) {
@@ -197,7 +212,7 @@ export default createStore({
     },
 
     //gets all organizations available through user's token 
-    async getOrganizationsFromSpecificGitSource({ state }) {
+    async getOrganizationsFromSpecificGitSource({ state, dispatch }) {
       return await axios
         .get(`${Config.ApiUrl}/gitorganizations`, {
           headers: {
@@ -207,7 +222,7 @@ export default createStore({
         .then(response => {
           return response.data
         }).catch((error) => {
-          //console.log(error.data)
+          dispatch('signUserOut')
         });
     },
 
