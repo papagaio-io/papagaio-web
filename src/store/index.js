@@ -12,6 +12,7 @@ export default createStore({
     loggedIn: false,
     currentAuthToken: "",
     currentUserName: "",
+    userAvatar: "",
     userIsAdmin: "",
 
     Orgname: "",
@@ -47,6 +48,9 @@ export default createStore({
     },
     getUserName(state) {
       return state.currentUserName;
+    },
+    getUserAvatar(state){
+      return state.userAvatar;
     },
     getCreateOrganizationBeURLResponse(state) {
       return state.createOrganizationBeResponse;
