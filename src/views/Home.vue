@@ -57,7 +57,7 @@
           </div>
         </div> -->
 
-        <div class="flex justify-center sm:mt-0 sm:ml-3">
+        <div class="flex justify-center sm:mt-0 sm:ml-3"  v-if="!this.$store.state.loggedIn">
           <table class="">
             <tr
               class="cursor-pointer"

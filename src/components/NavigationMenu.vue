@@ -531,22 +531,8 @@ export default {
   },
   methods: {
     logout() {
-
-       this.deleteAllCookies;
-
-
-          this.$store.commit("currentUserSession", {
-          tempLoggedIn: false,
-          tempCurrentAuthToken: '',
-          tempCurrentUserName: '',
-          tempUserAvatar: '',
-          tempUserIsAdmin: '',
-        });
-
-        
-       location.reload();
-       this.$router.push('/');
-        
+       //this.deleteAllCookies;
+       this.$store.dispatch('signUserOut');
     },
 
     deleteAllCookies() {

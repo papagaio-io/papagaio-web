@@ -128,6 +128,7 @@
                   "
                   v-model="tempDefaultRunIntervelIdentifier"
                   placeholder="Select"
+                  @change = "flushField()"
                 >
                   <!-- <el-option value="null" label="Select"> Select </el-option> -->
                   <el-option value="minute">Minute</el-option>
@@ -493,11 +494,43 @@ export default {
       this.tempNumericFailedRunInterval = null;
     },
 
+    flushField(){
+      this.tempNumericDefaultRunInterval = 1;
+    },
+
     addOneDefaultIntervel() {
-      this.tempNumericDefaultRunInterval++;
+      if(this.tempDefaultRunIntervelIdentifier === "minute")
+      {
+        if(this.tempNumericDefaultRunInterval < 59) {
+           this.tempNumericDefaultRunInterval++;
+        }
+
+      }
+       if(this.tempDefaultRunIntervelIdentifier === "hour")
+      {
+        if(this.tempNumericDefaultRunInterval < 24) {
+           this.tempNumericDefaultRunInterval++;
+        }
+
+      }
+      if(this.tempDefaultRunIntervelIdentifier === "day")
+      {
+        if(this.tempNumericDefaultRunInterval < 7) {
+           this.tempNumericDefaultRunInterval++;
+        }
+
+      }
+       if(this.tempDefaultRunIntervelIdentifier === "week")
+      {
+        if(this.tempNumericDefaultRunInterval < 4) {
+           this.tempNumericDefaultRunInterval++;
+        }
+
+      }
+     
     },
     decreaseOneDefaultIntervel() {
-      if (this.tempNumericDefaultRunInterval > 0) {
+      if (this.tempNumericDefaultRunInterval > 1) {
         this.tempNumericDefaultRunInterval--;
       }
     },

@@ -180,6 +180,7 @@ export default createStore({
         });
     },
 
+    //flush user's session
     signUserOut(context) {
 
       context.commit("currentUserSession", {
@@ -222,7 +223,10 @@ export default createStore({
         .then(response => {
           return response.data
         }).catch((error) => {
-          dispatch('signUserOut')
+          if(error.response.status === 401 ) {
+            dispatch('signUserOut')
+          }
+         
         });
     },
 
@@ -309,7 +313,13 @@ export default createStore({
             Authorization: `Bearer ${state.currentAuthToken}`,
           },
         })
-        .then(response => { commit("setAllOrganizationsDashboardData", response.data) });
+        .then(response => { commit("setAllOrganizationsDashboardData", response.data) })
+        .catch((error) => {
+          if(error.response.status === 401 ) {
+            dispatch('signUserOut')
+          }
+        });
+        
     },
 
     getOrganizationDashboard({ commit, state }) {
@@ -350,6 +360,11 @@ export default createStore({
           commit("setRunFailedDefaultTriggerTime", response.data.runFailedTriggerTime)
           commit("setUsersTriggerTime", response.data.usersTriggerTime)
 
+        }) 
+        .catch((error) => {
+          if(error.response.status === 401 ) {
+            dispatch('signUserOut')
+          }
         });
     },
 
