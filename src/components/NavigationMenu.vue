@@ -333,6 +333,10 @@
                   <a href="#" class= "text-center text-base block px-4 py-2 text-sm text-gray-700 ">{{this.$store.getters.getUserName}}</a>
                 </MenuItem>
                  <hr/>
+                   <MenuItem v-slot="{ active }">
+                  <a  target="_blank" :href="this.$store.state.userGitSourceLink" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Git Source</a>
+                </MenuItem>
+
                 <MenuItem >
                  
             <a
@@ -389,9 +393,7 @@
               >
             </a>
                 </MenuItem>
-                <!-- <MenuItem v-slot="{ active }">
-                  <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Sign out</a>
-                </MenuItem> -->
+              
               </MenuItems>
             </transition>
           </Menu>
