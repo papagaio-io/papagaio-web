@@ -14,6 +14,7 @@ export default createStore({
     currentUserName: "",
     userAvatar: "",
     userIsAdmin: "",
+    userGitSourceLink: '',
 
     Orgname: "",
     OrgAgolaRef: "",
@@ -51,6 +52,10 @@ export default createStore({
     },
     getUserAvatar(state){
       return state.userAvatar;
+    },
+    getuserGitSourceLink(state){
+      return state.userGitSourceLink
+
     },
     getCreateOrganizationBeURLResponse(state) {
       return state.createOrganizationBeResponse;
@@ -93,6 +98,7 @@ export default createStore({
         state.currentUserName = payload.tempCurrentUserName,
         state.userAvatar = payload.tempUserAvatar,
         state.userIsAdmin = payload.tempUserIsAdmin
+        state.userGitSourceLink = payload.tempUserGitSourceLink
 
     },
 
@@ -193,6 +199,7 @@ export default createStore({
         tempCurrentUserName: '',
         tempUserAvatar: '',
         tempUserIsAdmin: '',
+        tempUserGitSourceLink: '',
       });
 
       location.reload();

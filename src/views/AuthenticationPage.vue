@@ -36,12 +36,14 @@ export default {
       this.$store.state.userTokenUrlPath = this.$route.fullPath;
 
       this.$store.dispatch("getUserTokenDetails").then((response) => {
+        console.log(response);
         this.$store.commit("currentUserSession", {
           tempLoggedIn: true,
           tempCurrentAuthToken: response["token"],
           tempCurrentUserName: response["userInfo"]["login"],
           tempUserAvatar: response["userInfo"]["avatar_url"],
           tempUserIsAdmin: response["userInfo"]["is_admin"],
+          tempUserGitSourceLink: response["userInfo"]['user_page_url'],
         });
         this.$store.dispatch("organizationsDefaultTriggerTimeInDb");
 

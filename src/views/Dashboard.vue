@@ -22,6 +22,7 @@
    {{this.$store.state.currentUserName}}
     {{this.$store.state.userAvatar}}
      {{this.$store.state.userIsAdmin}}
+     {{this.$store.state.userGitSourceLink}}
 
 </template>
 
