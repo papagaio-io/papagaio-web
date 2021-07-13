@@ -23,7 +23,10 @@
     {{this.$store.state.userAvatar}}
      {{this.$store.state.userIsAdmin}}
      {{this.$store.state.userGitSourceLink}}
+<br>
+<br>
 
+{{this.$store.state.gitSourceAuthenticationChoice}}
 </template>
 
 <script>

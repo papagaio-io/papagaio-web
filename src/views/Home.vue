@@ -34,29 +34,6 @@
           to provide ease-of-use features.
         </p>
 
-        <!-- <div
-          v-if="$keycloak.authenticated == false"
-          class="mt-3 sm:mt-3 sm:flex sm:justify-center"
-        >
-          <div class="flex justify-center sm:mt-0 sm:ml-3">
-            <button
-              class="
-                px-10
-                py-3
-                font-medium
-                bg-papaDark-800
-                hover:bg-papaDark-700
-                text-white
-                float-right
-                border-solid border-2 border-white
-              "
-              @click="$keycloak.login()"
-            >
-              Sign In
-            </button>
-          </div>
-        </div> -->
-
         <div class="flex justify-center sm:mt-0 sm:ml-3"  v-if="!this.$store.state.loggedIn">
           <table class="">
             <tr
@@ -66,16 +43,16 @@
              
             >
               <td class="">
-                <a
-                 :href="authenticationChoice(currentView['name'])"
-                >
+               <button type= "button" @click="authenticationChoice(currentView['name'])" >
                 <img
                   class="w-12 inline-block align-middle"
                   :src="showAuthenticationIcon(currentView['gitType'])"
                   alt="Organization Icon"
                  
                 />
-                </a>
+              </button>
+                <!-- {{currentView['name']}} <br> 
+                {{currentView['gitType']}} -->
               </td>
             </tr>
           </table>
@@ -303,6 +280,8 @@
     </div>
   </div>
   hello {{ navigationURL }}
+  <br>
+  hello 2 {{authenticationMethodsAvailable}}
 </template>
 
 <script>
@@ -328,26 +307,29 @@ export default {
         .dispatch("gitSourceAuthenticationMethods")
         .then((response) => {
           this.authenticationMethodsAvailable = response;
-          console.log(response);
+          console.log(this.authenticationMethodsAvailable);
         });
+        
     },
 
     showAuthenticationIcon(recieved) {
       if (recieved === "gitea") {
         return require("../assets/img/Gitea_Logo.png");
+      }else 
+      {
+        return require("../assets/img/Gitea_Logo.png");
       }
     },
 
-    authenticationChoice(recieved) {
+  authenticationChoice(recieved) {
       this.$store.state.gitSourceAuthenticationChoice = recieved;
 
       this.$store.dispatch("gitSourceAuthenticationURL").then((response) => {
         this.navigationURL = response["oauth2_redirect"];
-        console.log(response);
+        console.log(this.navigationURL)
+       window.location.href = String(this.navigationURL);
       });
-      
-
-      return this.navigationURL;
+  
     },
   },
 };

@@ -265,7 +265,7 @@
           </button> -->
 
             <!-- Profile dropdown (logout) -->
-<!-- 
+            <!-- 
             <a
               @click="logout()"
               href="#"
@@ -320,85 +320,159 @@
               >
             </a> -->
 
-              <Menu as="div" class="ml-3 relative">
-            <div>
-              <MenuButton class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                <span class="sr-only">Open user menu</span>
-                <img class="h-8 w-8 rounded-full" :src="$store.getters.getUserAvatar" alt="" />
-              </MenuButton>
-            </div>
-            <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-              <MenuItems class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                <MenuItem>
-                  <a href="#" class= "text-center text-base block px-4 py-2 text-sm text-gray-700 ">{{this.$store.getters.getUserName}}</a>
-                </MenuItem>
-                 <hr/>
-                   <MenuItem v-slot="{ active }">
-                  <a  target="_blank" :href="this.$store.state.userGitSourceLink" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Git Source</a>
-                </MenuItem>
-
-                <MenuItem >
-                 
-            <a
-              @click="logout()"
-              href="#"
-              class="
-                relative
-                flex flex-row
-                
-                items-center
-                h-11
-                hover:bg-papaDark-700
-                hover:text-gray-200
-                pr-6
-              "
-            >
-              <span
-                class="
-                  inline-flex
-                  justify-center
-                  items-center
-                  ml-4
-                  text-red-400
-                "
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="black"
-                  class="bi bi-box-arrow-right"
-                  viewBox="0 0 16 16"
+            <Menu as="div" class="ml-3 relative">
+              <div>
+                <MenuButton
+                  class="
+                    bg-gray-800
+                    flex
+                    text-sm
+                    rounded-full
+                    focus:outline-none
+                    focus:ring-2
+                    focus:ring-offset-2
+                    focus:ring-offset-gray-800
+                    focus:ring-white
+                  "
                 >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"
+                  <span class="sr-only">Open user menu</span>
+                  <img
+                    class="h-8 w-8 rounded-full"
+                    :src="$store.getters.getUserAvatar"
+                    alt=""
                   />
-                  <path
-                    fill-rule="evenodd"
-                    d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"
-                  />
-                </svg>
-              </span>
-              <span
-                class="
-                  ml-2
-                  font-semibold
-                  text-sm
-                  tracking-wide
-                  truncate
-                  font-sans
-                "
-                >Logout</span
+                </MenuButton>
+              </div>
+              <transition
+                enter-active-class="transition ease-out duration-100"
+                enter-from-class="transform opacity-0 scale-95"
+                enter-to-class="transform opacity-100 scale-100"
+                leave-active-class="transition ease-in duration-75"
+                leave-from-class="transform opacity-100 scale-100"
+                leave-to-class="transform opacity-0 scale-95"
               >
-            </a>
-                </MenuItem>
-              
-              </MenuItems>
-            </transition>
-          </Menu>
+                <MenuItems
+                  class="
+                    origin-top-right
+                    absolute
+                    right-0
+                    mt-2
+                    w-48
+                    shadow-lg
+                    py-1
+                    bg-papaDark-800
+                    ring-1 ring-black ring-opacity-5
+                    focus:outline-none
+                  "
+                >
+                  <MenuItem>
+                    <a
+                      href="#"
+                      class="text-center block px-4 py-2 text-base text-white"
+                      >{{ this.$store.getters.getUserName }}</a
+                    >
+                  </MenuItem>
+                  <hr />
+                  <MenuItem>
+                    <a
+                      target="_blank"
+                      :href="this.$store.state.userGitSourceLink"
+                      class="
+                        relative
+                        flex flex-row
+                        items-center
+                        text-white
+                        h-11
+                        hover:bg-papaDark-700
+                        hover:text-gray-200
+                        pr-6
+                      "
+                    >
+                      <span
+                        class="inline-flex justify-center items-center ml-4"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="white"
+                          class="bi bi-box-arrow-right"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"
+                          />
+                          <path
+                            d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"
+                          />
+                        </svg>
+                      </span>
+                      <span
+                        class="
+                          ml-2
+                          font-medium
+                          text-sm
+                          tracking-wide
+                          truncate
+                          font-sans
+                        "
+                        >Git source</span
+                      >
+                    </a>
+                  </MenuItem>
 
-
+                  <MenuItem>
+                    <a
+                      @click="logout()"
+                      href="#"
+                      class="
+                        relative
+                        flex flex-row
+                        items-center
+                        h-11
+                        text-white
+                        hover:bg-papaDark-700
+                        hover:text-gray-200
+                        pr-6
+                      "
+                    >
+                      <span
+                        class="inline-flex justify-center items-center ml-4"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="white"
+                          class="bi bi-box-arrow-right"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"
+                          />
+                          <path
+                            fill-rule="evenodd"
+                            d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"
+                          />
+                        </svg>
+                      </span>
+                      <span
+                        class="
+                          ml-2
+                          font-medium
+                          text-sm
+                          tracking-wide
+                          truncate
+                          font-sans
+                        "
+                        >Logout</span
+                      >
+                    </a>
+                  </MenuItem>
+                </MenuItems>
+              </transition>
+            </Menu>
           </div>
         </div>
       </div>
@@ -611,8 +685,8 @@ export default {
   },
   methods: {
     logout() {
-       //this.deleteAllCookies;
-       this.$store.dispatch('signUserOut');
+      //this.deleteAllCookies;
+      this.$store.dispatch("signUserOut");
     },
 
     deleteAllCookies() {
@@ -626,8 +700,6 @@ export default {
       d.setTime(d.getTime() + expirydays * 24 * 60 * 60 * 1000);
       var expires = "expires=" + d.toUTCString();
       document.cookie = name + "=" + value + "; " + expires;
-
-     
     },
 
     deleteCookie(name) {
