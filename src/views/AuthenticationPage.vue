@@ -1,7 +1,13 @@
 <template>
   <div class="flex h-screen">
-    <div class="m-auto text-3xl font-extrabold tracking-tight sm:text-4xl">
-      Hello from the authentication page
+    <div class="container mx-auto">
+
+       <img
+      class="w-full  mx-auto"
+      alt="Papagaio logo"
+      src="../assets/img/papagaioMainLogo.jpg"
+    />
+      <!-- Hello from the authentication page
       <br />
       <div class="text-sm">
         {{ currentURL }}
@@ -10,7 +16,7 @@
 
       <div class="text-s">
         {{ userDetailsResponse }}
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

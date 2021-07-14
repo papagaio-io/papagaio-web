@@ -17,7 +17,7 @@
 
     <component v-bind:is="showDashboard"> </component>
   </div>
-   {{this.$store.state.loggedIn}}
+   <!-- {{this.$store.state.loggedIn}}
   {{this.$store.state.currentAuthToken}}
    {{this.$store.state.currentUserName}}
     {{this.$store.state.userAvatar}}
@@ -26,7 +26,7 @@
 <br>
 <br>
 
-{{this.$store.state.gitSourceAuthenticationChoice}}
+{{this.$store.state.gitSourceAuthenticationChoice}} -->
 </template>
 
 <script>

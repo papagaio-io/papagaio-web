@@ -20,7 +20,6 @@
 
         <p
           class="
-            mt-2
             mb-2
             sm:max-w-4xl
             sm:mx-auto
@@ -34,43 +33,10 @@
           to provide ease-of-use features.
         </p>
 
-        <!-- <div
-          class="
-            bg-white
-            relative
-            shadow-xl
-            w-5/6
-            md:w-4/6
-            lg:w-3/6
-            xl:w-2/6
-            mx-auto
-          "
-        >
-          <div class="flex justify-center">
-            <img
-              src="https://pantazisoft.com/img/avatar-2.jpeg"
-              alt=""
-              class="
-                rounded-full
-                mx-auto
-                absolute
-                -top-20
-                w-32
-                h-32
-                shadow-2xl
-                border-4 border-white
-              "
-            />
-          </div>
-
-          <div class="mt-16">
-            <h1 class="font-bold text-center text-3xl text-gray-900">
-              Eduard Pantazi
-            </h1>
-          </div>
-        </div> -->
-
         <div class="flex justify-center" v-if="!this.$store.state.loggedIn">
+          <div class="inline text-white bottom-20 mt-5 text-4xl tracking-tight font-extrabold sm:text-2xl md:text-3xl">
+            Login using
+          </div>
           <div
             class="ml-4"
             v-for="currentView in authenticationMethodsAvailable"
@@ -80,7 +46,7 @@
               type="button"
               @click="authenticationChoice(currentView['name'])"
               class="
-              hover:bg-papaDark-800
+                hover:bg-papaDark-800
                 inline
                 cursor-pointer
                 p-1
@@ -95,32 +61,11 @@
                 alt="Organization Icon"
               />
             </button>
-            <h2 class="bg-papaDark-800 text-white p-1 font-medium">
+            <h2 class="bg-papaDark-800 text-white p-1 font-medium ">
               {{ currentView["gitType"] }}
             </h2>
           </div>
         </div>
-
-        <!-- <table class="flex flex-row" v-if="!this.$store.state.loggedIn" >
-            <tr
-              class="cursor-pointer"
-              v-for="currentView in authenticationMethodsAvailable"
-              :key="currentView.id"
-             
-            >
-              <td class="">
-               <button type= "button" @click="authenticationChoice(currentView['name'])" >
-                <img
-                  class="w-12 inline-block align-middle"
-                  :src="showAuthenticationIcon(currentView['gitType'])"
-                  alt="Organization Icon"
-                 
-                />
-              </button>
-              
-              </td>
-            </tr>
-          </table> -->
       </div>
 
       <!-- Body  -->
@@ -343,9 +288,9 @@
       </div>
     </div>
   </div>
-  hello {{ navigationURL }}
+  <!-- hello {{ navigationURL }}
   <br />
-  hello 2 {{ authenticationMethodsAvailable }}
+  hello 2 {{ authenticationMethodsAvailable }} -->
 </template>
 
 <script>
