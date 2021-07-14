@@ -1,9 +1,9 @@
 <template>
-  <div class="flex h-screen">
-    <div class="container mx-auto">
+  
+    <div class="flex  h-screen justify-center items-center">
 
        <img
-      class="w-full  mx-auto"
+      class="w-1/4"
       alt="Papagaio logo"
       src="../assets/img/papagaioMainLogo.jpg"
     />
@@ -18,7 +18,6 @@
         {{ userDetailsResponse }}
       </div> -->
     </div>
-  </div>
 </template>
 
 <script>
