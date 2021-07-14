@@ -62,10 +62,6 @@ export default {
         
       }, 1000);
 
-      
-
-      //this.$store.dispatch("getAllOrganizationDashboard");
-      //this.$router.push("/dashboard");
     },
   },
 };

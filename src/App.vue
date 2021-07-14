@@ -1,17 +1,14 @@
 <template>
   <div id="app">
-     <label v-show="false">{{ userLoggedIn }}</label>
+    <label v-show="false">{{ userLoggedIn }}</label>
     <NavigationMenu v-if="this.$store.getters.getLoginState"> </NavigationMenu>
   </div>
   <router-view />
-
-  <!-- <NavigationBar v-if="$keycloak.authenticated"> </NavigationBar> -->
-  <!-- <p >{{currentUserToken }}</p> -->
 </template>
 
 <script>
 import NavigationBar from "./components/NavigationBar";
-import NavigationMenu from "./components/NavigationMenu.vue"
+import NavigationMenu from "./components/NavigationMenu.vue";
 
 export default {
   components: {
