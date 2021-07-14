@@ -34,8 +34,25 @@
           to provide ease-of-use features.
         </p>
 
-        <div class="flex justify-center sm:mt-0 sm:ml-3"  v-if="!this.$store.state.loggedIn">
-          <table class="">
+        <div class="" v-if="!this.$store.state.loggedIn">
+          <div
+            class="inline cursor-pointer"
+            v-for="currentView in authenticationMethodsAvailable"
+            :key="currentView.id"
+          >
+            <button
+              type="button"
+              @click="authenticationChoice(currentView['name'])"
+            >
+              <img
+                class="w-12 inline-block align-middle"
+                :src="showAuthenticationIcon(currentView['gitType'])"
+                alt="Organization Icon"
+              />
+            </button>
+          </div>
+        </div>
+        <!-- <table class="flex flex-row" v-if="!this.$store.state.loggedIn" >
             <tr
               class="cursor-pointer"
               v-for="currentView in authenticationMethodsAvailable"
@@ -51,12 +68,10 @@
                  
                 />
               </button>
-                <!-- {{currentView['name']}} <br> 
-                {{currentView['gitType']}} -->
+              
               </td>
             </tr>
-          </table>
-        </div>
+          </table> -->
       </div>
 
       <!-- Body  -->
@@ -175,7 +190,7 @@
                   </div>
                 </div>
                 <div class="ml-4">
-                  <dt class="text-lg leading-6 font-bold ">Dashboard</dt>
+                  <dt class="text-lg leading-6 font-bold">Dashboard</dt>
                   <dd class="mt-2 text-base text-justify">
                     Friendly previewing of the whole organization structure
                     which helps in monitoring significant information of the
@@ -280,8 +295,8 @@
     </div>
   </div>
   hello {{ navigationURL }}
-  <br>
-  hello 2 {{authenticationMethodsAvailable}}
+  <br />
+  hello 2 {{ authenticationMethodsAvailable }}
 </template>
 
 <script>
@@ -309,27 +324,26 @@ export default {
           this.authenticationMethodsAvailable = response;
           console.log(this.authenticationMethodsAvailable);
         });
-        
     },
 
     showAuthenticationIcon(recieved) {
       if (recieved === "gitea") {
         return require("../assets/img/Gitea_Logo.png");
-      }else 
-      {
+      } else if (recieved === "github") {
+        return require("../assets/img/Github_Logo.png");
+      } else {
         return require("../assets/img/Gitea_Logo.png");
       }
     },
 
-  authenticationChoice(recieved) {
+    authenticationChoice(recieved) {
       this.$store.state.gitSourceAuthenticationChoice = recieved;
 
       this.$store.dispatch("gitSourceAuthenticationURL").then((response) => {
         this.navigationURL = response["oauth2_redirect"];
-        console.log(this.navigationURL)
-       window.location.href = String(this.navigationURL);
+        console.log(this.navigationURL);
+        window.location.href = String(this.navigationURL);
       });
-  
     },
   },
 };
