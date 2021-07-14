@@ -1,12 +1,12 @@
 <template>
-  <div class="flex flex-col container mx-auto mt-5 w-full sm:w-3/4">
+  <div class="flex flex-col container mx-auto mt-2 w-full sm:w-3/4">
     <img
       class="w-full sm:w-2/5 mx-auto"
       alt="Papagaio logo"
       src="../assets/img/papagaioMainLogo.jpg"
     />
 
-    <div class="bg-papaDark-700 pt-2">
+    <div class="bg-papaDark-700 pt-1">
       <div class="heroBody">
         <h4 class="mt-2 text-xl font-bold text-white">
           Plugin of
@@ -20,8 +20,8 @@
 
         <p
           class="
-            mt-3
-            mb-4
+            mt-2
+            mb-2
             sm:max-w-4xl
             sm:mx-auto
             md:mt-5
@@ -34,24 +34,73 @@
           to provide ease-of-use features.
         </p>
 
-        <div class="" v-if="!this.$store.state.loggedIn">
+        <!-- <div
+          class="
+            bg-white
+            relative
+            shadow-xl
+            w-5/6
+            md:w-4/6
+            lg:w-3/6
+            xl:w-2/6
+            mx-auto
+          "
+        >
+          <div class="flex justify-center">
+            <img
+              src="https://pantazisoft.com/img/avatar-2.jpeg"
+              alt=""
+              class="
+                rounded-full
+                mx-auto
+                absolute
+                -top-20
+                w-32
+                h-32
+                shadow-2xl
+                border-4 border-white
+              "
+            />
+          </div>
+
+          <div class="mt-16">
+            <h1 class="font-bold text-center text-3xl text-gray-900">
+              Eduard Pantazi
+            </h1>
+          </div>
+        </div> -->
+
+        <div class="flex justify-center" v-if="!this.$store.state.loggedIn">
           <div
-            class="inline cursor-pointer"
+            class="ml-4"
             v-for="currentView in authenticationMethodsAvailable"
             :key="currentView.id"
           >
             <button
               type="button"
               @click="authenticationChoice(currentView['name'])"
+              class="
+              hover:bg-papaDark-800
+                inline
+                cursor-pointer
+                p-1
+                w-full
+                shadow-2xl shadow-inner
+                bg-papaDark-700
+              "
             >
               <img
-                class="w-12 inline-block align-middle"
+                class="w-12 inline-block"
                 :src="showAuthenticationIcon(currentView['gitType'])"
                 alt="Organization Icon"
               />
             </button>
+            <h2 class="bg-papaDark-800 text-white p-1 font-medium">
+              {{ currentView["gitType"] }}
+            </h2>
           </div>
         </div>
+
         <!-- <table class="flex flex-row" v-if="!this.$store.state.loggedIn" >
             <tr
               class="cursor-pointer"

@@ -416,7 +416,7 @@
                           truncate
                           font-sans
                         "
-                        >Git source</span
+                        >Profile</span
                       >
                     </a>
                   </MenuItem>
