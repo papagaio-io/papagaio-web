@@ -34,7 +34,7 @@
         </p>
 
         <div class="flex justify-center" v-if="!this.$store.state.loggedIn">
-          <div class="inline text-white bottom-20 mt-5 text-4xl tracking-tight font-extrabold sm:text-2xl md:text-3xl">
+          <div class="inline text-white mt-5 text-4xl tracking-tight font-medium sm:text-2xl md:text-3xl">
             Login using
           </div>
           <div
@@ -228,7 +228,7 @@
                 <div class="ml-4">
                   <dt class="text-lg leading-6 font-bold">Git sources</dt>
                   <dd class="mt-2 mb-2 text-base">
-                    Supports Gitea & Github repositories.
+                    Supports Gitea & Github.
                   </dd>
                 </div>
               </div>
