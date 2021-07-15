@@ -56,13 +56,13 @@
               "
             >
               <img
-                class="w-12 inline-block"
+                class="w-12 inline-block "
                 :src="showAuthenticationIcon(currentView['gitType'])"
                 alt="Organization Icon"
               />
             </button>
-            <h2 class="bg-papaDark-800 text-white p-1 font-medium ">
-              {{ currentView["gitType"] }}
+            <h2 class="bg-papaDark-800 text-white p-1 font-medium  ">
+              {{gitSourceNameCapitalizing(currentView["gitType"])}}
             </h2>
           </div>
         </div>
@@ -339,6 +339,17 @@ export default {
         window.location.href = String(this.navigationURL);
       });
     },
+    //returns the commerical names of the git source
+    gitSourceNameCapitalizing(recieved){
+      if(recieved == 'gitea')
+      {
+        return 'Gitea'
+      }
+      else if (recieved == 'github')
+      {
+        return 'GitHub'
+      }
+    }
   },
 };
 </script>
