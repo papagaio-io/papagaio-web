@@ -38,7 +38,7 @@
             </svg>
           </button>
         </div>
-        <div class="flex justify-around  mt-6">
+        <div class="flex justify-around mt-6">
           <div class="p-1 w-1/1 sm:w-1/5 shadow-lg font-medium">
             Default runs
             <h2
@@ -100,7 +100,6 @@
           <h5 class="mt-5 mb-3 text-xl text-papaOrange-600">Edit intervals</h5>
           <hr class="mt-5 mb-3" />
           <div class="flex flex-col sm:flex-row justify-around">
-            
             <!-- The default runs -->
             <div class="p-1 w-1/1 sm:w-1/5 shadow-lg font-medium">
               Default runs
@@ -128,14 +127,13 @@
                   "
                   v-model="tempDefaultRunIntervelIdentifier"
                   placeholder="Select"
-                  @change = "flushField()"
+                  @change="flushDefaultRunEditField()"
                 >
                   <!-- <el-option value="null" label="Select"> Select </el-option> -->
                   <el-option value="minute">Minute</el-option>
                   <el-option value="hour">Hour</el-option>
                   <el-option value="day">Day</el-option>
                   <el-option value="week">Week</el-option>
-                  <el-option value="month">Month</el-option>
                 </el-select>
 
                 <div class="sm:mt-0 sm:ml-3">
@@ -201,13 +199,13 @@
                   "
                   v-model="tempFailedRunIntervelIdentifier"
                   placeholder="Select"
+                  @change="flushFaildRunEditField()"
                 >
                   <!-- <el-option value="null" label="Select"> Select </el-option> -->
                   <el-option value="minute">Minute</el-option>
                   <el-option value="hour">Hour</el-option>
                   <el-option value="day">Day</el-option>
                   <el-option value="week">Week</el-option>
-                  <el-option value="month">Month</el-option>
                 </el-select>
 
                 <div class="sm:mt-0 sm:ml-3">
@@ -272,13 +270,13 @@
                   "
                   v-model="tempUsersTriggerIntervelIdentifier"
                   placeholder="Select"
+                  @change="flushUserIntervelEditField()"
                 >
                   <!-- <el-option value="null" label="Select"> Select </el-option> -->
                   <el-option value="minute">Minute</el-option>
                   <el-option value="hour">Hour</el-option>
                   <el-option value="day">Day</el-option>
                   <el-option value="week">Week</el-option>
-                  <el-option value="month">Month</el-option>
                 </el-select>
 
                 <div class="sm:mt-0 sm:ml-3">
@@ -363,7 +361,6 @@ export default {
     return {
       editIntervels: false,
       dialogVisible: false,
-      
 
       tempNumericDefaultRunInterval: 1,
       tempNumericFailedRunInterval: 1,
@@ -405,20 +402,18 @@ export default {
 
       //check if identifiers are in minutes. As no checks will be needed
 
-      if(this.tempDefaultRunIntervelIdentifier === "minute")
-      {
-        this.convertedNewDefaultRunIntervel = this.$store.getters.getOrganizationsDefaultTriggerTime;
+      if (this.tempDefaultRunIntervelIdentifier === "minute") {
+        this.convertedNewDefaultRunIntervel =
+          this.$store.getters.getOrganizationsDefaultTriggerTime;
       }
-      if( this.tempFailedRunIntervelIdentifier === "minute"){
-        this.convertedNewFailedRunIntervel = this.$store.getters.getRunFailedDefaultTriggerTime;
+      if (this.tempFailedRunIntervelIdentifier === "minute") {
+        this.convertedNewFailedRunIntervel =
+          this.$store.getters.getRunFailedDefaultTriggerTime;
       }
-      if(this.tempUsersTriggerIntervelIdentifier === "minute"){
-        this.convertedNewUsersTriggerIntervel = this.$store.getters.getUsersTriggerTime;
-
-      }
-
-      
-      else if (this.tempDefaultRunIntervelIdentifier == "hour") {
+      if (this.tempUsersTriggerIntervelIdentifier === "minute") {
+        this.convertedNewUsersTriggerIntervel =
+          this.$store.getters.getUsersTriggerTime;
+      } else if (this.tempDefaultRunIntervelIdentifier == "hour") {
         this.convertedNewDefaultRunIntervel =
           this.$store.getters.getOrganizationsDefaultTriggerTime * 60;
       } else if (this.tempDefaultRunIntervelIdentifier == "day") {
@@ -427,9 +422,6 @@ export default {
       } else if (this.tempDefaultRunIntervelIdentifier == "week") {
         this.convertedNewDefaultRunIntervel =
           this.$store.getters.getOrganizationsDefaultTriggerTime * 10080;
-      } else if (this.tempDefaultRunIntervelIdentifier == "month") {
-        this.convertedNewDefaultRunIntervel =
-          this.$store.getters.getOrganizationsDefaultTriggerTime * 43800;
       }
 
       if (this.tempFailedRunIntervelIdentifier == "hour") {
@@ -441,10 +433,7 @@ export default {
       } else if (this.tempFailedRunIntervelIdentifier == "week") {
         this.convertedNewFailedRunIntervel =
           this.$store.getters.getRunFailedDefaultTriggerTime * 10080;
-      } else if (this.tempFailedRunIntervelIdentifier == "month") {
-        this.convertedNewFailedRunIntervel =
-          this.$store.getters.getRunFailedDefaultTriggerTime * 43800;
-      } 
+      }
 
       if (this.tempUsersTriggerIntervelIdentifier == "hour") {
         this.convertedNewUsersTriggerIntervel =
@@ -455,12 +444,7 @@ export default {
       } else if (this.tempUsersTriggerIntervelIdentifier == "week") {
         this.convertedNewUsersTriggerIntervel =
           this.$store.getters.getUsersTriggerTime * 10080;
-      } else if (this.tempUsersTriggerIntervelIdentifier == "month") {
-        this.convertedNewUsersTriggerIntervel =
-          this.$store.getters.getUsersTriggerTime * 43800;
-      } 
-      
-      
+      }
 
       this.$store.commit(
         "setOrganizationsDefaultTriggerTime",
@@ -485,68 +469,104 @@ export default {
             this.messageError();
           }
         });
-      
 
       this.editIntervels = false;
-      
+
       //clear temp values
       this.tempNumericDefaultRunInterval = null;
       this.tempNumericFailedRunInterval = null;
     },
 
-    flushField(){
+    flushDefaultRunEditField() {
       this.tempNumericDefaultRunInterval = 1;
     },
 
     addOneDefaultIntervel() {
-      if(this.tempDefaultRunIntervelIdentifier === "minute")
-      {
-        if(this.tempNumericDefaultRunInterval < 59) {
-           this.tempNumericDefaultRunInterval++;
+      if (this.tempDefaultRunIntervelIdentifier === "minute") {
+        if (this.tempNumericDefaultRunInterval < 59) {
+          this.tempNumericDefaultRunInterval++;
         }
-
       }
-       if(this.tempDefaultRunIntervelIdentifier === "hour")
-      {
-        if(this.tempNumericDefaultRunInterval < 24) {
-           this.tempNumericDefaultRunInterval++;
+      if (this.tempDefaultRunIntervelIdentifier === "hour") {
+        if (this.tempNumericDefaultRunInterval < 24) {
+          this.tempNumericDefaultRunInterval++;
         }
-
       }
-      if(this.tempDefaultRunIntervelIdentifier === "day")
-      {
-        if(this.tempNumericDefaultRunInterval < 7) {
-           this.tempNumericDefaultRunInterval++;
+      if (this.tempDefaultRunIntervelIdentifier === "day") {
+        if (this.tempNumericDefaultRunInterval < 7) {
+          this.tempNumericDefaultRunInterval++;
         }
-
       }
-       if(this.tempDefaultRunIntervelIdentifier === "week")
-      {
-        if(this.tempNumericDefaultRunInterval < 4) {
-           this.tempNumericDefaultRunInterval++;
+      if (this.tempDefaultRunIntervelIdentifier === "week") {
+        if (this.tempNumericDefaultRunInterval < 4) {
+          this.tempNumericDefaultRunInterval++;
         }
-
       }
-     
     },
     decreaseOneDefaultIntervel() {
       if (this.tempNumericDefaultRunInterval > 1) {
         this.tempNumericDefaultRunInterval--;
       }
     },
+    flushFaildRunEditField() {
+      this.tempNumericFailedRunInterval = 1;
+    },
+
     addOneFailedIntervel() {
-      this.tempNumericFailedRunInterval++;
+      if (this.tempFailedRunIntervelIdentifier === "minute") {
+        if (this.tempNumericFailedRunInterval < 59) {
+          this.tempNumericFailedRunInterval++;
+        }
+      }
+      if (this.tempFailedRunIntervelIdentifier === "hour") {
+        if (this.tempNumericFailedRunInterval < 24) {
+          this.tempNumericFailedRunInterval++;
+        }
+      }
+      if (this.tempFailedRunIntervelIdentifier === "day") {
+        if (this.tempNumericFailedRunInterval < 7) {
+          this.tempNumericFailedRunInterval++;
+        }
+      }
+      if (this.tempFailedRunIntervelIdentifier === "week") {
+        if (this.tempNumericFailedRunInterval < 4) {
+          this.tempNumericFailedRunInterval++;
+        }
+      }
     },
     decreaseOneFailedIntervel() {
-      if (this.tempNumericFailedRunInterval > 0) {
+      if (this.tempNumericFailedRunInterval > 1) {
         this.tempNumericFailedRunInterval--;
       }
     },
+    flushUserIntervelEditField() {
+      this.tempNumericUsersTriggerInterval = 1;
+    },
+
     addOneUsersIntervel() {
-      this.tempNumericUsersTriggerInterval++;
+      if (this.tempUsersTriggerIntervelIdentifier === "minute") {
+        if (this.tempNumericUsersTriggerInterval < 59) {
+          this.tempNumericUsersTriggerInterval++;
+        }
+      }
+      if (this.tempUsersTriggerIntervelIdentifier === "hour") {
+        if (this.tempNumericUsersTriggerInterval < 24) {
+          this.tempNumericUsersTriggerInterval++;
+        }
+      }
+      if (this.tempUsersTriggerIntervelIdentifier === "day") {
+        if (this.tempNumericUsersTriggerInterval < 7) {
+          this.tempNumericUsersTriggerInterval++;
+        }
+      }
+      if (this.tempUsersTriggerIntervelIdentifier === "week") {
+        if (this.tempNumericUsersTriggerInterval < 4) {
+          this.tempNumericUsersTriggerInterval++;
+        }
+      }
     },
     decreaseUsersIntervel() {
-      if (this.tempNumericUsersTriggerInterval > 0) {
+      if (this.tempNumericUsersTriggerInterval > 1) {
         this.tempNumericUsersTriggerInterval--;
       }
     },

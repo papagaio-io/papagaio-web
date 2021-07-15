@@ -1,23 +1,11 @@
 <template>
-  
-    <div class="flex  h-screen justify-center items-center">
-
-       <img
-      class="w-1/4"
+  <div class="flex h-screen justify-center items-center">
+    <img
+      class="w-1/2"
       alt="Papagaio logo"
       src="../assets/img/papagaioMainLogo.jpg"
     />
-      <!-- Hello from the authentication page
-      <br />
-      <div class="text-sm">
-        {{ currentURL }}
-      </div>
-      <br />
-
-      <div class="text-s">
-        {{ userDetailsResponse }}
-      </div> -->
-    </div>
+  </div>
 </template>
 
 <script>
@@ -48,7 +36,7 @@ export default {
           tempCurrentUserName: response["userInfo"]["login"],
           tempUserAvatar: response["userInfo"]["avatar_url"],
           tempUserIsAdmin: response["userInfo"]["is_admin"],
-          tempUserGitSourceLink: response["userInfo"]['user_page_url'],
+          tempUserGitSourceLink: response["userInfo"]["user_page_url"],
         });
         this.$store.dispatch("organizationsDefaultTriggerTimeInDb");
 
@@ -59,9 +47,7 @@ export default {
       setTimeout(function () {
         self.$store.dispatch("getAllOrganizationDashboard");
         self.$router.push("/dashboard");
-        
       }, 1000);
-
     },
   },
 };
