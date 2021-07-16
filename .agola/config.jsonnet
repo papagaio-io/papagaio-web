@@ -40,7 +40,7 @@ local task_build_go() =
             else
               export TARBALL=papagaio-web-latest.tar.gz ; fi
 
-            mkdir dist && cp papagaio-web dist/ && tar -zcvf ${TARBALL} dist
+            cp papagaio-web dist/ && tar -zcvf ${TARBALL} dist
             curl -v -k -u $USERNAME:$PASSWORD --upload-file ${TARBALL} https://nexus.sorintdev.it/repository/binaries/it.sorintdev.papagaio/${TARBALL}
           |||,
         },
