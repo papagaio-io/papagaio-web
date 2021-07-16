@@ -18,27 +18,29 @@
           /></a>
         </h4>
 
-        <p
-          class="
-            mb-2
-            sm:max-w-4xl
-            sm:mx-auto
-            md:mt-5
-            md:text-xl
-            text-white
-          "
-        >
+        <p class="mb-2 sm:max-w-4xl sm:mx-auto md:mt-5 md:text-xl text-white">
           Agola is a CI/CD open source tool under the 2.0 Apache license.
           Papagaio was developed to complement Agola, extend its capabilities, &
           to provide ease-of-use features.
         </p>
 
         <div class="flex justify-center" v-if="!this.$store.state.loggedIn">
-          <div class="inline text-white mt-5 text-4xl tracking-tight font-medium sm:text-2xl md:text-3xl">
-            Login using
+          <div
+            class="
+              inline
+              text-white
+              mt-5
+              text-4xl
+              tracking-tight
+              font-medium
+              sm:text-2xl
+              md:text-3xl
+            "
+          >
+            Login with
           </div>
           <div
-            class="ml-4"
+            class="ml-4 w-40"
             v-for="currentView in authenticationMethodsAvailable"
             :key="currentView.id"
           >
@@ -47,22 +49,24 @@
               @click="authenticationChoice(currentView['name'])"
               class="
                 hover:bg-papaDark-800
-                inline
                 cursor-pointer
                 p-1
                 w-full
                 shadow-2xl shadow-inner
-                bg-papaDark-700
+                bg-papaDark-100
               "
             >
               <img
-                class="w-12 inline-block "
+                class="w-10 inline-block"
                 :src="showAuthenticationIcon(currentView['gitType'])"
                 alt="Organization Icon"
               />
             </button>
-            <h2 class="bg-papaDark-800 text-white p-1 font-medium  ">
+            <!-- <h2 class="bg-papaDark-800 text-white p-1 font-medium ">
               {{gitSourceNameCapitalizing(currentView["gitType"])}}
+            </h2> -->
+            <h2 class="bg-papaDark-800 text-white p-1 text-medium">
+              {{ currentView["name"] }}
             </h2>
           </div>
         </div>
@@ -227,9 +231,7 @@
                 </div>
                 <div class="ml-4">
                   <dt class="text-lg leading-6 font-bold">Git sources</dt>
-                  <dd class="mt-2 mb-2 text-base">
-                    Supports Gitea & Github.
-                  </dd>
+                  <dd class="mt-2 mb-2 text-base">Supports Gitea & Github.</dd>
                 </div>
               </div>
 
@@ -340,16 +342,13 @@ export default {
       });
     },
     //returns the commerical names of the git source
-    gitSourceNameCapitalizing(recieved){
-      if(recieved == 'gitea')
-      {
-        return 'Gitea'
+    gitSourceNameCapitalizing(recieved) {
+      if (recieved == "gitea") {
+        return "Gitea";
+      } else if (recieved == "github") {
+        return "GitHub";
       }
-      else if (recieved == 'github')
-      {
-        return 'GitHub'
-      }
-    }
+    },
   },
 };
 </script>
