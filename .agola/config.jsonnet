@@ -1,4 +1,4 @@
-//Adding stuff from Ercole
+//Adding stuff from Ercole. Test number 3
 local appName = "papagaio-web";
 
 local vue_runtime() = {
@@ -25,12 +25,12 @@ local task_build_go() =
     steps: 
       [
         { type: 'clone' },
-        { type: 'restore_cache', keys: ['cache-node' + version + '-sum-{{ md5sum "package.json" }}', 'cache-node' + version + '-date-'], dest_dir: './node_modules' },
+        { type: 'restore_cache', keys: ['cache-node' + '-sum-{{ md5sum "package.json" }}', 'cache-node' + '-date-'], dest_dir: './node_modules' },
         { type: 'run', name: 'remove directory', command: 'rm -rf dist' },
         { type: 'run', name: 'npm install', command: 'npm install' },
         { type: 'run', name: 'npm build', command: 'npm run build' },
-        { type: 'save_cache', key: 'cache-node' + version + '-sum-{{ md5sum "package.json" }}', contents: [{ source_dir: './node_modules' }] },
-        { type: 'save_cache', key: 'cache-node' + version + '-date-{{ year }}-{{ month }}-{{ day }}', contents: [{ source_dir: './node_modules' }] },
+        { type: 'save_cache', key: 'cache-node' + '-sum-{{ md5sum "package.json" }}', contents: [{ source_dir: './node_modules' }] },
+        { type: 'save_cache', key: 'cache-node' + '-date-{{ year }}-{{ month }}-{{ day }}', contents: [{ source_dir: './node_modules' }] },
         { type: 'save_to_workspace', contents: [{ source_dir: '.', dest_dir: '.', paths: ['**'] }] },
         { type: 'run',
           name: 'Create and deploy Nexus', 
