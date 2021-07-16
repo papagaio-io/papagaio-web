@@ -1,3 +1,4 @@
+//a comment to remove later
 local appName = "papagaio-web";
 
 local vue_runtime() = {
