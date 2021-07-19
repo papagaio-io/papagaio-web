@@ -21,8 +21,8 @@ local task_build_vue() =
        "PASSWORD": {
         from_variable: "NEXUSPASSWORD"
       },
-        "REPO_UPLOAD_URL": {
-        from_variable: "repo-upload-url"
+        "URLREPOUPLOAD": {
+        from_variable: "urlrepoupload"
       },
     },
     steps: 
@@ -45,7 +45,7 @@ local task_build_vue() =
               export TARBALL=papagaio-web-latest.tar.gz ; fi
 
             tar -zcvf ${TARBALL} dist
-            curl -v -k -u $USERNAME:$PASSWORD --upload-file ${TARBALL} ${REPO_UPLOAD_URL}${TARBALL}
+            curl -v -k -u $USERNAME:$PASSWORD --upload-file ${TARBALL} ${URLREPOUPLOAD}${TARBALL}
           |||,
         },
       ],
@@ -68,8 +68,8 @@ local task_docker_build_push_private() = {
     "PRIVATE_DOCKERAUTH": {
       from_variable: "dockerauth"
     },
-    "DOCKER_SORINT_URL": {
-      from_variable: "docker-sorint-url"
+    "URLDOCKERSORINT": {
+      from_variable: "urldockersorint"
     },
     "APPNAME": appName,
   },
@@ -85,7 +85,7 @@ local task_docker_build_push_private() = {
         cat << EOF > /kaniko/.docker/config.json
         {
           "auths": {
-            "docker_sorint_url": { "auth": "$PRIVATE_DOCKERAUTH" }
+            "URLDOCKERSORINT": { "auth": "$PRIVATE_DOCKERAUTH" }
           }
         }
         EOF
@@ -97,9 +97,9 @@ local task_docker_build_push_private() = {
       command: |||
         echo "branch" $AGOLA_GIT_BRANCH
         if [ $AGOLA_GIT_TAG ]; then
-          /kaniko/executor --context=dir:///kaniko/papagaio-web --dockerfile Dockerfile --destination docker_sorint_url/$APPNAME:$AGOLA_GIT_TAG;
+          /kaniko/executor --context=dir:///kaniko/papagaio-web --dockerfile Dockerfile --destination URLDOCKERSORINT/$APPNAME:$AGOLA_GIT_TAG;
         else
-          /kaniko/executor --context=dir:///kaniko/papagaio-web --dockerfile Dockerfile --destination docker_sorint_url/$APPNAME:latest ; fi
+          /kaniko/executor --context=dir:///kaniko/papagaio-web --dockerfile Dockerfile --destination URLDOCKERSORINT/$APPNAME:latest ; fi
       |||,
     },
    ],
@@ -154,7 +154,7 @@ local task_kubernetes_deploy(target) =
     {
       containers: [
         { 
-          image: "${docker_sorint_url}/bitnami/kubectl:1.19",
+          image: "${URLDOCKERSORINT}/bitnami/kubectl:1.19",
           volumes: [
             {
               path: "/mnt/data",
@@ -169,8 +169,8 @@ local task_kubernetes_deploy(target) =
       "KUBERNETESCONF": {
         from_variable: "SORINTDEVKUBERNETESCONF"
       },
-      "DOCKER_SORINT_URL": {
-        from_variable: "docker_sorint_url"
+      "URLDOCKERSORINT": {
+        from_variable: "URLDOCKERSORINT"
       },
     },
     working_dir: '/mnt/data',
@@ -191,7 +191,7 @@ local task_kubernetes_deploy(target) =
       name: 'papagaio web',
       docker_registries_auth:
       {
-        '${docker_sorint_url}':
+        '${URLDOCKERSORINT}':
         {
           username:
           {
