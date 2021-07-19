@@ -163,7 +163,7 @@ local task_kubernetes_deploy(target) =
     {
       containers: [
         { 
-          image: "registry.sorintdev.it/bitnami/kubectl:1.19",
+          image: '$urldockersorint/bitnami/kubectl:1.19',
           volumes: [
             {
               path: "/mnt/data",
