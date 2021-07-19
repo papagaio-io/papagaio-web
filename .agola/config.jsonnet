@@ -149,20 +149,6 @@ local task_docker_build_push_public() = {
 local task_kubernetes_deploy(target) = 
   {
     name: "kubernetes deploy " + target,
-    runtime:
-    {
-      containers: [
-        { 
-          image: "registry.sorintdev.it/bitnami/kubectl:1.19",
-          volumes: [
-            {
-              path: "/mnt/data",
-              tmpfs: {},
-            },
-          ],
-        },
-      ],
-    },
     environment:
     {
       "KUBERNETESCONF": {
@@ -171,6 +157,20 @@ local task_kubernetes_deploy(target) =
       "urldockersorint": {
         from_variable: "URLDOCKERSORINT"
       },
+    },
+    runtime:
+    {
+      containers: [
+        { 
+          image: "$urldockersorint/bitnami/kubectl:1.19",
+          volumes: [
+            {
+              path: "/mnt/data",
+              tmpfs: {},
+            },
+          ],
+        },
+      ],
     },
     working_dir: '/mnt/data',
     steps: 
