@@ -1,6 +1,7 @@
 //Adding stuff from Ercole. Test number 3
 local appName = "papagaio-web";
 
+
 local vue_runtime() = {
   type: 'pod',
   arch: 'amd64',
@@ -162,7 +163,7 @@ local task_kubernetes_deploy(target) =
     {
       containers: [
         { 
-          image: "$urldockersorint/bitnami/kubectl:1.19",
+          image: "${urldockersorint}/bitnami/kubectl:1.19",
           volumes: [
             {
               path: "/mnt/data",
