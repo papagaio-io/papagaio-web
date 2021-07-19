@@ -38,7 +38,6 @@ local task_build_vue() =
         { type: 'run',
           name: 'Create and deploy Nexus', 
           command: |||
-            export
             if [ ${AGOLA_GIT_TAG} ]; then
               export TARBALL=papagaio-web-${AGOLA_GIT_TAG}.tar.gz ;
             else
@@ -96,10 +95,11 @@ local task_docker_build_push_private() = {
       name: "kanico executor",
       command: |||
         echo "branch" $AGOLA_GIT_BRANCH
+        export
         if [ $AGOLA_GIT_TAG ]; then
-          /kaniko/executor --context=dir:///kaniko/papagaio-web --dockerfile Dockerfile --destination $urldockersorint/$APPNAME:$AGOLA_GIT_TAG;
+          /kaniko/executor --context=dir:///kaniko/papagaio-web --dockerfile Dockerfile --destination ${urldockersorint}/$APPNAME:$AGOLA_GIT_TAG;
         else
-          /kaniko/executor --context=dir:///kaniko/papagaio-web --dockerfile Dockerfile --destination $urldockersorint/$APPNAME:latest ; fi
+          /kaniko/executor --context=dir:///kaniko/papagaio-web --dockerfile Dockerfile --destination ${urldockersorint}/$APPNAME:latest ; fi
       |||,
     },
    ],
