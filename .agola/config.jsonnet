@@ -97,9 +97,9 @@ local task_docker_build_push_private() = {
       command: |||
         echo "branch" $AGOLA_GIT_BRANCH
         if [ $AGOLA_GIT_TAG ]; then
-          /kaniko/executor --context=dir:///kaniko/papagaio-web --dockerfile Dockerfile --destination urldockersorint/$APPNAME:$AGOLA_GIT_TAG;
+          /kaniko/executor --context=dir:///kaniko/papagaio-web --dockerfile Dockerfile --destination $urldockersorint/$APPNAME:$AGOLA_GIT_TAG;
         else
-          /kaniko/executor --context=dir:///kaniko/papagaio-web --dockerfile Dockerfile --destination urldockersorint/$APPNAME:latest ; fi
+          /kaniko/executor --context=dir:///kaniko/papagaio-web --dockerfile Dockerfile --destination $urldockersorint/$APPNAME:latest ; fi
       |||,
     },
    ],
@@ -170,7 +170,7 @@ local task_kubernetes_deploy(target) =
         from_variable: "SORINTDEVKUBERNETESCONF"
       },
       "urldockersorint": {
-        from_variable: "urldockersorint"
+        from_variable: "URLDOCKERSORINT"
       },
     },
     working_dir: '/mnt/data',
