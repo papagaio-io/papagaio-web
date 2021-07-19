@@ -159,6 +159,7 @@ local task_kubernetes_deploy(target) =
         from_variable: "URLDOCKERSORINT"
       },
     },
+   /*
     runtime:
     {
       containers: [
@@ -172,10 +173,11 @@ local task_kubernetes_deploy(target) =
           ],
         },
       ],
-    },
+    },*/
     working_dir: '/mnt/data',
     steps: 
     [
+      { type: "run", name: "test env var", command: "export" },
       { type: "restore_workspace", name: "restore workspace", dest_dir: "." },
       { type: 'run', name: 'create folder kubernetes', command: 'mkdir kubernetes' },
       { type: 'run', name: 'generate kubernetes config', command: 'echo $KUBERNETESCONF | base64 -d > kubernetes/kubernetes.conf' },
