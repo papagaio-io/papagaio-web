@@ -9,7 +9,7 @@ local vue_runtime() = {
   ],
 };
 
-local task_build_go() = 
+local task_build_vue() = 
   {
     name: "build vue",
     runtime: vue_runtime(),
@@ -20,6 +20,9 @@ local task_build_go() =
       },
        "PASSWORD": {
         from_variable: "NEXUSPASSWORD"
+      },
+        "urlrepoupload": {
+        from_variable: "URLREPOUPLOAD"
       },
     },
     steps: 
@@ -41,7 +44,7 @@ local task_build_go() =
               export TARBALL=papagaio-web-latest.tar.gz ; fi
 
             tar -zcvf ${TARBALL} dist
-            curl -v -k -u $USERNAME:$PASSWORD --upload-file ${TARBALL} https://nexus.sorintdev.it/repository/binaries/it.sorintdev.papagaio/${TARBALL}
+            curl -v -k -u $USERNAME:$PASSWORD --upload-file ${TARBALL} ${urlrepoupload}${TARBALL}
           |||,
         },
       ],
@@ -64,6 +67,9 @@ local task_docker_build_push_private() = {
     "PRIVATE_DOCKERAUTH": {
       from_variable: "dockerauth"
     },
+    "urldockersorint": {
+      from_variable: "URLDOCKERSORINT"
+    },
     "APPNAME": appName,
   },
   shell: "/busybox/sh",
@@ -78,7 +84,7 @@ local task_docker_build_push_private() = {
         cat << EOF > /kaniko/.docker/config.json
         {
           "auths": {
-            "registry.sorintdev.it": { "auth": "$PRIVATE_DOCKERAUTH" }
+            "$urldockersorint": { "auth": "$PRIVATE_DOCKERAUTH" }
           }
         }
         EOF
@@ -89,10 +95,12 @@ local task_docker_build_push_private() = {
       name: "kanico executor",
       command: |||
         echo "branch" $AGOLA_GIT_BRANCH
+        cat /kaniko/.docker/config.json
+        export
         if [ $AGOLA_GIT_TAG ]; then
-          /kaniko/executor --context=dir:///kaniko/papagaio-web --dockerfile Dockerfile --destination registry.sorintdev.it/$APPNAME:$AGOLA_GIT_TAG;
+          /kaniko/executor --context=dir:///kaniko/papagaio-web --dockerfile Dockerfile --destination ${urldockersorint}/$APPNAME:$AGOLA_GIT_TAG;
         else
-          /kaniko/executor --context=dir:///kaniko/papagaio-web --dockerfile Dockerfile --destination registry.sorintdev.it/$APPNAME:latest ; fi
+          /kaniko/executor --context=dir:///kaniko/papagaio-web --dockerfile Dockerfile --destination ${urldockersorint}/$APPNAME:latest ; fi
       |||,
     },
    ],
@@ -147,7 +155,7 @@ local task_kubernetes_deploy(target) =
     {
       containers: [
         { 
-          image: "registry.sorintdev.it/bitnami/kubectl:1.19",
+          image: "${urldockersorint}/bitnami/kubectl:1.19",
           volumes: [
             {
               path: "/mnt/data",
@@ -161,6 +169,9 @@ local task_kubernetes_deploy(target) =
     {
       "KUBERNETESCONF": {
         from_variable: "SORINTDEVKUBERNETESCONF"
+      },
+      "urldockersorint": {
+        from_variable: "URLDOCKERSORINT"
       },
     },
     working_dir: '/mnt/data',
@@ -181,7 +192,7 @@ local task_kubernetes_deploy(target) =
       name: 'papagaio web',
       docker_registries_auth:
       {
-        'registry.sorintdev.it':
+        '${urldockersorint}':
         {
           username:
           {
@@ -194,7 +205,7 @@ local task_kubernetes_deploy(target) =
         }
       },
       tasks: [
-        task_build_go(),
+        task_build_vue(),
         task_docker_build_push_private(),
         task_docker_build_push_public(),
         task_kubernetes_deploy('dev')+ {
