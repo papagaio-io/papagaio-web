@@ -98,9 +98,9 @@ local task_docker_build_push_private() = {
         cat /kaniko/.docker/config.json
         export
         if [ $AGOLA_GIT_TAG ]; then
-          /kaniko/executor --context=dir:///kaniko/papagaio-web --dockerfile Dockerfile --destination ${urldockersorint}/$APPNAME:$AGOLA_GIT_TAG;
+          /kaniko/executor --context=dir:///kaniko/papagaio-web --dockerfile Dockerfile --destination $urldockersorint/$APPNAME:$AGOLA_GIT_TAG;
         else
-          /kaniko/executor --context=dir:///kaniko/papagaio-web --dockerfile Dockerfile --destination ${urldockersorint}/$APPNAME:latest ; fi
+          /kaniko/executor --context=dir:///kaniko/papagaio-web --dockerfile Dockerfile --destination $urldockersorint/$APPNAME:latest ; fi
       |||,
     },
    ],
