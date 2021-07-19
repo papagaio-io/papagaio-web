@@ -159,12 +159,11 @@ local task_kubernetes_deploy(target) =
         from_variable: "URLDOCKERSORINT"
       },
     },
-   /*
     runtime:
     {
       containers: [
         { 
-          image: "${urldockersorint}/bitnami/kubectl:1.19",
+          image: "registry.sorintdev.it/bitnami/kubectl:1.19",
           volumes: [
             {
               path: "/mnt/data",
@@ -173,7 +172,7 @@ local task_kubernetes_deploy(target) =
           ],
         },
       ],
-    },*/
+    },
     working_dir: '/mnt/data',
     steps: 
     [
