@@ -148,6 +148,7 @@ local task_docker_build_push_public() = {
 };
 
 local task_kubernetes_deploy(target) = 
+
   {
     name: "kubernetes deploy " + target,
     environment:
@@ -163,7 +164,7 @@ local task_kubernetes_deploy(target) =
     {
       containers: [
         { 
-          image: '$urldockersorint/bitnami/kubectl:1.19',
+          image: 'registry.sorintdev.it/bitnami/kubectl:1.19/bitnami/kubectl:1.19',
           volumes: [
             {
               path: "/mnt/data",
