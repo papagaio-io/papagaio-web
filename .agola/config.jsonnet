@@ -95,8 +95,6 @@ local task_docker_build_push_private() = {
       name: "kanico executor",
       command: |||
         echo "branch" $AGOLA_GIT_BRANCH
-        cat /kaniko/.docker/config.json
-        export
         if [ $AGOLA_GIT_TAG ]; then
           /kaniko/executor --context=dir:///kaniko/papagaio-web --dockerfile Dockerfile --destination $urldockersorint/$APPNAME:$AGOLA_GIT_TAG;
         else
@@ -155,7 +153,7 @@ local task_kubernetes_deploy(target) =
     {
       containers: [
         { 
-          image: "${urldockersorint}/bitnami/kubectl:1.19",
+          image: "$urldockersorint/bitnami/kubectl:1.19",
           volumes: [
             {
               path: "/mnt/data",
@@ -192,7 +190,7 @@ local task_kubernetes_deploy(target) =
       name: 'papagaio web',
       docker_registries_auth:
       {
-        '${urldockersorint}':
+        '$urldockersorint':
         {
           username:
           {
