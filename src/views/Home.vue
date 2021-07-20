@@ -327,9 +327,12 @@ export default {
         return require("../assets/img/Gitea_Logo.png");
       } else if (recieved === "github") {
         return require("../assets/img/Github_Logo.png");
+      } else if (recieved == 'gitlab') {
+        return require("../assets/img/Gitlab_Logo.png");
       } else {
-        return require("../assets/img/Gitea_Logo.png");
+         return require("../assets/img/Gitea_Logo.png");
       }
+
     },
 
     authenticationChoice(recieved) {
