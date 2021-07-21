@@ -44,7 +44,7 @@
                   v-for="item in availableOrganizationInGitSource"
                   :key="item.value"
                   :label="item"
-                  :value="item"
+                  :value="item.path"
                 >
                 </el-option>
               </el-select>
@@ -514,7 +514,7 @@ export default {
       this.$store
         .dispatch("getOrganizationsFromSpecificGitSource")
         .then((response) => {
-          this.availableOrganizationInGitSource = response;
+          this.availableOrganizationInGitSource = response.name;
         });
     },
 
