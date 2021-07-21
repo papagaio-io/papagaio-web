@@ -43,7 +43,7 @@
                 <el-option
                   v-for="item in availableOrganizationInGitSource"
                   :key="item.value"
-                  :label="item"
+                  :label="item.name"
                   :value="item.path"
                 >
                 </el-option>
@@ -441,7 +441,7 @@
     </template>
   </el-dialog>
   <!-- <p>I have {{ availableOrganizationInGitSource }}</p> -->
-  <!-- <p>I have2 {{ orgName }}</p> -->
+  <p>I am orgName::::: {{ orgName }}</p>
   <!-- <p>Current Agola references names in DB {{ existingAgolaReferenceNameInDB }}</p> -->
   <!-- <p>New checkbox {{ createNewAgolaReferenceName }}</p> -->
   <!-- <p>Existing checkbox {{ selectFromExistingAgolaReferenceName }}</p> -->
@@ -514,7 +514,7 @@ export default {
       this.$store
         .dispatch("getOrganizationsFromSpecificGitSource")
         .then((response) => {
-          this.availableOrganizationInGitSource = response.name;
+          this.availableOrganizationInGitSource = response;
         });
     },
 
