@@ -9,7 +9,7 @@
       >
     </h4>
     <!-- Body  -->
-    <div class="bg-white ">
+    <div class="bg-white">
       <table class="w-11/12 mx-auto text-dark border">
         <tr class="text-center">
           <th class="px-4 py-3"></th>
@@ -153,7 +153,6 @@ export default {
   },
   mounted() {
     this.checkforUpdates();
-    
   },
 
   methods: {
@@ -188,9 +187,8 @@ export default {
       var date = new Date(null);
       date.setMilliseconds(received); // specify value for SECONDS here
       var result = date.toISOString().substr(11, 8);
-      if(result === "00:00:00")
-      {
-        return "N/A"
+      if (result === "00:00:00") {
+        return "N/A";
       }
       return result;
     },
@@ -204,7 +202,6 @@ export default {
       temp = this.$store.commit("setCurrentOpenOrganizationInDashboard", temp);
     },
 
-    
     //under construction
     confirmDeleteOnPapagaio(organization) {
       if (this.$store.state.userIsAdmin == true) {
@@ -254,13 +251,21 @@ export default {
       this.$store
         .dispatch("deleteOrganizationFromPapagaio", organization)
         .then((response) => {
-          this.$message({
-            type: "success",
-            message: ` ${organization} has been deleted successfully`,
-          });
-          setTimeout(function () {
-            self.$store.dispatch("getAllOrganizationDashboard");
-          }, 1000);
+          console.log(response)
+          if (response.errorCode === "USER_NOT_OWNER") {
+            this.$message({
+              type: "error",
+              message: `Failed to delete ${organization}.User is not the owner`,
+            });
+          } else if (response.errorCode === "NO_ERROR") {
+            this.$message({
+              type: "success",
+              message: ` ${organization} has been deleted successfully`,
+            });
+            setTimeout(function () {
+              self.$store.dispatch("getAllOrganizationDashboard");
+            }, 1000);
+          }
         });
     },
 
@@ -271,14 +276,22 @@ export default {
       this.$store
         .dispatch("deleteOrganizationFromAgola", organization)
         .then((response) => {
-          this.$message({
-            type: "success",
-            message: ` ${organization} has been deleted successfully`,
-          });
+          console.log(response)
+          if (response.errorCode === "USER_NOT_OWNER") {
+            this.$message({
+              type: "error",
+              message: `Failed to delete ${organization}.User is not the owner`,
+            });
+          } else if (response.errorCode === "NO_ERROR") {
+            this.$message({
+              type: "success",
+              message: ` ${organization} has been deleted successfully`,
+            });
 
-          setTimeout(function () {
-            self.$store.dispatch("getAllOrganizationDashboard");
-          }, 1000);
+            setTimeout(function () {
+              self.$store.dispatch("getAllOrganizationDashboard");
+            }, 1000);
+          }
         });
     },
     checkforUpdates() {

@@ -441,7 +441,7 @@
     </template>
   </el-dialog>
   <!-- <p>I have {{ availableOrganizationInGitSource }}</p> -->
-  <p>I am orgName::::: {{ orgName }}</p>
+  <!-- <p>I am orgName::::: {{ orgName }}</p> -->
   <!-- <p>Current Agola references names in DB {{ existingAgolaReferenceNameInDB }}</p> -->
   <!-- <p>New checkbox {{ createNewAgolaReferenceName }}</p> -->
   <!-- <p>Existing checkbox {{ selectFromExistingAgolaReferenceName }}</p> -->
