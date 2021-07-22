@@ -263,7 +263,7 @@ export default createStore({
           `${Config.ApiUrl}/createorganization`,
           {
 
-            name: state.Orgname,
+            gitPath: state.Orgname,
             agolaRef: state.OrgAgolaRef,
             visibility: state.OrgVisibility,
             gitSourceName: state.OrgGitSourceName,
@@ -293,7 +293,7 @@ export default createStore({
           `${Config.ApiUrl}/createorganization?force`,
           {
 
-            name: state.Orgname,
+            gitPath: state.Orgname,
             agolaRef: state.OrgAgolaRef,
             visibility: state.OrgVisibility,
             gitSourceName: state.OrgGitSourceName,

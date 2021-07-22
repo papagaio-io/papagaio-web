@@ -44,7 +44,7 @@
                   v-for="item in availableOrganizationInGitSource"
                   :key="item.value"
                   :label="item.name"
-                  :value="item.GitPath"
+                  :value="item.path"
                 >
                 </el-option>
               </el-select>
@@ -441,7 +441,7 @@
     </template>
   </el-dialog>
   <!-- <p>I have {{ availableOrganizationInGitSource }}</p> -->
-  <p>I am orgName:  {{ orgName }}</p>
+  <!-- <p>I am orgName::::: {{ orgName }}</p> -->
   <!-- <p>Current Agola references names in DB {{ existingAgolaReferenceNameInDB }}</p> -->
   <!-- <p>New checkbox {{ createNewAgolaReferenceName }}</p> -->
   <!-- <p>Existing checkbox {{ selectFromExistingAgolaReferenceName }}</p> -->
@@ -450,7 +450,7 @@
   <!-- <br /> -->
   <!-- <p>Agola reference that we deal with {{ agolaRefName }}</p> -->
   <!-- <p>Private/Public {{ orgIsPrivate }}</p> -->
-  <!-- {{ behaviorTypePicked }} -->
+  {{ behaviorTypePicked }}
 </template>
 
 <script>
