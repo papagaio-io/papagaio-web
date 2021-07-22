@@ -44,7 +44,7 @@
                   v-for="item in availableOrganizationInGitSource"
                   :key="item.value"
                   :label="item.name"
-                  :value="item.path"
+                  :value="item.GitPath"
                 >
                 </el-option>
               </el-select>
@@ -332,7 +332,7 @@
                   :disabled="defaultBehaviorSectionSwitch"
                   type="radio"
                   value="wildcard"
-                  v-model="behaviorTypepicked"
+                  v-model="behaviorTypePicked"
                 />
                 <span>Wildcard</span>
               </label>
@@ -343,7 +343,7 @@
                   :disabled="defaultBehaviorSectionSwitch"
                   type="radio"
                   value="regex"
-                  v-model="behaviorTypepicked"
+                  v-model="behaviorTypePicked"
                 />
                 <span>Regex</span>
               </label>
@@ -441,7 +441,7 @@
     </template>
   </el-dialog>
   <!-- <p>I have {{ availableOrganizationInGitSource }}</p> -->
-  <!-- <p>I am orgName::::: {{ orgName }}</p> -->
+  <p>I am orgName:  {{ orgName }}</p>
   <!-- <p>Current Agola references names in DB {{ existingAgolaReferenceNameInDB }}</p> -->
   <!-- <p>New checkbox {{ createNewAgolaReferenceName }}</p> -->
   <!-- <p>Existing checkbox {{ selectFromExistingAgolaReferenceName }}</p> -->
@@ -450,7 +450,7 @@
   <!-- <br /> -->
   <!-- <p>Agola reference that we deal with {{ agolaRefName }}</p> -->
   <!-- <p>Private/Public {{ orgIsPrivate }}</p> -->
-  <!-- {{ defaultBehaviorSectionSwitch }} -->
+  <!-- {{ behaviorTypePicked }} -->
 </template>
 
 <script>
@@ -486,7 +486,7 @@ export default {
       dialogVisible: false,
       repositoriesInclude: "*",
       repositoriesExclude: "",
-      behaviorTypepicked: "wildcard",
+      behaviorTypePicked: "wildcard",
 
       behaviorIncludeTempValue: "",
       behaviorExcludeTempValue: "",
@@ -499,10 +499,11 @@ export default {
   },
 
   computed: {
-    randomName() {
+      randomName() {
       let randomNumber = Math.floor(Math.random() * 100);
-      return randomNumber;
+      return randomNumber;    
     },
+    
   },
 
   watch: {
@@ -529,10 +530,13 @@ export default {
           });
 
         this.agolaRefName = this.orgName + this.randomName;
+        // this.agolaRefName = this.randomName(this.orgName);
         return this.agolaRefName;
       } else this.agolaRefName = "";
       return this.agolaRefName;
     },
+
+  
 
     checkIfAgolaRefNameExists() {
       if (this.createNewAgolaReferenceName == true) {
@@ -548,26 +552,26 @@ export default {
     },
 
     checkForm: function (e) {
+      this.errors = [];
+      this.errorOrganizationName = [];
+
       //checks which agolaRefName to use
       if (this.selectFromExistingAgolaReferenceName == true) {
         this.agolaRefName = this.ExistingAgolaRefName;
       }
 
-      this.errors = [];
-      this.errorOrganizationName = [];
-      // this.errorGitSourceSelect = [];
-
       if (!this.orgName || this.orgName === "null") {
         this.errorOrganizationName.push("");
       }
 
+      //TO BE REVIEWED
       if (this.orgIsPrivate === "false" || this.orgIsPrivate == false) {
         this.orgIsPrivate = "public";
       } else if (this.orgIsPrivate === "true" || this.orgIsPrivate == true) {
         this.orgIsPrivate = "private";
       }
 
-      if (this.orgName != null) {
+      if (this.orgName != "null" && this.orgName != "") {
         //in-case behaviorAddButton is off. Then assign the fields to be sent to BE
         if (this.defaultBehaviorSectionSwitch == false) {
           this.checkBehavior();
@@ -582,23 +586,17 @@ export default {
     checkBehavior() {
       this.errors = [];
 
-      if (!this.behaviorTypepicked) {
-        this.errors.push(
-          "Choose a 'behavior type', or remove the behavior section"
-        );
-      }
-
       //'behavior include' must have parameter if default is changed
       if (this.repositoriesInclude === "") {
         this.errors.push(
-          "Provide an 'include parameter' for the behavior, or remove the behavior section "
+          "Provide an 'include parameter' for the behavior, or switch to default behavior "
         );
       }
 
       if (!this.errors.length) {
         this.behaviorIncludeTempValue = this.repositoriesInclude;
         this.behaviorExcludeTempValue = this.repositoriesExclude;
-        this.behaviorTypeTempValue = this.behaviorTypepicked;
+        this.behaviorTypeTempValue = this.behaviorTypePicked;
         this.submitForm();
       }
     },
@@ -695,7 +693,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 </style>
 
 

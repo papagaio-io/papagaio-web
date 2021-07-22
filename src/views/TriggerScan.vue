@@ -339,12 +339,12 @@
     </div>
   </div>
   <el-dialog
-    title="Ops, no adminstration privilege"
+    title="Ops, no administrator privilege"
     v-model="dialogVisible"
     width="30%"
   >
     <span
-      >Account has no adminstration privilege to perform an edit.<br />
+      >Account has no admin privilege to perform an edit.<br/>
       Please contact the adminstator for more details on this.</span
     >
     <template #footer>

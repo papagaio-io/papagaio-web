@@ -318,7 +318,6 @@ export default {
         .dispatch("gitSourceAuthenticationMethods")
         .then((response) => {
           this.authenticationMethodsAvailable = response;
-          console.log(this.authenticationMethodsAvailable);
         });
     },
 
@@ -340,7 +339,6 @@ export default {
 
       this.$store.dispatch("gitSourceAuthenticationURL").then((response) => {
         this.navigationURL = response["oauth2_redirect"];
-        console.log(this.navigationURL);
         window.location.href = String(this.navigationURL);
       });
     },

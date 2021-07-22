@@ -9,19 +9,12 @@ import ElementPlus from 'element-plus';
 import './assets/styles/element-variables.scss'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import KeycloakConfig from "../keycloak.json";
-import Keycloak from 'keycloak-js';
+
 
 
 const myApp = createApp(App)
 
-let initOptions = {
-  url: KeycloakConfig["auth-server-url"], realm: KeycloakConfig.realm, clientId: KeycloakConfig.resource, clientSecret: KeycloakConfig.credentials.secret
-}
 
-const keycloak = Keycloak(initOptions)
-
-myApp.config.globalProperties.$keycloak = keycloak;
 myApp.use(ElementPlus)
 myApp.use(VueAxios, axios)
 myApp.use(store)

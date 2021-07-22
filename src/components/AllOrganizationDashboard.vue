@@ -116,12 +116,12 @@
     </div>
   </div>
   <el-dialog
-    title="Ops, no adminstration privilege"
+    title="Ops, no administrator privilege"
     v-model="notAdminstratorDialogVisible"
     width="30%"
   >
     <span
-      >Account has no adminstration privilege to perform a delete.<br />
+      >Account has no admin privilege to perform a delete.<br />
       Please contact the adminstator for more details on this.</span
     >
     <template #footer>
@@ -251,11 +251,10 @@ export default {
       this.$store
         .dispatch("deleteOrganizationFromPapagaio", organization)
         .then((response) => {
-          console.log(response)
           if (response.errorCode === "USER_NOT_OWNER") {
             this.$message({
               type: "error",
-              message: `Failed to delete ${organization}.User is not the owner`,
+              message: `Failed to delete ${organization}. User is not the owner`,
             });
           } else if (response.errorCode === "NO_ERROR") {
             this.$message({
@@ -276,11 +275,10 @@ export default {
       this.$store
         .dispatch("deleteOrganizationFromAgola", organization)
         .then((response) => {
-          console.log(response)
           if (response.errorCode === "USER_NOT_OWNER") {
             this.$message({
               type: "error",
-              message: `Failed to delete ${organization}.User is not the owner`,
+              message: `Failed to delete ${organization}. User is not the owner`,
             });
           } else if (response.errorCode === "NO_ERROR") {
             this.$message({
