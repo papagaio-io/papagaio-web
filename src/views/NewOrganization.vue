@@ -445,7 +445,7 @@
   <!-- <p>Current Agola references names in DB {{ existingAgolaReferenceNameInDB }}</p> -->
   <!-- <p>New checkbox {{ createNewAgolaReferenceName }}</p> -->
   <!-- <p>Existing checkbox {{ selectFromExistingAgolaReferenceName }}</p> -->
-  <!-- <p>The user choosed an Existing {{ ExistingAgolaRefName }}</p> -->
+  <!-- <p>The user choosed an Existing {{ existingAgolaReferenceNameInDB }}</p> -->
   <!-- <br /> -->
   <!-- <br /> -->
   <!-- <p>Agola reference that we deal with {{ agolaRefName }}</p> -->
@@ -498,13 +498,7 @@ export default {
     this.getAvailableOrganizationInGitSource();
   },
 
-  computed: {
-      randomName() {
-      let randomNumber = Math.floor(Math.random() * 100);
-      return randomNumber;    
-    },
-    
-  },
+  computed: {},
 
   watch: {
     agolaRefName: "checkIfAgolaRefNameExists",
@@ -529,14 +523,30 @@ export default {
             this.existingAgolaReferenceNameInDB = response;
           });
 
-        this.agolaRefName = this.orgName + this.randomName;
-        // this.agolaRefName = this.randomName(this.orgName);
+        // this.agolaRefName = this.orgName + this.randomName;
+        this.agolaRefName = this.randomName(this.orgName);
         return this.agolaRefName;
       } else this.agolaRefName = "";
       return this.agolaRefName;
     },
 
-  
+    randomName(recieved) {
+      // let randomNumber = Math.floor(Math.random() * 100);
+      // return randomNumber;
+      let x = true;
+      let y = 1;
+
+      while (x) {
+        console.log("i enter the loop");
+        if (!this.existingAgolaReferenceNameInDB.indexOf(recieved + y) > -1) {
+          console.log("i enter the if statement");
+          x = false;
+          return recieved + y;
+        } else {
+          y++;
+        }
+      }
+    },
 
     checkIfAgolaRefNameExists() {
       if (this.createNewAgolaReferenceName == true) {

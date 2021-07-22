@@ -317,8 +317,8 @@ export default createStore({
     },
 
 
-    getAllOrganizationDashboard({ commit, state }) {
-      axios
+    async getAllOrganizationDashboard({ commit, state }) {
+      await axios
         .get(`${Config.ApiUrl}/report`, {
           headers: {
             Authorization: `Bearer ${state.currentAuthToken}`,
@@ -329,6 +329,7 @@ export default createStore({
           if(error.response.status === 401 ) {
             dispatch('signUserOut')
           }
+         
         });
         
     },
