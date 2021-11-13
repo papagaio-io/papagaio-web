@@ -1,4 +1,4 @@
-# papagaio-fe
+# Papagaio-Web - Agola's Plugin 
 
 ## Project setup
 ```
